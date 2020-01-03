@@ -1,0 +1,7 @@
+
+jsquid:UselessImportCheck"?Remove this unused import 'javafx.scene.control.PasswordField'.(êú´Ë8¨®šÎô-
+_squid:S1126"AReplace this if-then-else statement by a single return statement.(—ÅÊ¥8–ìŸÎô-
+Psquid:S1172$"2Remove this unused method parameter "actionEvent".(öìˆû8†ÏêÌô-
+[
+squid:S106&"9Replace this use of System.out or System.err by a logger.(Š¢úÎøÿÿÿÿ8¡¼¡Îô-
+tsquid:S2068"V'PASSWORD' detected in this expression, review this potentially hard-coded credential.(³óÑ¡8¨®šÎô-

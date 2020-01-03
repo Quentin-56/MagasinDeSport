@@ -1,0 +1,22 @@
+.head-background {
+
+    -fx-background-color: linear-gradient(to bottom left, #de00c8, #19fdff);
+}
+* {
+    -fx-primary : #2A2E37;
+    -fx-secondary : #e1faff;
+    -fx-primarytext : #e1faff;
+}
+.button{
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-font-size: 12pt;
+}
+
+/*Color prompt textfield*/
+.text-field {
+    -fx-prompt-text-fill: #e1faff;
+    -fx-text-fill: -fx-secondary;
+}
+

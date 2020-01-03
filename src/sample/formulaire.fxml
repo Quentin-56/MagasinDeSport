@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="325.0" prefWidth="478.0" styleClass="head-background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FormulaireController">
+   <children>
+      <JFXButton fx:id="buttonConnect" layoutX="171.0" layoutY="233.0" onAction="#clickOnLogIn" prefHeight="39.0" prefWidth="135.0" styleClass="button" text="Se connecter" textAlignment="CENTER" textFill="#e1faff" />
+      <JFXTextField focusColor="#de00c8" layoutX="171.0" layoutY="117.0" prefHeight="19.0" prefWidth="135.0" promptText="Nom d'utilisateur" styleClass="text-field" stylesheets="@style.css" unFocusColor="#e1faff" />
+
+
+      <JFXPasswordField fx:id="passwordField" focusColor="#de00c8" layoutX="171.0" layoutY="173.0" promptText="Mot de passe" unFocusColor="#e1faff" />
+      <ImageView fx:id="imageView" fitHeight="61.0" fitWidth="231.0" layoutX="123.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" styleClass="round">
+         <image>
+            <Image url="@../images/logoCompany.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="19.0" fitWidth="16.0" layoutX="148.0" layoutY="178.0" preserveRatio="true">
+         <Image url="@../images/cadena.png" />
+      </ImageView>
+      <ImageView fitHeight="26.0" fitWidth="22.0" layoutX="145.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/user.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
