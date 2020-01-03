@@ -10,7 +10,7 @@ class BoiteAOutilsTest {
         String [] str = {"14", "-6", "5.60","0","-1.5"};
         Boolean [] strResult = {true, false, false,true,false};
         for(int i =0 ; i<str.length; i++){
-            assertEquals(BoiteAOutil.estUnNombreValable(str[i]), strResult[i]);
+            assertEquals(BoiteAOutil.estUnNombreValableEntier(str[i]), strResult[i]);
         }
     }
 
