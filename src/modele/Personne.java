@@ -21,7 +21,7 @@ public class Personne {
 	 * @param identifiant
 	 * @param motDePasse
 	 */
-	public Personne( String nom, String prenom, String identifiant, String motDePasse) {
+	public Personne(String nom, String prenom, String identifiant, String motDePasse) {
 		this.idPersonne = 0;
 		this.nom = nom;
 		this.prenom = prenom;

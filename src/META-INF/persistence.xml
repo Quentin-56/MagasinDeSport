@@ -1,0 +1,24 @@
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence_2_0.xsd" 
+		version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="magasinSport" transaction-type="RESOURCE_LOCAL">
+
+		<properties>
+			<property name = "hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/><!-- dialect peut changer en fonction des versions de la BDD -->
+			<property name = "hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+			<property name = "hibernate.connection.url" value="jdbc:mysql://localhost:3306/magasin?serverTimezone=UTC"/>
+			<property name = "hibernate.connection.username" value="root"/>
+			<property name = "hibernate.connection.password" value=""/>
+			<property name = "hibernate.connection.pool_size" value="10"/><!-- nb de connection -->
+			<property name = "hibernate.show_sql" value="true"/>
+			<property name = "hibernate.temp.use_jdbc_metadata_default" value="false"/>
+			
+			<property name = "hibernate.hbm2ddl.auto" value="create" />
+		  
+		</properties>
+	</persistence-unit>
+</persistence>
+
+
+
+
