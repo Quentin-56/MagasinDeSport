@@ -7,9 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jfoenix-9.0.8 (1)" level="project" />
-    <orderEntry type="library" name="controlsfx-11.0.1" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.18" level="project" />
-    <orderEntry type="library" name="FastInfoset-1.2.15" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.8" level="project" />
+    <orderEntry type="library" name="antlr-2.7.7" level="project" />
   </component>
 </module>

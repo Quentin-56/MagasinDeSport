@@ -1,13 +1,13 @@
 <component name="libraryTable">
-  <library name="hibernate required">
+  <library name="antlr-2.7.7">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/hibernate required/FastInfoset-1.2.15.jar!/" />
-      <root url="jar://$PROJECT_DIR$/hibernate required/dom4j-2.1.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/hibernate required/classmate-1.5.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/hibernate required/byte-buddy-1.10.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/hibernate required/antlr-2.7.7.jar!/" />
-      <root url="jar://$PROJECT_DIR$/hibernate required/hibernate-core-5.4.10.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hibernate required/byte-buddy-1.10.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hibernate required/FastInfoset-1.2.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hibernate required/classmate-1.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hibernate required/dom4j-2.1.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/hibernate required/hibernate-commons-annotations-5.1.0.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/hibernate required/hibernate-core-5.4.10.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/hibernate required/istack-commons-runtime-3.0.7.jar!/" />
       <root url="jar://$PROJECT_DIR$/hibernate required/jandex-2.1.1.Final.jar!/" />
       <root url="jar://$PROJECT_DIR$/hibernate required/javassist-3.24.0-GA.jar!/" />
