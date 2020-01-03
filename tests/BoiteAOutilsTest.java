@@ -19,7 +19,7 @@ class BoiteAOutilsTest {
     @Test
     public void formaterCasseTest() {
         String [] str ={"Antoine cARL","aa BB", "anToiNe BlAbLa", "antoine blabla","AA"};
-        String [] strResult ={"Antoine Carl","Aa Bb","Antoine Blabla","Antoine blabla","Aa"};
+        String [] strResult ={"Antoine Carl","Aa Bb","Antoine Blabla","Antoine Blabla","Aa"};
         for(int i =0 ; i<str.length; i++){
             assertEquals(BoiteAOutil.formaterCasse(str[i]), strResult[i]);
         }
