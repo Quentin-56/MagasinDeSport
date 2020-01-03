@@ -1,8 +1,16 @@
 package modele;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "idPersonne")
 public class Vendeur extends Personne{
 
-	private Rayon rayon;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Rayon rayonV;
 
 	/**
 	 * Constructeur de confort
@@ -10,11 +18,11 @@ public class Vendeur extends Personne{
 	 * @param prenom
 	 * @param identifiant
 	 * @param motDePasse
-	 * @param rayon
+	 * @param rayonV
 	 */
-	public Vendeur( String nom, String prenom, String identifiant, String motDePasse, Rayon rayon) {
+	public Vendeur( String nom, String prenom, String identifiant, String motDePasse, Rayon rayonV) {
 		super( nom, prenom, identifiant, motDePasse);
-		this.rayon = rayon;
+		this.rayonV = rayonV;
 	}
 
 	/**
@@ -22,16 +30,16 @@ public class Vendeur extends Personne{
 	 */
 	public Vendeur() {
 		super();
-		this.rayon =null;
+		this.rayonV =null;
 	}
 
 	//GETTERS ET SETTERS
-	public Rayon getRayon() {
-		return rayon;
+	public Rayon getRayonV() {
+		return rayonV;
 	}
 
-	public void setRayon(Rayon rayon) {
-		this.rayon = rayon;
+	public void setRayonV(Rayon rayonV) {
+		this.rayonV = rayonV;
 	}
 	
 	

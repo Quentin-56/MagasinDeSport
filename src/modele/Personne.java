@@ -1,8 +1,14 @@
 package modele;
 
-public class Personne {
+import javax.persistence.*;
 
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Personne {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int idPersonne;
+
 	private String nom;
 	private String prenom;
 	private String identifiant;

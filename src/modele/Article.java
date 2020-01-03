@@ -1,13 +1,21 @@
 package modele;
 
+import javax.persistence.*;
+
+@Entity
 public class Article {
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int idArticle;
+
 	private String nom;
 	private int quantite;
 	private String details;
 	private int quantiteReserve;
-	private Rayon rayon;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Rayon rayonA;
 
 	/**
 	 * Constructeur de confort
@@ -15,15 +23,15 @@ public class Article {
 	 * @param quantite
 	 * @param details
 	 * @param quantiteReserve
-	 * @param rayon
+	 * @param rayonA
 	 */
-	public Article(String nom, int quantite, String details, int quantiteReserve, Rayon rayon) {
+	public Article(String nom, int quantite, String details, int quantiteReserve, Rayon rayonA) {
 		this.idArticle = 0;
 		this.nom = nom;
 		this.quantite = quantite;
 		this.details = details;
 		this.quantiteReserve = quantiteReserve;
-		this.rayon = rayon;
+		this.rayonA = rayonA;
 	}
 
 	/**
@@ -34,7 +42,7 @@ public class Article {
 		this.quantite = 0;
 		this.details = "";
 		this.quantiteReserve = 0;
-		this.rayon = null;
+		this.rayonA = null;
 		this.idArticle = 0;
 	}
 
@@ -79,11 +87,11 @@ public class Article {
 		this.quantiteReserve = quantiteReserve;
 	}
 
-	public Rayon getRayon() {
-		return rayon;
+	public Rayon getRayonA() {
+		return rayonA;
 	}
 
-	public void setRayon(Rayon rayon) {
-		this.rayon = rayon;
+	public void setRayonA(Rayon rayonA) {
+		this.rayonA = rayonA;
 	}
 }

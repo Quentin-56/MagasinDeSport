@@ -1,14 +1,35 @@
 package modele;
 
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Rayon {
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private  int idRayon;
+
 	private String nom;
-	private ArrayList<Article>listeArticles;
-	private ArrayList<Article>listeReservationArticle;
-	private ArrayList<Vendeur>listeVendeurs;
+
+	@OneToMany(
+			mappedBy = "rayonA",
+			cascade = CascadeType.ALL
+	)
+	private List<Article>listeArticles;
+
+	@OneToMany(
+			mappedBy = "rayonA",
+			cascade = CascadeType.ALL
+	)
+	private List<Article>listeReservationArticle;
+
+	@OneToMany(
+			mappedBy = "rayonV",
+			cascade = CascadeType.ALL
+	)
+	private List<Vendeur> listeVendeurs;
 
 	/**
 	 * Constructeur de confort
@@ -17,8 +38,8 @@ public class Rayon {
 	 * @param listeReservationArticle
 	 * @param listeVendeurs
 	 */
-	public Rayon(String nom, ArrayList<Article> listeArticles, ArrayList<Article> listeReservationArticle,
-			ArrayList<Vendeur> listeVendeurs) {
+	public Rayon(String nom, List<Article> listeArticles, List<Article> listeReservationArticle,
+			List<Vendeur> listeVendeurs) {
 		this.idRayon = 0;
 		this.nom = nom;
 		this.listeArticles = listeArticles;
@@ -33,9 +54,9 @@ public class Rayon {
 		super();
 		this.idRayon = 0;
 		this.nom = "";
-		this.listeArticles = new ArrayList<Article>();
-		this.listeReservationArticle = new ArrayList<Article>();
-		this.listeVendeurs = new ArrayList<Vendeur>();
+		this.listeArticles = new ArrayList<>();
+		this.listeReservationArticle = new ArrayList<>();
+		this.listeVendeurs = new ArrayList<>();
 	}
 
 	//GETTERS ET SETTERS
@@ -55,27 +76,27 @@ public class Rayon {
 		this.nom = nom;
 	}
 
-	public ArrayList<Article> getListeArticles() {
+	public List<Article> getListeArticles() {
 		return listeArticles;
 	}
 
-	public void setListeArticles(ArrayList<Article> listeArticles) {
+	public void setListeArticles(List<Article> listeArticles) {
 		this.listeArticles = listeArticles;
 	}
 
-	public ArrayList<Article> getListeReservationArticle() {
+	public List<Article> getListeReservationArticle() {
 		return listeReservationArticle;
 	}
 
-	public void setListeReservationArticle(ArrayList<Article> listeReservationArticle) {
+	public void setListeReservationArticle(List<Article> listeReservationArticle) {
 		this.listeReservationArticle = listeReservationArticle;
 	}
 
-	public ArrayList<Vendeur> getListeVendeurs() {
+	public List<Vendeur> getListeVendeurs() {
 		return listeVendeurs;
 	}
 
-	public void setListeVendeurs(ArrayList<Vendeur> listeVendeurs) {
+	public void setListeVendeurs(List<Vendeur> listeVendeurs) {
 		this.listeVendeurs = listeVendeurs;
 	}
 }

@@ -1,7 +1,15 @@
 package modele;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
+@PrimaryKeyJoinColumn(name = "idPersonne")
 public class ChefMagasin extends Personne{
 
+	@OneToOne(fetch = FetchType.LAZY)
 	private Magasin magasin;
 
 	/**
@@ -34,7 +42,5 @@ public class ChefMagasin extends Personne{
 	public void setMagasin(Magasin magasin) {
 		this.magasin = magasin;
 	}
-	
-	
-	
+
 }

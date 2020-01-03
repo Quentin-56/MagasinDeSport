@@ -1,13 +1,13 @@
 
-squid:S1319"xThe type of the "listeArticles" object should be an interface such as "List" rather than the implementation "ArrayList".(¬À„	
 ™squid:S1319"‚The type of the "listeReservationArticle" object should be an interface such as "List" rather than the implementation "ArrayList".(¬À„	
 squid:S1319"xThe type of the "listeVendeurs" object should be an interface such as "List" rather than the implementation "ArrayList".(à³ìı
-Œsquid:S1319:"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(€°¿éùÿÿÿÿ
-”squid:S1319>"xThe type of the "listeArticles" object should be an interface such as "List" rather than the implementation "ArrayList".(‡¬æıÿÿÿÿ
-‡squid:S1319B"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(—®ıö
 Ÿsquid:S1319F"‚The type of the "listeReservationArticle" object should be an interface such as "List" rather than the implementation "ArrayList".(ÆóŸùÿÿÿÿ
-‡squid:S1319J"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÖËİ®
-squid:S1319N"xThe type of the "listeVendeurs" object should be an interface such as "List" rather than the implementation "ArrayList".(ª¶‚®
-usquid:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÕÁ†»ıÿÿÿÿ
-psquid:S2293%"YReplace the type specification in this constructor call with the diamond operator ("<>").(¤ÛÅ¥
+”squid:S1319>"xThe type of the "listeArticles" object should be an interface such as "List" rather than the implementation "ArrayList".(‡¬æıÿÿÿÿ
+Œsquid:S1319:"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(€°¿éùÿÿÿÿ
 usquid:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(Èÿ¤’ÿÿÿÿÿ
+squid:S1319N"xThe type of the "listeVendeurs" object should be an interface such as "List" rather than the implementation "ArrayList".(ª¶‚®
+squid:S1319"xThe type of the "listeArticles" object should be an interface such as "List" rather than the implementation "ArrayList".(¬À„	
+‡squid:S1319B"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(—®ıö
+‡squid:S1319J"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÖËİ®
+psquid:S2293%"YReplace the type specification in this constructor call with the diamond operator ("<>").(¤ÛÅ¥
+usquid:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÕÁ†»ıÿÿÿÿ
