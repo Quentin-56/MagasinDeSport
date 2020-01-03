@@ -1,15 +1,14 @@
 package modele;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 @Entity
 public class Magasin {
 
+	@Id
 	private String nom;
+
 	private ArrayList<Rayon>listeRayons;
 
 	@OneToOne(mappedBy = "magasin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

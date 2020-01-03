@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="FastInfoset-1.2.15">
+  <library name="hibernate required">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/hibernate required/FastInfoset-1.2.15.jar!/" />
       <root url="jar://$PROJECT_DIR$/hibernate required/dom4j-2.1.1.jar!/" />
