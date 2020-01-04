@@ -30,7 +30,7 @@ public class Magasin {
 	 * Constructeur par defaut
 	 */
 	public Magasin() {
-		this.nom = "";
+		this.nom = "Magasin";
 		this.listeRayons = new ArrayList<Rayon>();
 		this.chefMagasin = new ChefMagasin();
 	}
