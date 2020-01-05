@@ -22,15 +22,14 @@ public class Article {
 	 * @param nom
 	 * @param quantite
 	 * @param details
-	 * @param quantiteReserve
 	 * @param rayonA
 	 */
-	public Article(String nom, int quantite, String details, int quantiteReserve, Rayon rayonA) {
+	public Article(String nom, int quantite, String details, Rayon rayonA) {
 		this.idArticle = 0;
 		this.nom = nom;
 		this.quantite = quantite;
 		this.details = details;
-		this.quantiteReserve = quantiteReserve;
+		this.quantiteReserve = 0;
 		this.rayonA = rayonA;
 	}
 
