@@ -13,7 +13,7 @@ public class Magasin {
 	private static ArrayList<Rayon>listeRayons;
 
 	@OneToOne(mappedBy = "magasin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private ChefMagasin chefMagasin;
+	private static ChefMagasin chefMagasin;
 
 	/**
 	 * Constructeur de confort
@@ -58,7 +58,7 @@ public class Magasin {
 	}
 
 	public static void setChefMagasin(ChefMagasin chefMagasin) {
-		this.chefMagasin = chefMagasin;
+		Magasin.chefMagasin = chefMagasin;
 	}
 	
 	
