@@ -25,9 +25,9 @@ public class Main {
         r.setNom("Football");
         r.setIdRayon(1);*/
 
-        //MagasinControlleur.supprimerRayon(2);
-        MagasinControlleur.recupererRayon();
-        System.out.println(Magasin.getListeRayons());
-        //MagasinControlleur.creerRayon("Tennis");
+        //MagasinControlleur.supprimerRayon(3);
+        //MagasinControlleur.recupererRayon();
+        //System.out.println(Magasin.getListeRayons());
+        MagasinControlleur.creerRayon("Football");
     }
 }
