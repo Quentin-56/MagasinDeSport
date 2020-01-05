@@ -102,8 +102,9 @@ public class RayonDAO {
         EntityManager em =SetupEM.getEm();
 
         em.getTransaction().begin();
-        Query query = SetupEM.getEm().createQuery("from Article article where article.rayonA_idRayon = ?1 ");
-        List<Article> listP =  query.setParameter(1, rayon.getIdRayon()).getResultList();
+        Query query = SetupEM.getEm().createQuery("from Article article where article.rayonA = ?1");
+        List<Article> listP =  query.setParameter(1, rayon).getResultList();
+        //List<Article> listP =  query.getResultList();
 
         em.getTransaction().commit();
 

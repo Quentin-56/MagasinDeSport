@@ -2,6 +2,7 @@ package main;
 
 import controlleur.Connexion;
 import controlleur.MagasinControlleur;
+import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import modele.Magasin;
 import modele.Rayon;
@@ -13,21 +14,12 @@ public class Main {
 
         new SetupEM();
         Magasin magasin = new Magasin();
-/*
-        EntityManager em = SetupEM.getEm();
-        em.getTransaction().begin();
-
-        em.persist(magasin);
-
-        em.getTransaction().commit();
 
         Rayon r = new Rayon();
-        r.setNom("Football");
-        r.setIdRayon(1);*/
+        r.setIdRayon(1);
 
-        //MagasinControlleur.supprimerRayon(3);
-        //MagasinControlleur.recupererRayon();
-        //System.out.println(Magasin.getListeRayons());
-        MagasinControlleur.creerRayon("Football");
+        System.out.println(RayonDAO.recupererArticleDuRayon(r));
+
+
     }
 }

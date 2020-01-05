@@ -45,6 +45,15 @@ public class Article {
 		this.idArticle = 0;
 	}
 
+	@Override
+	public String toString() {
+		return "Article{" +
+				"idArticle=" + idArticle +
+				", nom='" + nom + '\'' +
+				", quantite=" + quantite +
+				'}';
+	}
+
 	//GETTERS ET SETTERS
 	public int getIdArticle() {
 		return idArticle;
