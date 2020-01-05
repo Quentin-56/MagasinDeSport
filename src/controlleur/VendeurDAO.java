@@ -16,7 +16,7 @@ public class VendeurDAO {
      * @param motDePasse
      * @param rayon
      */
-    public void creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
+    public static void creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
     {
         Vendeur vendeur =  new Vendeur();
         vendeur.setNom(nom);
@@ -39,7 +39,7 @@ public class VendeurDAO {
      * @param vendeur
      * @param rayon
      */
-    public void ajouterVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
+    public static void ajouterVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
     {
         rayon.getListeVendeurs().add(vendeur);
     }
@@ -49,7 +49,7 @@ public class VendeurDAO {
      * @param vendeur
      * @param rayon
      */
-    public void supprimerVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
+    public static void supprimerVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
     {
         rayon.getListeVendeurs().remove(vendeur);
     }
@@ -60,7 +60,7 @@ public class VendeurDAO {
      * @param idVendeurASupprimer
      * @param rayon
      */
-    public void supprimerVendeur(int idVendeurASupprimer, Rayon rayon)
+    public static void supprimerVendeur(int idVendeurASupprimer, Rayon rayon)
     {
         EntityManager em =SetupEM.getEm();
         em.getTransaction().begin();
@@ -77,7 +77,7 @@ public class VendeurDAO {
      *
      * @param vendeur
      */
-    public void modifierVendeur( Vendeur vendeur)
+    public static void modifierVendeur( Vendeur vendeur)
     {
         EntityManager em =SetupEM.getEm();
 
@@ -103,7 +103,7 @@ public class VendeurDAO {
      * @param id
      * @return
      */
-    public Vendeur trouverVendeurAvecId(int id)
+    public static Vendeur trouverVendeurAvecId(int id)
     {
         EntityManager em =SetupEM.getEm();
         em.getTransaction().begin();
