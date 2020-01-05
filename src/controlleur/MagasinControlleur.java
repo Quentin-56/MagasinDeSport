@@ -73,7 +73,7 @@ public class MagasinControlleur {
         EntityManager em =SetupEM.getEm();
 
         em.getTransaction().begin();
-        Query query = em.createQuery("from rayon");
+        Query query = em.createQuery("from Rayon");
 
         ArrayList<Rayon> listeRayons = (ArrayList<Rayon>) query.getResultList();
         em.getTransaction().commit();
