@@ -9,6 +9,7 @@ public class Magasin {
 	@Id
 	private String nom;
 
+	@Transient
 	private ArrayList<Rayon>listeRayons;
 
 	@OneToOne(mappedBy = "magasin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
