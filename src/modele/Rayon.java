@@ -71,6 +71,15 @@ public class Rayon {
 		this.listeVendeurs = rayon.listeVendeurs;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Rayon{" +
+				"idRayon=" + idRayon +
+				", nom='" + nom + '\'' +
+				'}';
+	}
+
 	//GETTERS ET SETTERS
 	public int getIdRayon() {
 		return idRayon;

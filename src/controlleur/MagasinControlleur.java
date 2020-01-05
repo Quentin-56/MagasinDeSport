@@ -40,13 +40,14 @@ public class MagasinControlleur {
 
     /**
      * Supprime le rayon dans la BDD et actualise la liste des rayons
-     * @param rayon
+     * @param idRayonASupprimer
      */
-    public static void supprimerRayon(Rayon rayon)
+    public static void supprimerRayon(int idRayonASupprimer)
     {
         EntityManager em =SetupEM.getEm();
         em.getTransaction().begin();
 
+        Rayon rayon = em.find(Rayon.class, idRayonASupprimer);
         em.remove(rayon);
 
         em.getTransaction().commit();
@@ -80,7 +81,7 @@ public class MagasinControlleur {
         Magasin.setListeRayons(listeRayons);
     }
 
-    public void modifierRayon(int idRayonAModifier, Rayon rayon)
+    public static void modifierRayon(Rayon rayon)
     {
         EntityManager em =SetupEM.getEm();
 

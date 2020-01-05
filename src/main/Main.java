@@ -4,6 +4,7 @@ import controlleur.Connexion;
 import controlleur.MagasinControlleur;
 import controlleur.SetupEM;
 import modele.Magasin;
+import modele.Rayon;
 
 import javax.persistence.EntityManager;
 
@@ -12,7 +13,7 @@ public class Main {
 
         new SetupEM();
         Magasin magasin = new Magasin();
-
+/*
         EntityManager em = SetupEM.getEm();
         em.getTransaction().begin();
 
@@ -20,9 +21,13 @@ public class Main {
 
         em.getTransaction().commit();
 
+        Rayon r = new Rayon();
+        r.setNom("Football");
+        r.setIdRayon(1);*/
 
-
-
-        MagasinControlleur.creerRayon("Tennis");
+        //MagasinControlleur.supprimerRayon(2);
+        MagasinControlleur.recupererRayon();
+        System.out.println(Magasin.getListeRayons());
+        //MagasinControlleur.creerRayon("Tennis");
     }
 }
