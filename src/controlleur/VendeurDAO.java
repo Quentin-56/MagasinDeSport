@@ -100,15 +100,15 @@ public class VendeurDAO {
 
     /**
      *
-     * @param idVendeurASupprimer
+     * @param id
      * @return
      */
-    public Vendeur trouverVendeurAvecId(int idVendeurASupprimer)
+    public Vendeur trouverVendeurAvecId(int id)
     {
         EntityManager em =SetupEM.getEm();
         em.getTransaction().begin();
 
-        Vendeur vendeur = em.find(Vendeur.class, idVendeurASupprimer);
+        Vendeur vendeur = em.find(Vendeur.class, id);
 
         em.getTransaction().commit();
 
