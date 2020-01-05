@@ -57,7 +57,7 @@ public class Magasin {
 		return chefMagasin;
 	}
 
-	public void setChefMagasin(ChefMagasin chefMagasin) {
+	public static void setChefMagasin(ChefMagasin chefMagasin) {
 		this.chefMagasin = chefMagasin;
 	}
 	
