@@ -10,7 +10,7 @@ public class Magasin {
 	private String nom;
 
 	@Transient
-	private ArrayList<Rayon>listeRayons;
+	private static ArrayList<Rayon>listeRayons;
 
 	@OneToOne(mappedBy = "magasin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private ChefMagasin chefMagasin;
@@ -45,12 +45,12 @@ public class Magasin {
 		this.nom = nom;
 	}
 
-	public ArrayList<Rayon> getListeRayons() {
+	public static ArrayList<Rayon> getListeRayons() {
 		return listeRayons;
 	}
 
-	public void setListeRayons(ArrayList<Rayon> listeRayons) {
-		this.listeRayons = listeRayons;
+	public static void setListeRayons(ArrayList<Rayon> listeRayons) {
+		Magasin.listeRayons = listeRayons;
 	}
 
 	public ChefMagasin getChefMagasin() {

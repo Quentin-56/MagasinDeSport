@@ -59,6 +59,18 @@ public class Rayon {
 		this.listeVendeurs = new ArrayList<>();
 	}
 
+	/**
+	 * Constructeur de recopie
+	 * @param rayon
+	 */
+	public Rayon(Rayon rayon) {
+		this.idRayon = rayon.idRayon;
+		this.nom = rayon.nom;
+		this.listeArticles = rayon.listeArticles;
+		this.listeReservationArticle = rayon.listeReservationArticle;
+		this.listeVendeurs = rayon.listeVendeurs;
+	}
+
 	//GETTERS ET SETTERS
 	public int getIdRayon() {
 		return idRayon;
