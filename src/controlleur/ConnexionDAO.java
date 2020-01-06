@@ -8,7 +8,7 @@ import modele.ChefMagasin;
 
 import java.util.List;
 
-public class Connexion {
+public class ConnexionDAO {
     /**
      * Vérifie si c'est l'identifiant du chef
      * @param identifiant champs entrée par l'utilisateur

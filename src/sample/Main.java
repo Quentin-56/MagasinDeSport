@@ -11,22 +11,29 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+            private static Stage primaryStage;
+
             @FXML
             private ImageView imageView;
 
             @Override
             public void start(Stage primaryStage) throws Exception{
 
+                Main.primaryStage = primaryStage;
+                Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
 
-        Parent root = FXMLLoader.load(getClass().getResource("applicationPrincipale.fxml"));
-        primaryStage.setTitle("Application de gestion de stock");
-        primaryStage.setScene(new Scene(root));
-        //Enlever la barre de menu du haut
-        //primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.getIcons().add(new Image("images/logoPolytech.png"));
-        primaryStage.show();
+
+                primaryStage.setTitle("Application de gestion de stock");
+                primaryStage.setScene(new Scene(root));
+                //Enlever la barre de menu du haut
+                //primaryStage.initStyle(StageStyle.UNDECORATED);
+                primaryStage.getIcons().add(new Image("images/logoPolytech.png"));
+                primaryStage.show();
     }
 
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
     public static void main(String[] args) {
         launch(args);

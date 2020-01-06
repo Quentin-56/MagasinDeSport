@@ -1,13 +1,9 @@
 package main;
 
-import controlleur.Connexion;
-import controlleur.MagasinControlleur;
 import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import modele.Magasin;
 import modele.Rayon;
-
-import javax.persistence.EntityManager;
 
 public class Main {
     public static void main(String[] args) {

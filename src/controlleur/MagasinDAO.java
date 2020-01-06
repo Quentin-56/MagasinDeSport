@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MagasinControlleur {
+public class MagasinDAO {
     /**
      * appelle constructeur bien
      * ajout le rayon dans la bdd

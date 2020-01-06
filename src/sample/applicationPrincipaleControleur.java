@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -50,7 +52,10 @@ public class applicationPrincipaleControleur {
 
         compteur++;
     }*/
+    public static void initApplicationPrincipale()
+    {
 
+    }
 
     public void cliqueSurAutresRayons(ActionEvent actionEvent)
     {
@@ -60,7 +65,7 @@ public class applicationPrincipaleControleur {
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
-                nodes[0] = (Node) FXMLLoader.load(getClass().getResource("autreRayons.fxml"));
+                nodes[0] = (Node) FXMLLoader.load(getClass().getResource("autresRayons.fxml"));
                 pnl_scroll.getChildren().add(nodes[0]);
 
                 //Mettre à jour les booleens
@@ -95,5 +100,12 @@ public class applicationPrincipaleControleur {
 
     public void cliqueSurArticlesReserves(ActionEvent actionEvent) {
         System.out.println("Ne fait encore rien");
+    }
+
+    public void cliqueSurDeconnecte(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
+
+        Main.getPrimaryStage().setScene(new Scene(root));
     }
 }
