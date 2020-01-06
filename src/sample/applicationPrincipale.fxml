@@ -76,25 +76,7 @@
                         <Insets left="50.0" />
                     </padding>
                 </JFXButton>
-                <JFXButton fx:id="articlesReserves" alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Articles réservés" textFill="#5b5858">
-                    <font>
-                        <Font size="13.0" />
-                    </font>
-                    <graphic>
-                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../images/reliabilty.png" />
-                            </image>
-                            <viewport>
-                                <Rectangle2D />
-                            </viewport>
-                        </ImageView>
-                    </graphic>
-                    <padding>
-                        <Insets left="50.0" />
-                    </padding>
-                </JFXButton>
-                <JFXButton fx:id="autresRayons" alignment="BASELINE_LEFT" graphicTextGap="10.0" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Autres rayons" textFill="#5b5858">
+                <JFXButton fx:id="autresRayons" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurAutresRayons" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Autres rayons" textFill="#5b5858">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
@@ -106,6 +88,24 @@
                             <image>
                                 <Image url="@../images/projections.png" />
                             </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                </JFXButton>
+                <JFXButton fx:id="articlesReserves" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurArticlesReserves" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Articles réservés" textFill="#5b5858">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/reliabilty.png" />
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
                         </ImageView>
                     </graphic>
                     <padding>

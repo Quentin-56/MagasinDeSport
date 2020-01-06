@@ -16,8 +16,9 @@ import java.util.logging.Logger;
 public class applicationPrincipaleControleur {
 
     private Node[] nodes = new Node[1];
-    private int compteur = 0;
-    private ArrayList<Integer> tableau = new ArrayList<Integer>();
+    private boolean estSurMonRayon = false;
+    private boolean estSurAutresRayons = false;
+    private boolean estSurArticlesReserves = false;
 
    //public Node[] nodes;
 
@@ -27,26 +28,6 @@ public class applicationPrincipaleControleur {
     @FXML
     private VBox pnl_scroll;
 
-    @FXML
-    private void handleButtonAction(MouseEvent event) {
-        Produit p = new Produit("echarpe",3);
-        refreshNodes(p);
-    }
-
-    public void cliqueSurMonRayon(ActionEvent actionEvent) {
-        try {
-            if(compteur == 0)
-            {
-                nodes[compteur] = (Node) FXMLLoader.load(getClass().getResource("monRayon.fxml"));
-                pnl_scroll.getChildren().add(nodes[compteur]);
-                compteur++;
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
    /* @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -54,7 +35,7 @@ public class applicationPrincipaleControleur {
         refreshNodes();
     }*/
 
-    private void refreshNodes(Produit p)
+    /*private void refreshNodes(Produit p)
     {
         //pnl_scroll.getChildren().clear();
 
@@ -68,7 +49,51 @@ public class applicationPrincipaleControleur {
             }
 
         compteur++;
+    }*/
+
+
+    public void cliqueSurAutresRayons(ActionEvent actionEvent)
+    {
+        try {
+            if(!estSurAutresRayons)
+            {
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
+
+                nodes[0] = (Node) FXMLLoader.load(getClass().getResource("autreRayons.fxml"));
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                //Mettre à jour les booleens
+                estSurAutresRayons = true;
+                estSurMonRayon = false;
+                estSurArticlesReserves = false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    public void cliqueSurMonRayon(ActionEvent actionEvent) {
+        try {
+            if(!estSurMonRayon)
+            {
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
 
+                nodes[0] = (Node) FXMLLoader.load(getClass().getResource("monRayon.fxml"));
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                //Mettre à jour les booleens
+                estSurMonRayon = true;
+                estSurAutresRayons = false;
+                estSurArticlesReserves = false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void cliqueSurArticlesReserves(ActionEvent actionEvent) {
+        System.out.println("Ne fait encore rien");
+    }
 }
