@@ -38,7 +38,7 @@
         </Pane>
         <VBox layoutX="-1.0" layoutY="145.0" prefHeight="477.0" prefWidth="227.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
             <children>
-                <Label fx:id="nomLabel" prefHeight="30.0" prefWidth="252.0" text="NOM Prenom" textFill="#171717">
+                <Label fx:id="nomLabel" prefHeight="30.0" prefWidth="252.0" textFill="#171717">
                     <font>
                         <Font size="13.0" />
                     </font>

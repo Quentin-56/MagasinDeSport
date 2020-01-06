@@ -17,7 +17,7 @@
         <TableView fx:id="tableau" prefHeight="416.0" prefWidth="267.0">
             <columns>
                 <TableColumn fx:id="colNom" prefWidth="123.99998474121094" text="Article" />
-                <TableColumn fx:id="colPrix" prefWidth="145.5999755859375" text="Prix" />
+                <TableColumn fx:id="colQuantite" prefWidth="145.5999755859375" text="Quantite" />
             </columns>
         </TableView>
         <Label layoutX="274.0" layoutY="5.0" text="Autres" AnchorPane.leftAnchor="274.0" AnchorPane.topAnchor="5.0" />

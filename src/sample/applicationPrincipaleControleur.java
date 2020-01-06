@@ -1,5 +1,6 @@
 package sample;
 
+import controlleur.VendeurDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import modele.Vendeur;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +28,7 @@ public class applicationPrincipaleControleur implements Initializable {
     private boolean estSurArticlesReserves = false;
 
     @FXML
-    private Label label;
+    private Label nomLabel;
 
     @FXML
     private VBox pnl_scroll;
@@ -34,7 +36,8 @@ public class applicationPrincipaleControleur implements Initializable {
    @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-
+       Vendeur vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+       nomLabel.setText(vendeur.getPrenom()+" "+vendeur.getNom());
     }
 
     public void cliqueSurAutresRayons(ActionEvent actionEvent)

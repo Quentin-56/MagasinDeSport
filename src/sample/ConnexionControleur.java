@@ -84,4 +84,10 @@ public class ConnexionControleur
             utilisateurLabel.setText("Nom d'utilisateur incorrect");
         }
     }
+
+    //GETTERS ET SETTERS
+
+    public static String getIdentifiant() {
+        return identifiant;
+    }
 }
