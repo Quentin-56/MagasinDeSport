@@ -1,11 +1,11 @@
 package sample;
 
-public class Produit
+public class Article
 {
     private String name;
     private double price;
 
-    public Produit(String name, double price) {
+    public Article(String name, double price) {
         this.name = name;
         this.price = price;
     }

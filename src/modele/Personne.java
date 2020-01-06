@@ -41,6 +41,17 @@ public class Personne {
 		this.motDePasse = "";
 	}
 
+	@Override
+	public String toString() {
+		return "Personne{" +
+				"idPersonne=" + idPersonne +
+				", nom='" + nom + '\'' +
+				", prenom='" + prenom + '\'' +
+				", identifiant='" + identifiant + '\'' +
+				", motDePasse='" + motDePasse + '\'' +
+				'}';
+	}
+
 	//GETTERS ET SETTERS
 	public int getIdPersonne() {
 		return idPersonne;

@@ -2,6 +2,7 @@ package main;
 
 import controlleur.RayonDAO;
 import controlleur.SetupEM;
+import controlleur.VendeurDAO;
 import modele.Magasin;
 import modele.Rayon;
 
@@ -11,11 +12,6 @@ public class Main {
         new SetupEM();
         Magasin magasin = new Magasin();
 
-        Rayon r = new Rayon();
-        r.setIdRayon(1);
-
-        System.out.println(RayonDAO.recupererArticleDuRayon(r));
-
-
+        System.out.println(VendeurDAO.trouverVendeurAvecIdentifiant("jeannot"));
     }
 }

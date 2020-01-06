@@ -33,6 +33,13 @@ public class Vendeur extends Personne{
 		this.rayonV =null;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString()+ "Vendeur{" +
+				"rayonV=" + rayonV +
+				'}';
+	}
+
 	//GETTERS ET SETTERS
 	public Rayon getRayonV() {
 		return rayonV;
@@ -41,7 +48,4 @@ public class Vendeur extends Personne{
 	public void setRayonV(Rayon rayonV) {
 		this.rayonV = rayonV;
 	}
-	
-	
-	
 }

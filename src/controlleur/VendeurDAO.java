@@ -1,9 +1,12 @@
 package controlleur;
 
+import modele.Article;
 import modele.Rayon;
 import modele.Vendeur;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 public class VendeurDAO {
     /**
@@ -109,6 +112,24 @@ public class VendeurDAO {
         em.getTransaction().begin();
 
         Vendeur vendeur = em.find(Vendeur.class, id);
+
+        em.getTransaction().commit();
+
+        return vendeur;
+    }
+
+    /**
+     *
+     * @param identifiant
+     * @return
+     */
+    public static Vendeur trouverVendeurAvecIdentifiant(String identifiant)
+    {
+        EntityManager em =SetupEM.getEm();
+        em.getTransaction().begin();
+
+        Query query = SetupEM.getEm().createQuery("from Vendeur vendeur where vendeur.identifiant = ?1");
+        Vendeur vendeur  = (Vendeur) query.setParameter(1, identifiant).getSingleResult();
 
         em.getTransaction().commit();
 

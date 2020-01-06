@@ -19,20 +19,21 @@ import java.util.regex.Pattern;
 public class ConnexionControleur
 {
     @FXML
-    JFXTextField textField;
+    private JFXTextField textField;
     @FXML
-    JFXPasswordField passwordField;
+    private JFXPasswordField passwordField;
     @FXML
-    JFXCheckBox checkBox;
+    private JFXCheckBox checkBox;
     @FXML
-    Label utilisateurLabel;
+    private Label utilisateurLabel;
     @FXML
-    Label mdpLabel;
+    private Label mdpLabel;
+
+    private static String identifiant;
 
     private static final String COMPLEX_PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$";
 
-    private static final Pattern PASSWORD_PATTERN =
-            Pattern.compile(COMPLEX_PASSWORD_REGEX);
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile(COMPLEX_PASSWORD_REGEX);
 
     public ConnexionControleur(){}
 
@@ -57,6 +58,8 @@ public class ConnexionControleur
             utilisateurLabel.setText("");
             if(ConnexionDAO.verifierMotDePasse(identifiant, password) == true)
             {
+                //Retenir l'identifiant
+                ConnexionControleur.identifiant = identifiant;
                 mdpLabel.setText("");
                 if(ConnexionDAO.leChefSeConnecte(identifiant) == true)
                 {
