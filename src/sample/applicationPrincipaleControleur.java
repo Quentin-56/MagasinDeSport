@@ -3,22 +3,19 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Controller  {
+public class applicationPrincipaleControleur {
 
-    private Node[] nodes = new Node[10];
+    private Node[] nodes = new Node[1];
     private int compteur = 0;
     private ArrayList<Integer> tableau = new ArrayList<Integer>();
 
@@ -35,6 +32,20 @@ public class Controller  {
         Produit p = new Produit("echarpe",3);
         refreshNodes(p);
     }
+
+    public void cliqueSurMonRayon(ActionEvent actionEvent) {
+        try {
+            if(compteur == 0)
+            {
+                nodes[compteur] = (Node) FXMLLoader.load(getClass().getResource("monRayon.fxml"));
+                pnl_scroll.getChildren().add(nodes[compteur]);
+                compteur++;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
    /* @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,9 +64,11 @@ public class Controller  {
                 pnl_scroll.getChildren().add(nodes[compteur]);
 
             } catch (IOException ex) {
-                Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         compteur++;
     }
+
+
 }

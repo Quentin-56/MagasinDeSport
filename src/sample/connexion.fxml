@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="325.0" prefWidth="478.0" styleClass="head-background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.FormulaireController">
+<AnchorPane prefHeight="325.0" prefWidth="478.0" styleClass="head-background" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ConnexionControleur">
    <children>
       <JFXButton fx:id="buttonConnect" layoutX="171.0" layoutY="233.0" onAction="#clickOnLogIn" prefHeight="39.0" prefWidth="135.0" styleClass="button" text="Se connecter" textAlignment="CENTER" textFill="#e1faff" />
       <JFXTextField focusColor="#de00c8" layoutX="171.0" layoutY="117.0" prefHeight="19.0" prefWidth="135.0" promptText="Nom d'utilisateur" styleClass="text-field" stylesheets="@style.css" unFocusColor="#e1faff" />

@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 
 import java.util.regex.Pattern;
 
-public class FormulaireController
+public class ConnexionControleur
 {
     @FXML
     JFXPasswordField passwordField;
