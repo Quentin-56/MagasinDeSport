@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,6 +24,11 @@ public class MonRayonControleur implements Initializable {
     private TableColumn<Article, String> colNom;
     @FXML
     private TableColumn<Article, String> colQuantite;
+    @FXML
+    private Label detailsLabel;
+    @FXML
+    private Label reservationLabel;
+
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
 
@@ -41,7 +47,27 @@ public class MonRayonControleur implements Initializable {
         produits.addAll(articles);
 
         tableau.setItems(produits);
+
+        //Nettoyer les details
+        afficherArticleDetails(null);
+
+
+        tableau.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
     }
 
+    public void afficherArticleDetails(Article article)
+    {
+        if(article != null)
+        {
+            detailsLabel.setText(article.getDetails());
+            reservationLabel.setText(article.getQuantiteReserve()+"");
+        }
+        else
+        {
+            detailsLabel.setText("");
+            reservationLabel.setText("");
+        }
+    }
 
 }

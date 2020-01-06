@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="589.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MonRayonControleur">
+<AnchorPane fx:id="anchorPane" prefHeight="416.0" prefWidth="594.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MonRayonControleur">
     <children>
 
         <TableView fx:id="tableau" prefHeight="416.0" prefWidth="267.0">
@@ -32,20 +32,20 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="stocks" text="Stock" />
-                <Label fx:id="stockLabel" text="Label" GridPane.columnIndex="1" />
-                <Label fx:id="description" text="Description" GridPane.rowIndex="1" />
-                <Label fx:id="descriptionLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="details" text="Details" />
+                <Label fx:id="detailsLabel" text="Label" GridPane.columnIndex="1" />
+                <Label fx:id="reservation" text="Reservation" GridPane.rowIndex="1" />
+                <Label fx:id="reservationLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </GridPane>
-        <ButtonBar layoutX="267.0" layoutY="376.0" prefHeight="40.0" prefWidth="200.0">
+        <ButtonBar layoutX="250.0" layoutY="370.0" prefHeight="40.0" prefWidth="338.0">
             <buttons>
-                <Button mnemonicParsing="false" text="Supprimer" />
+                <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="143.0" text="Supprimer" />
                 <Button mnemonicParsing="false" text="Modifier" />
-                <Button mnemonicParsing="false" text="Réserver" />
+                <Button mnemonicParsing="false" prefHeight="39.0" text="Réserver" />
             </buttons>
         </ButtonBar>
     </children>
