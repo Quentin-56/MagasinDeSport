@@ -34,8 +34,7 @@ public class ConnexionControleur
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile(COMPLEX_PASSWORD_REGEX);
 
-    public ConnexionControleur(
-    ){ }
+    public ConnexionControleur(){}
 
     public boolean passwordIsValid(String password)
     {

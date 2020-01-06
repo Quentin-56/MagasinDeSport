@@ -52,10 +52,6 @@ public class applicationPrincipaleControleur {
 
         compteur++;
     }*/
-    public static void initApplicationPrincipale()
-    {
-
-    }
 
     public void cliqueSurAutresRayons(ActionEvent actionEvent)
     {

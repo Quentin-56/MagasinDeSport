@@ -30,8 +30,11 @@ public class ConnexionDAO {
      * @return  vrai si c'est un identifiant valide faux sinon
      */
     public static boolean verifierIdentifiant(String identifiant){
+
+        identifiant = identifiant.toLowerCase();
         Query query = SetupEM.getEm().createQuery(" from Personne personne where personne.identifiant = ?1 ");
         List<Personne> listP =  query.setParameter(1, identifiant).getResultList();
+
         if(listP.isEmpty()){
             return false;
         }else{
