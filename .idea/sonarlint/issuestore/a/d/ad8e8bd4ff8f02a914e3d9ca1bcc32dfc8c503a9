@@ -1,7 +1,4 @@
 
-Ysquid:UselessImportCheck"5Remove this unused import 'javafx.scene.paint.Color'.(Ïî£à
-_squid:UselessImportCheck"<Remove this unused import 'javafx.scene.SnapshotParameters'.(ÏãÃg
-_squid:UselessImportCheck	";Remove this unused import 'javafx.scene.effect.DropShadow'.(Þ×òó
-bsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(êó¡É
-bsquid:UselessImportCheck"9Remove this unused import 'javafx.scene.shape.Rectangle'.(ÖÉ­Œþÿÿÿÿ
-asquid:UselessImportCheck"=Remove this unused import 'javafx.scene.image.WritableImage'.(ïçŸ¯
+Jsquid:S2440"'Remove this instantiation of "SetupEM".(²‚†Žúÿÿÿÿ8‹Áîß÷-
+Ysquid:S2696"6Make the enclosing method "static" or remove this set.(ˆ…³¨þÿÿÿÿ8‹Áîß÷-
+isquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(êó¡É8‹Áîß÷-

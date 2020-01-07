@@ -32,10 +32,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="details" text="Details" />
-                <Label fx:id="detailsLabel" text="Label" GridPane.columnIndex="1" />
-                <Label fx:id="reservation" text="Reservation" GridPane.rowIndex="1" />
-                <Label fx:id="reservationLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="details" text="Details" GridPane.rowIndex="1" />
+                <Label fx:id="detailsLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label fx:id="reservation" text="Reservation" GridPane.rowIndex="2" />
+                <Label fx:id="reservationLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label fx:id="prix" text="Prix (euros)" />
+                <Label fx:id="prixLabel" text="Label" GridPane.columnIndex="1" />
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

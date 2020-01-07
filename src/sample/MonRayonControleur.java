@@ -28,6 +28,8 @@ public class MonRayonControleur implements Initializable {
     private Label detailsLabel;
     @FXML
     private Label reservationLabel;
+    @FXML
+    private Label prixLabel;
 
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
@@ -62,11 +64,13 @@ public class MonRayonControleur implements Initializable {
         {
             detailsLabel.setText(article.getDetails());
             reservationLabel.setText(article.getQuantiteReserve()+"");
+            prixLabel.setText(article.getPrix()+"");
         }
         else
         {
             detailsLabel.setText("");
             reservationLabel.setText("");
+            prixLabel.setText("");
         }
     }
 

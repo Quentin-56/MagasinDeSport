@@ -13,6 +13,7 @@ public class Article {
 	private int quantite;
 	private String details;
 	private int quantiteReserve;
+	private double prix;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Rayon rayonA;
@@ -24,13 +25,14 @@ public class Article {
 	 * @param details
 	 * @param rayonA
 	 */
-	public Article(String nom, int quantite, String details, Rayon rayonA) {
+	public Article(String nom, int quantite, String details, Rayon rayonA, double prix) {
 		this.idArticle = 0;
 		this.nom = nom;
 		this.quantite = quantite;
 		this.details = details;
 		this.quantiteReserve = 0;
 		this.rayonA = rayonA;
+		this.prix = prix;
 	}
 
 	/**
@@ -43,6 +45,7 @@ public class Article {
 		this.quantiteReserve = 0;
 		this.rayonA = null;
 		this.idArticle = 0;
+		this.prix = 0.0;
 	}
 
 	@Override
@@ -101,5 +104,13 @@ public class Article {
 
 	public void setRayonA(Rayon rayonA) {
 		this.rayonA = rayonA;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
 	}
 }

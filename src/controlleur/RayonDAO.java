@@ -17,9 +17,9 @@ public class RayonDAO {
      * @param details
      * @param rayonA
      */
-    public static void creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA)
+    public static void creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
     {
-        Article article = new Article(nom, quantite, details, rayonA);
+        Article article = new Article(nom, quantite, details, rayonA, prix);
 
         EntityManager em =SetupEM.getEm();
         em.getTransaction().begin();
