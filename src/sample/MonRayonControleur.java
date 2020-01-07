@@ -61,7 +61,6 @@ public class MonRayonControleur implements Initializable {
         //Nettoyer les details
         afficherArticleDetails(null);
 
-
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
     }
@@ -86,25 +85,32 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
-        // Load the fxml file and create a new stage for the popup dialog.
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
-        //loader.setLocation(applicationPrincipaleControleur.class.getResource("boiteDialogue.fxml"));
-        //AnchorPane page = (AnchorPane) loader.load();
-        Parent parent = loader.load();
 
+        Article article =  tableau.getSelectionModel().getSelectedItem();
 
+        //Si un article est selectionne
+        if(article != null) {
+            // LE TOUT A FAIRE DANS UNE FONCTION A PART
+            //Charger le fichir fmxl
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
+            Parent parent = loader.load();
 
-        // Create the dialog Stage.
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Edit Person");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(Main.getPrimaryStage());
-        Scene scene = new Scene(parent);
-        dialogStage.setScene(scene);
+            // Creer le stage pour la boite de dialogue
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modifier Article");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(Main.getPrimaryStage());
+            Scene scene = new Scene(parent);
+            dialogStage.setScene(scene);
 
+            //Recuperer le controleur lier à la vue
+            BoiteDialogueControleur controleur = loader.getController();
+            controleur.setArticle(article);
+            controleur.remplirFormulaire();
 
-        // Show the dialog and wait until the user closes it
-        dialogStage.showAndWait();
+            // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+            dialogStage.showAndWait();
+        }
     }
 
     public void cliqueSurReserver(ActionEvent actionEvent) {

@@ -26,7 +26,7 @@ public class Main extends Application {
 
                 new SetupEM();
                 Main.primaryStage = primaryStage;
-                Parent root = FXMLLoader.load(getClass().getResource("boiteDialogue.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
 
 
                 primaryStage.setTitle("Application de gestion de stock");
