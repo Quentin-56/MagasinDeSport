@@ -8,7 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -22,7 +26,7 @@ public class Main extends Application {
 
                 new SetupEM();
                 Main.primaryStage = primaryStage;
-                Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("boiteDialogue.fxml"));
 
 
                 primaryStage.setTitle("Application de gestion de stock");
@@ -40,4 +44,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

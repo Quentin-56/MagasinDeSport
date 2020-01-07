@@ -45,9 +45,9 @@
         </GridPane>
         <ButtonBar layoutX="250.0" layoutY="370.0" prefHeight="40.0" prefWidth="338.0">
             <buttons>
-                <Button mnemonicParsing="false" prefHeight="39.0" prefWidth="143.0" text="Supprimer" />
-                <Button mnemonicParsing="false" text="Modifier" />
-                <Button mnemonicParsing="false" prefHeight="39.0" text="Réserver" />
+                <Button mnemonicParsing="false" onAction="#cliqueSurSupprimer" prefHeight="39.0" prefWidth="143.0" text="Supprimer" />
+                <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
+                <Button mnemonicParsing="false" onAction="#cliqueSurReserver" prefHeight="39.0" text="Réserver" />
             </buttons>
         </ButtonBar>
     </children>
