@@ -7,17 +7,21 @@ import controlleur.ConnexionDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class ConnexionControleur
+public class ConnexionControleur implements Initializable
 {
+    @FXML
+    private Button eyeBtn;
     @FXML
     private JFXTextField textField;
     @FXML
@@ -29,14 +33,27 @@ public class ConnexionControleur
     @FXML
     private Label mdpLabel;
 
+    private Boolean mdpEstCache = true;
+
     private static String identifiant;
 
     private static final String COMPLEX_PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$";
 
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(COMPLEX_PASSWORD_REGEX);
 
-    public ConnexionControleur(){}
+    public ConnexionControleur(){
 
+
+        /*btn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+            System.out.println("changed");
+            if (pressed) {
+                System.out.println("hello");
+            } else {
+                System.out.println("bye");
+            }
+        });*/
+    }
+    
     public boolean passwordIsValid(String password)
     {
         if (PASSWORD_PATTERN.matcher(password).matches())
@@ -48,6 +65,9 @@ public class ConnexionControleur
             return false;
         }
     }
+
+
+
 
     public void clickOnLogIn(ActionEvent actionEvent) throws IOException {
         String password = passwordField.getText();
@@ -89,5 +109,26 @@ public class ConnexionControleur
 
     public static String getIdentifiant() {
         return identifiant;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        eyeBtn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
+            if (pressed) {
+                if(!passwordField.getText().isEmpty())
+                {
+                    passwordField.setPromptText(passwordField.getText());
+                    passwordField.setText("");
+                    mdpEstCache = false;
+                }
+            } else {
+                if(!mdpEstCache)
+                {
+                    passwordField.setText(passwordField.getPromptText());
+                    passwordField.setPromptText("Mot de passe");
+                    mdpEstCache = true;
+                }
+            }});
     }
 }

@@ -48,6 +48,7 @@ public class applicationPrincipaleControleur implements Initializable {
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
+                //FXMLLoader loader =
                 nodes[0] = (Node) FXMLLoader.load(getClass().getResource("autresRayons.fxml"));
                 pnl_scroll.getChildren().add(nodes[0]);
 

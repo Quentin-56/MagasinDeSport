@@ -1,0 +1,6 @@
+
+Ÿsquid:S1186t"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢±ÀÒ8Í¥‘ø-
+Usquid:S1172W"2Remove this unused method parameter "actionEvent".(²èğÇøÿÿÿÿ8Í¥‘ø-
+fsquid:UselessImportCheck";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8Í¥‘ø-
+tsquid:S1450-"VRemove the "vendeur" field and declare it as a local variable in the relevant methods.(ÎÀ‘¤8Í¥‘ø-
+Ÿsquid:S1186T"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‰¼»—8Í¥‘ø-

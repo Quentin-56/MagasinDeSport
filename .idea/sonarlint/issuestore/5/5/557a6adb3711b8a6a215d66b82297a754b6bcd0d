@@ -1,0 +1,14 @@
+
+Dsquid:S1125A"(Remove the literal "true" boolean value.(É¸–æøÿÿÿÿ
+Tsquid:S2696?"6Make the enclosing method "static" or remove this set.(ˆ¼´ú8ƒƒÄà÷-
+Xsquid:S1126+"AReplace this if-then-else statement by a single return statement.(—ÅÊ¥
+msquid:HiddenFieldCheck7"?Rename "identifiant" which hides the field declared at line 33.(¤¬ë¡øÿÿÿÿ8Çì¿à÷-
+€squid:UselessImportCheck"URemove this unused import 'org.hibernate.type.descriptor.sql.SmallIntTypeDescriptor'.(Ş±à8ğŸ¡‰ù-
+?squid:S11259"(Remove the literal "true" boolean value.(©³Í—
+Xsquid:UselessImportCheck"/Remove this unused import 'javafx.stage.Stage'.(æÄ¸²úÿÿÿÿ
+csquid:UselessImportCheck"?Remove this unused import 'javafx.scene.control.PasswordField'.(êú´Ë
+?squid:S1125<"(Remove the literal "true" boolean value.(§®²
+Nsquid:S11725"2Remove this unused method parameter "actionEvent".(Ï‹şŒøÿÿÿÿ
+Msquid:S00108B")Either remove or fill this block of code.(ÒÌâ–øÿÿÿÿ8ğŸ¡‰ù-
+˜squid:S1186'"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(…Ú¾œ
+msquid:S2068#"V'PASSWORD' detected in this expression, review this potentially hard-coded credential.(³óÑ¡

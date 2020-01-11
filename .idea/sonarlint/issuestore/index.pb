@@ -45,3 +45,11 @@ S
 #src/controlleur/ChefMagasinDAO.java,9\d\9d3896325b50fa78cc4413ea67596feb8cd8e133
 L
 src/META-INF/persistence.xml,c\9\c9542b0c61459454efdae90e75de54a72077498b
+L
+src/sample/autresRayons.fxml,d\e\defcb7a7edc7aba75035ead50e3fe3c1014ad3b3
+V
+&src/sample/AutresRayonsControleur.java,9\8\98152d23d1741c0169e68910c1dbd1acd2dbea13
+W
+'src/sample/BoiteDialogueControleur.java,4\5\456986694212117c150ce3340d647576d6848f65
+M
+src/sample/boiteDialogue.fxml,a\4\a49a5329a3ac8c299aceafa630f21833f1328087

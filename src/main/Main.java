@@ -11,7 +11,5 @@ public class Main {
 
         new SetupEM();
         Magasin magasin = new Magasin();
-
-        System.out.println(VendeurDAO.trouverVendeurAvecIdentifiant("jeannot"));
     }
 }
