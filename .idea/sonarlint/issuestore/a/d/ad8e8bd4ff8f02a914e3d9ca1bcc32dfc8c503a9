@@ -1,7 +1,7 @@
 
-`squid:UselessImportCheck"2Remove this unused import 'javafx.stage.Modality'.(£†üĞüÿÿÿÿ8Ä ‘ø-
-^squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Ä ‘ø-
+Jsquid:S2440"'Remove this instantiation of "SetupEM".(²‚†úÿÿÿÿ8‹Áîß÷-
 fsquid:UselessImportCheck";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8Ä ‘ø-
-Wsquid:S2696"6Make the enclosing method "static" or remove this set.(ˆ…³¨şÿÿÿÿ8‹Áîß÷-
-Hsquid:S2440"'Remove this instantiation of "SetupEM".(²‚†úÿÿÿÿ8‹Áîß÷-
-gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(êó¡É8‹Áîß÷-
+isquid:CommentedOutCodeLine#"<This block of commented-out lines of code should be removed.(êó¡É8‹Áîß÷-
+`squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ8Ä ‘ø-
+Ysquid:S2696"6Make the enclosing method "static" or remove this set.(ˆ…³¨şÿÿÿÿ8‹Áîß÷-
+bsquid:UselessImportCheck"2Remove this unused import 'javafx.stage.Modality'.(£†üĞüÿÿÿÿ8Ä ‘ø-

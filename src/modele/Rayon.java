@@ -31,6 +31,9 @@ public class Rayon {
 	)
 	private List<Vendeur> listeVendeurs;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Magasin magasin;
+
 	/**
 	 * Constructeur de confort
 	 * @param nom

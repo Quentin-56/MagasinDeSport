@@ -1,4 +1,4 @@
 
-gsquid:CommentedOutCodeLined"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ
-Vsquid:UselessImportCheck"+Remove this unused import 'modele.Article'.(í€ƒ8Åî‚á÷-
 Vsquid:S1118":Add a private constructor to hide the implicit public one.(Ãæ‚Ýøÿÿÿÿ
+Vsquid:UselessImportCheck"+Remove this unused import 'modele.Article'.(í€ƒ8Åî‚á÷-
+gsquid:CommentedOutCodeLined"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ
