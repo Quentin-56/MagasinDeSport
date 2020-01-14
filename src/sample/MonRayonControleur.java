@@ -63,6 +63,7 @@ public class MonRayonControleur implements Initializable {
 
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
+
     }
 
     public void afficherArticleDetails(Article article)
@@ -82,6 +83,13 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
+
+        Article article =  tableau.getSelectionModel().getSelectedItem();
+        //Si un article est selectionne
+        if(article != null) {
+            RayonDAO.supprimerArticle(vendeur.getRayonV(),article);
+        }
+        //il manque un refresh immediat de la vue
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
@@ -115,4 +123,8 @@ public class MonRayonControleur implements Initializable {
 
     public void cliqueSurReserver(ActionEvent actionEvent) {
     }
+
+
+
+
 }
