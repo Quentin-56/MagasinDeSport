@@ -110,9 +110,28 @@ public class RayonDAO {
         return listP;
     }
 
+    /**
+     * transfere un article d'un rayon a un autre
+     * @param article l'article a transferer
+     * @param nouveauRayon le nouveau rayon de l article
+     */
     public static void transfererUnArticle(Article article, Rayon nouveauRayon)
     {
         //penser à modifier lattribut rayon de l'article et la liste d'article de l'ancien et du nouveau rayon
+
+        article.getRayonA().getListeArticles().remove(article);
+
+        //si l'article etait un article reserve alors le retirer de la liste des articles reserves de l ancien rayon
+        // et l ajouter dans la liste des articles reserves du nouveau rayon
+        if(article.getRayonA().getListeReservationArticle().contains(article))
+        {
+            article.getRayonA().getListeReservationArticle().remove(article);
+            nouveauRayon.getListeReservationArticle().add(article);
+        }
+
+        nouveauRayon.getListeArticles().add(article);
+
+        article.setRayonA(nouveauRayon);
     }
 
 }
