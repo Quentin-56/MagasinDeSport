@@ -39,14 +39,19 @@ public class MonRayonControleur implements Initializable {
     @FXML
     private Label prixLabel;
 
-
     private ObservableList<Article> produits = FXCollections.observableArrayList();
 
     private Vendeur vendeur;
 
+    public MonRayonControleur()
+    {
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        System.out.println("SALUT");
         this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne

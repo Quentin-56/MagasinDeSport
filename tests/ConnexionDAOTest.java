@@ -21,29 +21,35 @@ public class ConnexionDAOTest {
     @Mock
     EntityManager entityManagerMock;
     @Mock
-    SetupEM setupEMMock;
-    @Mock
     private Query queryMock;
 
     @BeforeEach
     public void setup(){
-        System.out.println("Hello");
        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    public void lechefseconnecteTest(){
-        System.out.println("Debut du test");
-        when(setupEMMock.getEm()).thenReturn(entityManagerMock);
-
+    public void devrait_etre_un_chef_qui_se_connecte(){
         when(entityManagerMock.createQuery("from ChefMagasin chef where chef.identifiant =  ?1")).thenReturn(queryMock);
         when(queryMock.setParameter(1,"Id")).thenReturn(queryMock);
 
         ChefMagasin chef = new ChefMagasin();
+        when(queryMock.getSingleResult()).thenReturn(chef);
+
+        ConnexionDAO con = new ConnexionDAO();
+        con.setEntityManager(entityManagerMock);
+        assertEquals(con.leChefSeConnecte("Id"),true);
+    }
+
+    @Test
+    public void devrait_etre_un_vendeur_qui_se_connecte(){
+        when(entityManagerMock.createQuery("from ChefMagasin chef where chef.identifiant =  ?1")).thenReturn(queryMock);
+        when(queryMock.setParameter(1,"Id")).thenReturn(queryMock);
+
         when(queryMock.getSingleResult()).thenReturn(null);
 
         ConnexionDAO con = new ConnexionDAO();
-        con.setEm(entityManagerMock);
-        assertEquals(con.leChefSeConnecte("Id"),true);
+        con.setEntityManager(entityManagerMock);
+        assertEquals(con.leChefSeConnecte("Id"),false);
     }
 }

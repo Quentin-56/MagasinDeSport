@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import controlleur.ConnexionDAO;
+import controlleur.SetupEM;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,8 @@ public class ConnexionControleur implements Initializable
 
     private Boolean mdpEstCache = true;
 
+    private ConnexionDAO connexion;
+
     private static String identifiant;
 
     private static final String COMPLEX_PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$";
@@ -42,16 +45,8 @@ public class ConnexionControleur implements Initializable
     private static final Pattern PASSWORD_PATTERN = Pattern.compile(COMPLEX_PASSWORD_REGEX);
 
     public ConnexionControleur(){
-
-
-        /*btn.pressedProperty().addListener((observable, wasPressed, pressed) -> {
-            System.out.println("changed");
-            if (pressed) {
-                System.out.println("hello");
-            } else {
-                System.out.println("bye");
-            }
-        });*/
+        connexion = new ConnexionDAO();
+        connexion.setEntityManager(SetupEM.getEm());
     }
     
     public boolean passwordIsValid(String password)
@@ -66,22 +61,19 @@ public class ConnexionControleur implements Initializable
         }
     }
 
-
-
-
     public void clickOnLogIn(ActionEvent actionEvent) throws IOException {
         String password = passwordField.getText();
         String identifiant = textField.getText();
 
-        if(ConnexionDAO.verifierIdentifiant(identifiant) == true)
+        if(connexion.verifierIdentifiant(identifiant) == true)
         {
             utilisateurLabel.setText("");
-            if(ConnexionDAO.verifierMotDePasse(identifiant, password) == true)
+            if(connexion.verifierMotDePasse(identifiant, password) == true)
             {
                 //Retenir l'identifiant
                 ConnexionControleur.identifiant = identifiant;
                 mdpLabel.setText("");
-                if(ConnexionDAO.leChefSeConnecte(identifiant) == true)
+                if(connexion.leChefSeConnecte(identifiant) == true)
                 {
 
                 }

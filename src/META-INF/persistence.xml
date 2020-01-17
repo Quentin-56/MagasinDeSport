@@ -13,7 +13,7 @@
 			<property name = "hibernate.show_sql" value="true"/>
 			<property name = "hibernate.temp.use_jdbc_metadata_default" value="false"/>
 
-			<property name = "hibernate.hbm2ddl.auto" value="create" />
+			<!--<property name = "hibernate.hbm2ddl.auto" value="create" />-->
 		  
 		</properties>
 	</persistence-unit>

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -66,11 +67,20 @@ public class applicationPrincipaleControleur implements Initializable {
         try {
             if(!estSurMonRayon)
             {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Test Connection");
+                alert.setContentText("Connect to the database successfully!");
+                alert.showAndWait();
+
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
-                nodes[0] = (Node) FXMLLoader.load(getClass().getResource("monRayon.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("monRayon.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
                 pnl_scroll.getChildren().add(nodes[0]);
+
+               MonRayonControleur controleur = loader.getController();
 
                 //Mettre à jour les booleens
                 estSurMonRayon = true;
