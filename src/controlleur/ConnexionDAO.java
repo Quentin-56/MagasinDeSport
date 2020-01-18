@@ -28,9 +28,18 @@ public class ConnexionDAO {
      * @return vrai si c'est le chef faux sinon
      */
     public boolean leChefSeConnecte(String identifiant){
-        Query query = entityManager.createQuery("from ChefMagasin chef where chef.identifiant =  ?1");
-       ChefMagasin chef = (ChefMagasin) query.setParameter(1, identifiant).getSingleResult();
-        if(chef == null){
+        ChefMagasin chef = null;
+        try {
+            Query query = entityManager.createQuery("from ChefMagasin chef where chef.identifiant =  ?1");
+            chef = (ChefMagasin) query.setParameter(1, identifiant).getSingleResult();
+
+        }catch(Exception e)
+        {
+            System.out.println("Ce n'est pas un chef");
+        }
+
+        if(chef == null)
+        {
             return false;
         }else{
             return true;
@@ -46,9 +55,9 @@ public class ConnexionDAO {
 
         identifiant = identifiant.toLowerCase();
         Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 ");
-        List<Personne> listP =  query.setParameter(1, identifiant).getResultList();
+        Personne personne = (Personne) query.setParameter(1, identifiant).getSingleResult();
 
-        if(listP.isEmpty()){
+        if(personne == null){
             return false;
         }else{
             return true;

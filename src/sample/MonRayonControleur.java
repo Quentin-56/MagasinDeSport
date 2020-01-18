@@ -1,6 +1,7 @@
 package sample;
 
 import controlleur.RayonDAO;
+import controlleur.SetupEM;
 import controlleur.VendeurDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,13 +40,16 @@ public class MonRayonControleur implements Initializable {
     @FXML
     private Label prixLabel;
 
+    private RayonDAO rayonDAO;
+
     private ObservableList<Article> produits = FXCollections.observableArrayList();
 
     private Vendeur vendeur;
 
     public MonRayonControleur()
     {
-
+        rayonDAO = new RayonDAO();
+        rayonDAO.setEntityManager(SetupEM.getEm());
     }
 
     @Override
@@ -58,7 +62,7 @@ public class MonRayonControleur implements Initializable {
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantite.setCellValueFactory(new PropertyValueFactory("quantite"));
 
-        List<Article> articles = RayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
+        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
         produits.addAll(articles);
 
         tableau.setItems(produits);
