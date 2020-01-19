@@ -27,7 +27,7 @@ public class ChefMagasinDAO {
     /**
      * Rempli le chef magasin du magasin
      */
-    public static  void recupererChefMagasin()
+    public static /*void*/ChefMagasin recupererChefMagasin()
     {
         EntityManager em =SetupEM.getEm();
 
@@ -38,5 +38,8 @@ public class ChefMagasinDAO {
         em.getTransaction().commit();
 
         Magasin.setChefMagasin(chef);
+
+        return chef;
+
     }
 }

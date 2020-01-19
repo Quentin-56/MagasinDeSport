@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="416.0" prefWidth="594.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MonRayonControleur">
+<AnchorPane fx:id="anchorPane" prefHeight="416.0" prefWidth="690.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MonRayonControleur">
     <children>
 
         <TableView fx:id="tableau" prefHeight="416.0" prefWidth="267.0">
@@ -43,11 +43,12 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </GridPane>
-        <ButtonBar layoutX="250.0" layoutY="370.0" prefHeight="40.0" prefWidth="338.0">
+        <ButtonBar layoutX="250.0" layoutY="370.0" prefHeight="40.0" prefWidth="439.0">
             <buttons>
                 <Button mnemonicParsing="false" onAction="#cliqueSurSupprimer" prefHeight="39.0" prefWidth="143.0" text="Supprimer" />
                 <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
                 <Button mnemonicParsing="false" onAction="#cliqueSurReserver" prefHeight="39.0" text="Réserver" />
+                <Button mnemonicParsing="false" onAction="#cliqueSurAjouter" text="Ajouter" />
             </buttons>
         </ButtonBar>
     </children>

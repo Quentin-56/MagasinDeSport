@@ -83,7 +83,8 @@ public class ConnexionControleur implements Initializable
                 mdpLabel.setText("");
                 if(ConnexionDAO.leChefSeConnecte(identifiant) == true)
                 {
-
+                    Parent root = FXMLLoader.load(getClass().getResource("applicationPrincipaleChef.fxml"));
+                    Main.getPrimaryStage().setScene(new Scene(root));
                 }
                 else
                 {
