@@ -28,7 +28,7 @@ public class RayonDAO {
      * @param details
      * @param rayonA
      */
-    public void creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
+    public Article creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
     {
         Article article = new Article(nom, quantite, details, rayonA, prix);
 
@@ -40,6 +40,8 @@ public class RayonDAO {
         entityManager.getTransaction().commit();
 
         ajouterArticleDansListeArticle(rayon, article);
+
+        return article;
     }
 
     /**

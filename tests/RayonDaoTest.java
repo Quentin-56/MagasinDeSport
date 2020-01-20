@@ -47,4 +47,19 @@ class RayonDaoTest {
         verify(transaction).begin();
         verify(transaction).commit();
     }
+    @Test
+    public void article_supprimer_du_rayon()
+    {
+        when(entityManagerMock.getTransaction()).thenReturn(transaction);
+        Rayon rayon = new Rayon();
+        RayonDAO rayonDAO = new RayonDAO();
+        rayonDAO.setEntityManager(entityManagerMock);
+        Article article =article =rayonDAO.creerArticle(rayon,"velo",2,"rouge",null,10.0);
+        when(entityManagerMock.find(Article.class, article.getIdArticle())).thenReturn(article);
+        doNothing().when(entityManagerMock).remove(article);
+        rayonDAO.supprimerArticle(rayon ,  article);
+        verify(entityManagerMock).remove(article);
+
+    }
+
 }
