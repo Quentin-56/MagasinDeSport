@@ -74,8 +74,8 @@ public class ConnexionDAO {
         Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2");
         query.setParameter(1, identifiant);
         query.setParameter(2, motDePasse);
-        List<Personne> listP =  query.getResultList();
-        if(listP.isEmpty()){
+        Personne personne =  (Personne) query.getSingleResult();
+        if(personne == null){
             return false;
         }else{
             return true;
