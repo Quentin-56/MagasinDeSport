@@ -53,10 +53,12 @@ public class ConnexionDAO {
      */
     public boolean verifierIdentifiant(String identifiant){
 
+        Personne personne=null;
         identifiant = identifiant.toLowerCase();
-        Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 ");
-        Personne personne = (Personne) query.setParameter(1, identifiant).getSingleResult();
-
+        try{
+            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 ");
+            personne = (Personne) query.setParameter(1, identifiant).getSingleResult();
+        }catch (Exception e){}
         if(personne == null){
             return false;
         }else{
@@ -71,10 +73,13 @@ public class ConnexionDAO {
      * @return vrai si il mot de passe est bon faux sinon
      */
     public boolean verifierMotDePasse(String identifiant, String motDePasse){
-        Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2");
-        query.setParameter(1, identifiant);
-        query.setParameter(2, motDePasse);
-        Personne personne =  (Personne) query.getSingleResult();
+        Personne personne = null;
+        try{
+            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2");
+            query.setParameter(1, identifiant);
+            query.setParameter(2, motDePasse);
+            personne =  (Personne) query.getSingleResult();
+        }catch(Exception e){}
         if(personne == null){
             return false;
         }else{
