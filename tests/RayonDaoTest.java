@@ -1,5 +1,6 @@
 import controlleur.RayonDAO;
 import modele.Article;
+import modele.Rayon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -7,6 +8,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -16,6 +19,9 @@ class RayonDaoTest {
     @Mock
     EntityManager entityManagerMock;
 
+    @Mock
+    EntityTransaction transaction;
+
     @BeforeEach
     public void setup(){
         MockitoAnnotations.initMocks(this);
@@ -24,7 +30,7 @@ class RayonDaoTest {
     @Test
     public void article_ajouter_au_rayon()
     {
-        //when(entityManagerMock.getTransaction().begin())
+        when(entityManagerMock.getTransaction()).thenReturn(transaction);
 
         doAnswer(new Answer<Object>(){
             @Override
@@ -34,10 +40,11 @@ class RayonDaoTest {
                 return null;
             }
         }).when(entityManagerMock).persist(any(Article.class));
-
         RayonDAO rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(entityManagerMock);
 
-        rayonDAO.creerArticle(null,"velo",2,"rouge",null,10.0);
+        rayonDAO.creerArticle(new Rayon(),"velo",2,"rouge",null,10.0);
+        verify(transaction).begin();
+        verify(transaction).commit();
     }
 }
