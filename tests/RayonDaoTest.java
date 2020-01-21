@@ -11,6 +11,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,9 @@ class RayonDaoTest {
 
     @Mock
     EntityTransaction transaction;
+
+    @Mock
+    private Query queryMock;
 
     @BeforeEach
     public void setup(){
@@ -124,6 +128,27 @@ class RayonDaoTest {
         }
         //after
         rayon.setListeArticles(null);
+    }
+
+    @Test
+    public void recuperer_article_du_rayon(){
+        RayonDAO dao = new RayonDAO();
+        Rayon rayon = new Rayon();
+        Article article1 = new Article();
+        Article article2 = new Article();
+        List<Article> listeTest =List.of(article1, article2);
+
+        when(entityManagerMock.getTransaction()).thenReturn(transaction);
+
+        when(entityManagerMock.createQuery("from Article article where article.rayonA = ?1")).thenReturn(queryMock);
+        when(queryMock.setParameter(1,rayon)).thenReturn(queryMock);
+        when(queryMock.getResultList()).thenReturn(listeTest);
+
+        assertEquals(listeTest.get(0), dao.recupererArticleDuRayon(rayon).get(0));
+        verify(transaction).begin();
+        verify(transaction).commit();
+
+
     }
 
 
