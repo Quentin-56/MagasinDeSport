@@ -109,7 +109,7 @@ public class RayonDAO {
     public List<Article> recupererArticleDuRayon(Rayon rayon)
     {
         entityManager.getTransaction().begin();
-        Query query = SetupEM.getEm().createQuery("from Article article where article.rayonA = ?1");
+        Query query = entityManager.createQuery("from Article article where article.rayonA = ?1");
         List<Article> listP =  query.setParameter(1, rayon).getResultList();
 
         entityManager.getTransaction().commit();

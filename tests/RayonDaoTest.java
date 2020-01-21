@@ -143,8 +143,8 @@ class RayonDaoTest {
         when(entityManagerMock.createQuery("from Article article where article.rayonA = ?1")).thenReturn(queryMock);
         when(queryMock.setParameter(1,rayon)).thenReturn(queryMock);
         when(queryMock.getResultList()).thenReturn(listeTest);
-
-        assertEquals(listeTest.get(0), dao.recupererArticleDuRayon(rayon).get(0));
+        dao.setEntityManager(entityManagerMock);
+        assertArrayEquals(listeTest.toArray(), dao.recupererArticleDuRayon(rayon).toArray());
         verify(transaction).begin();
         verify(transaction).commit();
 
