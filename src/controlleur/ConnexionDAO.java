@@ -3,21 +3,43 @@ package controlleur;
 import modele.Personne;
 import org.hibernate.Hibernate;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import modele.ChefMagasin;
 
 import java.util.List;
 
 public class ConnexionDAO {
+
+    private EntityManager entityManager;
+
+    //Getters et setters
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     /**
      * Vérifie si c'est l'identifiant du chef
      * @param identifiant champs entrée par l'utilisateur
      * @return vrai si c'est le chef faux sinon
      */
-    public static boolean leChefSeConnecte(String identifiant){
-        Query query = SetupEM.getEm().createQuery("from ChefMagasin chef where chef.idPersonne = (select personne.idPersonne from Personne personne where personne.identifiant = ?1 )");
-        List<ChefMagasin> listP =  query.setParameter(1, identifiant).getResultList();
-        if(listP.isEmpty()){
+    public boolean leChefSeConnecte(String identifiant){
+        ChefMagasin chef = null;
+        try {
+            Query query = entityManager.createQuery("from ChefMagasin chef where chef.identifiant =  ?1");
+            chef = (ChefMagasin) query.setParameter(1, identifiant).getSingleResult();
+
+        }catch(Exception e)
+        {
+            System.out.println("Ce n'est pas un chef");
+        }
+
+        if(chef == null)
+        {
             return false;
         }else{
             return true;
@@ -29,13 +51,15 @@ public class ConnexionDAO {
      * @param identifiant champs entrée par l'utilisateur
      * @return  vrai si c'est un identifiant valide faux sinon
      */
-    public static boolean verifierIdentifiant(String identifiant){
+    public boolean verifierIdentifiant(String identifiant){
 
+        Personne personne=null;
         identifiant = identifiant.toLowerCase();
-        Query query = SetupEM.getEm().createQuery(" from Personne personne where personne.identifiant = ?1 ");
-        List<Personne> listP =  query.setParameter(1, identifiant).getResultList();
-
-        if(listP.isEmpty()){
+        try{
+            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 ");
+            personne = (Personne) query.setParameter(1, identifiant).getSingleResult();
+        }catch (Exception e){}
+        if(personne == null){
             return false;
         }else{
             return true;
@@ -48,12 +72,15 @@ public class ConnexionDAO {
      * @param motDePasse mot de passe donnee
      * @return vrai si il mot de passe est bon faux sinon
      */
-    public static boolean verifierMotDePasse(String identifiant, String motDePasse){
-        Query query = SetupEM.getEm().createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2");
-        query.setParameter(1, identifiant);
-        query.setParameter(2, motDePasse);
-        List<Personne> listP =  query.getResultList();
-        if(listP.isEmpty()){
+    public boolean verifierMotDePasse(String identifiant, String motDePasse){
+        Personne personne = null;
+        try{
+            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2");
+            query.setParameter(1, identifiant);
+            query.setParameter(2, motDePasse);
+            personne =  (Personne) query.getSingleResult();
+        }catch(Exception e){}
+        if(personne == null){
             return false;
         }else{
             return true;

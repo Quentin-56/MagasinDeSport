@@ -1,6 +1,7 @@
 package sample;
 
 import controlleur.RayonDAO;
+import controlleur.SetupEM;
 import controlleur.VendeurDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,21 +40,29 @@ public class MonRayonControleur implements Initializable {
     @FXML
     private Label prixLabel;
 
+    private RayonDAO rayonDAO;
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
 
     private Vendeur vendeur;
 
+    public MonRayonControleur()
+    {
+        rayonDAO = new RayonDAO();
+        rayonDAO.setEntityManager(SetupEM.getEm());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        System.out.println("SALUT");
         this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantite.setCellValueFactory(new PropertyValueFactory("quantite"));
 
-        List<Article> articles = RayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
+        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
         produits.addAll(articles);
 
         tableau.setItems(produits);
