@@ -55,22 +55,30 @@ public class MonRayonControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        VendeurDAO vendeurDAO = new VendeurDAO();
+        vendeurDAO.setEntityManager(SetupEM.getEm());
+        this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantite.setCellValueFactory(new PropertyValueFactory("quantite"));
 
-        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
-        produits.addAll(articles);
-
-        tableau.setItems(produits);
+        remplirTableauDArticles();
 
         //Nettoyer les details
         afficherArticleDetails(null);
 
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
+    }
+
+    public void remplirTableauDArticles()
+    {
+        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
+        produits.clear();
+        produits.addAll(articles);
+
+        tableau.setItems(produits);
     }
 
     public void afficherArticleDetails(Article article)
@@ -89,8 +97,7 @@ public class MonRayonControleur implements Initializable {
         }
     }
 
-    public void editerFormulaire(String titre) throws IOException {
-
+    public void editerFormulaire(String titre, boolean bool) throws IOException {
         Article article = tableau.getSelectionModel().getSelectedItem();
 
         //Charger le fichir fmxl
@@ -106,17 +113,41 @@ public class MonRayonControleur implements Initializable {
         dialogStage.setScene(scene);
         //Recuperer le controleur lier à la vue
         BoiteDialogueControleur controleur = loader.getController();
-        controleur.remplirFormulaire(article);
+        //Modifier l'article
+        if(bool == true)
+        {
+            controleur.remplirFormulaire(article);
+        }
+        else
+        {
+            controleur.remplirFormulaire(null);
+        }
+        //Indique au controler si c'est a modifier ou a ajouter
+        controleur.setEstAModifier(bool);
+        controleur.setArticle(article);
+        controleur.setDialogStage(dialogStage);
+        controleur.setMonRayonControleur(this);
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
         dialogStage.showAndWait();
     }
 
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
+        RayonDAO rayonDAO = new RayonDAO();
+        rayonDAO.setEntityManager(SetupEM.getEm());
+        Article article = tableau.getSelectionModel().getSelectedItem();
+        rayonDAO.supprimerArticle(article);
+        //Actualiser le tableauView
+        remplirTableauDArticles();
+
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
-        editerFormulaire("Modifier article");
+        editerFormulaire("Modifier article",true);
+    }
+
+    public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+        editerFormulaire("Ajouter article",false);
     }
 
     public void cliqueSurReserver(ActionEvent actionEvent) {

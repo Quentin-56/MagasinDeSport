@@ -1,5 +1,6 @@
 package sample;
 
+import controlleur.SetupEM;
 import controlleur.VendeurDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,8 +37,10 @@ public class applicationPrincipaleControleur implements Initializable {
 
    @Override
     public void initialize(URL url, ResourceBundle rb) {
+       VendeurDAO vendeurDAO = new VendeurDAO();
+       vendeurDAO.setEntityManager(SetupEM.getEm());
 
-       Vendeur vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+       Vendeur vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
        nomLabel.setText(vendeur.getPrenom()+" "+vendeur.getNom());
     }
 

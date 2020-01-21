@@ -18,6 +18,17 @@ public class Article {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Rayon rayonA;
 
+	public Article(Article article)
+	{
+		this.idArticle = article.idArticle;
+		this.nom = article.nom;
+		this.quantite = article.quantite;
+		this.details = article.details;
+		this.quantiteReserve = article.quantiteReserve;
+		this.rayonA = article.rayonA;
+		this.prix = article.prix;
+	}
+
 	/**
 	 * Constructeur de confort
 	 * @param nom

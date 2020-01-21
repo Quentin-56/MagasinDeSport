@@ -9,6 +9,14 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class VendeurDAO {
+
+    private EntityManager entityManager;
+
+    //Getter et setter
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     /**
      * appelle constructeur
      * 	ajout le vendeur dans la bdd
@@ -19,7 +27,7 @@ public class VendeurDAO {
      * @param motDePasse
      * @param rayon
      */
-    public static void creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
+    public void creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
     {
         Vendeur vendeur =  new Vendeur();
         vendeur.setNom(nom);
@@ -28,11 +36,10 @@ public class VendeurDAO {
         vendeur.setMotDePasse(motDePasse);
         vendeur.setRayonV(rayon);
 
-        EntityManager em =SetupEM.getEm();
-        em.getTransaction().begin();
+        entityManager.getTransaction().begin();
         //Ajout du rayon dans la bdd
-        em.persist(vendeur);
-        em.getTransaction().commit();
+        entityManager.persist(vendeur);
+        entityManager.getTransaction().commit();
 
         ajouterVendeurDansListeVendeur(vendeur,rayon);
     }
@@ -42,7 +49,7 @@ public class VendeurDAO {
      * @param vendeur
      * @param rayon
      */
-    public static void ajouterVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
+    public void ajouterVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
     {
         rayon.getListeVendeurs().add(vendeur);
     }
@@ -52,7 +59,7 @@ public class VendeurDAO {
      * @param vendeur
      * @param rayon
      */
-    public static void supprimerVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
+    public void supprimerVendeurDansListeVendeur(Vendeur vendeur, Rayon rayon)
     {
         rayon.getListeVendeurs().remove(vendeur);
     }
@@ -63,15 +70,15 @@ public class VendeurDAO {
      * @param idVendeurASupprimer
      * @param rayon
      */
-    public static void supprimerVendeur(int idVendeurASupprimer, Rayon rayon)
+    public void supprimerVendeur(int idVendeurASupprimer, Rayon rayon)
     {
-        EntityManager em =SetupEM.getEm();
-        em.getTransaction().begin();
 
-        Vendeur vendeur = em.find(Vendeur.class, idVendeurASupprimer);
-        em.remove(vendeur);
+        entityManager.getTransaction().begin();
 
-        em.getTransaction().commit();
+        Vendeur vendeur = entityManager.find(Vendeur.class, idVendeurASupprimer);
+        entityManager.remove(vendeur);
+
+        entityManager.getTransaction().commit();
 
         supprimerVendeurDansListeVendeur(vendeur, rayon);
     }
@@ -80,15 +87,13 @@ public class VendeurDAO {
      *
      * @param vendeur
      */
-    public static void modifierVendeur( Vendeur vendeur)
+    public void modifierVendeur( Vendeur vendeur)
     {
-        EntityManager em =SetupEM.getEm();
+        entityManager.getTransaction().begin();
 
-        em.getTransaction().begin();
+        entityManager.merge(vendeur);
 
-        em.merge(vendeur);
-
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
     }
 
     /**
@@ -106,14 +111,13 @@ public class VendeurDAO {
      * @param id
      * @return
      */
-    public static Vendeur trouverVendeurAvecId(int id)
+    public Vendeur trouverVendeurAvecId(int id)
     {
-        EntityManager em =SetupEM.getEm();
-        em.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
-        Vendeur vendeur = em.find(Vendeur.class, id);
+        Vendeur vendeur = entityManager.find(Vendeur.class, id);
 
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
         return vendeur;
     }
@@ -123,15 +127,14 @@ public class VendeurDAO {
      * @param identifiant
      * @return
      */
-    public static Vendeur trouverVendeurAvecIdentifiant(String identifiant)
+    public Vendeur trouverVendeurAvecIdentifiant(String identifiant)
     {
-        EntityManager em =SetupEM.getEm();
-        em.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
         Query query = SetupEM.getEm().createQuery("from Vendeur vendeur where vendeur.identifiant = ?1");
         Vendeur vendeur  = (Vendeur) query.setParameter(1, identifiant).getSingleResult();
 
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
         return vendeur;
     }
