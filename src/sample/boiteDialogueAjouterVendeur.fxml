@@ -38,7 +38,7 @@
                 <TextField fx:id="prenomTextF" GridPane.columnIndex="1" />
             <!--<ComboBox fx:id="nomRayonCombo" prefHeight="26.0" prefWidth="428.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />-->
                 <ComboBox id="nomRayonCombo" fx:id="nomRayonCombo" prefHeight="26.0" prefWidth="428.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                    <items>
+                    <!--<items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Cyclisme" />
                             <String fx:value="Football" />
@@ -46,7 +46,7 @@
                     </items>
                     <value>
                         <String fx:value="Rayon" />
-                    </value>
+                    </value>-->
                 </ComboBox>
             </children>
         </GridPane>

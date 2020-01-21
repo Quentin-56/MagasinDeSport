@@ -40,7 +40,7 @@ public class BoiteDialogueAjouterVendeurControleur implements Initializable{
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
-                /*List<Rayon> rayons = MagasinDAO.recupererRayon();
+                List<Rayon> rayons = MagasinDAO.recupererRayon();
 
                 List<String> nomRayons = new ArrayList<String>();
                 for(int i = 0; i < rayons.size(); ++i)
@@ -48,10 +48,11 @@ public class BoiteDialogueAjouterVendeurControleur implements Initializable{
                         nomRayons.add(rayons.get(i).getNom());
                 }
                 //produits.addAll(nomRayons);
-                nomRayonCombo = new ComboBox<String>(FXCollections
-                        .observableArrayList(nomRayons));
-                nomRayonCombo.show();
-                nomRayonCombo.setVisible(true);*/
+                //nomRayonCombo = new ComboBox<String>(FXCollections
+                 //       .observableArrayList(nomRayons));
+                //nomRayonCombo.show();
+                //nomRayonCombo.setVisible(true);*/
+                nomRayonCombo.getItems().setAll(nomRayons);
 
         }
 
