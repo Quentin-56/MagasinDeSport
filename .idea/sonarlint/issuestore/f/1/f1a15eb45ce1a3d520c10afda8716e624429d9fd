@@ -1,6 +1,7 @@
 
 Xsquid:UselessImportCheck"4Remove this unused import 'org.hibernate.Hibernate'.(óñ‹è
-Qsquid:S1118":Add a private constructor to hide the implicit public one.(°áäÈ
-]squid:S1126"AReplace this if-then-else statement by a single return statement.(ŸêĞİüÿÿÿÿ
-]squid:S1126&"AReplace this if-then-else statement by a single return statement.(ŸêĞİüÿÿÿÿ
-]squid:S11268"AReplace this if-then-else statement by a single return statement.(ŸêĞİüÿÿÿÿ
+dsquid:S1126N"AReplace this if-then-else statement by a single return statement.(ŸêĞİüÿÿÿÿ8ÁÙÈû-
+V
+squid:S106&"9Replace this use of System.out or System.err by a logger.(†¯8½–ØÈû-
+^squid:S1126<"AReplace this if-then-else statement by a single return statement.(ö”Î8ÁÙÈû-
+dsquid:S1126)"AReplace this if-then-else statement by a single return statement.(½¾•®şÿÿÿÿ8µÁÚÈû-

@@ -1,4 +1,4 @@
 
+Xsquid:S1118":Add a private constructor to hide the implicit public one.(’åÃŠ8Þ”‚ïú-
 Tsquid:UselessImportCheck	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
-Lsquid:UselessImportCheck")Remove this unused import 'modele.Rayon'.(Ž¶£
-Qsquid:S1118":Add a private constructor to hide the implicit public one.(’åÃŠ
+Lsquid:UselessImportCheck")Remove this unused import 'modele.Rayon'.(Ž¶£

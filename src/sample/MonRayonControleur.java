@@ -55,7 +55,6 @@ public class MonRayonControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("SALUT");
         this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
@@ -90,36 +89,34 @@ public class MonRayonControleur implements Initializable {
         }
     }
 
+    public void editerFormulaire(String titre) throws IOException {
+
+        Article article = tableau.getSelectionModel().getSelectedItem();
+
+        //Charger le fichir fmxl
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
+        Parent parent = loader.load();
+
+        // Creer le stage pour la boite de dialogue
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(titre);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(Main.getPrimaryStage());
+        Scene scene = new Scene(parent);
+        dialogStage.setScene(scene);
+        //Recuperer le controleur lier à la vue
+        BoiteDialogueControleur controleur = loader.getController();
+        controleur.remplirFormulaire(article);
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+        dialogStage.showAndWait();
+    }
+
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
-
-        Article article =  tableau.getSelectionModel().getSelectedItem();
-
-        //Si un article est selectionne
-        if(article != null) {
-            // LE TOUT A FAIRE DANS UNE FONCTION A PART
-            //Charger le fichir fmxl
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
-            Parent parent = loader.load();
-
-            // Creer le stage pour la boite de dialogue
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modifier Article");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(Main.getPrimaryStage());
-            Scene scene = new Scene(parent);
-            dialogStage.setScene(scene);
-
-            //Recuperer le controleur lier à la vue
-            BoiteDialogueControleur controleur = loader.getController();
-            controleur.setArticle(article);
-            controleur.remplirFormulaire();
-
-            // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-            dialogStage.showAndWait();
-        }
+        editerFormulaire("Modifier article");
     }
 
     public void cliqueSurReserver(ActionEvent actionEvent) {

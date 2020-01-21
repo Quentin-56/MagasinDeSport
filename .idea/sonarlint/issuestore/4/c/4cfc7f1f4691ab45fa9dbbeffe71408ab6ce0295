@@ -1,13 +1,13 @@
 
-Fsquid:S3010$"(Remove this assignment of "chefMagasin".(¸²°‹8¾ªĞ÷-
-squid:S13190"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÒôÀ8¾ªĞ÷-
-Xsquid:S2209"5Change this instance-reference to a static reference.(ª³«‰ÿÿÿÿÿ8¾ªĞ÷-
-Ssquid:S2209$"5Change this instance-reference to a static reference.(¸²°‹8¾ªĞ÷-
-Ksquid:S3010"(Remove this assignment of "listeRayons".(å«ã”şÿÿÿÿ8¾ªĞ÷-
-Fsquid:S3010#"(Remove this assignment of "listeRayons".( ¼î8¾ªĞ÷-
-”squid:S1319"vThe type of the "listeRayons" object should be an interface such as "List" rather than the implementation "ArrayList".(œş«ƒ8¾ªĞ÷-
-Ssquid:S2209#"5Change this instance-reference to a static reference.( ¼î8¾ªĞ÷-
-Xsquid:S2209"5Change this instance-reference to a static reference.(å«ã”şÿÿÿÿ8¾ªĞ÷-
-wsquid:S2293#"YReplace the type specification in this constructor call with the diamond operator ("<>").( ¼î8¾ªĞ÷-
-”squid:S13194"vThe type of the "listeRayons" object should be an interface such as "List" rather than the implementation "ArrayList".(†ùƒÕ8¾ªĞ÷-
-Ksquid:S3010"(Remove this assignment of "chefMagasin".(ª³«‰ÿÿÿÿÿ8¾ªĞ÷-
+squid:S13193"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÒôÀ8¾ªĞ÷-
+Ssquid:S2209'"5Change this instance-reference to a static reference.(¸²°‹8¾ªĞ÷-
+Ssquid:S2209&"5Change this instance-reference to a static reference.( ¼î8¾ªĞ÷-
+Xsquid:S2209"5Change this instance-reference to a static reference.(å«ã”şÿÿÿÿ8¾ªĞ÷-
+”squid:S1319"vThe type of the "listeRayons" object should be an interface such as "List" rather than the implementation "ArrayList".(œş«ƒ8¾ªĞ÷-
+wsquid:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").( ¼î8¾ªĞ÷-
+Xsquid:S2209"5Change this instance-reference to a static reference.(ª³«‰ÿÿÿÿÿ8¾ªĞ÷-
+Ksquid:S3010"(Remove this assignment of "listeRayons".(å«ã”şÿÿÿÿ8¾ªĞ÷-
+Fsquid:S3010'"(Remove this assignment of "chefMagasin".(¸²°‹8¾ªĞ÷-
+Ksquid:S3010"(Remove this assignment of "chefMagasin".(ª³«‰ÿÿÿÿÿ8¾ªĞ÷-
+”squid:S13197"vThe type of the "listeRayons" object should be an interface such as "List" rather than the implementation "ArrayList".(†ùƒÕ8¾ªĞ÷-
+Fsquid:S3010&"(Remove this assignment of "listeRayons".( ¼î8¾ªĞ÷-

@@ -25,7 +25,11 @@ public class BoiteDialogueControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
-    public void remplirFormulaire()
+    /**
+     * Rempli le formulaire avec les champs associe à l'article si il n'est pas null, sinon les champs sont vides
+     * @param article
+     */
+    public void remplirFormulaire(Article article)
     {
         if(article != null)
         {
@@ -33,6 +37,9 @@ public class BoiteDialogueControleur implements Initializable {
             prixTextF.setText(article.getPrix() + "");
             detailsTextF.setText(article.getDetails());
             quantiteTextF.setText(article.getQuantite() + "");
+        }
+        else{
+            //Ne pas pré remplir les champs
         }
     }
 

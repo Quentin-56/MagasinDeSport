@@ -67,10 +67,10 @@ public class applicationPrincipaleControleur implements Initializable {
         try {
             if(!estSurMonRayon)
             {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+                /*Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Test Connection");
                 alert.setContentText("Connect to the database successfully!");
-                alert.showAndWait();
+                alert.showAndWait();*/
 
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
