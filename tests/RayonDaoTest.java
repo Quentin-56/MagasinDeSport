@@ -1,6 +1,8 @@
 import controlleur.RayonDAO;
 import modele.Article;
 import modele.Rayon;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -9,6 +11,9 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.any;
@@ -79,5 +84,47 @@ class RayonDaoTest {
         verify(entityManagerMock).merge(articleModifie);
 
     }
+
+
+    @Test
+    public void ajouter_article_dans_la_liste_article_test(){
+        //Before
+        Rayon rayon = new Rayon();
+        Article article1 = new Article();
+        Article article2 = new Article();
+        RayonDAO dao = new RayonDAO();
+        List<Article> listeArticleInitial = new ArrayList<>();
+        listeArticleInitial.add(article1);
+        rayon.setListeArticles(listeArticleInitial);
+        //test
+        dao.ajouterArticleDansListeArticle(rayon, article2);
+        assertEquals(article1,rayon.getListeArticles().get(0));
+        assertEquals(article2,rayon.getListeArticles().get(1));
+        //after
+        rayon.setListeArticles(null);
+    }
+    @Test
+    public void supprimer_article_dans_la_liste_article(){
+        //Before
+        Rayon rayon = new Rayon();
+        Article article1 = new Article();
+        Article article2 = new Article();
+        RayonDAO dao = new RayonDAO();
+        List<Article> listeArticleInitial = new ArrayList<>();
+        listeArticleInitial.add(article1);
+        listeArticleInitial.add(article2);
+        rayon.setListeArticles(listeArticleInitial);
+        //test
+        dao.supprimerArticleDansListeArticle(rayon, article2);
+        assertEquals(article1,rayon.getListeArticles().get(0));
+        try{
+            rayon.getListeArticles().get(1);
+        }catch (IndexOutOfBoundsException e){
+            assertEquals("Index 1 out of bounds for length 1",e.getMessage());
+        }
+        //after
+        rayon.setListeArticles(null);
+    }
+
 
 }
