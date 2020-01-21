@@ -11,10 +11,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -139,11 +141,21 @@ public class MonRayonControleur implements Initializable {
         rayonDAO.supprimerArticle(article);
         //Actualiser le tableauView
         remplirTableauDArticles();
-
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
-        editerFormulaire("Modifier article",true);
+
+        if(tableau.getSelectionModel().getSelectedItem() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur modifier article");
+                alert.setContentText("Veuillez selectionner un article dans la liste");
+                alert.showAndWait();
+        }
+        else
+            {
+            editerFormulaire("Modifier article", true);
+        }
     }
 
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
@@ -151,5 +163,9 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurReserver(ActionEvent actionEvent) {
+    }
+
+    public void cliqueSurSearch(ActionEvent actionEvent) {
+        System.out.println("Je fais une recherche");
     }
 }
