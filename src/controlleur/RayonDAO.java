@@ -9,6 +9,17 @@ import java.util.List;
 
 public class RayonDAO {
 
+    private EntityManager entityManager;
+
+    //Getter et setter
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     /**
      *Permet d'ajouter un article dans un rayon et est ajouté dans la BDD
      * @param rayon rayon ou ajouter l'article
@@ -17,19 +28,18 @@ public class RayonDAO {
      * @param details
      * @param rayonA
      */
-    public Article creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
+    public Article creerArticle(/*Rayon rayon,*/ String nom, int quantite, String details, Rayon rayonA, double prix)
     {
         Article article = new Article(nom, quantite, details, rayonA, prix);
 
-        EntityManager em =SetupEM.getEm();
-        em.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
         //Ajout de l'article dans la bdd
-        em.persist(article);
+        entityManager.persist(article);
 
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
-        ajouterArticleDansListeArticle(rayon, article);
+        ajouterArticleDansListeArticle(rayonA, article);
 
         return article;
     }
@@ -39,9 +49,9 @@ public class RayonDAO {
      * @param rayon
      * @param article
      */
-    public static void ajouterArticleDansListeArticle(Rayon rayon, Article article)
+    public void ajouterArticleDansListeArticle(Rayon rayon, Article article)
     {
-       rayon.getListeArticles().add(article);
+        rayon.getListeArticles().add(article);
     }
 
     /**
@@ -49,15 +59,14 @@ public class RayonDAO {
      * @param rayon
      * @param articleASupprimer
      */
-    public static void supprimerArticle(Rayon rayon, Article articleASupprimer)
+    public void supprimerArticle(Rayon rayon, Article articleASupprimer)
     {
-        EntityManager em =SetupEM.getEm();
-        em.getTransaction().begin();
+        entityManager.getTransaction().begin();
 
-        Article article = em.find(Article.class, articleASupprimer.getIdArticle());
-        em.remove(article);
+        Article article = entityManager.find(Article.class, articleASupprimer.getIdArticle());
+        entityManager.remove(article);
 
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
         supprimerArticleDansListeArticle(rayon, articleASupprimer);
     }
@@ -67,7 +76,7 @@ public class RayonDAO {
      * @param rayon
      * @param article
      */
-    public static void supprimerArticleDansListeArticle(Rayon rayon, Article article)
+    public void supprimerArticleDansListeArticle(Rayon rayon, Article article)
     {
 
         rayon.getListeArticles().remove(article);
@@ -83,15 +92,13 @@ public class RayonDAO {
      * Modifier un article
      * @param article
      */
-    public static void modifierArticle(Article article)
+    public void modifierArticle(Article article)
     {
-        EntityManager em =SetupEM.getEm();
+        entityManager.getTransaction().begin();
 
-        em.getTransaction().begin();
+        entityManager.merge(article);
 
-        em.merge(article);
-
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
     }
 
     /**
@@ -99,22 +106,39 @@ public class RayonDAO {
      * @param rayon
      * @return listP la liste des articles du rayon
      */
-    public static List<Article> recupererArticleDuRayon(Rayon rayon)
+    public List<Article> recupererArticleDuRayon(Rayon rayon)
     {
-        EntityManager em =SetupEM.getEm();
-
-        em.getTransaction().begin();
+        entityManager.getTransaction().begin();
         Query query = SetupEM.getEm().createQuery("from Article article where article.rayonA = ?1");
         List<Article> listP =  query.setParameter(1, rayon).getResultList();
 
-        em.getTransaction().commit();
+        entityManager.getTransaction().commit();
 
         return listP;
     }
 
-    public static void transfererUnArticle(Article article, Rayon nouveauRayon)
+    /**
+     * transfere un article d'un rayon a un autre
+     * @param article l'article a transferer
+     * @param nouveauRayon le nouveau rayon de l article
+     */
+    public void transfererUnArticle(Article article, Rayon nouveauRayon)
     {
         //penser à modifier lattribut rayon de l'article et la liste d'article de l'ancien et du nouveau rayon
+
+        article.getRayonA().getListeArticles().remove(article);
+
+        //si l'article etait un article reserve alors le retirer de la liste des articles reserves de l ancien rayon
+        // et l ajouter dans la liste des articles reserves du nouveau rayon
+        if(article.getRayonA().getListeReservationArticle().contains(article))
+        {
+            article.getRayonA().getListeReservationArticle().remove(article);
+            nouveauRayon.getListeReservationArticle().add(article);
+        }
+
+        nouveauRayon.getListeArticles().add(article);
+
+        article.setRayonA(nouveauRayon);
     }
 
 }

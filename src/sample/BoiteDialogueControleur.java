@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 
 public class BoiteDialogueControleur implements Initializable {
 
+    private RayonDAO rayonDAO;
     private Article article;
     private Vendeur vendeur;
     @FXML
@@ -50,7 +51,7 @@ public class BoiteDialogueControleur implements Initializable {
     public void cliqueSurValider(ActionEvent actionEvent/*, int num*/) {
         //if(num == 0)
         //{
-            RayonDAO.creerArticle(nomTextF.getText(), Integer.parseInt(quantiteTextF.getText()), detailsTextF.getText(), article.getRayonA(), Double.parseDouble(prixTextF.getText()));
+            rayonDAO.creerArticle(nomTextF.getText(), Integer.parseInt(quantiteTextF.getText()), detailsTextF.getText(), article.getRayonA(), Double.parseDouble(prixTextF.getText()));
         //}
 
     }

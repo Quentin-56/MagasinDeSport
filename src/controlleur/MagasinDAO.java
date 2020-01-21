@@ -2,6 +2,7 @@ package controlleur;
 
 import modele.Magasin;
 import modele.Rayon;
+import modele.Vendeur;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -68,7 +69,7 @@ public class MagasinDAO {
     /**
      * Rempli le tableau des rayons du magasin
      */
-    public static void recupererRayon()
+    public static ArrayList<Rayon> recupererRayon()
     {
         EntityManager em =SetupEM.getEm();
 
@@ -79,6 +80,8 @@ public class MagasinDAO {
         em.getTransaction().commit();
 
         Magasin.setListeRayons(listeRayons);
+
+        return  listeRayons;
     }
 
     public static void modifierRayon(Rayon rayon)
@@ -90,5 +93,26 @@ public class MagasinDAO {
         em.merge(rayon);
 
         em.getTransaction().commit();
+    }
+
+
+
+
+    /**
+     *
+     * @param nomRayon le nom du rayon
+     * @return le rayon correspondant au nomRayon
+     */
+    public static Rayon trouverRayonAvecNom(String nomRayon)
+    {
+        EntityManager em =SetupEM.getEm();
+        em.getTransaction().begin();
+
+        Query query = SetupEM.getEm().createQuery("from Rayon rayon where rayon.nom = ?1");
+        Rayon rayon  = (Rayon) query.setParameter(1, nomRayon).getSingleResult();
+
+        em.getTransaction().commit();
+
+        return rayon;
     }
 }

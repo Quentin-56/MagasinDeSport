@@ -13,14 +13,18 @@ public class ChefMagasinDAO {
      *  Remplace lancienne objet chef
      * @param chefmagasin nouveau ChefMagasin
      */
-    public static void modifierChefMagasin(ChefMagasin chefmagasin)
+    public static void modifierChefMagasin(ChefMagasin chefmagasin, String nom, String prenom, String motDePasse)
     {
         EntityManager em =SetupEM.getEm();
 
+        chefmagasin.setNom(nom);
+        chefmagasin.setPrenom(prenom);
+        chefmagasin.setMotDePasse(motDePasse);
+
         em.getTransaction().begin();
 
-        em.merge(chefmagasin);
-
+        //em.merge(chefmagasin);
+        em.persist(chefmagasin);
         em.getTransaction().commit();
     }
 

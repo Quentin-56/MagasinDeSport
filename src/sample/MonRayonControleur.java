@@ -96,7 +96,7 @@ public class MonRayonControleur implements Initializable {
         Article article =  tableau.getSelectionModel().getSelectedItem();
         //Si un article est selectionne
         if(article != null) {
-            RayonDAO.supprimerArticle(vendeur.getRayonV(),article);
+            rayonDAO.supprimerArticle(vendeur.getRayonV(),article);
         }
         //il manque un refresh immediat de la vue
 
