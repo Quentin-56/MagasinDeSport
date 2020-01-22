@@ -1,13 +1,11 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
-import controlleur.VendeurDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import modele.ChefMagasin;
-import modele.Vendeur;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,7 +43,7 @@ public class BoiteDialogueParametresControleur implements Initializable {
 
     public void cliqueSurValider(ActionEvent actionEvent) {
 
-        ChefMagasinDAO.modifierChefMagasin(chefMagasin, nomTextF.getText(), prenomTextF.getText(), motDePasseTextF.getText());
+        //ChefMagasinDAO.modifierChefMagasin(chefMagasin, nomTextF.getText(), prenomTextF.getText(), motDePasseTextF.getText());
 
 
     }

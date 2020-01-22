@@ -9,7 +9,7 @@ import modele.Article;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BoiteDialogueControleur implements Initializable {
+public class BoiteDialogueArticleControleur implements Initializable {
 
     private Article article;
     @FXML

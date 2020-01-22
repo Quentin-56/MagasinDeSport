@@ -1,7 +1,5 @@
 package sample;
 
-import controlleur.ChefMagasinDAO;
-import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import controlleur.VendeurDAO;
 import javafx.collections.FXCollections;
@@ -18,13 +16,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modele.Article;
 import modele.ChefMagasin;
 import modele.Vendeur;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class GestionDesVendeursControleur implements Initializable {
@@ -59,14 +55,14 @@ public class GestionDesVendeursControleur implements Initializable {
         public void initialize(URL url, ResourceBundle resourceBundle)
         {
             //this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
-            this.chefMagasin = ChefMagasinDAO.recupererChefMagasin();
+            //this.chefMagasin = ChefMagasinDAO.recupererChefMagasin();
 
             //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
             colPrenom.setCellValueFactory(new PropertyValueFactory("Prenom"));
             colNom.setCellValueFactory(new PropertyValueFactory("Nom"));
 
-            List<Vendeur> vendeurs = vendeurDAO.recupererVendeurs();
-            produits.addAll(vendeurs);
+            //List<Vendeur> vendeurs = vendeurDAO.recupererVendeurs();
+            //produits.addAll(vendeurs);
 
             tableauVendeurs.setItems(produits);
 
@@ -124,10 +120,10 @@ public class GestionDesVendeursControleur implements Initializable {
                 Scene scene = new Scene(parent);
                 dialogStage.setScene(scene);
 
-                //Recuperer le controleur lier à la vue
+               /* //Recuperer le controleur lier à la vue
                 BoiteDialogueModifierVendeurControleur controleur = loader.getController();
                 controleur.setVendeur(vendeur);
-                controleur.remplirFormulaire(/*vendeur.getRayonV()*/);
+                controleur.remplirFormulaire(vendeur.getRayonV());*/
 
                 // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
                 dialogStage.showAndWait();
@@ -139,7 +135,7 @@ public class GestionDesVendeursControleur implements Initializable {
 
             // LE TOUT A FAIRE DANS UNE FONCTION A PART
             //Charger le fichir fmxl
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueAjouterVendeur.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueVendeur.fxml"));
             Parent parent = loader.load();
 
             // Creer le stage pour la boite de dialogue
@@ -151,7 +147,7 @@ public class GestionDesVendeursControleur implements Initializable {
             dialogStage.setScene(scene);
 
             //Recuperer le controleur lier à la vue
-            BoiteDialogueAjouterVendeurControleur controleur = loader.getController();
+            BoiteDialogueVendeurControleur controleur = loader.getController();
             //controleur.setVendeur(vendeur);
             //controleur.remplirFormulaire(/*vendeur.getRayonV()*/);
 

@@ -11,11 +11,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
@@ -55,23 +55,30 @@ public class MonRayonControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("SALUT");
-        this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        VendeurDAO vendeurDAO = new VendeurDAO();
+        vendeurDAO.setEntityManager(SetupEM.getEm());
+        this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantite.setCellValueFactory(new PropertyValueFactory("quantite"));
 
-        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
-        produits.addAll(articles);
-
-        tableau.setItems(produits);
+        remplirTableauDArticles();
 
         //Nettoyer les details
         afficherArticleDetails(null);
 
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
+    }
+
+    public void remplirTableauDArticles()
+    {
+        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
+        produits.clear();
+        produits.addAll(articles);
+
+        tableau.setItems(produits);
     }
 
     public void afficherArticleDetails(Article article)
@@ -90,38 +97,74 @@ public class MonRayonControleur implements Initializable {
         }
     }
 
+    public void editerFormulaire(String titre, boolean bool) throws IOException {
+        Article article = tableau.getSelectionModel().getSelectedItem();
+
+        //Charger le fichir fmxl
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueArticle.fxml"));
+        Parent parent = loader.load();
+
+        // Creer le stage pour la boite de dialogue
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(titre);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(Main.getPrimaryStage());
+        Scene scene = new Scene(parent);
+        dialogStage.setScene(scene);
+        //Recuperer le controleur lier à la vue
+        BoiteDialogueArticleControleur controleur = loader.getController();
+        //Modifier l'article
+        if(bool == true)
+        {
+            controleur.remplirFormulaire(article);
+        }
+        else
+        {
+            controleur.remplirFormulaire(null);
+        }
+        //Indique au controler si c'est a modifier ou a ajouter
+        controleur.setEstAModifier(bool);
+        controleur.setArticle(article);
+        controleur.setDialogStage(dialogStage);
+        controleur.setMonRayonControleur(this);
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+        dialogStage.showAndWait();
+    }
+
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
+        RayonDAO rayonDAO = new RayonDAO();
+        rayonDAO.setEntityManager(SetupEM.getEm());
+        Article article = tableau.getSelectionModel().getSelectedItem();
+        rayonDAO.supprimerArticle(article);
+        //Actualiser le tableauView
+        remplirTableauDArticles();
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
 
-        Article article =  tableau.getSelectionModel().getSelectedItem();
-
-        //Si un article est selectionne
-        if(article != null) {
-            // LE TOUT A FAIRE DANS UNE FONCTION A PART
-            //Charger le fichir fmxl
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
-            Parent parent = loader.load();
-
-            // Creer le stage pour la boite de dialogue
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Modifier Article");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(Main.getPrimaryStage());
-            Scene scene = new Scene(parent);
-            dialogStage.setScene(scene);
-
-            //Recuperer le controleur lier à la vue
-            BoiteDialogueControleur controleur = loader.getController();
-            controleur.setArticle(article);
-            controleur.remplirFormulaire();
-
-            // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-            dialogStage.showAndWait();
+        if(tableau.getSelectionModel().getSelectedItem() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur modifier article");
+                alert.setContentText("Veuillez selectionner un article dans la liste");
+                alert.showAndWait();
+        }
+        else
+            {
+            editerFormulaire("Modifier article", true);
         }
     }
 
+    public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+        System.out.println("salut");
+        editerFormulaire("Ajouter article",false);
+    }
+
     public void cliqueSurReserver(ActionEvent actionEvent) {
+    }
+
+    public void cliqueSurSearch(ActionEvent actionEvent) {
+        System.out.println("Je fais une recherche");
     }
 }

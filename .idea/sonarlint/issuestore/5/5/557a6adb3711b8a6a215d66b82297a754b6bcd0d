@@ -1,12 +1,12 @@
 
-Tsquid:S2696J"6Make the enclosing method "static" or remove this set.(ˆ¼´ú8²ÂØïú-
-Msquid:S5411n"*Use the primitive boolean expression here.(€©Ìøÿÿÿÿ8²ÂØïú-
-Ksquid:S1125G"(Remove the literal "true" boolean value.(»¾Ø£şÿÿÿÿ8²ÂØïú-
-Usquid:S1172@"2Remove this unused method parameter "actionEvent".(Ï‹şŒøÿÿÿÿ8²ÂØïú-
-msquid:HiddenFieldCheckB"?Rename "identifiant" which hides the field declared at line 41.(¤¬ë¡øÿÿÿÿ8²ÂØïú-
-Fsquid:S1125L"(Remove the literal "true" boolean value.(¼£œò8²ÂØïú-
-tsquid:S2068+"V'PASSWORD' detected in this expression, review this potentially hard-coded credential.(³óÑ¡8²ÂØïú-
 Hsquid:S5411v"*Use the primitive boolean expression here.(Ãø’8²ÂØïú-
-Fsquid:S1125D"(Remove the literal "true" boolean value.(Ë’‹‚8²ÂØïú-
+Msquid:S5411n"*Use the primitive boolean expression here.(€©Ìøÿÿÿÿ8²ÂØïú-
 Msquid:S00108M")Either remove or fill this block of code.(ÒÌâ–øÿÿÿÿ8²ÂØïú-
+Fsquid:S1125D"(Remove the literal "true" boolean value.(Ë’‹‚8²ÂØïú-
+Usquid:S1172@"2Remove this unused method parameter "actionEvent".(Ï‹şŒøÿÿÿÿ8²ÂØïú-
+Fsquid:S1125L"(Remove the literal "true" boolean value.(¼£œò8²ÂØïú-
+Tsquid:S2696J"6Make the enclosing method "static" or remove this set.(ˆ¼´ú8²ÂØïú-
+Ksquid:S1125G"(Remove the literal "true" boolean value.(»¾Ø£şÿÿÿÿ8²ÂØïú-
+tsquid:S2068+"V'PASSWORD' detected in this expression, review this potentially hard-coded credential.(³óÑ¡8²ÂØïú-
 _squid:S11266"AReplace this if-then-else statement by a single return statement.(—ÅÊ¥8²ÂØïú-
+msquid:HiddenFieldCheckB"?Rename "identifiant" which hides the field declared at line 41.(¤¬ë¡øÿÿÿÿ8²ÂØïú-
