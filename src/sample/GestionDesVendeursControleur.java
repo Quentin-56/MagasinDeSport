@@ -58,9 +58,9 @@ public class GestionDesVendeursControleur implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle)
         {
-            //ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
-            //chefMagasinDAO.setEntityManager(SetupEM.getEm());
-            this.chefMagasin = ChefMagasinDAO.recupererChefMagasin();
+            ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
+            chefMagasinDAO.setEntityManager(SetupEM.getEm());
+            this.chefMagasin = chefMagasinDAO.recupererChefMagasin();
 
             //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
             colPrenom.setCellValueFactory(new PropertyValueFactory("prenom"));

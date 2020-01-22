@@ -7,20 +7,31 @@ import modele.Rayon;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class ChefMagasinDAO {
 
     private EntityManager entityManager;
 
+    //Getter et setter
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public  ChefMagasinDAO()
+    {
+        entityManager = SetupEM.getEm();
     }
 
     /**
      *  Remplace lancienne objet chef
      * @param chefmagasin nouveau ChefMagasin
      */
-    public static void modifierChefMagasin(ChefMagasin chefmagasin, String nom, String prenom, String motDePasse)
+    public void modifierChefMagasin(ChefMagasin chefmagasin)
     {
         entityManager.getTransaction().begin();
 

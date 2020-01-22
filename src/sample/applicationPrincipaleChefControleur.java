@@ -1,6 +1,7 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
+import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -29,6 +31,8 @@ public class applicationPrincipaleChefControleur implements Initializable {
     private boolean estSurGestionDesVendeurs = false;
     private boolean estSurGestionDesArticlesReserves = false;
     @FXML
+    private Label nomLabel;
+    @FXML
     private VBox pnl_scroll;
 
     @Override
@@ -36,7 +40,10 @@ public class applicationPrincipaleChefControleur implements Initializable {
         ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
         chefMagasinDAO.setEntityManager(SetupEM.getEm());
         chefMagasin = chefMagasinDAO.recupererChefMagasin();
+
+        nomLabel.setText(chefMagasin.getPrenom()+" "+chefMagasin.getNom());
     }
+
 
     public void cliqueSurGestionDesVendeurs(ActionEvent actionEvent) {
         try {
@@ -86,10 +93,12 @@ public class applicationPrincipaleChefControleur implements Initializable {
         BoiteDialogueParametresControleur controleur = loader.getController();
         controleur.setChefMagasin(chefMagasin);
         controleur.remplirFormulaire();
+        controleur.setDialogStage(dialogStage);
+        controleur.setApplicationPrincipaleChefControleur(this);
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
         dialogStage.showAndWait();
-        dialogStage.close();
+        //dialogStage.close();
 
     }
 

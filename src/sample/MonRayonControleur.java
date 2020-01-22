@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
@@ -147,12 +146,12 @@ public class MonRayonControleur implements Initializable {
         if(tableau.getSelectionModel().getSelectedItem() == null)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erreur modifier article");
-                alert.setContentText("Veuillez selectionner un article dans la liste");
-                alert.showAndWait();
+            alert.setTitle("Erreur modifier article");
+            alert.setContentText("Veuillez selectionner un article dans la liste");
+            alert.showAndWait();
         }
         else
-            {
+        {
             editerFormulaire("Modifier article", true);
         }
     }

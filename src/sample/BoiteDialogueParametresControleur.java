@@ -16,8 +16,9 @@ import java.util.ResourceBundle;
 public class BoiteDialogueParametresControleur implements Initializable {
 
     private Stage dialogStage;
-    private GestionDesVendeursControleur gestionDesVendeursControleur;
+    private applicationPrincipaleChefControleur applicationPrincipaleChefControleur1;
     private ChefMagasin chefMagasin;
+    private ChefMagasinDAO chefMagasinDAO;
     @FXML
     private TextField nomTextF;
     @FXML
@@ -25,12 +26,16 @@ public class BoiteDialogueParametresControleur implements Initializable {
     @FXML
     private TextField motDePasseTextF;
 
-    public void setGestionDesVendeursControleur(GestionDesVendeursControleur gestionDesVendeursControleur) {
-        this.gestionDesVendeursControleur = gestionDesVendeursControleur;
+    public void setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur applicationPrincipaleChefControleur1) {
+        this.applicationPrincipaleChefControleur1 = applicationPrincipaleChefControleur1;
     }
 
     public void setChefMagasin(ChefMagasin chefMagasin) {
         this.chefMagasin = chefMagasin;
+    }
+
+    public void setChefMagasinDAO(ChefMagasinDAO chefMagasinDAO) {
+        this.chefMagasinDAO = chefMagasinDAO;
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -40,6 +45,7 @@ public class BoiteDialogueParametresControleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        chefMagasinDAO = new ChefMagasinDAO();
     }
 
     public void remplirFormulaire()
@@ -57,7 +63,7 @@ public class BoiteDialogueParametresControleur implements Initializable {
         chefMagasin.setPrenom(prenomTextF.getText());
         chefMagasin.setMotDePasse(motDePasseTextF.getText());
 
-        ChefMagasinDAO.modifierChefMagasin(chefMagasin);
+        chefMagasinDAO.modifierChefMagasin(chefMagasin);
 
         //Fermer le formulaire
         dialogStage.close();

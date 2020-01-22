@@ -35,13 +35,13 @@ public class applicationPrincipaleControleur implements Initializable {
     @FXML
     private VBox pnl_scroll;
 
-   @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-       VendeurDAO vendeurDAO = new VendeurDAO();
-       vendeurDAO.setEntityManager(SetupEM.getEm());
+        VendeurDAO vendeurDAO = new VendeurDAO();
+        vendeurDAO.setEntityManager(SetupEM.getEm());
 
-       Vendeur vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
-       nomLabel.setText(vendeur.getPrenom()+" "+vendeur.getNom());
+        Vendeur vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        nomLabel.setText(vendeur.getPrenom()+" "+vendeur.getNom());
     }
 
     public void cliqueSurAutresRayons(ActionEvent actionEvent)
@@ -83,7 +83,7 @@ public class applicationPrincipaleControleur implements Initializable {
                 nodes[0] = (Node) parent;
                 pnl_scroll.getChildren().add(nodes[0]);
 
-               MonRayonControleur controleur = loader.getController();
+                MonRayonControleur controleur = loader.getController();
 
                 //Mettre à jour les booleens
                 estSurMonRayon = true;

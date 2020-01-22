@@ -55,7 +55,9 @@ public class GestionArticlesReservesControleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         //this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
-        this.chefMagasin = ChefMagasinDAO.recupererChefMagasin();
+        ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
+        chefMagasinDAO.setEntityManager(SetupEM.getEm());
+        this.chefMagasin = chefMagasinDAO.recupererChefMagasin();
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));

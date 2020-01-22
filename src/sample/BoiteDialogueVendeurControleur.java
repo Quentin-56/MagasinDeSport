@@ -104,7 +104,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
 
         public void cliqueSurValider(ActionEvent actionEvent) {
 
-            VendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom((String)nomRayonCombo.getSelectionModel().getSelectedItem()));
+            //VendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom((String)nomRayonCombo.getSelectionModel().getSelectedItem()));
 
 
                 VendeurDAO vendeurDAO = new VendeurDAO();
