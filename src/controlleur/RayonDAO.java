@@ -28,7 +28,7 @@ public class RayonDAO {
      * @param details
      * @param rayonA
      */
-    public Article creerArticle(/*Rayon rayon,*/ String nom, int quantite, String details, Rayon rayonA, double prix)
+    public Article creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
     {
         Article article = new Article(nom, quantite, details, rayonA, prix);
 
@@ -39,7 +39,7 @@ public class RayonDAO {
 
         entityManager.getTransaction().commit();
 
-        ajouterArticleDansListeArticle(rayonA, article);
+        ajouterArticleDansListeArticle(rayon, article);
 
         return article;
     }
@@ -51,7 +51,7 @@ public class RayonDAO {
      */
     public void ajouterArticleDansListeArticle(Rayon rayon, Article article)
     {
-        rayon.getListeArticles().add(article);
+       rayon.getListeArticles().add(article);
     }
 
     /**
@@ -117,28 +117,9 @@ public class RayonDAO {
         return listP;
     }
 
-    /**
-     * transfere un article d'un rayon a un autre
-     * @param article l'article a transferer
-     * @param nouveauRayon le nouveau rayon de l article
-     */
     public void transfererUnArticle(Article article, Rayon nouveauRayon)
     {
         //penser à modifier lattribut rayon de l'article et la liste d'article de l'ancien et du nouveau rayon
-
-        article.getRayonA().getListeArticles().remove(article);
-
-        //si l'article etait un article reserve alors le retirer de la liste des articles reserves de l ancien rayon
-        // et l ajouter dans la liste des articles reserves du nouveau rayon
-        if(article.getRayonA().getListeReservationArticle().contains(article))
-        {
-            article.getRayonA().getListeReservationArticle().remove(article);
-            nouveauRayon.getListeReservationArticle().add(article);
-        }
-
-        nouveauRayon.getListeArticles().add(article);
-
-        article.setRayonA(nouveauRayon);
     }
 
 }

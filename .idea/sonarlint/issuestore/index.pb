@@ -53,3 +53,13 @@ W
 'src/sample/BoiteDialogueControleur.java,4\5\456986694212117c150ce3340d647576d6848f65
 M
 src/sample/boiteDialogue.fxml,a\4\a49a5329a3ac8c299aceafa630f21833f1328087
+P
+ src/controlleur/BoiteAOutil.java,6\5\65549172f4737fee7cc124c78221f1facecd1098
+¡
+q.idea/libraries/com_google_code_maven_play_plugin_com_google_code_eamelink_mockito_mockito_all_1_9_1_20110911.xml,9\5\9500b823ecef3823550f04ac97a6d2446209646c
+K
+tests/ConnexionDAOTest.java,3\a\3ab0636709da5239779fdf76830f44971d16559c
+G
+tests/RayonDaoTest.java,9\c\9ca7d39f0116050bda4fb59a99cb4d08ebe0e93f
+B
+MagasinDeSport.iml,3\f\3f27dbc392a29e8c5c3724f15d9a3fd352342d9b

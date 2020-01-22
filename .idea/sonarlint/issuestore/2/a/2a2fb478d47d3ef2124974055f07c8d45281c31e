@@ -1,14 +1,16 @@
 
-Csquid:S19054"'Remove this unnecessary cast to "Node".(¹™Ì’şÿÿÿÿ
-Nsquid:S1172+"2Remove this unused method parameter "actionEvent".(ÆÁû¬ùÿÿÿÿ
->squid:S1905H"'Remove this unnecessary cast to "Node".(ü©Ü‰
-esquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ñ×‚
-Nsquid:S1172U"2Remove this unused method parameter "actionEvent".(ï™…íùÿÿÿÿ
-Vsquid:S1068":Remove this unused "estSurArticlesReserves" private field.(ß‰¶òÿÿÿÿÿ
-rsquid:S00116""URename this field "pnl_scroll" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âè²›ÿÿÿÿÿ
-Nsquid:S1172A"2Remove this unused method parameter "actionEvent".(ª¤öøÿÿÿÿ
-Tsquid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
-csquid:UselessImportCheck":Remove this unused import 'javafx.scene.input.MouseEvent'.(˜¬‹æÿÿÿÿÿ
-O
-squid:S106V"9Replace this use of System.out or System.err by a logger.(ÂÿüŠ
-Nsquid:S1172Y"2Remove this unused method parameter "actionEvent".(ÚÓ¸¯úÿÿÿÿ
+[squid:UselessImportCheck"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8ì–‚ïú-
+Usquid:S1172B"2Remove this unused method parameter "actionEvent".(ª¤öøÿÿÿÿ8ì–‚ïú-
+Jsquid:S1905P"'Remove this unnecessary cast to "Node".(öŒ£Ñşÿÿÿÿ8şš³ğú-
+]squid:S1068":Remove this unused "estSurArticlesReserves" private field.(ß‰¶òÿÿÿÿÿ8ì–‚ïú-
+ysquid:S00116#"URename this field "pnl_scroll" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âè²›ÿÿÿÿÿ8ì–‚ïú-
+V
+squid:S106`"9Replace this use of System.out or System.err by a logger.(ÂÿüŠ8ì–‚ïú-
+Usquid:S1172_"2Remove this unused method parameter "actionEvent".(ï™…íùÿÿÿÿ8ì–‚ïú-
+Rsquid:S1481S"/Remove this unused "controleur" local variable.(à‚‰’şÿÿÿÿ8û¯´ğú-
+Usquid:S1172c"2Remove this unused method parameter "actionEvent".(ÚÓ¸¯úÿÿÿÿ8ì–‚ïú-
+jsquid:UselessImportCheck":Remove this unused import 'javafx.scene.input.MouseEvent'.(˜¬‹æÿÿÿÿÿ8ì–‚ïú-
+asquid:S1854S">Remove this useless assignment to local variable "controleur".(à‚‰’şÿÿÿÿ8û¯´ğú-
+Usquid:S1172,"2Remove this unused method parameter "actionEvent".(ÆÁû¬ùÿÿÿÿ8ì–‚ïú-
+Jsquid:S19055"'Remove this unnecessary cast to "Node".(¹™Ì’şÿÿÿÿ8ì–‚ïú-
+lsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Ñ×‚8ì–‚ïú-

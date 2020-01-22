@@ -1,7 +1,2 @@
 
-Jsquid:S1481",Remove this unused "magasin" local variable.(’γΪζ8ΛΊ¨εχ-
-Jsquid:S2440"'Remove this instantiation of "SetupEM".(²‚†ϊÿÿÿÿ8ΛΊ¨εχ-
-Ysquid:S1854";Remove this useless assignment to local variable "magasin".(’γΪζ8ΛΊ¨εχ-
-Ssquid:UselessImportCheck")Remove this unused import 'modele.Rayon'.(¶£8ΛΊ¨εχ-
-asquid:UselessImportCheck"1Remove this unused import 'controlleur.RayonDAO'.(Λ±ψÿÿÿÿ8ΛΊ¨εχ-
-csquid:UselessImportCheck"3Remove this unused import 'controlleur.VendeurDAO'.(υΔ―ϋÿÿÿÿ8ςª™‹ω-
+gsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¦ΜΪΥ8¥¦ÿω-

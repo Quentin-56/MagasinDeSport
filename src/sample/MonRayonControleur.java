@@ -72,7 +72,6 @@ public class MonRayonControleur implements Initializable {
 
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
-
     }
 
     public void afficherArticleDetails(Article article)
@@ -92,14 +91,6 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
-
-        Article article =  tableau.getSelectionModel().getSelectedItem();
-        //Si un article est selectionne
-        if(article != null) {
-            rayonDAO.supprimerArticle(vendeur.getRayonV(),article);
-        }
-        //il manque un refresh immediat de la vue
-
     }
 
     public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
@@ -124,7 +115,7 @@ public class MonRayonControleur implements Initializable {
             //Recuperer le controleur lier à la vue
             BoiteDialogueControleur controleur = loader.getController();
             controleur.setArticle(article);
-            controleur.remplirFormulaire(vendeur.getRayonV());
+            controleur.remplirFormulaire();
 
             // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
             dialogStage.showAndWait();
@@ -132,32 +123,5 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurReserver(ActionEvent actionEvent) {
-    }
-
-
-    public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
-        int num = 0;
-
-        // LE TOUT A FAIRE DANS UNE FONCTION A PART
-        //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
-        Parent parent = loader.load();
-
-        // Creer le stage pour la boite de dialogue
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("ajouter Article");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(Main.getPrimaryStage());
-        Scene scene = new Scene(parent);
-        dialogStage.setScene(scene);
-
-        //Recuperer le controleur lier à la vue
-        BoiteDialogueControleur controleur = loader.getController();
-        //controleur.setArticle(article);
-        controleur.remplirFormulaire(vendeur.getRayonV());
-
-
-        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-        dialogStage.showAndWait();
     }
 }

@@ -1,4 +1,4 @@
-/*import controlleur.RayonDAO;
+import controlleur.RayonDAO;
 import modele.Article;
 import modele.Rayon;
 import org.junit.jupiter.api.BeforeEach;
@@ -80,4 +80,4 @@ class RayonDaoTest {
 
     }
 
-}*/
+}

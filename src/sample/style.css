@@ -30,9 +30,8 @@
 }
 
 .table-view {
-    -fx-base: #de00c8;
-    -fx-control-inner-background: #e1faff;
-    -fx-background-color: #e1faff;
+
+
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-padding: 5;
@@ -57,8 +56,43 @@
 .table-view:focused .table-row-cell:filled:focused:selected {
     -fx-background-color: -fx-focus-color;
 }
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #de00c8;
+}
+
+#labelAutres {
+    -fx-font-size: 32pt;
+    -fx-font-family: "Segoe UI Light";
+}
+
+#labelPolysports{
+    -fx-font-size: 30pt;
+    -fx-text-fill: #ffffff;
+    -fx-opacity: 1;
+}
+
+#labelSince2019
+{
+    -fx-text-fill: white;
+}
 
 #eyeBtn{
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+}
+
+#btnAdd{
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+}
+
+#btnSearch{
     -fx-background-color: transparent;
     -fx-border-radius: 0;
     -fx-background-radius: 0;
