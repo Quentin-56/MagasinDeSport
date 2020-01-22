@@ -1,7 +1,6 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
-import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import controlleur.VendeurDAO;
 import javafx.collections.FXCollections;
@@ -12,13 +11,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import modele.Article;
 import modele.ChefMagasin;
 import modele.Vendeur;
 
@@ -42,11 +41,12 @@ public class GestionDesVendeursControleur implements Initializable {
         @FXML
         private Label rayonLabel;
 
+
         private VendeurDAO vendeurDAO;
 
         private ObservableList<Vendeur> produits = FXCollections.observableArrayList();
 
-        //private Vendeur vendeur;
+
         private ChefMagasin chefMagasin;
 
         public GestionDesVendeursControleur()
@@ -58,17 +58,17 @@ public class GestionDesVendeursControleur implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle)
         {
-            //this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+            //ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
+            //chefMagasinDAO.setEntityManager(SetupEM.getEm());
             this.chefMagasin = ChefMagasinDAO.recupererChefMagasin();
 
             //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
-            colPrenom.setCellValueFactory(new PropertyValueFactory("Prenom"));
-            colNom.setCellValueFactory(new PropertyValueFactory("Nom"));
+            colPrenom.setCellValueFactory(new PropertyValueFactory("prenom"));
+            colNom.setCellValueFactory(new PropertyValueFactory("nom"));
 
-            List<Vendeur> vendeurs = vendeurDAO.recupererVendeurs();
-            produits.addAll(vendeurs);
 
-            tableauVendeurs.setItems(produits);
+            remplirTableauDeVendeurs();
+
 
             //Nettoyer les details
             afficherVendeursDetails(null);
@@ -78,7 +78,18 @@ public class GestionDesVendeursControleur implements Initializable {
 
         }
 
-        public void afficherVendeursDetails(Vendeur vendeur)
+
+        public void remplirTableauDeVendeurs()
+        {
+            List<Vendeur> vendeurs = vendeurDAO.recupererVendeurs();
+            produits.clear();
+            produits.addAll(vendeurs);
+
+            tableauVendeurs.setItems(produits);
+        }
+
+
+    public void afficherVendeursDetails(Vendeur vendeur)
         {
             if(vendeur != null)
             {
@@ -94,70 +105,79 @@ public class GestionDesVendeursControleur implements Initializable {
             }
         }
 
+        /**
+         *
+         * @param titre
+         * @param bool
+         * @throws IOException
+         */
+        public void editerFormulaire(String titre, boolean bool) throws IOException {
+            Vendeur vendeur = tableauVendeurs.getSelectionModel().getSelectedItem();
+
+            //Charger le fichir fmxl
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueVendeur.fxml"));
+            Parent parent = loader.load();
+
+            // Creer le stage pour la boite de dialogue
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(titre);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(Main.getPrimaryStage());
+            Scene scene = new Scene(parent);
+            dialogStage.setScene(scene);
+            //Recuperer le controleur lier à la vue
+            BoiteDialogueVendeurControleur controleur = loader.getController();
+            //Modifier le vendeur
+            if(bool == true)
+            {
+                controleur.remplirFormulaire(vendeur);
+            }
+            else
+            {
+                controleur.remplirFormulaire(null);
+            }
+            //Indique au controler si c'est a modifier ou a ajouter
+            controleur.setEstAModifier(bool);
+            controleur.setVendeur(vendeur);
+            controleur.setDialogStage(dialogStage);
+            controleur.setGestionDesVendeursControleur(this);
+
+            // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+            dialogStage.showAndWait();
+        }
+
         public void cliqueSurSupprimer(ActionEvent actionEvent) {
 
+            VendeurDAO vendeurDAO = new VendeurDAO();
+            vendeurDAO.setEntityManager(SetupEM.getEm());
             Vendeur vendeur =  tableauVendeurs.getSelectionModel().getSelectedItem();
             //Si un vendeur est selectionne
             if(vendeur != null) {
                 vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(),vendeur.getRayonV());
             }
-            //il manque un refresh immediat de la vue
+            remplirTableauDeVendeurs();
 
         }
 
         public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
 
-            Vendeur vendeur =  tableauVendeurs.getSelectionModel().getSelectedItem();
-
-            //Si un vendeur est selectionne
-            if(vendeur != null) {
-                // LE TOUT A FAIRE DANS UNE FONCTION A PART
-                //Charger le fichir fmxl
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueModifierVendeur.fxml"));
-                Parent parent = loader.load();
-
-                // Creer le stage pour la boite de dialogue
-                Stage dialogStage = new Stage();
-                dialogStage.setTitle("Modifier Vendeur");
-                dialogStage.initModality(Modality.WINDOW_MODAL);
-                dialogStage.initOwner(Main.getPrimaryStage());
-                Scene scene = new Scene(parent);
-                dialogStage.setScene(scene);
-
-                //Recuperer le controleur lier à la vue
-                BoiteDialogueModifierVendeurControleur controleur = loader.getController();
-                controleur.setVendeur(vendeur);
-                controleur.remplirFormulaire(/*vendeur.getRayonV()*/);
-
-                // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-                dialogStage.showAndWait();
+            if(tableauVendeurs.getSelectionModel().getSelectedItem() == null)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur modifier vendeur");
+                alert.setContentText("Veuillez selectionner un vendeur dans la liste");
+                alert.showAndWait();
             }
+            else
+            {
+                editerFormulaire("Modifier vendeur", true);
+            }
+
         }
 
 
         public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
-
-            // LE TOUT A FAIRE DANS UNE FONCTION A PART
-            //Charger le fichir fmxl
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueAjouterVendeur.fxml"));
-            Parent parent = loader.load();
-
-            // Creer le stage pour la boite de dialogue
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Ajouter Vendeur");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(Main.getPrimaryStage());
-            Scene scene = new Scene(parent);
-            dialogStage.setScene(scene);
-
-            //Recuperer le controleur lier à la vue
-            BoiteDialogueAjouterVendeurControleur controleur = loader.getController();
-            //controleur.setVendeur(vendeur);
-            //controleur.remplirFormulaire(/*vendeur.getRayonV()*/);
-
-
-            // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-            dialogStage.showAndWait();
+            editerFormulaire("Ajouter vendeur",false);
         }
 
 }

@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.ChefMagasin;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -88,6 +89,62 @@ public class applicationPrincipaleChefControleur implements Initializable {
         dialogStage.showAndWait();
         dialogStage.close();
 
+    }
+
+    public void cliqueSurGestionDesRayons(ActionEvent actionEvent) throws IOException {
+        /*try {
+            if (!estSurGestionDesRayons) {
+
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("applicationPrincipale.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                applicationPrincipaleControleur controleur = loader.getController();
+
+                //Mettre à jour les booleens
+                estSurGestionDesRayons = true;
+                estSurGestionDesVendeurs = false;
+                estSurGestionDesArticlesReserves = false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+    }
+
+    public void cliqueSurGestionArticlesReserves(ActionEvent actionEvent) throws IOException {
+        try {
+            if (!estSurGestionDesArticlesReserves) {
+
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                GestionArticlesReservesControleur controleur = loader.getController();
+
+                //Mettre à jour les booleens
+                estSurGestionDesArticlesReserves = true;
+                estSurGestionDesRayons = false;
+                estSurGestionDesVendeurs = false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void cliqueSurDeconnecte(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
+
+        Main.getPrimaryStage().setScene(new Scene(root));
     }
 
 

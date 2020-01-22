@@ -28,7 +28,7 @@ public class RayonDAO {
      * @param details
      * @param rayonA
      */
-    public Article creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
+    public Article creerArticle(/*Rayon rayon,*/ String nom, int quantite, String details, Rayon rayonA, double prix)
     {
         Article article = new Article(nom, quantite, details, rayonA, prix);
 
@@ -39,7 +39,7 @@ public class RayonDAO {
 
         entityManager.getTransaction().commit();
 
-        ajouterArticleDansListeArticle(rayon, article);
+        ajouterArticleDansListeArticle(rayonA, article);
 
         return article;
     }
@@ -56,10 +56,9 @@ public class RayonDAO {
 
     /**
      * Supprime l'article dans la BDD et dans la liste d'article du rayon
-     * @param rayon
      * @param articleASupprimer
      */
-    public void supprimerArticle(Rayon rayon, Article articleASupprimer)
+    public void supprimerArticle(Article articleASupprimer)
     {
         entityManager.getTransaction().begin();
 
@@ -68,7 +67,7 @@ public class RayonDAO {
 
         entityManager.getTransaction().commit();
 
-        supprimerArticleDansListeArticle(rayon, articleASupprimer);
+        supprimerArticleDansListeArticle(articleASupprimer.getRayonA(), articleASupprimer);
     }
 
     /**

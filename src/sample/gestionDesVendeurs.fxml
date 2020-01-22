@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GestionDesVendeursControleur">
+<AnchorPane prefHeight="521.0" prefWidth="684.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GestionDesVendeursControleur">
    <children>
-      <TableView fx:id="tableauVendeurs" layoutX="9.0" layoutY="82.0" prefHeight="267.0" prefWidth="200.0">
+      <TableView fx:id="tableauVendeurs" layoutX="9.0" layoutY="82.0" prefHeight="353.0" prefWidth="233.0">
         <columns>
           <TableColumn fx:id="colPrenom" prefWidth="123.99998474121094" text="Prenom" />
             <TableColumn fx:id="colNom" prefWidth="145.5999755859375" text="Nom" />
         </columns>
       </TableView>
-      <Label layoutX="274.0" layoutY="5.0" text="Autres" AnchorPane.leftAnchor="274.0" AnchorPane.topAnchor="5.0" />
-      <GridPane layoutX="210.0" layoutY="98.0">
+      <Label layoutX="245.0" layoutY="71.0" text="Autres" AnchorPane.leftAnchor="245.0" AnchorPane.topAnchor="71.0" />
+      <GridPane layoutX="245.0" layoutY="92.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,10 +39,10 @@
          </children>
       </GridPane>
       <Button layoutX="40.0" layoutY="31.0" mnemonicParsing="false" onAction="#cliqueSurAjouter" text="Ajouter vendeur" />
-      <ButtonBar layoutX="200.0" layoutY="302.0" prefHeight="40.0" prefWidth="254.0">
+      <ButtonBar layoutX="242.0" layoutY="305.0" prefHeight="40.0" prefWidth="254.0">
          <buttons>
-          <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
             <Button layoutX="135.0" layoutY="17.0" mnemonicParsing="false" onAction="#cliqueSurSupprimer" text="Supprimer" />
+          <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
          </buttons>
       </ButtonBar>
    </children>

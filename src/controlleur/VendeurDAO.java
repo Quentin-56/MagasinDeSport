@@ -16,6 +16,10 @@ public class VendeurDAO {
         this.entityManager = entityManager;
     }
 
+    public EntityManager getEntityManager() {
+        return  entityManager;
+    }
+
     /**
      * appelle constructeur
      * 	ajout le vendeur dans la bdd
@@ -85,23 +89,15 @@ public class VendeurDAO {
 
     /**
      *
-     * @param vendeur
+     * @param vendeurayon
      */
-    public static void modifierVendeur( Vendeur vendeur, String prenom, String nom, Rayon rayon, String identifiant, String motDePasse)
+    public void modifierVendeur( Vendeur vendeurayon)
     {
-        EntityManager em =SetupEM.getEm();
+        getEntityManager().getTransaction().begin();
 
-        vendeur.setPrenom(prenom);
-        vendeur.setNom(nom);
-        vendeur.setRayonV(rayon);
-        vendeur.setIdentifiant(identifiant);
-        vendeur.setMotDePasse(motDePasse);
+        getEntityManager().merge(vendeurayon);
 
-        em.getTransaction().begin();
-        em.persist(vendeur);
-        //em.merge(vendeur);
-
-        em.getTransaction().commit();
+        getEntityManager().getTransaction().commit();
     }
 
     /**
