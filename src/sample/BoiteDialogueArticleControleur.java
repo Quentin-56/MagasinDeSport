@@ -13,7 +13,7 @@ import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import modele.Rayon;
 
-public class BoiteDialogueControleur implements Initializable {
+public class BoiteDialogueArticleControleur implements Initializable {
 
     private Stage dialogStage;
     private MonRayonControleur monRayonControleur;

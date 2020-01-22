@@ -73,14 +73,16 @@ public class ConnexionControleur implements Initializable
                 //Retenir l'identifiant
                 ConnexionControleur.identifiant = identifiant;
                 mdpLabel.setText("");
+                Parent root = null;
                 if(connexion.leChefSeConnecte(identifiant) == true)
                 {
-                    Parent root = FXMLLoader.load(getClass().getResource("applicationPrincipaleChef.fxml"));
+                    root = FXMLLoader.load(getClass().getResource("applicationPrincipaleChef.fxml"));
                     Main.getPrimaryStage().setScene(new Scene(root));
                 }
                 else
                 {
-                    Parent root = FXMLLoader.load(getClass().getResource("applicationPrincipale.fxml"));
+                    //Est un vendeur
+                    root = FXMLLoader.load(getClass().getResource("applicationPrincipale.fxml"));
                     Main.getPrimaryStage().setScene(new Scene(root));
                 }
             }

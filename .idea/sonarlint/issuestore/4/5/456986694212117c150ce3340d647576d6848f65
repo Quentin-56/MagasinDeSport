@@ -1,4 +1,6 @@
 
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ
-˜squid:S1186'"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(‚Ï¹•
-˜squid:S1186+"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«¹¢€
+Dsquid:S1125"(Remove the literal "true" boolean value.(®…ÿÛ8–é‘Ìü-
+Nsquid:S1172"2Remove this unused method parameter "actionEvent".(«¹¢€8µ×ÖÌü-
+Qsquid:UselessImportCheck")Remove this unused import 'modele.Rayon'.(¶£8°Æ½Îü-
+›squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ
+Nsquid:S1172"2Remove this unused method parameter "actionEvent".(‚Ï¹•8–é‘Ìü-

@@ -56,8 +56,9 @@ public class MonRayonControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        System.out.println("SALUT");
-        this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        VendeurDAO vendeurDAO = new VendeurDAO();
+        vendeurDAO.setEntityManager(SetupEM.getEm());
+        this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
@@ -71,7 +72,6 @@ public class MonRayonControleur implements Initializable {
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
     }
-
 
     public void remplirTableauDArticles()
     {
@@ -98,12 +98,11 @@ public class MonRayonControleur implements Initializable {
         }
     }
 
-
     public void editerFormulaire(String titre, boolean bool) throws IOException {
         Article article = tableau.getSelectionModel().getSelectedItem();
 
         //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueArticle.fxml"));
         Parent parent = loader.load();
 
         // Creer le stage pour la boite de dialogue
@@ -114,7 +113,7 @@ public class MonRayonControleur implements Initializable {
         Scene scene = new Scene(parent);
         dialogStage.setScene(scene);
         //Recuperer le controleur lier à la vue
-        BoiteDialogueControleur controleur = loader.getController();
+        BoiteDialogueArticleControleur controleur = loader.getController();
         //Modifier l'article
         if(bool == true)
         {
@@ -134,7 +133,6 @@ public class MonRayonControleur implements Initializable {
         dialogStage.showAndWait();
     }
 
-
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
         RayonDAO rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(SetupEM.getEm());
@@ -149,17 +147,18 @@ public class MonRayonControleur implements Initializable {
         if(tableau.getSelectionModel().getSelectedItem() == null)
         {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur modifier article");
-            alert.setContentText("Veuillez selectionner un article dans la liste");
-            alert.showAndWait();
+                alert.setTitle("Erreur modifier article");
+                alert.setContentText("Veuillez selectionner un article dans la liste");
+                alert.showAndWait();
         }
         else
-        {
+            {
             editerFormulaire("Modifier article", true);
         }
     }
 
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+        System.out.println("salut");
         editerFormulaire("Ajouter article",false);
     }
 
@@ -169,5 +168,4 @@ public class MonRayonControleur implements Initializable {
     public void cliqueSurSearch(ActionEvent actionEvent) {
         System.out.println("Je fais une recherche");
     }
-
 }
