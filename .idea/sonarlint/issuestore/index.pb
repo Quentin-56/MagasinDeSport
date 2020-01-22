@@ -49,10 +49,6 @@ L
 src/sample/autresRayons.fxml,d\e\defcb7a7edc7aba75035ead50e3fe3c1014ad3b3
 V
 &src/sample/AutresRayonsControleur.java,9\8\98152d23d1741c0169e68910c1dbd1acd2dbea13
-W
-'src/sample/BoiteDialogueControleur.java,4\5\456986694212117c150ce3340d647576d6848f65
-M
-src/sample/boiteDialogue.fxml,a\4\a49a5329a3ac8c299aceafa630f21833f1328087
 P
  src/controlleur/BoiteAOutil.java,6\5\65549172f4737fee7cc124c78221f1facecd1098
 ¡
@@ -63,3 +59,23 @@ G
 tests/RayonDaoTest.java,9\c\9ca7d39f0116050bda4fb59a99cb4d08ebe0e93f
 B
 MagasinDeSport.iml,3\f\3f27dbc392a29e8c5c3724f15d9a3fd352342d9b
+Y
+)src/sample/applicationPrincipaleChef.fxml,1\a\1a60eecd96afca0570a1a987c0818256096e6271
+c
+3src/sample/applicationPrincipaleChefControleur.java,1\0\105cda266f73f382d207b5d661d130d0e9da4662
+T
+$src/sample/boiteDialogueArticle.fxml,7\f\7fbc6c3e5602a6aa2e1bf6ae0978dbd8ba2d7cf3
+^
+.src/sample/BoiteDialogueArticleControleur.java,5\f\5f8da7f0718118920b4b7cd445ba6e681dd0e2a7
+W
+'src/sample/boiteDialogueParametres.fxml,9\3\9378a929d0b8704671ff0a70eb7776b7185c55a7
+a
+1src/sample/BoiteDialogueParametresControleur.java,5\2\52ce7a82bf4922dcdd71deb21a82744b6b5e9655
+T
+$src/sample/boiteDialogueVendeur.fxml,2\c\2c8ff43bdaa591a631e8471cfc508b36debd7ea1
+^
+.src/sample/BoiteDialogueVendeurControleur.java,e\9\e93db4caa93bdfae10a40545b6fba585695f5e47
+R
+"src/sample/gestionDesVendeurs.fxml,3\2\32d22e6f3b14db5616d0974ed09c6d05404c0a13
+\
+,src/sample/GestionDesVendeursControleur.java,5\0\50f402e444d23ac30c3f217734306c92a8cecbeb

@@ -1,12 +1,12 @@
 
-Qsquid:S1172¨"2Remove this unused method parameter "actionEvent".(æĞ•8ÎğÿĞü-
-Qsquid:S1172‰"2Remove this unused method parameter "actionEvent".(‰¼»—8©ÖœĞü-
-fsquid:HiddenFieldCheckŠ"<Rename "rayonDAO" which hides the field declared at line 45.(ÕŠ¼î8©ÖœĞü-
+fsquid:HiddenFieldCheckˆ"<Rename "rayonDAO" which hides the field declared at line 43.(ÕŠ¼î8©ÖœĞü-
+Vsquid:S1172"2Remove this unused method parameter "actionEvent".(²èğÇøÿÿÿÿ8©ÖœĞü-
+Qsquid:S1172‡"2Remove this unused method parameter "actionEvent".(‰¼»—8©ÖœĞü-
+Qsquid:S1172§"2Remove this unused method parameter "actionEvent".(æĞ•8ÎğÿĞü-
+ squid:S1186¤"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢±ÀÒ8ßÕÌü-
+Qsquid:S1172Ÿ"2Remove this unused method parameter "actionEvent".(ßà¿ô8©ÖœĞü-
 W
-squid:S106©"9Replace this use of System.out or System.err by a logger.(€àÄœ8²çğĞü-
-jsquid:UselessImportCheck":Remove this unused import 'javafx.scene.input.MouseEvent'.(˜¬‹æÿÿÿÿÿ8ÎğÿĞü-
- squid:S1186¥"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢±ÀÒ8ßÕÌü-
-Fsquid:S1125w"(Remove the literal "true" boolean value.(÷€²8©ÖœĞü-
-Vsquid:S1172’"2Remove this unused method parameter "actionEvent".(²èğÇøÿÿÿÿ8©ÖœĞü-
-Qsquid:S1172¡"2Remove this unused method parameter "actionEvent".(ßà¿ô8©ÖœĞü-
-fsquid:UselessImportCheck";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8ªŸ¨ïú-
+squid:S106¨"9Replace this use of System.out or System.err by a logger.(€àÄœ8²çğĞü-
+W
+squid:S106 "9Replace this use of System.out or System.err by a logger.(¢Êò‹8Üšæü-
+Fsquid:S1125u"(Remove the literal "true" boolean value.(÷€²8©ÖœĞü-

@@ -24,13 +24,12 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
     </content>
-    <orderEntry type="jdk" jdkName="11 (1)" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="11 (3)" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mysql-connector-java-8.0.18" level="project" />
     <orderEntry type="library" name="jfoenix-9.0.8" level="project" />
     <orderEntry type="library" name="antlr-2.7.7" level="project" />
     <orderEntry type="library" name="org.junit.jupiter:junit-jupiter-api:Release" level="project" />
-    <orderEntry type="library" name="controlsfx-11.0.1" level="project" />
     <orderEntry type="library" name="com.google.code.maven-play-plugin.com.google.code.eamelink-mockito:mockito-all:1.9.1-20110911" level="project" />
     <orderEntry type="module-library" scope="TEST">
       <library name="JUnit4">
@@ -43,5 +42,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="antlr-2.7.7" level="project" />
+    <orderEntry type="library" name="controlsfx-11.0.1" level="project" />
   </component>
 </module>
