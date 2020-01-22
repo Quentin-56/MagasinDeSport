@@ -6,6 +6,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import modele.ChefMagasin;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.List;
 
@@ -21,7 +22,6 @@ public class ConnexionDAO {
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
-
     /**
      * Vérifie si c'est l'identifiant du chef
      * @param identifiant champs entrée par l'utilisateur
@@ -36,7 +36,8 @@ public class ConnexionDAO {
         }catch(Exception e)
         {
             System.out.println("Ce n'est pas un chef");
-        }
+
+        }System.out.println("yo");
 
         if(chef == null)
         {
