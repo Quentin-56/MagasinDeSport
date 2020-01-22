@@ -22,12 +22,13 @@ public class RayonDAO {
 
     /**
      *Permet d'ajouter un article dans un rayon et est ajouté dans la BDD
+     * @param rayon rayon ou ajouter l'article
      * @param nom
      * @param quantite
      * @param details
      * @param rayonA
      */
-    public Article creerArticle(String nom, int quantite, String details, Rayon rayonA, double prix)
+    public Article creerArticle(Rayon rayon, String nom, int quantite, String details, Rayon rayonA, double prix)
     {
         Article article = new Article(nom, quantite, details, rayonA, prix);
 
@@ -38,7 +39,7 @@ public class RayonDAO {
 
         entityManager.getTransaction().commit();
 
-        ajouterArticleDansListeArticle(rayonA, article);
+        ajouterArticleDansListeArticle(rayon, article);
 
         return article;
     }
@@ -55,9 +56,10 @@ public class RayonDAO {
 
     /**
      * Supprime l'article dans la BDD et dans la liste d'article du rayon
+     * @param rayon
      * @param articleASupprimer
      */
-    public void supprimerArticle(Article articleASupprimer)
+    public void supprimerArticle(Rayon rayon, Article articleASupprimer)
     {
         entityManager.getTransaction().begin();
 
@@ -66,7 +68,7 @@ public class RayonDAO {
 
         entityManager.getTransaction().commit();
 
-        supprimerArticleDansListeArticle(articleASupprimer.getRayonA(), articleASupprimer);
+        supprimerArticleDansListeArticle(rayon, articleASupprimer);
     }
 
     /**
@@ -107,7 +109,7 @@ public class RayonDAO {
     public List<Article> recupererArticleDuRayon(Rayon rayon)
     {
         entityManager.getTransaction().begin();
-        Query query = entityManager.createQuery("from Article article where article.rayonA = ?1");
+        Query query = SetupEM.getEm().createQuery("from Article article where article.rayonA = ?1");
         List<Article> listP =  query.setParameter(1, rayon).getResultList();
 
         entityManager.getTransaction().commit();
