@@ -20,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
 import modele.Vendeur;
+import org.controlsfx.control.textfield.CustomTextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -39,10 +40,13 @@ public class MonRayonControleur implements Initializable {
     private Label reservationLabel;
     @FXML
     private Label prixLabel;
+    @FXML
+    private CustomTextField filtreTextField;
 
     private RayonDAO rayonDAO;
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
+    private ObservableList<Article> filtreProduits = FXCollections.observableArrayList();
 
     private Vendeur vendeur;
 
@@ -75,10 +79,11 @@ public class MonRayonControleur implements Initializable {
     public void remplirTableauDArticles()
     {
         List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
-        produits.clear();
-        produits.addAll(articles);
+        filtreProduits.clear();
+        filtreProduits.addAll(articles);
+        produits.addAll((articles));
 
-        tableau.setItems(produits);
+        tableau.setItems(filtreProduits);
     }
 
     public void afficherArticleDetails(Article article)
@@ -94,6 +99,33 @@ public class MonRayonControleur implements Initializable {
             detailsLabel.setText("");
             reservationLabel.setText("");
             prixLabel.setText("");
+        }
+    }
+
+    private void mettreAJourFiltre() {
+        filtreProduits.clear();
+
+        for (Article a : produits) {
+            if (matchFiltre(a)) {
+                filtreProduits.add(a);
+            }
+        }
+    }
+
+    private boolean matchFiltre(Article article) {
+        String filtrerString = filtreTextField.getText();
+        if (filtrerString == null || filtrerString.isEmpty()) {
+            //Pas de filtre afficher tout les articles
+            return true;
+        }
+        String lowerCaseFilterString = filtrerString.toLowerCase();
+
+        if (article.getNom().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+            return true;
+        }
+        else{
+            //Aucun match trouve
+            return false;
         }
     }
 
@@ -165,6 +197,7 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurSearch(ActionEvent actionEvent) {
-        System.out.println("Je fais une recherche");
+        mettreAJourFiltre();
     }
 }
+
