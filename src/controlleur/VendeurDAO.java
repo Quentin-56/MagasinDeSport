@@ -9,6 +9,13 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class VendeurDAO {
+    private EntityManager entityManager;
+
+    //Getter et setter
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+
     /**
      * appelle constructeur
      * 	ajout le vendeur dans la bdd
@@ -80,13 +87,19 @@ public class VendeurDAO {
      *
      * @param vendeur
      */
-    public static void modifierVendeur( Vendeur vendeur)
+    public static void modifierVendeur( Vendeur vendeur, String prenom, String nom, Rayon rayon, String identifiant, String motDePasse)
     {
         EntityManager em =SetupEM.getEm();
 
-        em.getTransaction().begin();
+        vendeur.setPrenom(prenom);
+        vendeur.setNom(nom);
+        vendeur.setRayonV(rayon);
+        vendeur.setIdentifiant(identifiant);
+        vendeur.setMotDePasse(motDePasse);
 
-        em.merge(vendeur);
+        em.getTransaction().begin();
+        em.persist(vendeur);
+        //em.merge(vendeur);
 
         em.getTransaction().commit();
     }
@@ -134,6 +147,22 @@ public class VendeurDAO {
         em.getTransaction().commit();
 
         return vendeur;
+    }
+
+
+    /**
+     * Permet de recuper les vendeurs du magasin
+     * @return listV la liste des vendeurs du magasin
+     */
+    public List<Vendeur> recupererVendeurs()
+    {
+        entityManager.getTransaction().begin();
+        Query query = SetupEM.getEm().createQuery("from Vendeur vendeur");
+        List<Vendeur> listV =  query.getResultList();
+
+        entityManager.getTransaction().commit();
+
+        return listV;
     }
 
 }
