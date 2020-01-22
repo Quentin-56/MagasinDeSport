@@ -1,8 +1,6 @@
 import controlleur.RayonDAO;
 import modele.Article;
 import modele.Rayon;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -11,10 +9,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Matchers.any;
@@ -27,9 +21,6 @@ class RayonDaoTest {
 
     @Mock
     EntityTransaction transaction;
-
-    @Mock
-    private Query queryMock;
 
     @BeforeEach
     public void setup(){
@@ -52,7 +43,7 @@ class RayonDaoTest {
         RayonDAO rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(entityManagerMock);
 
-        Article article =rayonDAO.creerArticle("velo",2,"rouge",new Rayon(),10.0);
+        Article article =rayonDAO.creerArticle(/*new Rayon(),*/"velo",2,"rouge",null,10.0);
         verify(transaction).begin();
         verify(transaction).commit();
         verify(entityManagerMock).persist(article);
@@ -64,7 +55,7 @@ class RayonDaoTest {
         Rayon rayon = new Rayon();
         RayonDAO rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(entityManagerMock);
-        Article article =article =rayonDAO.creerArticle("velo",2,"rouge",rayon,10.0);
+        Article article =article =rayonDAO.creerArticle(/*rayon,*/"velo",2,"rouge",null,10.0);
         when(entityManagerMock.find(Article.class, article.getIdArticle())).thenReturn(article);
         doNothing().when(entityManagerMock).remove(article);
         rayonDAO.supprimerArticle(article);
@@ -88,68 +79,5 @@ class RayonDaoTest {
         verify(entityManagerMock).merge(articleModifie);
 
     }
-
-
-    @Test
-    public void ajouter_article_dans_la_liste_article_test(){
-        //Before
-        Rayon rayon = new Rayon();
-        Article article1 = new Article();
-        Article article2 = new Article();
-        RayonDAO dao = new RayonDAO();
-        List<Article> listeArticleInitial = new ArrayList<>();
-        listeArticleInitial.add(article1);
-        rayon.setListeArticles(listeArticleInitial);
-        //test
-        dao.ajouterArticleDansListeArticle(rayon, article2);
-        assertEquals(article1,rayon.getListeArticles().get(0));
-        assertEquals(article2,rayon.getListeArticles().get(1));
-        //after
-        rayon.setListeArticles(null);
-    }
-    @Test
-    public void supprimer_article_dans_la_liste_article(){
-        //Before
-        Rayon rayon = new Rayon();
-        Article article1 = new Article();
-        Article article2 = new Article();
-        RayonDAO dao = new RayonDAO();
-        List<Article> listeArticleInitial = new ArrayList<>();
-        listeArticleInitial.add(article1);
-        listeArticleInitial.add(article2);
-        rayon.setListeArticles(listeArticleInitial);
-        //test
-        dao.supprimerArticleDansListeArticle(rayon, article2);
-        assertEquals(article1,rayon.getListeArticles().get(0));
-        try{
-            rayon.getListeArticles().get(1);
-        }catch (IndexOutOfBoundsException e){
-            assertEquals("Index 1 out of bounds for length 1",e.getMessage());
-        }
-        //after
-        rayon.setListeArticles(null);
-    }
-
-    @Test
-    public void recuperer_article_du_rayon(){
-        RayonDAO dao = new RayonDAO();
-        Rayon rayon = new Rayon();
-        Article article1 = new Article();
-        Article article2 = new Article();
-        List<Article> listeTest =List.of(article1, article2);
-
-        when(entityManagerMock.getTransaction()).thenReturn(transaction);
-
-        when(entityManagerMock.createQuery("from Article article where article.rayonA = ?1")).thenReturn(queryMock);
-        when(queryMock.setParameter(1,rayon)).thenReturn(queryMock);
-        when(queryMock.getResultList()).thenReturn(listeTest);
-        dao.setEntityManager(entityManagerMock);
-        assertArrayEquals(listeTest.toArray(), dao.recupererArticleDuRayon(rayon).toArray());
-        verify(transaction).begin();
-        verify(transaction).commit();
-
-
-    }
-
 
 }

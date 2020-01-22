@@ -1,6 +1,7 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
+import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,11 +10,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.ChefMagasin;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +31,8 @@ public class applicationPrincipaleChefControleur implements Initializable {
     private boolean estSurGestionDesVendeurs = false;
     private boolean estSurGestionDesArticlesReserves = false;
     @FXML
+    private Label nomLabel;
+    @FXML
     private VBox pnl_scroll;
 
     @Override
@@ -35,7 +40,10 @@ public class applicationPrincipaleChefControleur implements Initializable {
         ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
         chefMagasinDAO.setEntityManager(SetupEM.getEm());
         chefMagasin = chefMagasinDAO.recupererChefMagasin();
+
+        nomLabel.setText(chefMagasin.getPrenom()+" "+chefMagasin.getNom());
     }
+
 
     public void cliqueSurGestionDesVendeurs(ActionEvent actionEvent) {
         try {
@@ -85,11 +93,69 @@ public class applicationPrincipaleChefControleur implements Initializable {
         BoiteDialogueParametresControleur controleur = loader.getController();
         controleur.setChefMagasin(chefMagasin);
         controleur.remplirFormulaire();
+        controleur.setDialogStage(dialogStage);
+        controleur.setApplicationPrincipaleChefControleur(this);
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
         dialogStage.showAndWait();
-        dialogStage.close();
+        //dialogStage.close();
 
+    }
+
+    public void cliqueSurGestionDesRayons(ActionEvent actionEvent) throws IOException {
+        /*try {
+            if (!estSurGestionDesRayons) {
+
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("applicationPrincipale.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                applicationPrincipaleControleur controleur = loader.getController();
+
+                //Mettre à jour les booleens
+                estSurGestionDesRayons = true;
+                estSurGestionDesVendeurs = false;
+                estSurGestionDesArticlesReserves = false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+
+    }
+
+    public void cliqueSurGestionArticlesReserves(ActionEvent actionEvent) throws IOException {
+        try {
+            if (!estSurGestionDesArticlesReserves) {
+
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                GestionArticlesReservesControleur controleur = loader.getController();
+
+                //Mettre à jour les booleens
+                estSurGestionDesArticlesReserves = true;
+                estSurGestionDesRayons = false;
+                estSurGestionDesVendeurs = false;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void cliqueSurDeconnecte(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
+
+        Main.getPrimaryStage().setScene(new Scene(root));
     }
 
 

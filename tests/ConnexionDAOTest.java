@@ -1,4 +1,4 @@
-import controlleur.ConnexionDAO;
+/*import controlleur.ConnexionDAO;
 import modele.ChefMagasin;
 import modele.Personne;
 import modele.Vendeur;
@@ -100,4 +100,4 @@ public class ConnexionDAOTest {
 
         assertEquals(con.verifierMotDePasse("id", "mdp"),false);
     }
-}
+}*/

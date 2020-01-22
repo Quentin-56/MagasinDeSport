@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.effect.DropShadow?>
@@ -13,25 +15,33 @@
     <children>
         <Pane layoutX="-2.0" layoutY="40.0" prefHeight="145.0" prefWidth="1186.0" styleClass="head-background" stylesheets="@style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Label layoutX="224.0" layoutY="47.0" text="Poly'Sports" textFill="WHITE">
+                <Label fx:id="labelPolysports" layoutX="224.0" layoutY="47.0" text="Poly'Sports" textFill="WHITE">
                     <font>
                         <Font size="36.0" />
                     </font>
                 </Label>
-                <Label layoutX="227.0" layoutY="100.0" text="Since 2019" textFill="WHITE">
+                <Label fx:id="labelSince2019" layoutX="227.0" layoutY="100.0" text="Since 2019" textFill="WHITE">
                     <font>
                         <Font size="13.0" />
                     </font>
                 </Label>
-                <JFXButton fx:id="parametres" layoutX="850.0" layoutY="90.0" nodeOrientation="RIGHT_TO_LEFT" onAction="#cliqueSurParametres" prefHeight="30.0" prefWidth="163.0" ripplerFill="WHITE" style="-fx-background-color: #473E98;" text="parametres" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="12.0" />
-                    </font>
-                </JFXButton>
+            <JFXButton fx:id="parametres" layoutX="869.0" layoutY="91.0" onAction="#cliqueSurParametres" text="parametres" />
             </children>
         </Pane>
-        <VBox layoutX="-1.0" layoutY="145.0" prefHeight="477.0" prefWidth="227.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
+        <VBox layoutX="-1.0" layoutY="145.0" prefHeight="477.0" prefWidth="239.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
             <children>
+                <Label fx:id="nomLabel" prefHeight="30.0" prefWidth="252.0" text="Prenom Nom" textFill="#171717">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <padding>
+                        <Insets left="40.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="60.0" />
+                    </VBox.margin>
+                </Label>
+                <JFXToggleButton onAction="#cliqueSurDeconnecte" text="Connecté" toggleColor="WHITE" toggleLineColor="#ed0505" unToggleLineColor="#15d215" />
                 <Label prefHeight="30.0" prefWidth="252.0" text="Menu" textFill="#171717">
                     <font>
                         <Font size="13.0" />
@@ -40,7 +50,7 @@
                         <Insets left="40.0" />
                     </padding>
                 </Label>
-                <JFXButton fx:id="gestionDesVendeurs" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurGestionDesVendeurs" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="gestion des vendeurs" textFill="#5b5858">
+                <JFXButton fx:id="gestionDesVendeurs" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurGestionDesVendeurs" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Gestion des vendeurs" textFill="#5b5858">
                     <VBox.margin>
                         <Insets />
                     </VBox.margin>
@@ -52,6 +62,42 @@
                             <image>
                                 <Image url="@../images/projects.png" />
                             </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                </JFXButton>
+                <JFXButton fx:id="gestionDesRayons" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurGestionDesRayons" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Gestion des rayons" textFill="#5b5858">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/projections.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                </JFXButton>
+                <JFXButton fx:id="gestionArticlesReserves" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurGestionArticlesReserves" prefHeight="43.0" prefWidth="245.0" ripplerFill="#bfadf8" text="Gestion articles reserves" textFill="#5b5858">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/reliabilty.png" />
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
                         </ImageView>
                     </graphic>
                     <padding>
@@ -74,7 +120,7 @@
         </Pane>
         <ScrollPane layoutX="226.0" layoutY="146.0" prefHeight="477.0" prefWidth="955.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="226.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="146.0">
             <content>
-                <VBox fx:id="pnl_scroll" prefHeight="474.0" prefWidth="1116.0" spacing="20.0" style="-fx-background-color: #fff;" />
+                <VBox fx:id="pnl_scroll" prefHeight="465.0" prefWidth="1116.0" spacing="20.0" style="-fx-background-color: #fff;" />
             </content>
         </ScrollPane>
         <HBox layoutX="251.0" layoutY="145.0" prefHeight="30.0" prefWidth="810.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="1.0" />
