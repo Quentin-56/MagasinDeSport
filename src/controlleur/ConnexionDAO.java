@@ -36,8 +36,7 @@ public class ConnexionDAO {
         }catch(Exception e)
         {
             System.out.println("Ce n'est pas un chef");
-
-        }System.out.println("yo");
+        }
 
         if(chef == null)
         {
