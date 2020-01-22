@@ -16,8 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
@@ -103,7 +101,7 @@ public class MonRayonControleur implements Initializable {
         Article article = tableau.getSelectionModel().getSelectedItem();
 
         //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueArticle.fxml"));
         Parent parent = loader.load();
 
         // Creer le stage pour la boite de dialogue
@@ -114,7 +112,7 @@ public class MonRayonControleur implements Initializable {
         Scene scene = new Scene(parent);
         dialogStage.setScene(scene);
         //Recuperer le controleur lier à la vue
-        BoiteDialogueControleur controleur = loader.getController();
+        BoiteDialogueArticleControleur controleur = loader.getController();
         //Modifier l'article
         if(bool == true)
         {
@@ -159,6 +157,7 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+        System.out.println("salut");
         editerFormulaire("Ajouter article",false);
     }
 

@@ -66,11 +66,13 @@
               </Button>
           </left>
       </CustomTextField>
-        <Button fx:id="btnAdd" layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#cliqueSurAjouter" prefHeight="39.0" prefWidth="46.0" />
-          <ImageView fitHeight="28.0" fitWidth="33.0" layoutX="535.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-              <image>
-                  <Image url="@../images/add.png" />
-              </image>
-          </ImageView>
+        <Button fx:id="btnAdd" layoutX="523.0" layoutY="14.0" mnemonicParsing="false" onAction="#cliqueSurAjouter" prefHeight="39.0" prefWidth="46.0">
+         <graphic>
+                <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/add.png" />
+                    </image>
+                </ImageView>
+         </graphic></Button>
     </children>
 </AnchorPane>
