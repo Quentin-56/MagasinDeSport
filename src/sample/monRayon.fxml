@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import org.controlsfx.control.textfield.CustomTextField?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="474.0" prefWidth="597.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MonRayonControleur">
+<AnchorPane fx:id="anchorPane" prefHeight="485.0" prefWidth="713.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MonRayonControleur">
     <children>
 
         <TableView fx:id="tableau" layoutY="64.0" prefHeight="410.0" prefWidth="267.0">
@@ -46,11 +46,12 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </GridPane>
-        <ButtonBar layoutX="253.0" layoutY="420.0" prefHeight="40.0" prefWidth="338.0">
+        <ButtonBar layoutX="253.0" layoutY="420.0" prefHeight="40.0" prefWidth="445.0">
             <buttons>
                 <Button mnemonicParsing="false" onAction="#cliqueSurSupprimer" prefHeight="39.0" prefWidth="143.0" text="Supprimer" />
                 <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
                 <Button mnemonicParsing="false" onAction="#cliqueSurReserver" prefHeight="39.0" text="Réserver" />
+            <Button fx:id="transfererButton" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#cliquerSurTransferer" prefHeight="39.0" text="Transferer" />
             </buttons>
         </ButtonBar>
       <CustomTextField fx:id="filtreTextField" layoutX="3.0" layoutY="10.0" prefHeight="25.0" prefWidth="261.0">

@@ -21,7 +21,7 @@
             <buttons>
                 <Button layoutX="135.0" layoutY="17.0" mnemonicParsing="false" onAction="#cliqueSurVisiter" text="Visiter" />
                 <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
-            <Button layoutX="59.0" layoutY="10.0" mnemonicParsing="false" onAction="#cliqueSurSupprimer" text="Supprimer" />
+                <Button layoutX="59.0" layoutY="10.0" mnemonicParsing="false" onAction="#cliqueSurSupprimer" text="Supprimer" />
             </buttons>
         </ButtonBar>
         <CustomTextField fx:id="filtreTextField" layoutX="5.0" layoutY="30.0" prefHeight="25.0" prefWidth="261.0">

@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.*;
@@ -40,6 +41,29 @@ public class GestionDesRayonsControleur implements Initializable {
 
     private ObservableList<Rayon> produits = FXCollections.observableArrayList();
     private ObservableList<Rayon> filtreProduits = FXCollections.observableArrayList();
+
+    private VBox pnl_scroll;
+    private Node[] nodes;
+
+    public void setVBox(VBox vBox)
+    {
+        this.pnl_scroll = vBox;
+    }
+
+    public VBox getVBox()
+    {
+        return pnl_scroll;
+    }
+
+    public Node[] getNodes()
+    {
+        return nodes;
+    }
+
+    public void setNodes(Node[] no)
+    {
+        this.nodes = no;
+    }
 
     public GestionDesRayonsControleur()
     {
@@ -174,20 +198,24 @@ public class GestionDesRayonsControleur implements Initializable {
 
     public void cliqueSurVisiter(ActionEvent actionEvent) {
         try {
-
+            //applicationPrincipaleChefControleur app = new applicationPrincipaleChefControleur();
             //Vider l'ancienne vue
-            //pnl_scroll.getChildren().clear();
+            pnl_scroll.getChildren().clear();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("visiterRayon.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("monRayon.fxml"));
             Parent parent = loader.load();
-            //nodes[0] = (Node) parent;
-            //pnl_scroll.getChildren().add(nodes[0]);
+            nodes[0] = (Node) parent;
+            pnl_scroll.getChildren().add(nodes[0]);
 
-            VisiterRayonControleur controleur = loader.getController();
+            MonRayonControleur controleur = loader.getController();
 
             Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
             // permet de savoir quel rayon afficher
             controleur.setRayon(rayon);
+
+            controleur.setEstUnVendeur(false);
+            controleur.vue();
+            controleur.remplirTableauDArticles();
 
 
         } catch (IOException ex) {

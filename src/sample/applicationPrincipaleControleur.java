@@ -28,6 +28,7 @@ public class applicationPrincipaleControleur implements Initializable {
     private boolean estSurMonRayon = false;
     private boolean estSurAutresRayons = false;
     private boolean estSurArticlesReserves = false;
+    private Vendeur vendeur;
 
     @FXML
     private Label nomLabel;
@@ -40,7 +41,7 @@ public class applicationPrincipaleControleur implements Initializable {
         VendeurDAO vendeurDAO = new VendeurDAO();
         vendeurDAO.setEntityManager(SetupEM.getEm());
 
-        Vendeur vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
         nomLabel.setText(vendeur.getPrenom()+" "+vendeur.getNom());
     }
 
@@ -75,6 +76,11 @@ public class applicationPrincipaleControleur implements Initializable {
                 alert.setContentText("Connect to the database successfully!");
                 alert.showAndWait();*/
 
+                /*MonRayonControleur controleur = new MonRayonControleur();
+                controleur.setRayon(vendeur.getRayonV());
+                controleur.setEstUnVendeur(true);*/
+
+
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
@@ -84,6 +90,11 @@ public class applicationPrincipaleControleur implements Initializable {
                 pnl_scroll.getChildren().add(nodes[0]);
 
                 MonRayonControleur controleur = loader.getController();
+                //System.out.println(vendeur.getRayonV());
+                controleur.setRayon(vendeur.getRayonV());
+                controleur.setEstUnVendeur(true);
+                controleur.vue();
+                controleur.remplirTableauDArticles();
 
                 //Mettre à jour les booleens
                 estSurMonRayon = true;

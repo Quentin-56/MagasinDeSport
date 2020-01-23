@@ -35,6 +35,33 @@ public class applicationPrincipaleChefControleur implements Initializable {
     @FXML
     private VBox pnl_scroll;
 
+    /*public void setVBox(VBox vBox)
+    {
+        this.pnl_scroll = vBox;
+    }
+
+    public VBox getVBox()
+    {
+        return pnl_scroll;
+    }
+
+    public Node[] getNodes()
+    {
+        return nodes;
+    }
+
+    public void setNodes(Node[] no)
+    {
+        this.nodes = no;
+    }
+
+    public applicationPrincipaleChefControleur()
+    {
+        nodes = new Node[1];
+        pnl_scroll = new VBox();
+    }*/
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
@@ -115,6 +142,9 @@ public class applicationPrincipaleChefControleur implements Initializable {
                 pnl_scroll.getChildren().add(nodes[0]);
 
                 GestionDesRayonsControleur controleur = loader.getController();
+
+                controleur.setVBox(pnl_scroll);
+                controleur.setNodes(nodes);
 
                 //Mettre à jour les booleens
                 estSurGestionDesRayons = true;
