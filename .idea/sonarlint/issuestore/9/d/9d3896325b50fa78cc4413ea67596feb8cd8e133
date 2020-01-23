@@ -1,5 +1,5 @@
 
 Ssquid:UselessImportCheck")Remove this unused import 'modele.Rayon'.(Ž¶£8·û‡øü-
+[squid:UselessImportCheck	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8·û‡øü-
 Zsquid:UselessImportCheck
 "*Remove this unused import 'java.util.Set'.(ö²„¤þÿÿÿÿ8·û‡øü-
-[squid:UselessImportCheck	"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8·û‡øü-

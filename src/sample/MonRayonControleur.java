@@ -81,6 +81,8 @@ public class MonRayonControleur implements Initializable {
         List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
         filtreProduits.clear();
         filtreProduits.addAll(articles);
+
+        produits.clear();
         produits.addAll((articles));
 
         tableau.setItems(filtreProduits);
@@ -110,6 +112,14 @@ public class MonRayonControleur implements Initializable {
                 filtreProduits.add(a);
             }
         }
+    }
+
+    /**
+     * Vider ce qui a ete tape dans la barre de recherche
+     */
+    public void viderBarreRecherche()
+    {
+        filtreTextField.setText("");
     }
 
     private boolean matchFiltre(Article article) {
@@ -189,7 +199,6 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
-        System.out.println("salut");
         editerFormulaire("Ajouter article",false);
     }
 
@@ -201,6 +210,8 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
+         viderBarreRecherche();
+         remplirTableauDArticles();
     }
 }
 

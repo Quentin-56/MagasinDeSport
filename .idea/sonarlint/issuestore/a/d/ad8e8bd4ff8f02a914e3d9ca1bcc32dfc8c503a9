@@ -1,7 +1,7 @@
 
-isquid:CommentedOutCodeLine#"<This block of commented-out lines of code should be removed.(êó¡É8‹Áîß÷-
-Jsquid:S2440"'Remove this instantiation of "SetupEM".(²‚†Žúÿÿÿÿ8Ã™»Èû-
-Ysquid:S2696"6Make the enclosing method "static" or remove this set.(ˆ…³¨þÿÿÿÿ8‹Áîß÷-
 fsquid:UselessImportCheck";Remove this unused import 'javafx.scene.layout.AnchorPane'.(Ø µ8Ä ‘ø-
-bsquid:UselessImportCheck"2Remove this unused import 'javafx.stage.Modality'.(£†üÐüÿÿÿÿ8Ä ‘ø-
 `squid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úýÿÿÿÿ8Ä ‘ø-
+Jsquid:S2440"'Remove this instantiation of "SetupEM".(²‚†Žúÿÿÿÿ8Ã™»Èû-
+isquid:CommentedOutCodeLine#"<This block of commented-out lines of code should be removed.(êó¡É8‹Áîß÷-
+Ysquid:S2696"6Make the enclosing method "static" or remove this set.(ˆ…³¨þÿÿÿÿ8‹Áîß÷-
+bsquid:UselessImportCheck"2Remove this unused import 'javafx.stage.Modality'.(£†üÐüÿÿÿÿ8Ä ‘ø-

@@ -109,3 +109,9 @@
     -fx-background-radius: 0;
     -fx-border-color: transparent;
 }
+
+#btnSupprimerFiltre:hover{
+    -fx-background-image: url("../images/crossZoom.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
