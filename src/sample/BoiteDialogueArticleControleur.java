@@ -18,6 +18,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
 
     private Stage dialogStage;
     private MonRayonControleur monRayonControleur;
+    private VisiterRayonControleur visiterRayonControleur;
     private boolean estAModifier;
     private Article article;
     @FXML
@@ -32,6 +33,10 @@ public class BoiteDialogueArticleControleur implements Initializable {
 
     public void setMonRayonControleur(MonRayonControleur monRayonControleur) {
         this.monRayonControleur = monRayonControleur;
+    }
+
+    public void setVisiterRayonControleur(VisiterRayonControleur visiterRayonControleur) {
+        this.visiterRayonControleur = visiterRayonControleur;
     }
 
     public void setEstAModifier(boolean estAModifier) {

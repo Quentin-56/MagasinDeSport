@@ -33,6 +33,7 @@ public class MagasinDAO {
     {
         Rayon rayon = new Rayon();
         rayon.setNom(nom);
+
         entityManager.getTransaction().begin();
         //Ajout du rayon dans la bdd
         entityManager.persist(rayon);

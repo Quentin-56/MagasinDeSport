@@ -39,7 +39,7 @@ public class GestionArticlesReservesControleur implements Initializable {
     @FXML
     private Label prixLabel;
 
-    //private RayonDAO rayonDAO;
+    private MagasinDAO magasinDAO;
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
     private ChefMagasin chefMagasin;
@@ -47,8 +47,8 @@ public class GestionArticlesReservesControleur implements Initializable {
 
     public GestionArticlesReservesControleur()
     {
-        //rayonDAO = new RayonDAO();
-        //rayonDAO.setEntityManager(SetupEM.getEm());
+        magasinDAO = new MagasinDAO();
+        magasinDAO.setEntityManager(SetupEM.getEm());
     }
 
     @Override
@@ -77,7 +77,7 @@ public class GestionArticlesReservesControleur implements Initializable {
     {
         List<Article> articlesReserves = new ArrayList<Article>();
 
-        List<Rayon> rayons = MagasinDAO.recupererRayon();
+        List<Rayon> rayons = magasinDAO.recupererRayon();
         for (int i = 0; i < rayons.size(); ++i) {
             for(int j = 0; j < rayons.get(i).getListeReservationArticle().size(); ++j)
             {
