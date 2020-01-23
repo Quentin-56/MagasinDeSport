@@ -1,2 +1,4 @@
 
-]squid:S1118":Add a private constructor to hide the implicit public one.(¦Šöşÿÿÿÿ8ø•‚ïú-
+“squid:S1319H"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(¾¼ õıÿÿÿÿ8ßø‡øü-
+[squid:UselessImportCheck"+Remove this unused import 'modele.Vendeur'.(ï†®øüÿÿÿÿ8ßø‡øü-
+]squid:S1118":Add a private constructor to hide the implicit public one.(¦Šöşÿÿÿÿ8ßø‡øü-

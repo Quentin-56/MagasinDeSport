@@ -199,5 +199,8 @@ public class MonRayonControleur implements Initializable {
     public void cliqueSurSearch(ActionEvent actionEvent) {
         mettreAJourFiltre();
     }
+
+    public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
+    }
 }
 

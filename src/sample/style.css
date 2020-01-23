@@ -100,5 +100,12 @@
 }
 
 #filtreTextField{
-    -fx-primarytext : #de00c8;
+    -fx-text-fill: #de00c8;
+}
+
+#btnSupprimerFiltre{
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
 }

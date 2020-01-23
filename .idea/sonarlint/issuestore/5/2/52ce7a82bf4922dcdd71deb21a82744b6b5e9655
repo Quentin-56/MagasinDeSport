@@ -1,7 +1,7 @@
 
-˜squid:S11863"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«¹¢€
-gsquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(éØ»Úûÿÿÿÿ
-gsquid:CommentedOutCodeLine%"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ
-asquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ñ‘„
-nsquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(ÄÇ¯ƒùÿÿÿÿ8ÎŸ™çü-
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘ÝŸüÿÿÿÿ
+csquid:UselessImportCheck"3Remove this unused import 'controlleur.VendeurDAO'.(õÄ¯Ÿûÿÿÿÿ8¿þ‡øü-
+[squid:UselessImportCheck"+Remove this unused import 'modele.Vendeur'.(ï†®øüÿÿÿÿ8¿þ‡øü-
+–squid:S1450"sRemove the "applicationPrincipaleChefControleur1" field and declare it as a local variable in the relevant methods.(ÃÂ±ûÿÿÿÿ8¿þ‡øü-
+Psquid:S1172<"2Remove this unused method parameter "actionEvent".(‚Ï¹•8¿þ‡øü-
+Psquid:S1172J"2Remove this unused method parameter "actionEvent".(«¹¢€8¿þ‡øü-
+ksquid:S1068"HRemove this unused "applicationPrincipaleChefControleur1" private field.(ÃÂ±ûÿÿÿÿ8¿þ‡øü-

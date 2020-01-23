@@ -79,3 +79,5 @@ R
 "src/sample/gestionDesVendeurs.fxml,3\2\32d22e6f3b14db5616d0974ed09c6d05404c0a13
 \
 ,src/sample/GestionDesVendeursControleur.java,5\0\50f402e444d23ac30c3f217734306c92a8cecbeb
+U
+%.idea/libraries/controlsfx_11_0_1.xml,f\1\f172efbadafa866725785cc6ac2f006822e87687
