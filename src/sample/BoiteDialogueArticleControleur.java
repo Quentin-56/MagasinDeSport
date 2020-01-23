@@ -21,6 +21,8 @@ public class BoiteDialogueArticleControleur implements Initializable {
     private VisiterRayonControleur visiterRayonControleur;
     private boolean estAModifier;
     private Article article;
+    private Rayon rayon;
+
     @FXML
     private TextField nomTextF;
     @FXML
@@ -30,6 +32,9 @@ public class BoiteDialogueArticleControleur implements Initializable {
     @FXML
     private TextField quantiteTextF;
 
+    public void setRayon(Rayon rayon) {
+        this.rayon = rayon;
+    }
 
     public void setMonRayonControleur(MonRayonControleur monRayonControleur) {
         this.monRayonControleur = monRayonControleur;
@@ -79,7 +84,10 @@ public class BoiteDialogueArticleControleur implements Initializable {
             messageErreur += "Prix non valide!\n";
         } else {
             try {
-                System.out.println(Double.parseDouble(prixTextF.getText()));
+                if(Double.parseDouble(prixTextF.getText())<0)
+                {
+                    messageErreur+= "Le prix doit être positif!\n";
+                }
             } catch (NumberFormatException e) {
                 messageErreur += "Le prix doit être un nombre!\n";
             }
@@ -89,7 +97,10 @@ public class BoiteDialogueArticleControleur implements Initializable {
             messageErreur += "Quantité non valide!\n";
         }else {
             try {
-                    Integer.parseInt(quantiteTextF.getText());
+                    if(Integer.parseInt(quantiteTextF.getText())<0)
+                    {
+                        messageErreur+= "La quantite doit être positive!\n";
+                    }
             } catch (NumberFormatException e) {
                 messageErreur += "La quantite doit être un nombre!\n";
             }
@@ -128,7 +139,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
                 //Fermer le formulaire
                 dialogStage.close();
             } else {
-                rayonDAO.creerArticle(nomTextF.getText(), Integer.parseInt(quantiteTextF.getText()), detailsTextF.getText(), article.getRayonA(), Double.parseDouble(prixTextF.getText()));
+                rayonDAO.creerArticle(nomTextF.getText(), Integer.parseInt(quantiteTextF.getText()), detailsTextF.getText(), rayon, Double.parseDouble(prixTextF.getText()));
                 //Fermer le formulaire
                 dialogStage.close();
             }

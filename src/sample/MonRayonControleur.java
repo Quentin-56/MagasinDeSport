@@ -130,7 +130,7 @@ public class MonRayonControleur implements Initializable {
         }
         String lowerCaseFilterString = filtrerString.toLowerCase();
 
-        if (article.getNom().toLowerCase().indexOf(lowerCaseFilterString) != -1) {
+        if (article.getNom().toLowerCase().contains(lowerCaseFilterString)) {
             return true;
         }
         else{
@@ -156,13 +156,14 @@ public class MonRayonControleur implements Initializable {
         //Recuperer le controleur lier à la vue
         BoiteDialogueArticleControleur controleur = loader.getController();
         //Modifier l'article
-        if(bool == true)
+        if(bool)
         {
             controleur.remplirFormulaire(article);
         }
-        else
+        else //Ajouter l'article
         {
             controleur.remplirFormulaire(null);
+            controleur.setRayon(vendeur.getRayonV());
         }
         //Indique au controler si c'est a modifier ou a ajouter
         controleur.setEstAModifier(bool);
@@ -175,8 +176,6 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurSupprimer(ActionEvent actionEvent) {
-        RayonDAO rayonDAO = new RayonDAO();
-        rayonDAO.setEntityManager(SetupEM.getEm());
         Article article = tableau.getSelectionModel().getSelectedItem();
         rayonDAO.supprimerArticle(article);
         //Actualiser le tableauView
@@ -200,6 +199,7 @@ public class MonRayonControleur implements Initializable {
 
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
         editerFormulaire("Ajouter article",false);
+
     }
 
     public void cliqueSurReserver(ActionEvent actionEvent) {
