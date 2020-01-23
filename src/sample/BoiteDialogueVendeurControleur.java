@@ -1,6 +1,7 @@
 package sample;
 
 import com.jfoenix.controls.JFXComboBox;
+import controlleur.BoiteAOutil;
 import controlleur.MagasinDAO;
 import controlleur.SetupEM;
 import controlleur.VendeurDAO;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -99,39 +101,72 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                 }
         }
 
+        private boolean lesChampsSontValides() {
+                String messageErreur = "";
 
+                if (prenomTextF.getText() == null || prenomTextF.getText().length() < 2 || BoiteAOutil.checkCaractereSpeciaux(prenomTextF.getText()) == true) {
+                        messageErreur += "Prenom de vendeur non valide!\n";
+                }
+                if (nomTextF.getText() == null || nomTextF.getText().length() < 2 || BoiteAOutil.checkCaractereSpeciaux(nomTextF.getText()) == true) {
+                        messageErreur += "Nom de vendeur non valide!\n";
+                }
+                if (identifiantTextF.getText() == null || identifiantTextF.getText().length() == 0) {
+                        messageErreur += "Identifiant non valide!\n";
+                }
+                if (motDePasseTextF.getText() == null || motDePasseTextF.getText().length() < 8 || BoiteAOutil.checkString(motDePasseTextF.getText()) == false) {
+                        messageErreur += "Identifiant non valide!\n";
+                }
+                if (nomRayonCombo.getSelectionModel().getSelectedItem() == null || nomRayonCombo.getSelectionModel().getSelectedItem().length() == 0) {
+                        messageErreur += "Rayon non valide!\n";
+                }
+
+                if (messageErreur.length() == 0) {
+                        return true;
+                } else {
+                        // Show the error message.
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.initOwner(dialogStage);
+                        alert.setTitle("Champs invalides");
+                        alert.setHeaderText("Veuillez corriger les champs incorrects");
+                        alert.setContentText(messageErreur);
+
+                        alert.showAndWait();
+
+                        return false;
+                }
+        }
 
 
         public void cliqueSurValider(ActionEvent actionEvent) {
+                if(lesChampsSontValides()) {
 
-            //VendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom((String)nomRayonCombo.getSelectionModel().getSelectedItem()));
+                        //VendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom((String)nomRayonCombo.getSelectionModel().getSelectedItem()));
 
 
-                VendeurDAO vendeurDAO = new VendeurDAO();
-                vendeurDAO.setEntityManager(SetupEM.getEm());
+                        VendeurDAO vendeurDAO = new VendeurDAO();
+                        vendeurDAO.setEntityManager(SetupEM.getEm());
 
-                if(estAModifier == true)
-                {
-                        Vendeur vendeurModifie = new Vendeur(vendeur.getNom(), vendeur.getPrenom(), vendeur.getIdentifiant(), vendeur.getMotDePasse(), vendeur.getRayonV());
-                        //A FAIRE DANS UNE FONCTION
-                        vendeurModifie.setNom(nomTextF.getText());
-                        vendeurModifie.setPrenom(prenomTextF.getText());
-                        vendeurModifie.setIdentifiant(identifiantTextF.getText());
-                        vendeurModifie.setMotDePasse(motDePasseTextF.getText());
-                        vendeurModifie.setRayonV(MagasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
+                        if (estAModifier == true) {
+                                Vendeur vendeurModifie = new Vendeur(vendeur.getNom(), vendeur.getPrenom(), vendeur.getIdentifiant(), vendeur.getMotDePasse(), vendeur.getRayonV());
+                                //A FAIRE DANS UNE FONCTION
+                                vendeurModifie.setNom(nomTextF.getText());
+                                vendeurModifie.setPrenom(prenomTextF.getText());
+                                vendeurModifie.setIdentifiant(identifiantTextF.getText());
+                                vendeurModifie.setMotDePasse(motDePasseTextF.getText());
+                                vendeurModifie.setRayonV(MagasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
 
-                        vendeurDAO.modifierVendeur(vendeurModifie);
-                        //Fermer le formulaire
-                        dialogStage.close();
+                                vendeurDAO.modifierVendeur(vendeurModifie);
+                                //Fermer le formulaire
+                                dialogStage.close();
+                        } else {
+                                vendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
+                                //Fermer le formulaire
+                                dialogStage.close();
+                        }
+                        //Actualiser le tableView dans tout les cas
+                        gestionDesVendeursControleur.remplirTableauDeVendeurs();
+                        gestionDesVendeursControleur.viderBarreRecherche();
                 }
-                else
-                {
-                        vendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
-                        //Fermer le formulaire
-                        dialogStage.close();
-                }
-                //Actualiser le tableView dans tout les cas
-                gestionDesVendeursControleur.remplirTableauDeVendeurs();
         }
 
         public void cliqueSurAnnuler(ActionEvent actionEvent) {
