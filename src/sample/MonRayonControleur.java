@@ -1,5 +1,6 @@
 package sample;
 
+import controlleur.MagasinDAO;
 import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import controlleur.VendeurDAO;
@@ -11,19 +12,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
+import modele.Rayon;
 import modele.Vendeur;
 import org.controlsfx.control.textfield.CustomTextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,13 +42,18 @@ public class MonRayonControleur implements Initializable {
     private Label prixLabel;
     @FXML
     private CustomTextField filtreTextField;
+    @FXML
+    private Button transfererButton;
 
     private RayonDAO rayonDAO;
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
     private ObservableList<Article> filtreProduits = FXCollections.observableArrayList();
 
-    private Vendeur vendeur;
+    //private Vendeur vendeur;
+
+    private boolean estUnVendeur;
+    private Rayon rayon;
 
     public MonRayonControleur()
     {
@@ -56,12 +61,26 @@ public class MonRayonControleur implements Initializable {
         rayonDAO.setEntityManager(SetupEM.getEm());
     }
 
+    public void setEstUnVendeur(boolean estUnVendeur)
+    {
+        this.estUnVendeur = estUnVendeur;
+    }
+
+    public void setRayon(Rayon rayon)
+    {
+        this.rayon = rayon;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        VendeurDAO vendeurDAO = new VendeurDAO();
-        vendeurDAO.setEntityManager(SetupEM.getEm());
-        this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        /*if(estUnVendeur == true)
+        {
+            VendeurDAO vendeurDAO = new VendeurDAO();
+            vendeurDAO.setEntityManager(SetupEM.getEm());
+            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        }*/
+        System.out.println("bundle" + resourceBundle);
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
@@ -74,11 +93,20 @@ public class MonRayonControleur implements Initializable {
 
         tableau.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> afficherArticleDetails(newValue));
+
     }
 
     public void remplirTableauDArticles()
     {
-        List<Article> articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
+        List<Article> articles = new ArrayList<>();
+        //if(estUnVendeur == true)
+       // {
+       //     articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
+       // }
+       // else
+        //{
+            articles = rayonDAO.recupererArticleDuRayon(rayon);
+        //}
         filtreProduits.clear();
         filtreProduits.addAll(articles);
 
@@ -212,6 +240,19 @@ public class MonRayonControleur implements Initializable {
     public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
          viderBarreRecherche();
          remplirTableauDArticles();
+    }
+
+    public void cliquerSurTransferer(ActionEvent actionEvent)
+    {
+
+    }
+
+    public void vue()
+    {
+        if(estUnVendeur == true)
+        {
+            transfererButton.setVisible(false);
+        }
     }
 }
 
