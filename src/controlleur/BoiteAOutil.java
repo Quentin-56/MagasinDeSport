@@ -2,6 +2,8 @@ package controlleur;
 
 public class BoiteAOutil {
 
+
+
         /**
          * @brief appelle estUnNombreValable et verifie si il ny a pas de point => est un entier
          * @param saisieUtilisateur la chaine en entrée
@@ -122,4 +124,51 @@ public class BoiteAOutil {
             return res;
         }
 
+    /**
+     *
+     * @param input le mot de passe en entree
+     * @return true si le mot de passe est correct, false sinon
+     */
+    public static boolean checkString(String input) {
+        char currentCharacter;
+        boolean numberPresent = false;
+        boolean upperCasePresent = false;
+        boolean lowerCasePresent = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            currentCharacter = input.charAt(i);
+            if (Character.isDigit(currentCharacter)) {
+                numberPresent = true;
+            } else if (Character.isUpperCase(currentCharacter)) {
+                upperCasePresent = true;
+            } else if (Character.isLowerCase(currentCharacter)) {
+                lowerCasePresent = true;
+            }
+        }
+
+        return
+                numberPresent && upperCasePresent && lowerCasePresent;
     }
+
+    /**
+     *
+     * @param input la chaine de caractere en entree
+     * @return true si la input contient un caractere special, false sinon
+     */
+    public static boolean checkCaractereSpeciaux(String input) {
+        String specialChars = "~`[email protected]#$%^&** ()-__=+\\|[{]};:'\",<.>/?";
+        char currentCharacter;
+        boolean specialCharacterPresent = false;
+
+        for (int i = 0; i < input.length(); i++) {
+            currentCharacter = input.charAt(i);
+            if (specialChars.contains(String.valueOf(currentCharacter))) {
+                specialCharacterPresent = true;
+            }
+        }
+
+        return specialCharacterPresent;
+    }
+
+
+}

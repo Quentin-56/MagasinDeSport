@@ -18,8 +18,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import modele.Article;
 import modele.ChefMagasin;
 import modele.Vendeur;
+import org.controlsfx.control.textfield.CustomTextField;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,12 +42,13 @@ public class GestionDesVendeursControleur implements Initializable {
         private Label motDePasseLabel;
         @FXML
         private Label rayonLabel;
-
+        @FXML
+        private CustomTextField filtreTextField;
 
         private VendeurDAO vendeurDAO;
 
         private ObservableList<Vendeur> produits = FXCollections.observableArrayList();
-
+        private ObservableList<Vendeur> filtreProduits = FXCollections.observableArrayList();
 
         private ChefMagasin chefMagasin;
 
@@ -82,10 +85,13 @@ public class GestionDesVendeursControleur implements Initializable {
         public void remplirTableauDeVendeurs()
         {
             List<Vendeur> vendeurs = vendeurDAO.recupererVendeurs();
+            filtreProduits.clear();
+            filtreProduits.addAll(vendeurs);
+
             produits.clear();
             produits.addAll(vendeurs);
 
-            tableauVendeurs.setItems(produits);
+            tableauVendeurs.setItems(filtreProduits);
         }
 
 
@@ -102,6 +108,43 @@ public class GestionDesVendeursControleur implements Initializable {
                 identifiantLabel.setText("");
                 motDePasseLabel.setText("");
                 rayonLabel.setText("");
+            }
+        }
+
+
+        private void mettreAJourFiltre() {
+            filtreProduits.clear();
+
+            for (Vendeur v : produits) {
+                if (matchFiltre(v)) {
+                    filtreProduits.add(v);
+                }
+            }
+        }
+
+        /**
+         * Vider ce qui a ete tape dans la barre de recherche
+         */
+        public void viderBarreRecherche()
+        {
+            filtreTextField.setText("");
+        }
+
+
+        private boolean matchFiltre(Vendeur vendeur) {
+            String filtrerString = filtreTextField.getText();
+            if (filtrerString == null || filtrerString.isEmpty()) {
+                //Pas de filtre afficher tout les vendeurs
+                return true;
+            }
+            String lowerCaseFilterString = filtrerString.toLowerCase();
+
+            if ((vendeur.getPrenom() + " " + vendeur.getNom()).toLowerCase().contains(lowerCaseFilterString)) {
+                return true;
+            }
+            else{
+                //Aucun match trouve
+                return false;
             }
         }
 
@@ -178,6 +221,16 @@ public class GestionDesVendeursControleur implements Initializable {
 
         public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
             editerFormulaire("Ajouter vendeur",false);
+        }
+
+
+        public void cliqueSurSearch(ActionEvent actionEvent) {
+            mettreAJourFiltre();
+        }
+
+        public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
+            viderBarreRecherche();
+            remplirTableauDeVendeurs();
         }
 
 }
