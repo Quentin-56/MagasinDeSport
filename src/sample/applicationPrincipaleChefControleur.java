@@ -103,18 +103,18 @@ public class applicationPrincipaleChefControleur implements Initializable {
     }
 
     public void cliqueSurGestionDesRayons(ActionEvent actionEvent) throws IOException {
-        /*try {
+        try {
             if (!estSurGestionDesRayons) {
 
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("applicationPrincipale.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionDesRayons.fxml"));
                 Parent parent = loader.load();
                 nodes[0] = (Node) parent;
                 pnl_scroll.getChildren().add(nodes[0]);
 
-                applicationPrincipaleControleur controleur = loader.getController();
+                GestionDesRayonsControleur controleur = loader.getController();
 
                 //Mettre à jour les booleens
                 estSurGestionDesRayons = true;
@@ -123,7 +123,7 @@ public class applicationPrincipaleChefControleur implements Initializable {
             }
         } catch (IOException ex) {
             Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
 
     }
 

@@ -45,7 +45,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
 
         //private ComboBox<String> nomRayonCombo;
         //private ObservableList<String> produits = FXCollections.observableArrayList();
-
+        private MagasinDAO magasinDAO;
 
         public void setGestionDesVendeursControleur(GestionDesVendeursControleur gestionDesVendeursControleur) {
                 this.gestionDesVendeursControleur = gestionDesVendeursControleur;
@@ -66,7 +66,10 @@ public class BoiteDialogueVendeurControleur implements Initializable{
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
-                List<Rayon> rayons = MagasinDAO.recupererRayon();
+                magasinDAO = new MagasinDAO();
+                magasinDAO.setEntityManager(SetupEM.getEm());
+
+                List<Rayon> rayons = magasinDAO.recupererRayon();
 
                 List<String> nomRayons = new ArrayList<String>();
                 for(int i = 0; i < rayons.size(); ++i)
@@ -153,13 +156,13 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                                 vendeurModifie.setPrenom(prenomTextF.getText());
                                 vendeurModifie.setIdentifiant(identifiantTextF.getText());
                                 vendeurModifie.setMotDePasse(motDePasseTextF.getText());
-                                vendeurModifie.setRayonV(MagasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
+                                vendeurModifie.setRayonV(magasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
 
                                 vendeurDAO.modifierVendeur(vendeurModifie);
                                 //Fermer le formulaire
                                 dialogStage.close();
                         } else {
-                                vendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
+                                vendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), magasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
                                 //Fermer le formulaire
                                 dialogStage.close();
                         }
