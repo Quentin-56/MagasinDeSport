@@ -10,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -35,6 +32,12 @@ public class GestionDesRayonsControleur implements Initializable {
     private TableColumn<Rayon, String> colRayon;
     @FXML
     private CustomTextField filtreTextField;
+    @FXML
+    private Button ajouterButton;
+    @FXML
+    private Button modifierButton;
+    @FXML
+    private Button supprimerButton;
 
     private MagasinDAO magasinDAO;
     private ChefMagasin chefMagasin;
@@ -44,6 +47,8 @@ public class GestionDesRayonsControleur implements Initializable {
 
     private VBox pnl_scroll;
     private Node[] nodes;
+    private boolean estUnVendeur;
+    private Vendeur vendeur;
 
     public void setVBox(VBox vBox)
     {
@@ -63,6 +68,16 @@ public class GestionDesRayonsControleur implements Initializable {
     public void setNodes(Node[] no)
     {
         this.nodes = no;
+    }
+
+    public void setEstUnVendeur(boolean estUnVendeur)
+    {
+        this.estUnVendeur = estUnVendeur;
+    }
+
+    public void setVendeur(Vendeur vendeur)
+    {
+        this.vendeur = vendeur;
     }
 
     public GestionDesRayonsControleur()
@@ -86,7 +101,14 @@ public class GestionDesRayonsControleur implements Initializable {
 
     public void remplirTableauDeRayons()
     {
+
         List<Rayon> rayons = magasinDAO.recupererRayon();
+
+
+        if(estUnVendeur == true)
+        {
+            rayons.remove(vendeur.getRayonV());
+        }
         filtreProduits.clear();
         filtreProduits.addAll(rayons);
 
@@ -210,12 +232,24 @@ public class GestionDesRayonsControleur implements Initializable {
             MonRayonControleur controleur = loader.getController();
 
             Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
+
+
             // permet de savoir quel rayon afficher
             controleur.setRayon(rayon);
 
-            controleur.setEstUnVendeur(false);
+            if(estUnVendeur == false)
+            {
+                controleur.settype(0);
+            }
+            if(estUnVendeur == true)
+            {
+                controleur.settype(2);
+            }
+
             controleur.vue();
             controleur.remplirTableauDArticles();
+
+
 
 
         } catch (IOException ex) {
@@ -231,5 +265,15 @@ public class GestionDesRayonsControleur implements Initializable {
     public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
         viderBarreRecherche();
         remplirTableauDeRayons();
+    }
+
+    public void vue()
+    {
+        if(estUnVendeur == true)
+        {
+            ajouterButton.setVisible(false);
+            modifierButton.setVisible(false);
+            supprimerButton.setVisible(false);
+        }
     }
 }

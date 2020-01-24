@@ -43,18 +43,37 @@ public class GestionArticlesReservesControleur implements Initializable {
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
     private ChefMagasin chefMagasin;
-    //private Vendeur vendeur;
+    private boolean estUnVendeur;
+    private Vendeur vendeur;
+    private VendeurDAO vendeurDAO;
+
+    public void setEstUnVendeur(boolean estUnVendeur)
+    {
+        this.estUnVendeur = estUnVendeur;
+    }
+
+    public void setVendeur(Vendeur vendeur)
+    {
+        vendeur = vendeur;
+    }
 
     public GestionArticlesReservesControleur()
     {
         magasinDAO = new MagasinDAO();
         magasinDAO.setEntityManager(SetupEM.getEm());
+        vendeurDAO = new VendeurDAO();
+        vendeurDAO.setEntityManager(SetupEM.getEm());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        //this.vendeur = VendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        if(estUnVendeur == true)
+        {
+            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        }
+
+
         ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
         chefMagasinDAO.setEntityManager(SetupEM.getEm());
         this.chefMagasin = chefMagasinDAO.recupererChefMagasin();
@@ -87,14 +106,20 @@ public class GestionArticlesReservesControleur implements Initializable {
                     articlesReserves.add(rayons.get(i).getListeReservationArticle().get(j));
                 }
             }
-
         }
 
-        for(int i = 0; i < articlesReserves.size(); ++i)
+        //cas du vendeur
+        if(estUnVendeur == true)
         {
-            System.out.println("nom " + articlesReserves.get(i).getNom());
-            System.out.println("quantite reservee " + articlesReserves.get(i).getQuantiteReserve());
+            for(int i = 0; i < articlesReserves.size(); ++i)
+            {
+                if(articlesReserves.get(i).getRayonA().getNom().compareTo(vendeur.getRayonV().getNom()) != 0)
+                {
+                    articlesReserves.remove(articlesReserves.get(i));
+                }
+            }
         }
+
 
         produits.clear();
         produits.addAll(articlesReserves);
