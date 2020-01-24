@@ -53,14 +53,26 @@ public class applicationPrincipaleControleur implements Initializable {
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
-                //FXMLLoader loader =
-                nodes[0] = (Node) FXMLLoader.load(getClass().getResource("autresRayons.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionDesRayons.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
                 pnl_scroll.getChildren().add(nodes[0]);
+
+                GestionDesRayonsControleur controleur = loader.getController();
+                controleur.setVendeur(vendeur);
+
+                controleur.setVBox(pnl_scroll);
+                controleur.setNodes(nodes);
+                controleur.setEstUnVendeur(true);
+                controleur.remplirTableauDeRayons();
+
+                controleur.vue();
 
                 //Mettre à jour les booleens
                 estSurAutresRayons = true;
                 estSurMonRayon = false;
                 estSurArticlesReserves = false;
+
             }
         } catch (IOException ex) {
             Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +104,7 @@ public class applicationPrincipaleControleur implements Initializable {
                 MonRayonControleur controleur = loader.getController();
                 //System.out.println(vendeur.getRayonV());
                 controleur.setRayon(vendeur.getRayonV());
-                controleur.setEstUnVendeur(true);
+                controleur.settype(1);
                 controleur.vue();
                 controleur.remplirTableauDArticles();
 
@@ -107,7 +119,32 @@ public class applicationPrincipaleControleur implements Initializable {
     }
 
     public void cliqueSurArticlesReserves(ActionEvent actionEvent) {
-        System.out.println("Ne fait encore rien");
+    try{
+
+        //Vider l'ancienne vue
+        pnl_scroll.getChildren().clear();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
+        Parent parent = loader.load();
+        nodes[0] = (Node) parent;
+        pnl_scroll.getChildren().add(nodes[0]);
+
+        GestionArticlesReservesControleur controleur = loader.getController();
+        //System.out.println(vendeur.getRayonV());
+        controleur.setEstUnVendeur(true);
+        controleur.setVendeur(vendeur);
+        controleur.remplirTableauDArticlesReserves();
+
+        //Mettre à jour les booleens
+        estSurArticlesReserves = true;
+        estSurMonRayon = false;
+        estSurAutresRayons = false;
+
+
+        } catch (IOException ex) {
+        Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public void cliqueSurDeconnecte(ActionEvent actionEvent) throws IOException {

@@ -156,7 +156,7 @@ public class BoiteAOutil {
      * @return true si la input contient un caractere special, false sinon
      */
     public static boolean checkCaractereSpeciaux(String input) {
-        String specialChars = "~`[email protected]#$%^&** ()-__=+\\|[{]};:'\",<.>/?";
+        String specialChars = "~`[]#$%^&** ()-__=+\\|[{]};:'\",<.>/?";
         char currentCharacter;
         boolean specialCharacterPresent = false;
 

@@ -117,7 +117,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                         messageErreur += "Identifiant non valide!\n";
                 }
                 if (motDePasseTextF.getText() == null || motDePasseTextF.getText().length() < 8 || BoiteAOutil.checkString(motDePasseTextF.getText()) == false) {
-                        messageErreur += "Identifiant non valide!\n";
+                        messageErreur += "Mot de passe non valide!\n";
                 }
                 if (nomRayonCombo.getSelectionModel().getSelectedItem() == null || nomRayonCombo.getSelectionModel().getSelectedItem().length() == 0) {
                         messageErreur += "Rayon non valide!\n";

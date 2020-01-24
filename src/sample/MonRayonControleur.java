@@ -10,10 +10,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
@@ -44,6 +46,14 @@ public class MonRayonControleur implements Initializable {
     private CustomTextField filtreTextField;
     @FXML
     private Button transfererButton;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button supprimerButton;
+    @FXML
+    private Button modifierButton;
+    @FXML
+    private Button reserverButton;
 
     private RayonDAO rayonDAO;
 
@@ -52,7 +62,7 @@ public class MonRayonControleur implements Initializable {
 
     //private Vendeur vendeur;
 
-    private boolean estUnVendeur;
+    private int type;
     private Rayon rayon;
 
     public MonRayonControleur()
@@ -61,9 +71,9 @@ public class MonRayonControleur implements Initializable {
         rayonDAO.setEntityManager(SetupEM.getEm());
     }
 
-    public void setEstUnVendeur(boolean estUnVendeur)
+    public void settype(int type)
     {
-        this.estUnVendeur = estUnVendeur;
+        this.type = type;
     }
 
     public void setRayon(Rayon rayon)
@@ -80,7 +90,7 @@ public class MonRayonControleur implements Initializable {
             vendeurDAO.setEntityManager(SetupEM.getEm());
             this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
         }*/
-        System.out.println("bundle" + resourceBundle);
+
 
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
@@ -230,7 +240,29 @@ public class MonRayonControleur implements Initializable {
 
     }
 
-    public void cliqueSurReserver(ActionEvent actionEvent) {
+    public void cliqueSurReserver(ActionEvent actionEvent) throws IOException {
+        Article article = tableau.getSelectionModel().getSelectedItem();
+
+        //Charger le fichir fmxl
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueReservationArticle.fxml"));
+        Parent parent = loader.load();
+
+        // Creer le stage pour la boite de dialogue
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("reserver " + article.getNom());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(Main.getPrimaryStage());
+        Scene scene = new Scene(parent);
+        dialogStage.setScene(scene);
+        //Recuperer le controleur lier à la vue
+        BoiteDialogueReservationArticleControleur controleur = loader.getController();
+
+        controleur.setArticle(article);
+        controleur.setDialogStage(dialogStage);
+        controleur.setMonRayonControleur(this);
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+        dialogStage.showAndWait();
     }
 
     public void cliqueSurSearch(ActionEvent actionEvent) {
@@ -242,16 +274,47 @@ public class MonRayonControleur implements Initializable {
          remplirTableauDArticles();
     }
 
-    public void cliquerSurTransferer(ActionEvent actionEvent)
-    {
+    public void cliquerSurTransferer(ActionEvent actionEvent) throws IOException {
+        Article article = tableau.getSelectionModel().getSelectedItem();
 
+        //Charger le fichir fmxl
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueTransfererArticle.fxml"));
+        Parent parent = loader.load();
+
+        // Creer le stage pour la boite de dialogue
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("transferer " + article.getNom());
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(Main.getPrimaryStage());
+        Scene scene = new Scene(parent);
+        dialogStage.setScene(scene);
+        //Recuperer le controleur lier à la vue
+        BoiteDialogueTransfererArticleControleur controleur = loader.getController();
+
+        controleur.setArticle(article);
+        controleur.setDialogStage(dialogStage);
+        controleur.setMonRayonControleur(this);
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+        dialogStage.showAndWait();
     }
 
     public void vue()
     {
-        if(estUnVendeur == true)
+        //cas vendeur qui regarde son rayon
+        if(type == 1)
         {
             transfererButton.setVisible(false);
+        }
+
+        //cas vendeur qui regarde un autre rayon
+        if(type == 2)
+        {
+            btnAdd.setVisible(false);
+            transfererButton.setVisible(false);
+            modifierButton.setVisible(false);
+            supprimerButton.setVisible(false);
+            reserverButton.setVisible(false);
         }
     }
 }

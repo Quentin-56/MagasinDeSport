@@ -145,6 +145,7 @@ public class applicationPrincipaleChefControleur implements Initializable {
 
                 controleur.setVBox(pnl_scroll);
                 controleur.setNodes(nodes);
+                controleur.setEstUnVendeur(false);
 
                 //Mettre à jour les booleens
                 estSurGestionDesRayons = true;
@@ -170,6 +171,7 @@ public class applicationPrincipaleChefControleur implements Initializable {
                 pnl_scroll.getChildren().add(nodes[0]);
 
                 GestionArticlesReservesControleur controleur = loader.getController();
+                controleur.setEstUnVendeur(false);
 
                 //Mettre à jour les booleens
                 estSurGestionDesArticlesReserves = true;
