@@ -139,7 +139,7 @@ public class VendeurDAO {
 
         entityManager.getTransaction().begin();
 
-        Query query = SetupEM.getEm().createQuery("from Vendeur vendeur where vendeur.identifiant = ?1");
+        Query query = entityManager.createQuery("from Vendeur vendeur where vendeur.identifiant = ?1");
         Vendeur vendeur  = (Vendeur) query.setParameter(1, identifiant).getSingleResult();
 
         entityManager.getTransaction().commit();
@@ -155,7 +155,7 @@ public class VendeurDAO {
     public List<Vendeur> recupererVendeurs()
     {
         entityManager.getTransaction().begin();
-        Query query = SetupEM.getEm().createQuery("from Vendeur vendeur");
+        Query query = entityManager.createQuery("from Vendeur vendeur");
         List<Vendeur> listV =  query.getResultList();
 
         entityManager.getTransaction().commit();
