@@ -30,7 +30,7 @@ public class VendeurDAO {
      * @param motDePasse
      * @param rayon
      */
-    public void creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
+    public Vendeur creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
     {
         Vendeur vendeur =  new Vendeur();
         vendeur.setNom(nom);
@@ -46,6 +46,8 @@ public class VendeurDAO {
         entityManager.getTransaction().commit();
 
         ajouterVendeurDansListeVendeur(vendeur,rayon);
+
+        return vendeur;
     }
 
     /**

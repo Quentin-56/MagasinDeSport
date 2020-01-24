@@ -191,7 +191,7 @@ public class MonRayonControleur implements Initializable {
         else //Ajouter l'article
         {
             controleur.remplirFormulaire(null);
-            controleur.setRayon(vendeur.getRayonV());
+            //controleur.setRayon(vendeur.getRayonV());
         }
         //Indique au controler si c'est a modifier ou a ajouter
         controleur.setEstAModifier(bool);
