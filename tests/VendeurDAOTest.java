@@ -45,7 +45,7 @@ public class VendeurDAOTest {
                 vendeur.setIdPersonne(1);
                 return vendeur;
             }
-        }).when(entityManagerMock).persist(any(Article.class));
+        }).when(entityManagerMock).persist(any(Vendeur.class));
         VendeurDAO dao = new VendeurDAO();
         dao.setEntityManager(entityManagerMock);
 
@@ -103,7 +103,7 @@ public class VendeurDAOTest {
         rayon.setListeArticles(null);
     }
     @Test
-    public void supprimer_article_dans_la_liste_article(){
+    public void supprimer_vendeur_dans_la_liste_vendeur(){
         //Before
         Rayon rayon = new Rayon();
         Vendeur vendeur1 = new Vendeur();
@@ -125,7 +125,7 @@ public class VendeurDAOTest {
         rayon.setListeArticles(null);
     }
     @Test
-    public void recuperer_article_du_rayon(){
+    public void recuperer_vendeur(){
         VendeurDAO dao = new VendeurDAO();
         Rayon rayon = new Rayon();
         Vendeur vendeur1 = new Vendeur();

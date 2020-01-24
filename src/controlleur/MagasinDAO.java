@@ -29,7 +29,7 @@ public class MagasinDAO {
      *	apelle ajouterRayonDansLaListeRayon
      * @param nom
      */
-    public void creerRayon(String nom)
+    public Rayon creerRayon(String nom)
     {
         Rayon rayon = new Rayon();
         rayon.setNom(nom);
@@ -40,6 +40,7 @@ public class MagasinDAO {
         entityManager.getTransaction().commit();
 
         ajouterRayonDansLaListeRayon(rayon);
+        return rayon;
     }
 
     /**
@@ -113,7 +114,7 @@ public class MagasinDAO {
     {
         entityManager.getTransaction().begin();
 
-        Query query = SetupEM.getEm().createQuery("from Rayon rayon where rayon.nom = ?1");
+        Query query = entityManager.createQuery("from Rayon rayon where rayon.nom = ?1");
         Rayon rayon  = (Rayon) query.setParameter(1, nomRayon).getSingleResult();
 
         entityManager.getTransaction().commit();
