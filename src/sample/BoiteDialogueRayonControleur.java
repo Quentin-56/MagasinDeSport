@@ -1,16 +1,12 @@
 package sample;
 
 import controlleur.MagasinDAO;
-import controlleur.RayonDAO;
 import controlleur.SetupEM;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import modele.Article;
-import modele.Magasin;
 import modele.Rayon;
 
 import java.net.URL;
@@ -75,16 +71,14 @@ public class BoiteDialogueRayonControleur implements Initializable {
         }
     }
 
-    public void cliqueSurValider(ActionEvent actionEvent) {
+    public void cliqueSurValider() {
         if(lesChampsSontValides()) {
             MagasinDAO magasinDAO = new MagasinDAO();
             magasinDAO.setEntityManager(SetupEM.getEm());
 
             if (estAModifier == true) {
                 Rayon rayonModifie = new Rayon(rayon);
-                //A FAIRE DANS UNE FONCTION
                 rayonModifie.setNom(nomTextF.getText());
-
                 magasinDAO.modifierRayon(rayonModifie);
 
                 //Fermer le formulaire
@@ -101,7 +95,7 @@ public class BoiteDialogueRayonControleur implements Initializable {
         }
     }
 
-    public void cliqueSurAnnuler(ActionEvent actionEvent) {
+    public void cliqueSurAnnuler() {
         //Fermer le formulaire
         dialogStage.close();
     }

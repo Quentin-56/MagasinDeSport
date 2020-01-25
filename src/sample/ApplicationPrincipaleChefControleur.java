@@ -90,6 +90,7 @@ public class ApplicationPrincipaleChefControleur implements Initializable {
         controleur.remplirFormulaire();
         controleur.setDialogStage(dialogStage);
         controleur.setApplicationPrincipaleChefControleur(this);
+        controleur.setNomLabel(nomLabel);
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
         dialogStage.showAndWait();

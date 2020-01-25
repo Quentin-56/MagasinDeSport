@@ -128,3 +128,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+#parametres{
+    -fx-text-fill: #e1faff;
+}

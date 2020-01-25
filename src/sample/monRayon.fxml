@@ -54,7 +54,7 @@
             <Button fx:id="transfererButton" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#cliquerSurTransferer" prefHeight="39.0" text="Transferer" />
             </buttons>
         </ButtonBar>
-      <CustomTextField fx:id="filtreTextField" layoutX="69.0" layoutY="10.0" prefHeight="25.0" prefWidth="261.0">
+      <CustomTextField fx:id="filtreTextField" layoutX="3.0" layoutY="10.0" prefHeight="42.0" prefWidth="267.0">
           <left>
               <Button fx:id="btnSearch" onAction="#cliqueSurSearch">
                   <graphic>
@@ -75,7 +75,7 @@
                     </image>
                 </ImageView>
          </graphic></Button>
-      <Button fx:id="btnSupprimerFiltre" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#cliqueSurSupprimerFiltre">
+      <Button fx:id="btnSupprimerFiltre" layoutX="273.0" layoutY="11.0" mnemonicParsing="false" onAction="#cliqueSurSupprimerFiltre">
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
