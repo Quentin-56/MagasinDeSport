@@ -149,5 +149,49 @@ class RayonDaoTest {
 
 
     }
+    @Test
+    public void transferer_un_article(){
+        //before
+        Rayon rayon = new Rayon();
+        Rayon nouveauRayon = new Rayon();
+        Article article = new Article();
+        rayon.getListeArticles().add(article);
+        article.setRayonA(rayon);
+        //test
+        RayonDAO dao = new RayonDAO();
+        dao.transfererUnArticle(article,nouveauRayon);
+        assertEquals(nouveauRayon,article.getRayonA());
+        assertEquals(nouveauRayon.getListeArticles().contains(article),true);
+        assertEquals(rayon.getListeArticles().contains(article),false);
+    }
+    @Test
+    public void transferer_un_article_reserve(){
+        //before
+        Rayon rayon = new Rayon();
+        Rayon nouveauRayon = new Rayon();
+        Article article = new Article();
+        rayon.getListeArticles().add(article);
+        rayon.getListeReservationArticle().add(article);
+        article.setRayonA(rayon);
+        //test
+        RayonDAO dao = new RayonDAO();
+        dao.transfererUnArticle(article,nouveauRayon);
+        assertEquals(nouveauRayon,article.getRayonA());
+        assertEquals(nouveauRayon.getListeArticles().contains(article),true);
+        assertEquals(rayon.getListeArticles().contains(article),false);
+        assertEquals(rayon.getListeReservationArticle().contains(article), false);
+        assertEquals(nouveauRayon.getListeReservationArticle().contains(article), true);
+    }
+    @Test
+    public void reserver_un_article(){
+        Article article =  new Article();
+        article.setQuantite(10);
+        article.setQuantiteReserve(1);
+        RayonDAO dao = new RayonDAO();
+        dao.reserverUnArticle(article, 3);
+        assertEquals(article.getQuantite(), 7);
+        assertEquals(article.getQuantiteReserve(), 4);
+
+    }
 
 }
