@@ -1,7 +1,6 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
-import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,14 +15,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.ChefMagasin;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class applicationPrincipaleChefControleur implements Initializable {
+public class ApplicationPrincipaleChefControleur implements Initializable {
 
     private ChefMagasin chefMagasin;
     private Node[] nodes = new Node[1];
@@ -35,33 +33,6 @@ public class applicationPrincipaleChefControleur implements Initializable {
     @FXML
     private VBox pnl_scroll;
 
-    /*public void setVBox(VBox vBox)
-    {
-        this.pnl_scroll = vBox;
-    }
-
-    public VBox getVBox()
-    {
-        return pnl_scroll;
-    }
-
-    public Node[] getNodes()
-    {
-        return nodes;
-    }
-
-    public void setNodes(Node[] no)
-    {
-        this.nodes = no;
-    }
-
-    public applicationPrincipaleChefControleur()
-    {
-        nodes = new Node[1];
-        pnl_scroll = new VBox();
-    }*/
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();
@@ -71,16 +42,14 @@ public class applicationPrincipaleChefControleur implements Initializable {
         nomLabel.setText(chefMagasin.getPrenom()+" "+chefMagasin.getNom());
     }
 
+    public void setEstSurGestionDesRayons(boolean estSurGestionDesRayons) {
+        this.estSurGestionDesRayons = estSurGestionDesRayons;
+    }
 
-    public void cliqueSurGestionDesVendeurs(ActionEvent actionEvent) {
+    public void cliqueSurGestionDesVendeurs() {
         try {
             if(!estSurGestionDesVendeurs)
             {
-                /*Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Test Connection");
-                alert.setContentText("Connect to the database successfully!");
-                alert.showAndWait();*/
-
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
@@ -97,12 +66,11 @@ public class applicationPrincipaleChefControleur implements Initializable {
                 estSurGestionDesArticlesReserves = false;
             }
         } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-
-    public void cliqueSurParametres(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurParametres() throws IOException {
         // LE TOUT A FAIRE DANS UNE FONCTION A PART
         //Charger le fichir fmxl
         FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueParametres.fxml"));
@@ -125,11 +93,9 @@ public class applicationPrincipaleChefControleur implements Initializable {
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
         dialogStage.showAndWait();
-        //dialogStage.close();
-
     }
 
-    public void cliqueSurGestionDesRayons(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurGestionDesRayons() throws IOException {
         try {
             if (!estSurGestionDesRayons) {
 
@@ -146,6 +112,7 @@ public class applicationPrincipaleChefControleur implements Initializable {
                 controleur.setVBox(pnl_scroll);
                 controleur.setNodes(nodes);
                 controleur.setEstUnVendeur(false);
+                controleur.setApplicationPrincipaleChefControleur(this);
 
                 //Mettre à jour les booleens
                 estSurGestionDesRayons = true;
@@ -153,12 +120,12 @@ public class applicationPrincipaleChefControleur implements Initializable {
                 estSurGestionDesArticlesReserves = false;
             }
         } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public void cliqueSurGestionArticlesReserves(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurGestionArticlesReserves() throws IOException {
         try {
             if (!estSurGestionDesArticlesReserves) {
 
@@ -179,16 +146,14 @@ public class applicationPrincipaleChefControleur implements Initializable {
                 estSurGestionDesVendeurs = false;
             }
         } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void cliqueSurDeconnecte(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurDeconnecte() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
 
         Main.getPrimaryStage().setScene(new Scene(root));
     }
-
-
 }

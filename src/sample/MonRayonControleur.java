@@ -4,7 +4,6 @@ import controlleur.RayonDAO;
 import controlleur.SetupEM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,19 +49,23 @@ public class MonRayonControleur implements Initializable {
     @FXML
     private Button btnRetourEnArriere;
 
-
-    private RayonDAO rayonDAO;
-
     private ObservableList<Article> produits = FXCollections.observableArrayList();
     private ObservableList<Article> filtreProduits = FXCollections.observableArrayList();
 
     private int type;
     private Rayon rayon;
+    private ApplicationPrincipaleControleur applicationPrincipaleControleur;
+    private ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur;
+    private RayonDAO rayonDAO;
 
     public MonRayonControleur()
     {
         rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(SetupEM.getEm());
+    }
+
+    public void setApplicationPrincipaleControleur(ApplicationPrincipaleControleur applicationPrincipaleControleur) {
+        this.applicationPrincipaleControleur = applicationPrincipaleControleur;
     }
 
     public void setType(int type)
@@ -73,6 +76,10 @@ public class MonRayonControleur implements Initializable {
     public void setRayon(Rayon rayon)
     {
         this.rayon = rayon;
+    }
+
+    public void setApplicationPrincipaleChefControleur(ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur) {
+        this.applicationPrincipaleChefControleur = applicationPrincipaleChefControleur;
     }
 
     @Override
@@ -299,7 +306,17 @@ public class MonRayonControleur implements Initializable {
         }
     }
 
-    public void cliqueSurRetourEnArriere() {
-        System.out.println("RETOUR EN ARRIERE");
+    public void cliqueSurRetourEnArriere() throws IOException {
+
+        if(applicationPrincipaleControleur !=null)
+        {
+            applicationPrincipaleControleur.setEstSurAutresRayons(false);
+            applicationPrincipaleControleur.cliqueSurAutresRayons();
+        }
+        else{
+            applicationPrincipaleChefControleur.setEstSurGestionDesRayons(false);
+            applicationPrincipaleChefControleur.cliqueSurGestionDesRayons();
+        }
+
     }
 }

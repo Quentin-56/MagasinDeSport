@@ -1,14 +1,12 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
-import controlleur.VendeurDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modele.ChefMagasin;
-import modele.Vendeur;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +14,7 @@ import java.util.ResourceBundle;
 public class BoiteDialogueParametresControleur implements Initializable {
 
     private Stage dialogStage;
-    private applicationPrincipaleChefControleur applicationPrincipaleChefControleur1;
+    private ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur1;
     private ChefMagasin chefMagasin;
     private ChefMagasinDAO chefMagasinDAO;
     @FXML
@@ -26,7 +24,7 @@ public class BoiteDialogueParametresControleur implements Initializable {
     @FXML
     private TextField motDePasseTextF;
 
-    public void setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur applicationPrincipaleChefControleur1) {
+    public void setApplicationPrincipaleChefControleur(ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur1) {
         this.applicationPrincipaleChefControleur1 = applicationPrincipaleChefControleur1;
     }
 

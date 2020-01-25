@@ -2,7 +2,6 @@ package sample;
 
 import controlleur.SetupEM;
 import controlleur.VendeurDAO;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +18,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class applicationPrincipaleControleur implements Initializable {
+public class ApplicationPrincipaleControleur implements Initializable {
 
     private Node[] nodes = new Node[1];
     private boolean estSurMonRayon = false;
@@ -42,11 +41,17 @@ public class applicationPrincipaleControleur implements Initializable {
         nomLabel.setText(vendeur.getPrenom()+" "+vendeur.getNom());
     }
 
-    public void cliqueSurAutresRayons(ActionEvent actionEvent)
+    public void setEstSurAutresRayons(boolean estSurAutresRayons) {
+        this.estSurAutresRayons = estSurAutresRayons;
+    }
+
+    public void cliqueSurAutresRayons()
     {
+
         try {
             if(!estSurAutresRayons)
             {
+                System.out.println("salut toi");
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
@@ -62,6 +67,7 @@ public class applicationPrincipaleControleur implements Initializable {
                 controleur.setNodes(nodes);
                 controleur.setEstUnVendeur(true);
                 controleur.remplirTableauDeRayons();
+                controleur.setApplicationPrincipaleControleur(this);
 
                 controleur.vue();
 
@@ -72,11 +78,11 @@ public class applicationPrincipaleControleur implements Initializable {
 
             }
         } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void cliqueSurMonRayon(ActionEvent actionEvent) {
+    public void cliqueSurMonRayon() {
         try {
             if(!estSurMonRayon)
             {
@@ -100,11 +106,11 @@ public class applicationPrincipaleControleur implements Initializable {
                 estSurArticlesReserves = false;
             }
         } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void cliqueSurArticlesReserves(ActionEvent actionEvent) {
+    public void cliqueSurArticlesReserves() {
     try{
 
         //Vider l'ancienne vue
@@ -116,7 +122,7 @@ public class applicationPrincipaleControleur implements Initializable {
         pnl_scroll.getChildren().add(nodes[0]);
 
         GestionArticlesReservesControleur controleur = loader.getController();
-        //System.out.println(vendeur.getRayonV());
+
         controleur.setEstUnVendeur(true);
         controleur.setVendeur(vendeur);
         controleur.remplirTableauDArticlesReserves();
@@ -128,12 +134,12 @@ public class applicationPrincipaleControleur implements Initializable {
 
 
         } catch (IOException ex) {
-        Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public void cliqueSurDeconnecte(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurDeconnecte() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
 
