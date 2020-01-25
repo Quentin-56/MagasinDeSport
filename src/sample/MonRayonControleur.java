@@ -1,31 +1,24 @@
 package sample;
 
-import controlleur.MagasinDAO;
 import controlleur.RayonDAO;
 import controlleur.SetupEM;
-import controlleur.VendeurDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
 import modele.Rayon;
-import modele.Vendeur;
 import org.controlsfx.control.textfield.CustomTextField;
-
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -54,13 +47,14 @@ public class MonRayonControleur implements Initializable {
     private Button modifierButton;
     @FXML
     private Button reserverButton;
+    @FXML
+    private Button btnRetourEnArriere;
+
 
     private RayonDAO rayonDAO;
 
     private ObservableList<Article> produits = FXCollections.observableArrayList();
     private ObservableList<Article> filtreProduits = FXCollections.observableArrayList();
-
-    //private Vendeur vendeur;
 
     private int type;
     private Rayon rayon;
@@ -71,7 +65,7 @@ public class MonRayonControleur implements Initializable {
         rayonDAO.setEntityManager(SetupEM.getEm());
     }
 
-    public void settype(int type)
+    public void setType(int type)
     {
         this.type = type;
     }
@@ -84,14 +78,6 @@ public class MonRayonControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        /*if(estUnVendeur == true)
-        {
-            VendeurDAO vendeurDAO = new VendeurDAO();
-            vendeurDAO.setEntityManager(SetupEM.getEm());
-            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
-        }*/
-
-
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantite.setCellValueFactory(new PropertyValueFactory("quantite"));
@@ -108,15 +94,8 @@ public class MonRayonControleur implements Initializable {
 
     public void remplirTableauDArticles()
     {
-        List<Article> articles = new ArrayList<>();
-        //if(estUnVendeur == true)
-       // {
-       //     articles = rayonDAO.recupererArticleDuRayon(vendeur.getRayonV());
-       // }
-       // else
-        //{
-            articles = rayonDAO.recupererArticleDuRayon(rayon);
-        //}
+        List<Article> articles = rayonDAO.recupererArticleDuRayon(rayon);
+
         filtreProduits.clear();
         filtreProduits.addAll(articles);
 
@@ -214,14 +193,14 @@ public class MonRayonControleur implements Initializable {
         dialogStage.showAndWait();
     }
 
-    public void cliqueSurSupprimer(ActionEvent actionEvent) {
+    public void cliqueSurSupprimer() {
         Article article = tableau.getSelectionModel().getSelectedItem();
         rayonDAO.supprimerArticle(article);
         //Actualiser le tableauView
         remplirTableauDArticles();
     }
 
-    public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurModifier() throws IOException {
 
         if(tableau.getSelectionModel().getSelectedItem() == null)
         {
@@ -236,12 +215,12 @@ public class MonRayonControleur implements Initializable {
         }
     }
 
-    public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurAjouter() throws IOException {
         editerFormulaire("Ajouter article",false);
 
     }
 
-    public void cliqueSurReserver(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurReserver() throws IOException {
         Article article = tableau.getSelectionModel().getSelectedItem();
 
         //Charger le fichir fmxl
@@ -266,16 +245,16 @@ public class MonRayonControleur implements Initializable {
         dialogStage.showAndWait();
     }
 
-    public void cliqueSurSearch(ActionEvent actionEvent) {
+    public void cliqueSurSearch() {
         mettreAJourFiltre();
     }
 
-    public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
+    public void cliqueSurSupprimerFiltre() {
          viderBarreRecherche();
          remplirTableauDArticles();
     }
 
-    public void cliquerSurTransferer(ActionEvent actionEvent) throws IOException {
+    public void cliquerSurTransferer() throws IOException {
         Article article = tableau.getSelectionModel().getSelectedItem();
 
         //Charger le fichir fmxl
@@ -284,7 +263,7 @@ public class MonRayonControleur implements Initializable {
 
         // Creer le stage pour la boite de dialogue
         Stage dialogStage = new Stage();
-        dialogStage.setTitle("transferer " + article.getNom());
+        dialogStage.setTitle("Transferer " + article.getNom());
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(Main.getPrimaryStage());
         Scene scene = new Scene(parent);
@@ -306,6 +285,7 @@ public class MonRayonControleur implements Initializable {
         if(type == 1)
         {
             transfererButton.setVisible(false);
+            btnRetourEnArriere.setVisible(false);
         }
 
         //cas vendeur qui regarde un autre rayon
@@ -318,5 +298,8 @@ public class MonRayonControleur implements Initializable {
             reserverButton.setVisible(false);
         }
     }
-}
 
+    public void cliqueSurRetourEnArriere() {
+        System.out.println("RETOUR EN ARRIERE");
+    }
+}

@@ -236,11 +236,11 @@ public class GestionDesRayonsControleur implements Initializable {
 
             if(estUnVendeur == false)
             {
-                controleur.settype(0);
+                controleur.setType(0);
             }
             if(estUnVendeur == true)
             {
-                controleur.settype(2);
+                controleur.setType(2);
             }
 
             controleur.vue();

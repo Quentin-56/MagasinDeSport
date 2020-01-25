@@ -1,8 +1,5 @@
 
-Qsquid:S1172È"2Remove this unused method parameter "actionEvent".(ßà¿ô8©ÖœĞü-
- squid:S1186Í"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(¢±ÀÒ8ßÕÌü-
-Qsquid:S1172²"2Remove this unused method parameter "actionEvent".(‰¼»—8Ö×Æœı-
-`squid:S1126…"AReplace this if-then-else statement by a single return statement.(Ûç“­8ª¦ˆùü-
-Vsquid:S1172¹"2Remove this unused method parameter "actionEvent".(²èğÇøÿÿÿÿ8©ÖœĞü-
-Qsquid:S1172Ğ"2Remove this unused method parameter "actionEvent".(æĞ•8Œ¨›ùü-
-Psquid:S1172Ô"2Remove this unused method parameter "actionEvent".(Ò±ÔQ8íŞØ“ı-
+esquid:UselessImportCheck"5Remove this unused import 'javafx.event.ActionEvent'.(î•¯¼ıÿÿÿÿ8ËÆ¥ëı-
+`squid:S1126“"AReplace this if-then-else statement by a single return statement.(Ûç“­8ŸïÖêı-
+\
+squid:S106«"9Replace this use of System.out or System.err by a logger.(ÍŞ»Ëşÿÿÿÿ8­ª¥ëı-

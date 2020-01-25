@@ -1,8 +1,6 @@
 
-ˆsquid:S1450"eRemove the "visiterRayonControleur" field and declare it as a local variable in the relevant methods.(ÜÒÚûÿÿÿÿ8¯ÈÂ›ı-
-Psquid:S1172}"2Remove this unused method parameter "actionEvent".(‚Ï¹•8„”“•ı-
-squid:S1186="€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ
-psquid:S3776I"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(½ñü†8ÕÓº•ı-
-Qsquid:S1172˜"2Remove this unused method parameter "actionEvent".(«¹¢€8„”“•ı-
-]squid:S1068":Remove this unused "visiterRayonControleur" private field.(ÜÒÚûÿÿÿÿ8¯ÈÂ›ı-
-Lsquid:S1125‚"(Remove the literal "true" boolean value.(¼ÖÜ†üÿÿÿÿ8„”“•ı-
+squid:S11868"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ
+psquid:S3776D"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(½ñü†8ÕÓº•ı-
+Ksquid:S1125}"(Remove the literal "true" boolean value.(¼ÖÜ†üÿÿÿÿ8„”“•ı-
+Qsquid:S1172“"2Remove this unused method parameter "actionEvent".(«¹¢€8„”“•ı-
+Psquid:S1172x"2Remove this unused method parameter "actionEvent".(‚Ï¹•8„”“•ı-

@@ -115,3 +115,16 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
+
+#btnRetourEnArriere{
+    -fx-background-color: transparent;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+}
+
+#btnRetourEnArriere:hover{
+    -fx-background-image: url("../images/backZoom.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}

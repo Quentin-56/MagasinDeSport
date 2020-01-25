@@ -1,13 +1,17 @@
 
-jsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(øñ®úÿÿÿÿ
-rsquid:S00116"URename this field "pnl_scroll" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âè²›ÿÿÿÿÿ
-Nsquid:S1172F"2Remove this unused method parameter "actionEvent".(ÉÇàúúÿÿÿÿ
-bsquid:CommentedOutCodeLine,"<This block of commented-out lines of code should be removed.(Õ®êÊ
-‹squid:S1450"oRemove the "estSurGestionDesArticlesReserves" field and declare it as a local variable in the relevant methods.(™ÉÁÁûÿÿÿÿ
-Esquid:S14819"/Remove this unused "controleur" local variable.(‡í½v
-Tsquid:S18549">Remove this useless assignment to local variable "controleur".(‡í½v
-Psquid:S1068":Remove this unused "estSurGestionDesRayons" private field.(¾Èª
-`squid:S1068"DRemove this unused "estSurGestionDesArticlesReserves" private field.(™ÉÁÁûÿÿÿÿ
-Isquid:S1172("2Remove this unused method parameter "actionEvent".(¿“Âû
-Csquid:S19056"'Remove this unnecessary cast to "Node".(öŒ£Ñşÿÿÿÿ
-{squid:S1450"eRemove the "estSurGestionDesRayons" field and declare it as a local variable in the relevant methods.(¾Èª
+jsquid:S00101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(øñ®úÿÿÿÿ
+Csquid:S1905Y"'Remove this unnecessary cast to "Node".(öŒ£Ñşÿÿÿÿ
+rsquid:S00116$"URename this field "pnl_scroll" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(âè²›ÿÿÿÿÿ
+Isquid:S1172K"2Remove this unused method parameter "actionEvent".(¿“Âû
+Esquid:S1481\"/Remove this unused "controleur" local variable.(‡í½v
+bsquid:CommentedOutCodeLineO"<This block of commented-out lines of code should be removed.(Õ®êÊ
+Tsquid:S1854\">Remove this useless assignment to local variable "controleur".(‡í½v
+Nsquid:S1172i"2Remove this unused method parameter "actionEvent".(ÉÇàúúÿÿÿÿ
+asquid:UselessImportCheck"1Remove this unused import 'controlleur.RayonDAO'.(Ë±øÿÿÿÿ8ŠÊíåı-
+Qsquid:S1172„"2Remove this unused method parameter "actionEvent".(ú²ä8ŠÊíåı-
+Ksquid:S1905"'Remove this unnecessary cast to "Node".(öŒ£Ñşÿÿÿÿ8ŠÊíåı-
+Vsquid:S1172¡"2Remove this unused method parameter "actionEvent".(š²°şüÿÿÿÿ8ŠÊíåı-
+Ksquid:S1905ª"'Remove this unnecessary cast to "Node".(öŒ£Ñşÿÿÿÿ8ŠÊíåı-
+Vsquid:S1172º"2Remove this unused method parameter "actionEvent".(ÚÓ¸¯úÿÿÿÿ8ŠÊíåı-
+nsquid:CommentedOutCodeLine'"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ8ŠÊíåı-
+osquid:CommentedOutCodeLine€"<This block of commented-out lines of code should be removed.(Êñ’½ÿÿÿÿÿ8ŠÊíåı-
