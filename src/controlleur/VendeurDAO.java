@@ -103,33 +103,6 @@ public class VendeurDAO {
     }
 
     /**
-     * APPELE par barre de recherche, renvoie tableau des vendeurs correspond au prenom,nom, id
-     * @param expressionReguliere
-     * @return
-     */
-    /*public ArrayList<Vendeur> rechercherVendeur(String expressionReguliere)
-    {
-
-    }*/
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Vendeur trouverVendeurAvecId(int id)
-    {
-
-        entityManager.getTransaction().begin();
-
-        Vendeur vendeur = entityManager.find(Vendeur.class, id);
-
-        entityManager.getTransaction().commit();
-
-        return vendeur;
-    }
-
-    /**
      *
      * @param identifiant
      * @return

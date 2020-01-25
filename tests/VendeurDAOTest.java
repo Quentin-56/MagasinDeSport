@@ -144,4 +144,19 @@ public class VendeurDAOTest {
 
 
     }
+    @Test
+    public void trouver_vendeur_avec_son_identifiant(){
+        VendeurDAO dao = new VendeurDAO();
+        Vendeur vendeur = new Vendeur();
+        String identifiant= "ok";
+        vendeur.setIdentifiant(identifiant);
+        when(entityManagerMock.getTransaction()).thenReturn(transaction);
+        when(entityManagerMock.createQuery("from Vendeur vendeur where vendeur.identifiant = ?1")).thenReturn(queryMock);
+        when(queryMock.setParameter(1,identifiant)).thenReturn(queryMock);
+        when(queryMock.getSingleResult()).thenReturn(vendeur);
+        dao.setEntityManager(entityManagerMock);
+        assertEquals(vendeur, dao.trouverVendeurAvecIdentifiant(identifiant));
+        verify(transaction).begin();
+        verify(transaction).commit();
+    }
 }
