@@ -118,8 +118,6 @@ public class GestionDesRayonsControleur implements Initializable {
         tableauRayons.setItems(filtreProduits);
     }
 
-
-
     private void mettreAJourFiltre() {
         filtreProduits.clear();
 
@@ -233,7 +231,6 @@ public class GestionDesRayonsControleur implements Initializable {
 
             Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
 
-
             // permet de savoir quel rayon afficher
             controleur.setRayon(rayon);
 
@@ -248,9 +245,6 @@ public class GestionDesRayonsControleur implements Initializable {
 
             controleur.vue();
             controleur.remplirTableauDArticles();
-
-
-
 
         } catch (IOException ex) {
             Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
