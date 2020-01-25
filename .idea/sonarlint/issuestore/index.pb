@@ -81,3 +81,5 @@ R
 ,src/sample/GestionDesVendeursControleur.java,5\0\50f402e444d23ac30c3f217734306c92a8cecbeb
 U
 %.idea/libraries/controlsfx_11_0_1.xml,f\1\f172efbadafa866725785cc6ac2f006822e87687
+\
+,src/sample/BoiteDialogueRayonControleur.java,4\6\46dc93403b8da9dfc494449f186583a1165d5222
