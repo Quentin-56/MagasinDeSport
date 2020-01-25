@@ -42,4 +42,26 @@ class BoiteAOutilsTest {
         }
 
     }
+    @Test
+    public void le_formatage_dun_mdp_est_incorrect(){
+        String [] str ={"PASSWORD","PASS3","password2", "333333","password", "Password"};
+        for (int i= 0; i< str.length; i++){
+            assertEquals(BoiteAOutil.checkString(str[i]), false);
+        }
+    }
+    @Test
+    public void le_formatage_dun_mdp_est_correct(){
+        assertEquals(BoiteAOutil.checkString("PaSsWoRd75"), true);
+    }
+    @Test
+    public void la_chaine_comporte_un_caractere_special(){
+        String [] str ={"ovdtezGYF$","//debuzfg","@t"};
+        for (int i= 0; i< str.length; i++){
+            assertEquals(BoiteAOutil.checkCaractereSpeciaux(str[i]), true);
+        }
+    }
+    @Test
+    public void la_chaine_ne_comporte_pas_un_caractere_special(){
+        assertEquals(BoiteAOutil.checkCaractereSpeciaux("dvoeyfdoetyFTOEFYHDvyfd"), false);
+    }
 }
