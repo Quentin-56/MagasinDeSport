@@ -201,13 +201,14 @@ public class MonRayonControleur implements Initializable {
         else //Ajouter l'article
         {
             controleur.remplirFormulaire(null);
-            //controleur.setRayon(vendeur.getRayonV());
+            controleur.setRayon(rayon);
         }
         //Indique au controler si c'est a modifier ou a ajouter
         controleur.setEstAModifier(bool);
         controleur.setArticle(article);
         controleur.setDialogStage(dialogStage);
         controleur.setMonRayonControleur(this);
+
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
         dialogStage.showAndWait();

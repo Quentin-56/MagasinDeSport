@@ -22,13 +22,12 @@ public class RayonDAO {
 
     /**
      *Permet d'ajouter un article dans un rayon et est ajouté dans la BDD
-     * @param rayon rayon ou ajouter l'article
      * @param nom
      * @param quantite
      * @param details
      * @param rayonA
      */
-    public Article creerArticle(/*Rayon rayon,*/ String nom, int quantite, String details, Rayon rayonA, double prix)
+    public Article creerArticle(String nom, int quantite, String details, Rayon rayonA, double prix)
     {
         Article article = new Article(nom, quantite, details, rayonA, prix);
 

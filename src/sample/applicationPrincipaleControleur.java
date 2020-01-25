@@ -83,16 +83,6 @@ public class applicationPrincipaleControleur implements Initializable {
         try {
             if(!estSurMonRayon)
             {
-                /*Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Test Connection");
-                alert.setContentText("Connect to the database successfully!");
-                alert.showAndWait();*/
-
-                /*MonRayonControleur controleur = new MonRayonControleur();
-                controleur.setRayon(vendeur.getRayonV());
-                controleur.setEstUnVendeur(true);*/
-
-
                 //Vider l'ancienne vue
                 pnl_scroll.getChildren().clear();
 
@@ -102,7 +92,6 @@ public class applicationPrincipaleControleur implements Initializable {
                 pnl_scroll.getChildren().add(nodes[0]);
 
                 MonRayonControleur controleur = loader.getController();
-                //System.out.println(vendeur.getRayonV());
                 controleur.setRayon(vendeur.getRayonV());
                 controleur.settype(1);
                 controleur.vue();
