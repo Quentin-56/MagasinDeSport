@@ -153,4 +153,21 @@ public class MagasinDAOTest {
 
 
     }
+
+    @Test
+    public void trouver_un_rayon_avec_son_nom(){
+        MagasinDAO dao =  new MagasinDAO();
+        Rayon rayon = new Rayon();
+        String nomRayon = "Foot";
+        rayon.setNom(nomRayon);
+        when(entityManagerMock.getTransaction()).thenReturn(transaction);
+        when(entityManagerMock.createQuery("from Rayon rayon where rayon.nom = ?1")).thenReturn(queryMock);
+        when(queryMock.setParameter(1,nomRayon)).thenReturn(queryMock);
+        when(queryMock.getSingleResult()).thenReturn(rayon);
+        dao.setEntityManager(entityManagerMock);
+        assertEquals(dao.trouverRayonAvecNom(nomRayon), rayon);
+        verify(transaction).begin();
+        verify(transaction).commit();
+
+    }
 }

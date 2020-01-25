@@ -115,7 +115,8 @@ public class MagasinDAO {
         entityManager.getTransaction().begin();
 
         Query query = entityManager.createQuery("from Rayon rayon where rayon.nom = ?1");
-        Rayon rayon  = (Rayon) query.setParameter(1, nomRayon).getSingleResult();
+        query.setParameter(1, nomRayon);
+        Rayon rayon  = (Rayon) query.getSingleResult();
 
         entityManager.getTransaction().commit();
 
