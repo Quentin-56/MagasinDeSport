@@ -1,7 +1,7 @@
 
-]squid:S11265"AReplace this if-then-else statement by a single return statement.(¸ƒÊÆÿÿÿÿÿ
 Qsquid:S1118":Add a private constructor to hide the implicit public one.(‰·¡Å
-@squid:S1125")Remove the literal "false" boolean value.(ÍÉğ
-8squid:S1643["Use a StringBuilder instead.(¶ÊóÖûÿÿÿÿ
-Rsquid:S2130";Use "Float.parseFloat" for this string-to-float conversion.(ú³’‰
-]squid:S1126"AReplace this if-then-else statement by a single return statement.(½Ê²•üÿÿÿÿ
+dsquid:S1126"AReplace this if-then-else statement by a single return statement.(½Ê²•üÿÿÿÿ8ÿÅ¢›ı-
+dsquid:S11267"AReplace this if-then-else statement by a single return statement.(¸ƒÊÆÿÿÿÿÿ8ÿÅ¢›ı-
+?squid:S1643]"Use a StringBuilder instead.(¶ÊóÖûÿÿÿÿ8ÿÅ¢›ı-
+Gsquid:S1125")Remove the literal "false" boolean value.(ÍÉğ8ÿÅ¢›ı-
+Ysquid:S2130";Use "Float.parseFloat" for this string-to-float conversion.(ú³’‰8ÿÅ¢›ı-

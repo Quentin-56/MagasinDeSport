@@ -72,6 +72,7 @@ public class Rayon {
 		this.listeArticles = rayon.listeArticles;
 		this.listeReservationArticle = rayon.listeReservationArticle;
 		this.listeVendeurs = rayon.listeVendeurs;
+		this.magasin = rayon.magasin;
 	}
 
 

@@ -1,24 +1,23 @@
 package sample;
 
 import controlleur.ChefMagasinDAO;
-import controlleur.VendeurDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modele.ChefMagasin;
-import modele.Vendeur;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BoiteDialogueParametresControleur implements Initializable {
 
     private Stage dialogStage;
-    private applicationPrincipaleChefControleur applicationPrincipaleChefControleur1;
+    private ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur1;
     private ChefMagasin chefMagasin;
     private ChefMagasinDAO chefMagasinDAO;
+    private Label nomLabel;
     @FXML
     private TextField nomTextF;
     @FXML
@@ -26,7 +25,11 @@ public class BoiteDialogueParametresControleur implements Initializable {
     @FXML
     private TextField motDePasseTextF;
 
-    public void setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur applicationPrincipaleChefControleur1) {
+    public void setNomLabel(Label nomLabel) {
+        this.nomLabel = nomLabel;
+    }
+
+    public void setApplicationPrincipaleChefControleur(ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur1) {
         this.applicationPrincipaleChefControleur1 = applicationPrincipaleChefControleur1;
     }
 
@@ -50,7 +53,6 @@ public class BoiteDialogueParametresControleur implements Initializable {
 
     public void remplirFormulaire()
     {
-
         nomTextF.setText(chefMagasin.getNom());
         prenomTextF.setText(chefMagasin.getPrenom() + "");
         motDePasseTextF.setText(chefMagasin.getMotDePasse());
@@ -64,17 +66,13 @@ public class BoiteDialogueParametresControleur implements Initializable {
         chefMagasin.setMotDePasse(motDePasseTextF.getText());
 
         chefMagasinDAO.modifierChefMagasin(chefMagasin);
-
+        nomLabel.setText(chefMagasin.getPrenom()+" "+chefMagasin.getNom());
         //Fermer le formulaire
         dialogStage.close();
-
-
     }
 
     public void cliqueSurAnnuler(ActionEvent actionEvent) {
         //Fermer le formulaire
         dialogStage.close();
     }
-
-
 }

@@ -30,7 +30,7 @@ public class VendeurDAO {
      * @param motDePasse
      * @param rayon
      */
-    public void creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
+    public Vendeur creerVendeur(String nom, String prenom, String identifiant, String motDePasse, Rayon rayon)
     {
         Vendeur vendeur =  new Vendeur();
         vendeur.setNom(nom);
@@ -46,6 +46,8 @@ public class VendeurDAO {
         entityManager.getTransaction().commit();
 
         ajouterVendeurDansListeVendeur(vendeur,rayon);
+
+        return vendeur;
     }
 
     /**
@@ -101,33 +103,6 @@ public class VendeurDAO {
     }
 
     /**
-     * APPELE par barre de recherche, renvoie tableau des vendeurs correspond au prenom,nom, id
-     * @param expressionReguliere
-     * @return
-     */
-    /*public ArrayList<Vendeur> rechercherVendeur(String expressionReguliere)
-    {
-
-    }*/
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public Vendeur trouverVendeurAvecId(int id)
-    {
-
-        entityManager.getTransaction().begin();
-
-        Vendeur vendeur = entityManager.find(Vendeur.class, id);
-
-        entityManager.getTransaction().commit();
-
-        return vendeur;
-    }
-
-    /**
      *
      * @param identifiant
      * @return
@@ -137,7 +112,7 @@ public class VendeurDAO {
 
         entityManager.getTransaction().begin();
 
-        Query query = SetupEM.getEm().createQuery("from Vendeur vendeur where vendeur.identifiant = ?1");
+        Query query = entityManager.createQuery("from Vendeur vendeur where vendeur.identifiant = ?1");
         Vendeur vendeur  = (Vendeur) query.setParameter(1, identifiant).getSingleResult();
 
         entityManager.getTransaction().commit();
@@ -153,7 +128,7 @@ public class VendeurDAO {
     public List<Vendeur> recupererVendeurs()
     {
         entityManager.getTransaction().begin();
-        Query query = SetupEM.getEm().createQuery("from Vendeur vendeur");
+        Query query = entityManager.createQuery("from Vendeur vendeur");
         List<Vendeur> listV =  query.getResultList();
 
         entityManager.getTransaction().commit();

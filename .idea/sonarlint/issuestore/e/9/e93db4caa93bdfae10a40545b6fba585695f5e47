@@ -1,10 +1,16 @@
 
-gsquid:CommentedOutCodeLineS"<This block of commented-out lines of code should be removed.(Ö¥üÍûÿÿÿÿ
-asquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(­È?
-gsquid:CommentedOutCodeLineB"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ
-gsquid:CommentedOutCodeLine7"<This block of commented-out lines of code should be removed.(İ±­¥şÿÿÿÿ
-Jsquid:S1068".Remove this unused "vendeurDAO" private field.(›ÇËÿÿÿÿÿ
-gsquid:CommentedOutCodeLine!"<This block of commented-out lines of code should be removed.(¼íÚúÿÿÿÿ
-˜squid:S1186P"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(«¹¢€
-nsquid:CommentedOutCodeLineK"<This block of commented-out lines of code should be removed.(›¿¬ıÿÿÿÿ8‹í—çü-
-nsquid:CommentedOutCodeLine&"<This block of commented-out lines of code should be removed.(­¹¤Êıÿÿÿÿ8ÒÚ“çü-
+msquid:UselessImportCheck"=Remove this unused import 'com.jfoenix.controls.JFXComboBox'.(İÅéûÿÿÿÿ8û»¨›ı-
+Vsquid:UselessImportCheck"+Remove this unused import 'modele.Article'.(í€ƒ8û»¨›ı-
+hsquid:CommentedOutCodeLine""<This block of commented-out lines of code should be removed.(ƒİş@8û»¨›ı-
+Qsquid:S1172¯"2Remove this unused method parameter "actionEvent".(«¹¢€8û»¨›ı-
+gsquid:CommentedOutCodeLine."<This block of commented-out lines of code should be removed.(¼íÚúÿÿÿÿ
+vsquid:S2293J"YReplace the type specification in this constructor call with the diamond operator ("<>").(…“•8®ÏÂ›ı-
+Fsquid:S1125n"(Remove the literal "true" boolean value.(ş²ÍË8®ÏÂ›ı-
+Ksquid:S1125q"(Remove the literal "true" boolean value.(ğÚ¦üÿÿÿÿ8®ÏÂ›ı-
+Gsquid:S1125w")Remove the literal "false" boolean value.(´Î·8®ÏÂ›ı-
+Qsquid:S1172"2Remove this unused method parameter "actionEvent".(‚Ï¹•8®ÏÂ›ı-
+Lsquid:S1125˜"(Remove the literal "true" boolean value.(¼ÖÜ†üÿÿÿÿ8®ÏÂ›ı-
+isquid:CommentedOutCodeLineO"<This block of commented-out lines of code should be removed.(“ÿáä8®ÏÂ›ı-
+isquid:CommentedOutCodeLineQ"<This block of commented-out lines of code should be removed.(¶‰ò¯8®ÏÂ›ı-
+isquid:CommentedOutCodeLineb"<This block of commented-out lines of code should be removed.(‘ÇˆÖ8®ÏÂ›ı-
+osquid:CommentedOutCodeLine’"<This block of commented-out lines of code should be removed.(›¿¬ıÿÿÿÿ8®ÏÂ›ı-

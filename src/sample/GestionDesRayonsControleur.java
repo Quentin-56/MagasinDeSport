@@ -17,7 +17,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.*;
 import org.controlsfx.control.textfield.CustomTextField;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -49,6 +48,16 @@ public class GestionDesRayonsControleur implements Initializable {
     private Node[] nodes;
     private boolean estUnVendeur;
     private Vendeur vendeur;
+    private ApplicationPrincipaleControleur applicationPrincipaleControleur;
+    private ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur;
+
+    public void setApplicationPrincipaleChefControleur(ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur) {
+        this.applicationPrincipaleChefControleur = applicationPrincipaleChefControleur;
+    }
+
+    public void setApplicationPrincipaleControleur(ApplicationPrincipaleControleur applicationPrincipaleControleur) {
+        this.applicationPrincipaleControleur = applicationPrincipaleControleur;
+    }
 
     public void setVBox(VBox vBox)
     {
@@ -101,9 +110,7 @@ public class GestionDesRayonsControleur implements Initializable {
 
     public void remplirTableauDeRayons()
     {
-
         List<Rayon> rayons = magasinDAO.recupererRayon();
-
 
         if(estUnVendeur == true)
         {
@@ -117,8 +124,6 @@ public class GestionDesRayonsControleur implements Initializable {
 
         tableauRayons.setItems(filtreProduits);
     }
-
-
 
     private void mettreAJourFiltre() {
         filtreProduits.clear();
@@ -190,16 +195,14 @@ public class GestionDesRayonsControleur implements Initializable {
         dialogStage.showAndWait();
     }
 
-    public void cliqueSurSupprimer(ActionEvent actionEvent) {
-        MagasinDAO magasinDAO = new MagasinDAO();
-        magasinDAO.setEntityManager(SetupEM.getEm());
+    public void cliqueSurSupprimer() {
         Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
         magasinDAO.supprimerRayon(rayon.getIdRayon());
         //Actualiser le tableauView
         remplirTableauDeRayons();
     }
 
-    public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurModifier() throws IOException {
 
         if(tableauRayons.getSelectionModel().getSelectedItem() == null)
         {
@@ -214,13 +217,12 @@ public class GestionDesRayonsControleur implements Initializable {
         }
     }
 
-    public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+    public void cliqueSurAjouter() throws IOException {
         editerFormulaire("Ajouter rayon",false);
     }
 
-    public void cliqueSurVisiter(ActionEvent actionEvent) {
+    public void cliqueSurVisiter() {
         try {
-            //applicationPrincipaleChefControleur app = new applicationPrincipaleChefControleur();
             //Vider l'ancienne vue
             pnl_scroll.getChildren().clear();
 
@@ -233,36 +235,34 @@ public class GestionDesRayonsControleur implements Initializable {
 
             Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
 
-
             // permet de savoir quel rayon afficher
             controleur.setRayon(rayon);
+            controleur.setApplicationPrincipaleControleur(applicationPrincipaleControleur);
+            controleur.setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur);
 
-            if(estUnVendeur == false)
+            if(!estUnVendeur)
             {
-                controleur.settype(0);
+                controleur.setType(0);
             }
-            if(estUnVendeur == true)
+            if(estUnVendeur)
             {
-                controleur.settype(2);
+                controleur.setType(2);
             }
 
             controleur.vue();
             controleur.remplirTableauDArticles();
 
-
-
-
         } catch (IOException ex) {
-            Logger.getLogger(applicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public void cliqueSurSearch(ActionEvent actionEvent) {
+    public void cliqueSurSearch() {
         mettreAJourFiltre();
     }
 
-    public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
+    public void cliqueSurSupprimerFiltre() {
         viderBarreRecherche();
         remplirTableauDeRayons();
     }

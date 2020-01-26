@@ -9,9 +9,13 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<AnchorPane id="AnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="623.0" prefWidth="1183.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.applicationPrincipaleChefControleur">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="623.0" prefWidth="1183.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ApplicationPrincipaleChefControleur">
     <children>
         <Pane layoutX="-2.0" layoutY="40.0" prefHeight="145.0" prefWidth="1186.0" styleClass="head-background" stylesheets="@style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -25,7 +29,7 @@
                         <Font size="13.0" />
                     </font>
                 </Label>
-            <JFXButton fx:id="parametres" layoutX="869.0" layoutY="91.0" onAction="#cliqueSurParametres" text="parametres" />
+            <JFXButton fx:id="parametres" layoutX="1031.0" layoutY="91.0" onAction="#cliqueSurParametres" text="Mes paramètres" />
             </children>
         </Pane>
         <VBox layoutX="-1.0" layoutY="145.0" prefHeight="477.0" prefWidth="239.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">

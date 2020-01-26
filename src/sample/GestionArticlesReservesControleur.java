@@ -120,7 +120,6 @@ public class GestionArticlesReservesControleur implements Initializable {
             }
         }
 
-
         produits.clear();
         produits.addAll(articlesReserves);
 

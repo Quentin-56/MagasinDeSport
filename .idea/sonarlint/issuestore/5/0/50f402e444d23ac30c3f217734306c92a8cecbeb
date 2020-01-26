@@ -1,12 +1,12 @@
 
-Jsquid:S1172†"2Remove this unused method parameter "actionEvent".(ßà¿ô
-gsquid:CommentedOutCodeLine-"<This block of commented-out lines of code should be removed.(Å¶œûÿÿÿÿ
-Nsquid:S1172h"2Remove this unused method parameter "actionEvent".(²èğÇøÿÿÿÿ
-Ksquid:S1068."/Remove this unused "chefMagasin" private field.(ÔòÜÊıÿÿÿÿ
-bsquid:CommentedOutCodeLine9"<This block of commented-out lines of code should be removed.(Í¾Öš
-csquid:CommentedOutCodeLine—"<This block of commented-out lines of code should be removed.(¤óË“
-[squid:S1854–">Remove this useless assignment to local variable "controleur".(°Øğñÿÿÿÿÿ
-Isquid:S1172]"2Remove this unused method parameter "actionEvent".(‰¼»—
-isquid:CommentedOutCodeLine@"<This block of commented-out lines of code should be removed.(ÇŸ¶8¿«‰çü-
-Lsquid:S1481–"/Remove this unused "controleur" local variable.(°Øğñÿÿÿÿÿ
-nsquid:CommentedOutCodeLine|"<This block of commented-out lines of code should be removed.(âÃŸƒúÿÿÿÿ8§˜‡çü-
+Jsquid:S1172Ş"2Remove this unused method parameter "actionEvent".(ßà¿ô
+Jsquid:S1172À"2Remove this unused method parameter "actionEvent".(‰¼»—
+Ksquid:S10685"/Remove this unused "chefMagasin" private field.(ÔòÜÊıÿÿÿÿ
+Osquid:S1172Í"2Remove this unused method parameter "actionEvent".(²èğÇøÿÿÿÿ
+Vsquid:UselessImportCheck"+Remove this unused import 'modele.Article'.(í€ƒ8¯ÑÚæı-
+}squid:S14505"ZRemove the "chefMagasin" field and declare it as a local variable in the relevant methods.(ÔòÜÊıÿÿÿÿ8¯ÑÚæı-
+esquid:S1126"AReplace this if-then-else statement by a single return statement.(³„¥Áùÿÿÿÿ8¯ÑÚæı-
+Gsquid:S1125®"(Remove the literal "true" boolean value.(÷€²8¯ÑÚæı-
+gsquid:HiddenFieldCheckÂ">Rename "vendeurDAO" which hides the field declared at line 48.(Ó°Ô[8¯ÑÚæı-
+Qsquid:S1172ã"2Remove this unused method parameter "actionEvent".(æĞ•8¯ÑÚæı-
+Psquid:S1172ç"2Remove this unused method parameter "actionEvent".(Ò±ÔQ8¯ÑÚæı-

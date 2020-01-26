@@ -125,7 +125,7 @@ public class BoiteAOutil {
         }
 
     /**
-     *
+     * Verifier que le mot de passe comporte au moins 1 majuscule, 1 minuscule et 1 chiffre
      * @param input le mot de passe en entree
      * @return true si le mot de passe est correct, false sinon
      */
@@ -151,12 +151,12 @@ public class BoiteAOutil {
     }
 
     /**
-     *
+     * Savoir si la chaine comporte un carractere special
      * @param input la chaine de caractere en entree
      * @return true si la input contient un caractere special, false sinon
      */
     public static boolean checkCaractereSpeciaux(String input) {
-        String specialChars = "~`[]#$%^&** ()-__=+\\|[{]};:'\",<.>/?";
+        String specialChars = "~`[]#$%^&** ()-__=+\\|[{]};:'\",<.>/?@";
         char currentCharacter;
         boolean specialCharacterPresent = false;
 

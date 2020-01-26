@@ -1,6 +1,6 @@
 
-Fsquid:S1125J"(Remove the literal "true" boolean value.(®…ÿÛ8–é‘Ìü-
-Psquid:S1172E"2Remove this unused method parameter "actionEvent".(‚Ï¹•8–é‘Ìü-
-Ssquid:UselessImportCheck")Remove this unused import 'modele.Rayon'.(¶£8°Æ½Îü-
-squid:S11860"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ
-Psquid:S1172a"2Remove this unused method parameter "actionEvent".(«¹¢€8µ×ÖÌü-
+squid:S11868"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•‘İŸüÿÿÿÿ
+psquid:S3776D"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(½ñü†8ÕÓº•ı-
+Ksquid:S1125}"(Remove the literal "true" boolean value.(¼ÖÜ†üÿÿÿÿ8„”“•ı-
+Qsquid:S1172“"2Remove this unused method parameter "actionEvent".(«¹¢€8„”“•ı-
+Psquid:S1172x"2Remove this unused method parameter "actionEvent".(‚Ï¹•8„”“•ı-
