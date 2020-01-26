@@ -122,16 +122,15 @@ public class ApplicationPrincipaleControleur implements Initializable {
         pnl_scroll.getChildren().add(nodes[0]);
 
         GestionArticlesReservesControleur controleur = loader.getController();
-
         controleur.setEstUnVendeur(true);
         controleur.setVendeur(vendeur);
-        controleur.remplirTableauDArticlesReserves();
+        controleur.remplirTableauDArticlesReserves(vendeur);
+
 
         //Mettre à jour les booleens
         estSurArticlesReserves = true;
         estSurMonRayon = false;
         estSurAutresRayons = false;
-
 
         } catch (IOException ex) {
         Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
