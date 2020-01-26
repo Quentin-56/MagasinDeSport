@@ -78,11 +78,16 @@ public class GestionArticlesReservesControleur implements Initializable {
         chefMagasinDAO.setEntityManager(SetupEM.getEm());
         this.chefMagasin = chefMagasinDAO.recupererChefMagasin();
 
+
+
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantiteReservee.setCellValueFactory(new PropertyValueFactory("quantiteReserve"));
 
-        remplirTableauDArticlesReserves();
+
+        remplirTableauDArticlesReserves(vendeur);
+
+
 
         //Nettoyer les details
         afficherArticleDetails(null);
@@ -92,7 +97,7 @@ public class GestionArticlesReservesControleur implements Initializable {
     }
 
 
-    public void remplirTableauDArticlesReserves()
+    public void remplirTableauDArticlesReserves(Vendeur vendeur)
     {
         List<Article> articlesReserves = new ArrayList<Article>();
 
@@ -113,6 +118,13 @@ public class GestionArticlesReservesControleur implements Initializable {
         {
             for(int i = 0; i < articlesReserves.size(); ++i)
             {
+                System.out.println("vendeur " + vendeur);
+                System.out.println("rayon vendeur " + vendeur.getRayonV());
+                System.out.println("liste articles reserves " + articlesReserves);
+                System.out.println("article reserve " + articlesReserves.get(i) + "a l'indice " + i);
+                System.out.println("rayon " + articlesReserves.get(i).getRayonA() + "de l article reserve " + articlesReserves.get(i) + "a l'indice " + i);
+
+
                 if(articlesReserves.get(i).getRayonA().getNom().compareTo(vendeur.getRayonV().getNom()) != 0)
                 {
                     articlesReserves.remove(articlesReserves.get(i));
@@ -180,6 +192,10 @@ public class GestionArticlesReservesControleur implements Initializable {
 
 
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+        if(estUnVendeur == true)
+        {
+            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        }
 
         Article article = tableauArticlesReserves.getSelectionModel().getSelectedItem();
 
@@ -196,7 +212,7 @@ public class GestionArticlesReservesControleur implements Initializable {
                 alert.setContentText("augmentation du stock reserve de 1");
                 alert.showAndWait();
 
-                remplirTableauDArticlesReserves();
+                remplirTableauDArticlesReserves(vendeur);
             }
             else
             {
@@ -210,6 +226,10 @@ public class GestionArticlesReservesControleur implements Initializable {
     }
 
     public void cliqueSurRetirer(ActionEvent actionEvent) throws IOException {
+        if(estUnVendeur == true)
+        {
+            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
+        }
         Article article = tableauArticlesReserves.getSelectionModel().getSelectedItem();
 
         if(article != null)
@@ -220,7 +240,7 @@ public class GestionArticlesReservesControleur implements Initializable {
             article.setQuantite(article.getQuantite() + 1);
             article.setQuantiteReserve(article.getQuantiteReserve() - 1);
 
-            remplirTableauDArticlesReserves();
+            remplirTableauDArticlesReserves(vendeur);
             //}
 
         /*else

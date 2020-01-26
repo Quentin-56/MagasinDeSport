@@ -151,6 +151,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
 
                         if (estAModifier == true) {
                                 Vendeur vendeurModifie = new Vendeur(vendeur.getNom(), vendeur.getPrenom(), vendeur.getIdentifiant(), vendeur.getMotDePasse(), vendeur.getRayonV());
+                                //vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(), vendeur.getRayonV());
                                 //A FAIRE DANS UNE FONCTION
                                 vendeurModifie.setNom(nomTextF.getText());
                                 vendeurModifie.setPrenom(prenomTextF.getText());
@@ -159,6 +160,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                                 vendeurModifie.setRayonV(magasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
 
                                 vendeurDAO.modifierVendeur(vendeurModifie);
+
                                 //Fermer le formulaire
                                 dialogStage.close();
                         } else {
@@ -166,9 +168,16 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                                 //Fermer le formulaire
                                 dialogStage.close();
                         }
+
+
                         //Actualiser le tableView dans tout les cas
                         gestionDesVendeursControleur.remplirTableauDeVendeurs();
                         gestionDesVendeursControleur.viderBarreRecherche();
+
+
+                        MagasinDAO magasinDAO = new MagasinDAO();
+                        magasinDAO.setEntityManager(SetupEM.getEm());
+
                 }
         }
 
