@@ -163,19 +163,10 @@ public class GestionDesRayonsControleur implements Initializable {
     public void editerFormulaire(String titre, boolean bool) throws IOException {
         Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
 
-        //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueRayon.fxml"));
-        Parent parent = loader.load();
+        Object[] res = new BoiteAOutil().creerBoiteDialogue (titre, 4);
 
-        // Creer le stage pour la boite de dialogue
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle(titre);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(Main.getPrimaryStage());
-        Scene scene = new Scene(parent);
-        dialogStage.setScene(scene);
         //Recuperer le controleur lier à la vue
-        BoiteDialogueRayonControleur controleur = loader.getController();
+        BoiteDialogueRayonControleur controleur = ((FXMLLoader)res[0]).getController();
         //Modifier le rayon
         if(bool == true)
         {
@@ -188,11 +179,11 @@ public class GestionDesRayonsControleur implements Initializable {
         //Indique au controler si c'est a modifier ou a ajouter
         controleur.setEstAModifier(bool);
         controleur.setRayon(rayon);
-        controleur.setDialogStage(dialogStage);
+        controleur.setDialogStage((Stage)res[1]);
         controleur.setGestionDesRayonsControleur(this);
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-        dialogStage.showAndWait();
+        ((Stage)res[1]).showAndWait();
     }
 
     public void cliqueSurSupprimer() {

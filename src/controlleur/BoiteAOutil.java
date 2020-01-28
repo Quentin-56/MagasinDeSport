@@ -1,5 +1,14 @@
 package controlleur;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import sample.Main;
+
+import java.io.IOException;
+
 public class BoiteAOutil {
 
 
@@ -170,5 +179,53 @@ public class BoiteAOutil {
         return specialCharacterPresent;
     }
 
+    /**
+     *
+     * @param titre le titre de la boite de dialogue
+     * @param nombre permet de differencie les cas
+     */
+    public Object[] creerBoiteDialogue (String titre, int nombre) throws IOException {
+        //Charger le fichir fmxl
+        FXMLLoader loader = new FXMLLoader();
+        if(nombre == 0)
+        {
+            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueParametres.fxml"));
+        }
+        if(nombre == 1)
+        {
+            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueArticle.fxml"));
+        }
+        if(nombre == 2)
+        {
+            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueReservationArticle.fxml"));
+        }
+        if(nombre == 3)
+        {
+            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueTransfererArticle.fxml"));
+        }
+        if(nombre == 4)
+        {
+            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueRayon.fxml"));
+        }
+        if(nombre == 5)
+        {
+            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueVendeur.fxml"));
+        }
+        Parent parent = loader.load();
+
+        // Creer le stage pour la boite de dialogue
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle(titre);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(Main.getPrimaryStage());
+        Scene scene = new Scene(parent);
+        dialogStage.setScene(scene);
+
+        Object [] res = new Object[2];
+        res[0] = loader;
+        res[1] = dialogStage;
+
+        return  res;
+    }
 
 }

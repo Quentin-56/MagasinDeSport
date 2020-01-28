@@ -1,5 +1,6 @@
 package sample;
 
+import controlleur.BoiteAOutil;
 import controlleur.ChefMagasinDAO;
 import controlleur.SetupEM;
 import controlleur.VendeurDAO;
@@ -157,19 +158,10 @@ public class GestionDesVendeursControleur implements Initializable {
         public void editerFormulaire(String titre, boolean bool) throws IOException {
             Vendeur vendeur = tableauVendeurs.getSelectionModel().getSelectedItem();
 
-            //Charger le fichir fmxl
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueVendeur.fxml"));
-            Parent parent = loader.load();
+            Object[] res = new BoiteAOutil().creerBoiteDialogue (titre, 5);
 
-            // Creer le stage pour la boite de dialogue
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle(titre);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(Main.getPrimaryStage());
-            Scene scene = new Scene(parent);
-            dialogStage.setScene(scene);
             //Recuperer le controleur lier à la vue
-            BoiteDialogueVendeurControleur controleur = loader.getController();
+            BoiteDialogueVendeurControleur controleur = ((FXMLLoader)res[0]).getController();
             //Modifier le vendeur
             if(bool == true)
             {
@@ -182,11 +174,11 @@ public class GestionDesVendeursControleur implements Initializable {
             //Indique au controler si c'est a modifier ou a ajouter
             controleur.setEstAModifier(bool);
             controleur.setVendeur(vendeur);
-            controleur.setDialogStage(dialogStage);
+            controleur.setDialogStage((Stage)res[1]);
             controleur.setGestionDesVendeursControleur(this);
 
             // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-            dialogStage.showAndWait();
+            ((Stage)res[1]).showAndWait();
         }
 
         public void cliqueSurSupprimer(ActionEvent actionEvent) {
