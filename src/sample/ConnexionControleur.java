@@ -40,25 +40,9 @@ public class ConnexionControleur implements Initializable
 
     private static String identifiant;
 
-    private static final String COMPLEX_PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$";
-
-    private static final Pattern PASSWORD_PATTERN = Pattern.compile(COMPLEX_PASSWORD_REGEX);
-
     public ConnexionControleur(){
         connexion = new ConnexionDAO();
         connexion.setEntityManager(SetupEM.getEm());
-    }
-    
-    public boolean passwordIsValid(String password)
-    {
-        if (PASSWORD_PATTERN.matcher(password).matches())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public void clickOnLogIn(ActionEvent actionEvent) throws IOException {
