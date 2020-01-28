@@ -51,31 +51,7 @@ public class ApplicationPrincipaleControleur implements Initializable {
         try {
             if(!estSurAutresRayons)
             {
-                System.out.println("salut toi");
-                //Vider l'ancienne vue
-                pnl_scroll.getChildren().clear();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionDesRayons.fxml"));
-                Parent parent = loader.load();
-                nodes[0] = (Node) parent;
-                pnl_scroll.getChildren().add(nodes[0]);
-
-                GestionDesRayonsControleur controleur = loader.getController();
-                controleur.setVendeur(vendeur);
-
-                controleur.setVBox(pnl_scroll);
-                controleur.setNodes(nodes);
-                controleur.setEstUnVendeur(true);
-                controleur.remplirTableauDeRayons();
-                controleur.setApplicationPrincipaleControleur(this);
-
-                controleur.vue();
-
-                //Mettre à jour les booleens
-                estSurAutresRayons = true;
-                estSurMonRayon = false;
-                estSurArticlesReserves = false;
-
+                chargerPage(0);
             }
         } catch (IOException ex) {
             Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,24 +62,7 @@ public class ApplicationPrincipaleControleur implements Initializable {
         try {
             if(!estSurMonRayon)
             {
-                //Vider l'ancienne vue
-                pnl_scroll.getChildren().clear();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("monRayon.fxml"));
-                Parent parent = loader.load();
-                nodes[0] = (Node) parent;
-                pnl_scroll.getChildren().add(nodes[0]);
-
-                MonRayonControleur controleur = loader.getController();
-                controleur.setRayon(vendeur.getRayonV());
-                controleur.setType(1);
-                controleur.vue();
-                controleur.remplirTableauDArticles();
-
-                //Mettre à jour les booleens
-                estSurMonRayon = true;
-                estSurAutresRayons = false;
-                estSurArticlesReserves = false;
+                chargerPage(1);
             }
         } catch (IOException ex) {
             Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -112,27 +71,11 @@ public class ApplicationPrincipaleControleur implements Initializable {
 
     public void cliqueSurArticlesReserves() {
     try{
-
-        //Vider l'ancienne vue
-        pnl_scroll.getChildren().clear();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
-        Parent parent = loader.load();
-        nodes[0] = (Node) parent;
-        pnl_scroll.getChildren().add(nodes[0]);
-
-        GestionArticlesReservesControleur controleur = loader.getController();
-        controleur.setEstUnVendeur(true);
-        controleur.setVendeur(vendeur);
-        controleur.remplirTableauDArticlesReserves(vendeur);
-
-
-        //Mettre à jour les booleens
-        estSurArticlesReserves = true;
-        estSurMonRayon = false;
-        estSurAutresRayons = false;
-
-        } catch (IOException ex) {
+        if(!estSurArticlesReserves)
+        {
+            chargerPage(2);
+        }
+    } catch (IOException ex) {
         Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -143,5 +86,78 @@ public class ApplicationPrincipaleControleur implements Initializable {
         Parent root = FXMLLoader.load(getClass().getResource("connexion.fxml"));
 
         Main.getPrimaryStage().setScene(new Scene(root));
+    }
+
+
+    /**
+     *
+     * @param nombre differencie les cas
+     */
+    public void chargerPage(int nombre) throws IOException {
+        //vider l'ancienne vue
+        pnl_scroll.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader();
+        if(nombre == 0)
+        {
+            loader = new FXMLLoader(getClass().getResource("gestionDesRayons.fxml"));
+        }
+        else if(nombre == 1)
+        {
+            loader = new FXMLLoader(getClass().getResource("monRayon.fxml"));
+        }
+        else if(nombre == 2)
+        {
+            loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
+        }
+
+        Parent parent = loader.load();
+        nodes[0] = (Node) parent;
+        pnl_scroll.getChildren().add(nodes[0]);
+
+        if(nombre == 0)
+        {
+            GestionDesRayonsControleur controleur = loader.getController();
+            controleur.setVendeur(vendeur);
+
+            controleur.setVBox(pnl_scroll);
+            controleur.setNodes(nodes);
+            controleur.setEstUnVendeur(true);
+            controleur.remplirTableauDeRayons();
+            controleur.setApplicationPrincipaleControleur(this);
+
+            controleur.vue();
+
+            //Mettre à jour les booleens
+            estSurAutresRayons = true;
+            estSurMonRayon = false;
+            estSurArticlesReserves = false;
+        }
+        else if(nombre == 1)
+        {
+            MonRayonControleur controleur = loader.getController();
+            controleur.setRayon(vendeur.getRayonV());
+            controleur.setType(1);
+            controleur.vue();
+            controleur.remplirTableauDArticles();
+
+            //Mettre à jour les booleens
+            estSurMonRayon = true;
+            estSurAutresRayons = false;
+            estSurArticlesReserves = false;
+        }
+        else if(nombre == 2)
+        {
+            GestionArticlesReservesControleur controleur = loader.getController();
+            controleur.setEstUnVendeur(true);
+            controleur.setVendeur(vendeur);
+            controleur.remplirTableauDArticlesReserves(vendeur);
+
+
+            //Mettre à jour les booleens
+            estSurArticlesReserves = true;
+            estSurMonRayon = false;
+            estSurAutresRayons = false;
+        }
+
     }
 }

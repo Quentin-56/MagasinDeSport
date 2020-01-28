@@ -1,5 +1,6 @@
 package sample;
 
+import controlleur.BoiteAOutil;
 import controlleur.ChefMagasinDAO;
 import controlleur.SetupEM;
 import javafx.event.ActionEvent;
@@ -50,20 +51,7 @@ public class ApplicationPrincipaleChefControleur implements Initializable {
         try {
             if(!estSurGestionDesVendeurs)
             {
-                //Vider l'ancienne vue
-                pnl_scroll.getChildren().clear();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionDesVendeurs.fxml"));
-                Parent parent = loader.load();
-                nodes[0] = (Node) parent;
-                pnl_scroll.getChildren().add(nodes[0]);
-
-                GestionDesVendeursControleur controleur = loader.getController();
-
-                //Mettre à jour les booleens
-                estSurGestionDesVendeurs = true;
-                estSurGestionDesRayons = false;
-                estSurGestionDesArticlesReserves = false;
+                chargerPage(0);
             }
         } catch (IOException ex) {
             Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -71,54 +59,25 @@ public class ApplicationPrincipaleChefControleur implements Initializable {
     }
 
     public void cliqueSurParametres() throws IOException {
-        // LE TOUT A FAIRE DANS UNE FONCTION A PART
-        //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogueParametres.fxml"));
-        Parent parent = loader.load();
 
-        // Creer le stage pour la boite de dialogue
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle("Modifier Parametres");
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(Main.getPrimaryStage());
-        Scene scene = new Scene(parent);
-        dialogStage.setScene(scene);
+        Object[] res = new BoiteAOutil().creerBoiteDialogue ("Modifier Parametres", 0);
 
         //Recuperer le controleur lier à la vue
-        BoiteDialogueParametresControleur controleur = loader.getController();
+        BoiteDialogueParametresControleur controleur = ((FXMLLoader)res[0]).getController();
         controleur.setChefMagasin(chefMagasin);
         controleur.remplirFormulaire();
-        controleur.setDialogStage(dialogStage);
+        controleur.setDialogStage((Stage)res[1]);
         controleur.setApplicationPrincipaleChefControleur(this);
         controleur.setNomLabel(nomLabel);
 
         // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-        dialogStage.showAndWait();
+        ((Stage)res[1]).showAndWait();
     }
 
     public void cliqueSurGestionDesRayons() throws IOException {
         try {
             if (!estSurGestionDesRayons) {
-
-                //Vider l'ancienne vue
-                pnl_scroll.getChildren().clear();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionDesRayons.fxml"));
-                Parent parent = loader.load();
-                nodes[0] = (Node) parent;
-                pnl_scroll.getChildren().add(nodes[0]);
-
-                GestionDesRayonsControleur controleur = loader.getController();
-
-                controleur.setVBox(pnl_scroll);
-                controleur.setNodes(nodes);
-                controleur.setEstUnVendeur(false);
-                controleur.setApplicationPrincipaleChefControleur(this);
-
-                //Mettre à jour les booleens
-                estSurGestionDesRayons = true;
-                estSurGestionDesVendeurs = false;
-                estSurGestionDesArticlesReserves = false;
+                chargerPage(1);
             }
         } catch (IOException ex) {
             Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -129,22 +88,7 @@ public class ApplicationPrincipaleChefControleur implements Initializable {
     public void cliqueSurGestionArticlesReserves() throws IOException {
         try {
             if (!estSurGestionDesArticlesReserves) {
-
-                //Vider l'ancienne vue
-                pnl_scroll.getChildren().clear();
-
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
-                Parent parent = loader.load();
-                nodes[0] = (Node) parent;
-                pnl_scroll.getChildren().add(nodes[0]);
-
-                GestionArticlesReservesControleur controleur = loader.getController();
-                controleur.setEstUnVendeur(false);
-
-                //Mettre à jour les booleens
-                estSurGestionDesArticlesReserves = true;
-                estSurGestionDesRayons = false;
-                estSurGestionDesVendeurs = false;
+                chargerPage(2);
             }
         } catch (IOException ex) {
             Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,4 +101,63 @@ public class ApplicationPrincipaleChefControleur implements Initializable {
 
         Main.getPrimaryStage().setScene(new Scene(root));
     }
+
+    /**
+     *
+     * @param nombre differencie les cas
+     */
+    public void chargerPage(int nombre) throws IOException {
+        //vider l'ancienne vue
+        pnl_scroll.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader();
+        if(nombre == 0)
+        {
+            loader = new FXMLLoader(getClass().getResource("gestionDesVendeurs.fxml"));
+        }
+        else if(nombre == 1)
+        {
+            loader = new FXMLLoader(getClass().getResource("gestionDesRayons.fxml"));
+        }
+        else if(nombre == 2)
+        {
+            loader = new FXMLLoader(getClass().getResource("gestionArticlesReserves.fxml"));
+        }
+
+        Parent parent = loader.load();
+        nodes[0] = (Node) parent;
+        pnl_scroll.getChildren().add(nodes[0]);
+
+        if(nombre == 0)
+        {
+            GestionDesVendeursControleur controleur = loader.getController();
+
+            estSurGestionDesVendeurs = true;
+            estSurGestionDesRayons = false;
+            estSurGestionDesArticlesReserves = false;
+        }
+        else if(nombre == 1)
+        {
+            GestionDesRayonsControleur controleur = loader.getController();
+
+            controleur.setVBox(pnl_scroll);
+            controleur.setNodes(nodes);
+            controleur.setEstUnVendeur(false);
+            controleur.setApplicationPrincipaleChefControleur(this);
+
+            estSurGestionDesRayons = true;
+            estSurGestionDesVendeurs = false;
+            estSurGestionDesArticlesReserves = false;
+        }
+        else if(nombre == 2)
+        {
+            GestionArticlesReservesControleur controleur = loader.getController();
+            controleur.setEstUnVendeur(false);
+
+            estSurGestionDesArticlesReserves = true;
+            estSurGestionDesRayons = false;
+            estSurGestionDesVendeurs = false;
+        }
+
+    }
+
 }

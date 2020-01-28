@@ -155,42 +155,6 @@ public class GestionArticlesReservesControleur implements Initializable {
     }
 
 
-    /*public void editerFormulaire(String titre, boolean bool) throws IOException {
-        Article article = tableau.getSelectionModel().getSelectedItem();
-
-        //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("boiteDialogue.fxml"));
-        Parent parent = loader.load();
-
-        // Creer le stage pour la boite de dialogue
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle(titre);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(Main.getPrimaryStage());
-        Scene scene = new Scene(parent);
-        dialogStage.setScene(scene);
-        //Recuperer le controleur lier à la vue
-        BoiteDialogueControleur controleur = loader.getController();
-        //Modifier l'article
-        if(bool == true)
-        {
-            controleur.remplirFormulaire(article);
-        }
-        else
-        {
-            controleur.remplirFormulaire(null);
-        }
-        //Indique au controler si c'est a modifier ou a ajouter
-        controleur.setEstAModifier(bool);
-        controleur.setArticle(article);
-        controleur.setDialogStage(dialogStage);
-        controleur.setMonRayonControleur(this);
-
-        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
-        dialogStage.showAndWait();
-    }*/
-
-
     public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
         if(estUnVendeur == true)
         {

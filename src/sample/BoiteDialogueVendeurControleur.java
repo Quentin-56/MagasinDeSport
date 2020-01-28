@@ -31,7 +31,6 @@ public class BoiteDialogueVendeurControleur implements Initializable{
         private boolean estAModifier;
         private Vendeur vendeur;
 
-        //private VendeurDAO vendeurDAO;
         @FXML
         private TextField prenomTextF;
         @FXML
@@ -43,8 +42,6 @@ public class BoiteDialogueVendeurControleur implements Initializable{
         @FXML
         private TextField motDePasseTextF;
 
-        //private ComboBox<String> nomRayonCombo;
-        //private ObservableList<String> produits = FXCollections.observableArrayList();
         private MagasinDAO magasinDAO;
 
         public void setGestionDesVendeursControleur(GestionDesVendeursControleur gestionDesVendeursControleur) {
@@ -76,13 +73,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                 {
                         nomRayons.add(rayons.get(i).getNom());
                 }
-                //produits.addAll(nomRayons);
-                //nomRayonCombo = new ComboBox<String>(FXCollections
-                 //       .observableArrayList(nomRayons));
-                //nomRayonCombo.show();
-                //nomRayonCombo.setVisible(true);*/
                 nomRayonCombo.getItems().setAll(nomRayons);
-
         }
 
         /**
