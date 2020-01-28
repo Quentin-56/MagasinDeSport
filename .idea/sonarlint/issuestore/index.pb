@@ -83,3 +83,9 @@ P
  src/sample/gestionDesRayons.fxml,2\e\2e959b3152e20eeccf47a1a63928e8991e99c076
 Z
 *src/sample/GestionDesRayonsControleur.java,4\c\4cfbd6b54a43bec7bfd8fba734db9a320eee4858
+a
+1src/sample/GestionArticlesReservesControleur.java,c\7\c70087a25ed210541fab982c808b98659c674795
+_
+/src/sample/ApplicationPrincipaleControleur.java,1\2\127438ccfbe6b382d1d262849589cc371e7a418a
+c
+3src/sample/ApplicationPrincipaleChefControleur.java,9\f\9fcf793960e2e064d055b4825ed84fecfb89f0aa

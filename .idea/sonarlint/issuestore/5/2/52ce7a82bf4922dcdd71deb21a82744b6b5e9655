@@ -1,7 +1,5 @@
 
-csquid:UselessImportCheck"3Remove this unused import 'controlleur.VendeurDAO'.(õÄ¯Ÿûÿÿÿÿ8¿ş‡øü-
-[squid:UselessImportCheck"+Remove this unused import 'modele.Vendeur'.(ï†®øüÿÿÿÿ8¿ş‡øü-
-–squid:S1450"sRemove the "applicationPrincipaleChefControleur1" field and declare it as a local variable in the relevant methods.(ÃÂ±ûÿÿÿÿ8¿ş‡øü-
-Psquid:S1172<"2Remove this unused method parameter "actionEvent".(‚Ï¹•8¿ş‡øü-
+Psquid:S1172>"2Remove this unused method parameter "actionEvent".(‚Ï¹•8¿ş‡øü-
+‘squid:S1450"sRemove the "applicationPrincipaleChefControleur1" field and declare it as a local variable in the relevant methods.(É®ğĞ8Ùæ­íı-
 Psquid:S1172J"2Remove this unused method parameter "actionEvent".(«¹¢€8¿ş‡øü-
-ksquid:S1068"HRemove this unused "applicationPrincipaleChefControleur1" private field.(ÃÂ±ûÿÿÿÿ8¿ş‡øü-
+fsquid:S1068"HRemove this unused "applicationPrincipaleChefControleur1" private field.(É®ğĞ8Ùæ­íı-

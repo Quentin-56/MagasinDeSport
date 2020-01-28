@@ -54,7 +54,7 @@ public class GestionArticlesReservesControleur implements Initializable {
 
     public void setVendeur(Vendeur vendeur)
     {
-        vendeur = vendeur;
+        this.vendeur = vendeur;
     }
 
     public GestionArticlesReservesControleur()
