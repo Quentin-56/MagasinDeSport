@@ -10,3 +10,13 @@ Le responsable de magasin posséde des droits super utilisateur lui permettant d
 <strong>Interface :</strong> JAVAFX <br />
 <strong>Base de données :</strong> mySQL <br />
 </em></p>
+
+<h2>Informations pour lancer le projet sous intelliJ</h2>
+<p><em>
+Les étapes à réaliser pour que cela fonctionne, à faire la premiere fois :<br/>
+<ul>
+<li>Veuillez créer une BDD se nommant "magasin"</li>  
+<li>Insérer le fichier .sql dans la base de données </li>
+<li>Sur IntelliJ, s'assurer d'être sous java 11</li>
+<li>Ajouter le pilote au projet (mysql-connector-java-8.0.18.jar), les librairies Hibernate, controlsfx-11.0.1 et jfoenix-9.0.8</li>
+</em></p>
