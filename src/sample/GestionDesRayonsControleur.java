@@ -187,10 +187,21 @@ public class GestionDesRayonsControleur implements Initializable {
     }
 
     public void cliqueSurSupprimer() {
-        Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
-        magasinDAO.supprimerRayon(rayon.getIdRayon());
-        //Actualiser le tableauView
-        remplirTableauDeRayons();
+        if(tableauRayons.getSelectionModel().getSelectedItem() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur supprimer rayon");
+            alert.setContentText("Veuillez selectionner un rayon dans la liste");
+            alert.showAndWait();
+        }
+        else
+        {
+            Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
+            magasinDAO.supprimerRayon(rayon.getIdRayon());
+            //Actualiser le tableauView
+            remplirTableauDeRayons();
+        }
+
     }
 
     public void cliqueSurModifier() throws IOException {

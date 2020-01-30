@@ -182,15 +182,25 @@ public class GestionDesVendeursControleur implements Initializable {
         }
 
         public void cliqueSurSupprimer(ActionEvent actionEvent) {
-
-            VendeurDAO vendeurDAO = new VendeurDAO();
-            vendeurDAO.setEntityManager(SetupEM.getEm());
-            Vendeur vendeur =  tableauVendeurs.getSelectionModel().getSelectedItem();
-            //Si un vendeur est selectionne
-            if(vendeur != null) {
-                vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(),vendeur.getRayonV());
+            if(tableauVendeurs.getSelectionModel().getSelectedItem() == null)
+            {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur supprimer vendeur");
+                alert.setContentText("Veuillez selectionner un vendeur dans la liste");
+                alert.showAndWait();
             }
-            remplirTableauDeVendeurs();
+            else
+            {
+                VendeurDAO vendeurDAO = new VendeurDAO();
+                vendeurDAO.setEntityManager(SetupEM.getEm());
+                Vendeur vendeur =  tableauVendeurs.getSelectionModel().getSelectedItem();
+                //Si un vendeur est selectionne
+                if(vendeur != null) {
+                    vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(),vendeur.getRayonV());
+                }
+                remplirTableauDeVendeurs();
+            }
+
 
         }
 
