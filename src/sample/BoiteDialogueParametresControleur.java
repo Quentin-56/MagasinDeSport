@@ -1,9 +1,11 @@
 package sample;
 
+import controlleur.BoiteAOutil;
 import controlleur.ChefMagasinDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -58,17 +60,43 @@ public class BoiteDialogueParametresControleur implements Initializable {
         motDePasseTextF.setText(chefMagasin.getMotDePasse());
     }
 
+    private boolean lesChampsSontValides() {
+        String messageErreur = "";
+
+
+        if (motDePasseTextF.getText() == null || motDePasseTextF.getText().length() < 8 || BoiteAOutil.checkString(motDePasseTextF.getText()) == false) {
+            messageErreur += "Mot de passe non valide!\n";
+        }
+
+        if (messageErreur.length() == 0) {
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("Champs invalides");
+            alert.setHeaderText("Veuillez corriger les champs incorrects");
+            alert.setContentText(messageErreur);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }
+
 
     public void cliqueSurValider(ActionEvent actionEvent) {
+        if(lesChampsSontValides()) {
+            chefMagasin.setNom(nomTextF.getText());
+            chefMagasin.setPrenom(prenomTextF.getText());
+            chefMagasin.setMotDePasse(motDePasseTextF.getText());
 
-        chefMagasin.setNom(nomTextF.getText());
-        chefMagasin.setPrenom(prenomTextF.getText());
-        chefMagasin.setMotDePasse(motDePasseTextF.getText());
+            chefMagasinDAO.modifierChefMagasin(chefMagasin);
+            nomLabel.setText(chefMagasin.getPrenom()+" "+chefMagasin.getNom());
+            //Fermer le formulaire
+            dialogStage.close();
+        }
 
-        chefMagasinDAO.modifierChefMagasin(chefMagasin);
-        nomLabel.setText(chefMagasin.getPrenom()+" "+chefMagasin.getNom());
-        //Fermer le formulaire
-        dialogStage.close();
     }
 
     public void cliqueSurAnnuler(ActionEvent actionEvent) {
