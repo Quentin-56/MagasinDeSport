@@ -214,34 +214,45 @@ public class GestionDesRayonsControleur implements Initializable {
 
     public void cliqueSurVisiter() {
         try {
-            //Vider l'ancienne vue
-            pnl_scroll.getChildren().clear();
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("monRayon.fxml"));
-            Parent parent = loader.load();
-            nodes[0] = (Node) parent;
-            pnl_scroll.getChildren().add(nodes[0]);
-
-            MonRayonControleur controleur = loader.getController();
-
-            Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
-
-            // permet de savoir quel rayon afficher
-            controleur.setRayon(rayon);
-            controleur.setApplicationPrincipaleControleur(applicationPrincipaleControleur);
-            controleur.setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur);
-
-            if(!estUnVendeur)
+            if(tableauRayons.getSelectionModel().getSelectedItem() == null)
             {
-                controleur.setType(0);
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Erreur visiter rayon");
+                alert.setContentText("Veuillez selectionner un rayon dans la liste");
+                alert.showAndWait();
             }
-            if(estUnVendeur)
+            else
             {
-                controleur.setType(2);
+                //Vider l'ancienne vue
+                pnl_scroll.getChildren().clear();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("monRayon.fxml"));
+                Parent parent = loader.load();
+                nodes[0] = (Node) parent;
+                pnl_scroll.getChildren().add(nodes[0]);
+
+                MonRayonControleur controleur = loader.getController();
+
+                Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();
+
+                // permet de savoir quel rayon afficher
+                controleur.setRayon(rayon);
+                controleur.setApplicationPrincipaleControleur(applicationPrincipaleControleur);
+                controleur.setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur);
+
+                if(!estUnVendeur)
+                {
+                    controleur.setType(0);
+                }
+                if(estUnVendeur)
+                {
+                    controleur.setType(2);
+                }
+
+                controleur.vue();
+                controleur.remplirTableauDArticles();
             }
 
-            controleur.vue();
-            controleur.remplirTableauDArticles();
 
         } catch (IOException ex) {
             Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);
