@@ -42,6 +42,7 @@ public class Vendeur extends Personne{
 		this.rayonV = vendeur.rayonV;
 		/*this.nom = rayon.nom;
 		this.listeArticles = rayon.listeArticles;
+		this.listeArticles = rayon.listeArticles;
 		this.listeReservationArticle = rayon.listeReservationArticle;
 		this.listeVendeurs = rayon.listeVendeurs;
 		this.magasin = rayon.magasin;*/
