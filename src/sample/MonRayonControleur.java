@@ -193,10 +193,21 @@ public class MonRayonControleur implements Initializable {
     }
 
     public void cliqueSurSupprimer() {
-        Article article = tableau.getSelectionModel().getSelectedItem();
-        rayonDAO.supprimerArticle(article);
-        //Actualiser le tableauView
-        remplirTableauDArticles();
+        if(tableau.getSelectionModel().getSelectedItem() == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur supprimer article");
+            alert.setContentText("Veuillez selectionner un article dans la liste");
+            alert.showAndWait();
+        }
+        else
+        {
+            Article article = tableau.getSelectionModel().getSelectedItem();
+            rayonDAO.supprimerArticle(article);
+            //Actualiser le tableauView
+            remplirTableauDArticles();
+        }
+
     }
 
     public void cliqueSurModifier() throws IOException {
