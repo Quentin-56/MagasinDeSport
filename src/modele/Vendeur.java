@@ -33,6 +33,20 @@ public class Vendeur extends Personne{
 		this.rayonV =null;
 	}
 
+
+	/**
+	 * Constructeur de recopie
+	 * @param vendeur
+	 */
+	public Vendeur(Vendeur vendeur) {
+		this.rayonV = vendeur.rayonV;
+		/*this.nom = rayon.nom;
+		this.listeArticles = rayon.listeArticles;
+		this.listeReservationArticle = rayon.listeReservationArticle;
+		this.listeVendeurs = rayon.listeVendeurs;
+		this.magasin = rayon.magasin;*/
+	}
+
 	@Override
 	public String toString() {
 		return super.toString()+ "Vendeur{" +
