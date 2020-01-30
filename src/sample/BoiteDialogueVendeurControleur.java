@@ -141,7 +141,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                         vendeurDAO.setEntityManager(SetupEM.getEm());
 
                         if (estAModifier == true) {
-                                Vendeur vendeurModifie = new Vendeur(vendeur.getNom(), vendeur.getPrenom(), vendeur.getIdentifiant(), vendeur.getMotDePasse(), vendeur.getRayonV());
+                                Vendeur vendeurModifie = new Vendeur(/*vendeur.getNom(), vendeur.getPrenom(), vendeur.getIdentifiant(), vendeur.getMotDePasse(), vendeur.getRayonV()*/vendeur);
                                 //vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(), vendeur.getRayonV());
                                 //A FAIRE DANS UNE FONCTION
                                 vendeurModifie.setNom(nomTextF.getText());

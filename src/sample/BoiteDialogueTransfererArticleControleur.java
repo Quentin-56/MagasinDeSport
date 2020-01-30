@@ -62,8 +62,22 @@ public class BoiteDialogueTransfererArticleControleur implements Initializable {
     public void cliqueSurValider(ActionEvent actionEvent) {
         RayonDAO rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(SetupEM.getEm());
+        if(nomRayonCombo.getSelectionModel().getSelectedItem() != null)
+        {
+            rayonDAO.transfererUnArticle(article, magasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
+        }
+        else
+        {
+            // Show the error message.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(dialogStage);
+            alert.setTitle("erreur");
+            alert.setHeaderText("Veuillez selectionner un rayon");
+            //alert.setContentText(messageErreur);
 
-        rayonDAO.transfererUnArticle(article, magasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
+            alert.showAndWait();
+        }
+
 
         dialogStage.close();
 
