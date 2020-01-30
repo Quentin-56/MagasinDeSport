@@ -171,7 +171,7 @@ public class GestionArticlesReservesControleur implements Initializable {
                 article.setQuantite(article.getQuantite() - 1);
                 article.setQuantiteReserve(article.getQuantiteReserve() + 1);
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Ajout");
                 alert.setContentText("augmentation du stock reserve de 1");
                 alert.showAndWait();
