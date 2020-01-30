@@ -116,20 +116,28 @@ public class GestionArticlesReservesControleur implements Initializable {
         //cas du vendeur
         if(estUnVendeur == true)
         {
-            for(int i = 0; i < articlesReserves.size(); ++i)
-            {
-                System.out.println("vendeur " + vendeur);
-                System.out.println("rayon vendeur " + vendeur.getRayonV());
-                System.out.println("liste articles reserves " + articlesReserves);
-                System.out.println("article reserve " + articlesReserves.get(i) + "a l'indice " + i);
-                System.out.println("rayon " + articlesReserves.get(i).getRayonA() + "de l article reserve " + articlesReserves.get(i) + "a l'indice " + i);
+            //for(int i = 0; i < articlesReserves.size(); ++i)
+            //{
+                //System.out.println("vendeur " + vendeur);
+                //System.out.println("rayon vendeur " + vendeur.getRayonV());
+                //System.out.println("liste articles reserves " + articlesReserves);
+                //System.out.println("article reserve " + articlesReserves.get(i) + "a l'indice " + i);
+                //System.out.println("rayon " + articlesReserves.get(i).getRayonA() + "de l article reserve " + articlesReserves.get(i) + "a l'indice " + i);
 
+                articlesReserves = new ArrayList<Article>();
+                for(int j = 0; j < vendeur.getRayonV().getListeArticles().size(); ++ j)
+                {
+                    if(vendeur.getRayonV().getListeReservationArticle().get(j).getQuantiteReserve() > 0)
+                    {
+                        articlesReserves.add(vendeur.getRayonV().getListeReservationArticle().get(j));
+                    }
+                }
 
-                if(articlesReserves.get(i).getRayonA().getNom().compareTo(vendeur.getRayonV().getNom()) != 0)
+                /*if(articlesReserves.get(i).getRayonA().getNom().compareTo(vendeur.getRayonV().getNom()) != 0)
                 {
                     articlesReserves.remove(articlesReserves.get(i));
-                }
-            }
+                }*/
+            //}
         }
 
         produits.clear();
