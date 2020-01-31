@@ -8,11 +8,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modele.Article;
 import modele.Rayon;
@@ -86,6 +83,7 @@ public class MonRayonControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        detailsLabel.setWrapText(true);
         //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
         colNom.setCellValueFactory(new PropertyValueFactory("nom"));
         colQuantite.setCellValueFactory(new PropertyValueFactory("quantite"));

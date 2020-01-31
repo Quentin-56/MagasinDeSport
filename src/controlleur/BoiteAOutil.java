@@ -186,7 +186,44 @@ public class BoiteAOutil {
      */
     public Object[] creerBoiteDialogue (String titre, int nombre) throws IOException {
         //Charger le fichir fmxl
-        FXMLLoader loader = new FXMLLoader();
+        String nomFXML="";
+        FXMLLoader loader;
+
+        switch(nombre)
+        {
+            case 0:
+                nomFXML = "../sample/boiteDialogueParametres.fxml";
+                break;
+
+            case 1 :
+                nomFXML = "../sample/boiteDialogueArticle.fxml";
+                break;
+
+            case 2:
+                nomFXML = "../sample/boiteDialogueReservationArticle.fxml";
+                break;
+
+            case 3:
+                nomFXML = "../sample/boiteDialogueTransfererArticle.fxml";
+                break;
+
+            case 4:
+                nomFXML = "../sample/boiteDialogueRayon.fxml";
+                break;
+
+            case 5:
+                nomFXML = "../sample/boiteDialogueVendeur.fxml";
+                break;
+
+            default:
+                //Ne devrait pas arriver
+        }
+
+        loader = new FXMLLoader(getClass().getResource(nomFXML));
+
+
+
+        /*
         if(nombre == 0)
         {
             loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueParametres.fxml"));
@@ -211,6 +248,8 @@ public class BoiteAOutil {
         {
             loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueVendeur.fxml"));
         }
+
+         */
         Parent parent = loader.load();
 
         // Creer le stage pour la boite de dialogue
@@ -227,5 +266,4 @@ public class BoiteAOutil {
 
         return  res;
     }
-
 }

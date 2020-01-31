@@ -89,3 +89,5 @@ _
 /src/sample/ApplicationPrincipaleControleur.java,1\2\127438ccfbe6b382d1d262849589cc371e7a418a
 c
 3src/sample/ApplicationPrincipaleChefControleur.java,9\f\9fcf793960e2e064d055b4825ed84fecfb89f0aa
+V
+&tests/PageConnexionControleurTest.java,d\d\ddc0a5fbf49d7f60f6c4770734244308ed739d9c

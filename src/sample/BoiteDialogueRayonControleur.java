@@ -12,7 +12,7 @@ import modele.Rayon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BoiteDialogueRayonControleur implements Initializable {
+public class BoiteDialogueRayonControleur {
 
     private Stage dialogStage;
     private GestionDesRayonsControleur gestionDesRayonsControleur;
@@ -35,11 +35,6 @@ public class BoiteDialogueRayonControleur implements Initializable {
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
-    }
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
     }
 
     public void remplirFormulaire(Rayon rayon) {
