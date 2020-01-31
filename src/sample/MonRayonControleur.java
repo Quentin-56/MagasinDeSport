@@ -27,6 +27,8 @@ public class MonRayonControleur implements Initializable {
     @FXML
     private TableColumn<Article, String> colQuantite;
     @FXML
+    private Label nomLabel;
+    @FXML
     private Label detailsLabel;
     @FXML
     private Label reservationLabel;
@@ -115,12 +117,15 @@ public class MonRayonControleur implements Initializable {
     {
         if(article != null)
         {
+            nomLabel.setText(article.getNom());
             detailsLabel.setText(article.getDetails());
             reservationLabel.setText(article.getQuantiteReserve()+"");
             prixLabel.setText(article.getPrix()+"");
+
         }
         else
         {
+            nomLabel.setText("");
             detailsLabel.setText("");
             reservationLabel.setText("");
             prixLabel.setText("");

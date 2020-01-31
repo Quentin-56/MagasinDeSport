@@ -1,11 +1,11 @@
 package sample;
 
-import controlleur.BoiteDialogueException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
 import modele.Article;
 
@@ -28,7 +28,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
     @FXML
     private TextField prixTextF;
     @FXML
-    private TextField detailsTextF;
+    private TextArea detailsTextF;
     @FXML
     private TextField quantiteTextF;
 
@@ -55,6 +55,13 @@ public class BoiteDialogueArticleControleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        detailsTextF.setWrapText(true);
+
+        //Limiter les details à moins de
+        TextFormatter<Object> limitSize = new TextFormatter<>(change ->
+                change.getControlNewText().length() <= 255 ? change : null);
+
+        detailsTextF.setTextFormatter(limitSize);
     }
 
     public void remplirFormulaire(Article article) {
@@ -69,7 +76,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
     private boolean lesChampsSontValides(){
         String messageErreur = "";
 
-        if (nomTextF.getText() == null || nomTextF.getText().length() == 0) {
+        if (nomTextF.getText() == null || nomTextF.getText().length() == 0 || nomTextF.getText().length() > 255) {
             messageErreur += "Nom de l'article non valide!\n";
         }
         if (detailsTextF.getText() == null || detailsTextF.getText().length() == 0) {

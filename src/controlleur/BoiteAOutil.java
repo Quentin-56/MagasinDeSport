@@ -220,36 +220,6 @@ public class BoiteAOutil {
         }
 
         loader = new FXMLLoader(getClass().getResource(nomFXML));
-
-
-
-        /*
-        if(nombre == 0)
-        {
-            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueParametres.fxml"));
-        }
-        if(nombre == 1)
-        {
-            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueArticle.fxml"));
-        }
-        if(nombre == 2)
-        {
-            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueReservationArticle.fxml"));
-        }
-        if(nombre == 3)
-        {
-            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueTransfererArticle.fxml"));
-        }
-        if(nombre == 4)
-        {
-            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueRayon.fxml"));
-        }
-        if(nombre == 5)
-        {
-            loader = new FXMLLoader(getClass().getResource("../sample/boiteDialogueVendeur.fxml"));
-        }
-
-         */
         Parent parent = loader.load();
 
         // Creer le stage pour la boite de dialogue

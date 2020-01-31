@@ -22,10 +22,10 @@
         </columns>
       </TableView>
       <Label layoutX="269.0" layoutY="100.0" text="Autres" AnchorPane.leftAnchor="269.0" AnchorPane.topAnchor="100.0" />
-      <GridPane layoutX="269.0" layoutY="131.0" prefWidth="200.0">
+      <GridPane layoutX="269.0" layoutY="131.0" prefHeight="92.0" prefWidth="406.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.20001220703125" minWidth="10.0" prefWidth="101.39996337890625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.60003662109375" minWidth="10.0" prefWidth="304.60003662109375" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="29.60001220703125" vgrow="SOMETIMES" />

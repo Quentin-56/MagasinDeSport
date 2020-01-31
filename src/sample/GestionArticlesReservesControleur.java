@@ -68,6 +68,8 @@ public class GestionArticlesReservesControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
+        detailsLabel.setWrapText(true);
+
         if(estUnVendeur == true)
         {
             this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());
