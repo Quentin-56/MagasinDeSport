@@ -92,11 +92,15 @@ public class RayonDAO {
      */
     public void modifierArticle(Article article)
     {
-        entityManager.getTransaction().begin();
+        try {
+            entityManager.getTransaction().begin();
 
-        entityManager.merge(article);
+            entityManager.merge(article);
 
-        entityManager.getTransaction().commit();
+            entityManager.getTransaction().commit();
+        }catch (Exception e){
+            e.getStackTrace();
+        }
     }
 
     /**

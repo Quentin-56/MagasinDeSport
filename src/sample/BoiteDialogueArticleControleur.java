@@ -1,5 +1,6 @@
 package sample;
 
+import controlleur.BoiteDialogueException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,7 +66,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
         }
     }
 
-    private boolean lesChampsSontValides() {
+    private boolean lesChampsSontValides(){
         String messageErreur = "";
 
         if (nomTextF.getText() == null || nomTextF.getText().length() == 0) {
@@ -117,7 +118,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
         }
     }
 
-    public void cliqueSurValider(ActionEvent actionEvent) {
+    public void cliqueSurValider() {
         if(lesChampsSontValides()) {
             RayonDAO rayonDAO = new RayonDAO();
             rayonDAO.setEntityManager(SetupEM.getEm());
@@ -144,7 +145,7 @@ public class BoiteDialogueArticleControleur implements Initializable {
         }
     }
 
-    public void cliqueSurAnnuler(ActionEvent actionEvent) {
+    public void cliqueSurAnnuler() {
         //Fermer le formulaire
         dialogStage.close();
     }

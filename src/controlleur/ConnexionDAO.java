@@ -1,14 +1,9 @@
 package controlleur;
 
 import modele.Personne;
-import org.hibernate.Hibernate;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import modele.ChefMagasin;
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.List;
 
 public class ConnexionDAO {
 
@@ -73,17 +68,18 @@ public class ConnexionDAO {
      * @return vrai si il mot de passe est bon faux sinon
      */
     public boolean verifierMotDePasse(String identifiant, String motDePasse){
-        Personne personne = null;
+        String mdp = "";
         try{
-            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2");
+            Personne personne;
+            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1");
             query.setParameter(1, identifiant);
-            query.setParameter(2, motDePasse);
             personne =  (Personne) query.getSingleResult();
+            mdp = personne.getMotDePasse();
         }catch(Exception e){}
-        if(personne == null){
-            return false;
-        }else{
+        if(mdp.equals(motDePasse)){
             return true;
+        }else{
+            return false;
         }
     }
 }
