@@ -19,4 +19,6 @@ Les étapes à réaliser pour que cela fonctionne, à faire la premiere fois :<b
 <li>Insérer le fichier .sql dans la base de données </li>
 <li>Sur IntelliJ, s'assurer d'être sous java 11</li>
 <li>S'assurer de la présence du: pilote mySQL(mysql-connector-java-8.0.18.jar), les librairies Hibernate, controlsfx-11.0.1 et jfoenix-9.0.8</li>
+ <br />
+ Un tutoriel complet pour utiliser l'application est disponible dans le document nommé Guide Utilisateur
 </em></p>
