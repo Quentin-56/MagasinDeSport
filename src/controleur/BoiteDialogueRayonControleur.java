@@ -67,10 +67,9 @@ public class BoiteDialogueRayonControleur {
             MagasinDAO magasinDAO = new MagasinDAO();
             magasinDAO.setEntityManager(SetupEM.getEm());
 
-            if (estAModifier == true) {
-                Rayon rayonModifie = new Rayon(rayon);
-                rayonModifie.setNom(nomTextF.getText());
-                magasinDAO.modifierRayon(rayonModifie);
+            if (estAModifier == true) {          
+                rayon.setNom(nomTextF.getText());
+                magasinDAO.modifierRayon(rayon);
 
                 //Fermer le formulaire
                 dialogStage.close();
