@@ -86,7 +86,7 @@ public class BoiteDialogueVendeurControleur implements Initializable{
                 {
                         prenomTextF.setText(vendeur.getPrenom());
                         nomTextF.setText(vendeur.getNom() + "");
-                        //nomRayonCombo.setText(vendeur.getRayonV().getNom());
+                        nomRayonCombo.setValue(vendeur.getRayonV().getNom());
                         identifiantTextF.setText(vendeur.getIdentifiant() + "");
                         motDePasseTextF.setText(vendeur.getMotDePasse() + "");
                 }
@@ -134,24 +134,10 @@ public class BoiteDialogueVendeurControleur implements Initializable{
         public void cliqueSurValider(ActionEvent actionEvent) {
                 if(lesChampsSontValides()) {
 
-                        //VendeurDAO.creerVendeur(nomTextF.getText(), prenomTextF.getText(), identifiantTextF.getText(), motDePasseTextF.getText(), MagasinDAO.trouverRayonAvecNom((String)nomRayonCombo.getSelectionModel().getSelectedItem()));
-
-
                         VendeurDAO vendeurDAO = new VendeurDAO();
                         vendeurDAO.setEntityManager(SetupEM.getEm());
 
                         if (estAModifier == true) {
-                                //Vendeur vendeurModifie = new Vendeur(/*vendeur.getNom(), vendeur.getPrenom(), vendeur.getIdentifiant(), vendeur.getMotDePasse(), vendeur.getRayonV()*/vendeur);
-                                //vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(), vendeur.getRayonV());
-                                //A FAIRE DANS UNE FONCTION
-                                /*vendeurModifie.setNom(nomTextF.getText());
-                                vendeurModifie.setPrenom(prenomTextF.getText());
-                                vendeurModifie.setIdentifiant(identifiantTextF.getText());
-                                vendeurModifie.setMotDePasse(motDePasseTextF.getText());
-                                vendeurModifie.setRayonV(magasinDAO.trouverRayonAvecNom(nomRayonCombo.getSelectionModel().getSelectedItem()));
-
-                                vendeurDAO.modifierVendeur(vendeurModifie);*/
-
                                 vendeur.setNom(nomTextF.getText());
                                 vendeur.setPrenom(prenomTextF.getText());
                                 vendeur.setIdentifiant(identifiantTextF.getText());

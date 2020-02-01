@@ -6,7 +6,6 @@ import java.util.List;
 
 @Entity
 public class Rayon {
-
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private  int idRayon;

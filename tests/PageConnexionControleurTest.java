@@ -1,4 +1,4 @@
-import controlleur.SetupEM;
+/*import controlleur.SetupEM;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -37,4 +37,4 @@ public class PageConnexionControleurTest extends ApplicationTest {
         clickOn("#textField");
         write("");
     }
-}
+}*/

@@ -49,7 +49,7 @@ public class BoiteDialogueTransfererArticleControleur implements Initializable {
 
         List<Rayon> rayons = magasinDAO.recupererRayon();
 
-        List<String> nomRayons = new ArrayList<String>();
+        List<String> nomRayons = new ArrayList<>();
         for(int i = 0; i < rayons.size(); ++i)
         {
             nomRayons.add(rayons.get(i).getNom());
@@ -59,7 +59,7 @@ public class BoiteDialogueTransfererArticleControleur implements Initializable {
     }
 
 
-    public void cliqueSurValider(ActionEvent actionEvent) {
+    public void cliqueSurValider() {
         RayonDAO rayonDAO = new RayonDAO();
         rayonDAO.setEntityManager(SetupEM.getEm());
         if(nomRayonCombo.getSelectionModel().getSelectedItem() != null)
