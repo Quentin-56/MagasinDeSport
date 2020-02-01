@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Article.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">modele</a> &gt; <span class="el_source">Article.java</span></div><h1>Article.java</h1><pre class="source lang-java linenums">package modele;
+
+import javax.persistence.*;
+
+@Entity
+public class Article {
+
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private int idArticle;
+
+	private String nom;
+	private int quantite;
+	private String details;
+	private int quantiteReserve;
+	private double prix;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Rayon rayonA;
+
+	public Article(Article article)
+<span class="nc" id="L22">	{</span>
+<span class="nc" id="L23">		this.idArticle = article.idArticle;</span>
+<span class="nc" id="L24">		this.nom = article.nom;</span>
+<span class="nc" id="L25">		this.quantite = article.quantite;</span>
+<span class="nc" id="L26">		this.details = article.details;</span>
+<span class="nc" id="L27">		this.quantiteReserve = article.quantiteReserve;</span>
+<span class="nc" id="L28">		this.rayonA = article.rayonA;</span>
+<span class="nc" id="L29">		this.prix = article.prix;</span>
+<span class="nc" id="L30">	}</span>
+
+	/**
+	 * Constructeur de confort
+	 * @param nom
+	 * @param quantite
+	 * @param details
+	 * @param rayonA
+	 */
+<span class="fc" id="L39">	public Article(String nom, int quantite, String details, Rayon rayonA, double prix) {</span>
+<span class="fc" id="L40">		this.idArticle = 0;</span>
+<span class="fc" id="L41">		this.nom = nom;</span>
+<span class="fc" id="L42">		this.quantite = quantite;</span>
+<span class="fc" id="L43">		this.details = details;</span>
+<span class="fc" id="L44">		this.quantiteReserve = 0;</span>
+<span class="fc" id="L45">		this.rayonA = rayonA;</span>
+<span class="fc" id="L46">		this.prix = prix;</span>
+<span class="fc" id="L47">	}</span>
+
+	/**
+	 * Constructeur par defaut
+	 */
+<span class="fc" id="L52">	public Article() {</span>
+<span class="fc" id="L53">		this.nom = &quot;&quot;;</span>
+<span class="fc" id="L54">		this.quantite = 0;</span>
+<span class="fc" id="L55">		this.details = &quot;&quot;;</span>
+<span class="fc" id="L56">		this.quantiteReserve = 0;</span>
+<span class="fc" id="L57">		this.rayonA = null;</span>
+<span class="fc" id="L58">		this.idArticle = 0;</span>
+<span class="fc" id="L59">		this.prix = 0.0;</span>
+<span class="fc" id="L60">	}</span>
+
+	@Override
+	public String toString() {
+<span class="nc" id="L64">		return &quot;Article{&quot; +</span>
+				&quot;idArticle=&quot; + idArticle +
+				&quot;, nom='&quot; + nom + '\'' +
+				&quot;, quantite=&quot; + quantite +
+				'}';
+	}
+
+	//GETTERS ET SETTERS
+	public int getIdArticle() {
+<span class="fc" id="L73">		return idArticle;</span>
+	}
+
+	public void setIdArticle(int idArticle) {
+<span class="fc" id="L77">		this.idArticle = idArticle;</span>
+<span class="fc" id="L78">	}</span>
+
+	public String getNom() {
+<span class="nc" id="L81">		return nom;</span>
+	}
+
+	public void setNom(String nom) {
+<span class="fc" id="L85">		this.nom = nom;</span>
+<span class="fc" id="L86">	}</span>
+
+	public int getQuantite() {
+<span class="fc" id="L89">		return quantite;</span>
+	}
+
+	public void setQuantite(int quantite) {
+<span class="fc" id="L93">		this.quantite = quantite;</span>
+<span class="fc" id="L94">	}</span>
+
+	public String getDetails() {
+<span class="nc" id="L97">		return details;</span>
+	}
+
+	public void setDetails(String details) {
+<span class="nc" id="L101">		this.details = details;</span>
+<span class="nc" id="L102">	}</span>
+
+	public int getQuantiteReserve() {
+<span class="fc" id="L105">		return quantiteReserve;</span>
+	}
+
+	public void setQuantiteReserve(int quantiteReserve) {
+<span class="fc" id="L109">		this.quantiteReserve = quantiteReserve;</span>
+<span class="fc" id="L110">	}</span>
+
+	public Rayon getRayonA() {
+<span class="fc" id="L113">		return rayonA;</span>
+	}
+
+	public void setRayonA(Rayon rayonA) {
+<span class="fc" id="L117">		this.rayonA = rayonA;</span>
+<span class="fc" id="L118">	}</span>
+
+	public double getPrix() {
+<span class="nc" id="L121">		return prix;</span>
+	}
+
+	public void setPrix(double prix) {
+<span class="nc" id="L125">		this.prix = prix;</span>
+<span class="nc" id="L126">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

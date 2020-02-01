@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BoiteDialogueArticleControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">BoiteDialogueArticleControleur.java</span></div><h1>BoiteDialogueArticleControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.stage.Stage;
+import modele.Article;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import controleur.dao.RayonDAO;
+import controleur.dao.SetupEM;
+import modele.Rayon;
+
+<span class="nc" id="L18">public class BoiteDialogueArticleControleur implements Initializable {</span>
+
+    private Stage dialogStage;
+    private MonRayonControleur monRayonControleur;
+    private boolean estAModifier;
+    private Article article;
+    private Rayon rayon;
+
+    @FXML
+    private TextField nomTextF;
+    @FXML
+    private TextField prixTextF;
+    @FXML
+    private TextArea detailsTextF;
+    @FXML
+    private TextField quantiteTextF;
+
+    public void setRayon(Rayon rayon) {
+<span class="nc" id="L36">        this.rayon = rayon;</span>
+<span class="nc" id="L37">    }</span>
+
+    public void setMonRayonControleur(MonRayonControleur monRayonControleur) {
+<span class="nc" id="L40">        this.monRayonControleur = monRayonControleur;</span>
+<span class="nc" id="L41">    }</span>
+
+    public void setEstAModifier(boolean estAModifier) {
+<span class="nc" id="L44">        this.estAModifier = estAModifier;</span>
+<span class="nc" id="L45">    }</span>
+
+    public void setArticle(Article article) {
+<span class="nc" id="L48">        this.article = article;</span>
+<span class="nc" id="L49">    }</span>
+
+    public void setDialogStage(Stage dialogStage) {
+<span class="nc" id="L52">        this.dialogStage = dialogStage;</span>
+<span class="nc" id="L53">    }</span>
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+<span class="nc" id="L58">        detailsTextF.setWrapText(true);</span>
+
+        //Limiter les details à moins de
+<span class="nc" id="L61">        TextFormatter&lt;Object&gt; limitSize = new TextFormatter&lt;&gt;(change -&gt;</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">                change.getControlNewText().length() &lt;= 255 ? change : null);</span>
+
+<span class="nc" id="L64">        detailsTextF.setTextFormatter(limitSize);</span>
+<span class="nc" id="L65">    }</span>
+
+    public void remplirFormulaire(Article article) {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (article != null) {</span>
+<span class="nc" id="L69">            nomTextF.setText(article.getNom());</span>
+<span class="nc" id="L70">            prixTextF.setText(article.getPrix() + &quot;&quot;);</span>
+<span class="nc" id="L71">            detailsTextF.setText(article.getDetails());</span>
+<span class="nc" id="L72">            quantiteTextF.setText(article.getQuantite() + &quot;&quot;);</span>
+        }
+<span class="nc" id="L74">    }</span>
+
+    private boolean lesChampsSontValides(){
+<span class="nc" id="L77">        String messageErreur = &quot;&quot;;</span>
+
+<span class="nc bnc" id="L79" title="All 6 branches missed.">        if (nomTextF.getText() == null || nomTextF.getText().length() == 0 || nomTextF.getText().length() &gt; 255) {</span>
+<span class="nc" id="L80">            messageErreur += &quot;Nom de l'article non valide!\n&quot;;</span>
+        }
+<span class="nc bnc" id="L82" title="All 4 branches missed.">        if (detailsTextF.getText() == null || detailsTextF.getText().length() == 0) {</span>
+<span class="nc" id="L83">            messageErreur += &quot;Details non valide!\n&quot;;</span>
+        }
+
+<span class="nc bnc" id="L86" title="All 4 branches missed.">        if (prixTextF.getText() == null || prixTextF.getText().length() == 0) {</span>
+<span class="nc" id="L87">            messageErreur += &quot;Prix non valide!\n&quot;;</span>
+        } else {
+            try {
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                if(Double.parseDouble(prixTextF.getText())&lt;0)</span>
+                {
+<span class="nc" id="L92">                    messageErreur+= &quot;Le prix doit être positif!\n&quot;;</span>
+                }
+<span class="nc" id="L94">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L95">                messageErreur += &quot;Le prix doit être un nombre!\n&quot;;</span>
+<span class="nc" id="L96">            }</span>
+        }
+
+<span class="nc bnc" id="L99" title="All 4 branches missed.">        if (quantiteTextF.getText() == null || quantiteTextF.getText().length() == 0) {</span>
+<span class="nc" id="L100">            messageErreur += &quot;Quantité non valide!\n&quot;;</span>
+        }else {
+            try {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">                    if(Integer.parseInt(quantiteTextF.getText())&lt;0)</span>
+                    {
+<span class="nc" id="L105">                        messageErreur+= &quot;La quantite doit être positive!\n&quot;;</span>
+                    }
+<span class="nc" id="L107">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L108">                messageErreur += &quot;La quantite doit être un nombre!\n&quot;;</span>
+<span class="nc" id="L109">            }</span>
+        }
+
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (messageErreur.length() == 0) {</span>
+<span class="nc" id="L113">            return true;</span>
+        } else {
+            // Show the error message.
+<span class="nc" id="L116">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L117">            alert.initOwner(dialogStage);</span>
+<span class="nc" id="L118">            alert.setTitle(&quot;Champs invalides&quot;);</span>
+<span class="nc" id="L119">            alert.setHeaderText(&quot;Veuillez corriger les champs incorrects&quot;);</span>
+<span class="nc" id="L120">            alert.setContentText(messageErreur);</span>
+
+<span class="nc" id="L122">            alert.showAndWait();</span>
+
+<span class="nc" id="L124">            return false;</span>
+        }
+    }
+
+    public void cliqueSurValider() {
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if(lesChampsSontValides()) {</span>
+<span class="nc" id="L130">            RayonDAO rayonDAO = new RayonDAO();</span>
+<span class="nc" id="L131">            rayonDAO.setEntityManager(SetupEM.getEm());</span>
+
+<span class="nc bnc" id="L133" title="All 2 branches missed.">            if (estAModifier == true) {</span>
+<span class="nc" id="L134">                Article articleModifie = new Article(article);</span>
+                //A FAIRE DANS UNE FONCTION
+<span class="nc" id="L136">                articleModifie.setNom(nomTextF.getText());</span>
+<span class="nc" id="L137">                articleModifie.setDetails(detailsTextF.getText());</span>
+<span class="nc" id="L138">                articleModifie.setPrix(Double.parseDouble(prixTextF.getText()));</span>
+<span class="nc" id="L139">                articleModifie.setQuantite(Integer.parseInt(quantiteTextF.getText()));</span>
+
+<span class="nc" id="L141">                rayonDAO.modifierArticle(articleModifie);</span>
+                //Fermer le formulaire
+<span class="nc" id="L143">                dialogStage.close();</span>
+<span class="nc" id="L144">            } else {</span>
+<span class="nc" id="L145">                rayonDAO.creerArticle(nomTextF.getText(), Integer.parseInt(quantiteTextF.getText()), detailsTextF.getText(), rayon, Double.parseDouble(prixTextF.getText()));</span>
+                //Fermer le formulaire
+<span class="nc" id="L147">                dialogStage.close();</span>
+            }
+            //Actualiser le tableView dans tout les cas
+<span class="nc" id="L150">            monRayonControleur.remplirTableauDArticles();</span>
+<span class="nc" id="L151">            monRayonControleur.viderBarreRecherche();</span>
+        }
+<span class="nc" id="L153">    }</span>
+
+    public void cliqueSurAnnuler() {
+        //Fermer le formulaire
+<span class="nc" id="L157">        dialogStage.close();</span>
+<span class="nc" id="L158">    }</span>
+
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

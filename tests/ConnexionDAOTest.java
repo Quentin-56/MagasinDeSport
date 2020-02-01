@@ -72,26 +72,31 @@ public class ConnexionDAOTest {
 
         assertEquals(con.verifierIdentifiant("id"),false);
     }
+
     @Test
-    public void motDePasse_associe_a_un_identifiant_est_correct(){
-        when(entityManagerMock.createQuery("from Personne personne where personne.identifiant = ?1")).thenReturn(queryMock);
+    public void motDePasse_associe_a_un_identifiant_est_incorrect(){
+        when(entityManagerMock.createQuery(" from Personne personne where personne.identifiant = ?1")).thenReturn(queryMock);
         when(queryMock.setParameter(1,"id")).thenReturn(queryMock);
 
         Personne personne = new Personne();
+        personne.setMotDePasse("mdpdifferent");
         when(queryMock.getSingleResult()).thenReturn(personne);
 
         ConnexionDAO con = new ConnexionDAO();
         con.setEntityManager(entityManagerMock);
 
         assertEquals(con.verifierMotDePasse("id", "mdp"),false);
-
-
     }
+
     @Test
-    public void motDePasse_associe_a_un_identifiant_est_incorrect(){
+    public void motDePasse_associe_a_un_identifiant_est_correct(){
+
         when(entityManagerMock.createQuery(" from Personne personne where personne.identifiant = ?1")).thenReturn(queryMock);
         when(queryMock.setParameter(1,"id")).thenReturn(queryMock);
-        when(queryMock.getSingleResult()).thenReturn(null);
+
+        Personne personne = new Personne();
+        personne.setMotDePasse("mdp");
+        when(queryMock.getSingleResult()).thenReturn(personne);
 
         ConnexionDAO con = new ConnexionDAO();
         con.setEntityManager(entityManagerMock);

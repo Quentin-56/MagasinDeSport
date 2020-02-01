@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestionArticlesReservesControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">GestionArticlesReservesControleur.java</span></div><h1>GestionArticlesReservesControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import controleur.dao.ChefMagasinDAO;
+import controleur.dao.MagasinDAO;
+import controleur.dao.SetupEM;
+import controleur.dao.VendeurDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import modele.*;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class GestionArticlesReservesControleur implements Initializable {
+
+    @FXML
+    private TableView&lt;Article&gt; tableauArticlesReserves;
+    @FXML
+    private TableColumn&lt;Article, String&gt; colNom;
+    @FXML
+    private TableColumn&lt;Article, String&gt; colQuantiteReservee;
+    @FXML
+    private Label rayonLabel;
+    @FXML
+    private Label detailsLabel;
+    @FXML
+    private Label prixLabel;
+
+    private MagasinDAO magasinDAO;
+
+<span class="nc" id="L42">    private ObservableList&lt;Article&gt; produits = FXCollections.observableArrayList();</span>
+    private ChefMagasin chefMagasin;
+    private boolean estUnVendeur;
+    private Vendeur vendeur;
+    private VendeurDAO vendeurDAO;
+
+    public void setEstUnVendeur(boolean estUnVendeur)
+    {
+<span class="nc" id="L50">        this.estUnVendeur = estUnVendeur;</span>
+<span class="nc" id="L51">    }</span>
+
+    public void setVendeur(Vendeur vendeur)
+    {
+<span class="nc" id="L55">        this.vendeur = vendeur;</span>
+<span class="nc" id="L56">    }</span>
+
+    public GestionArticlesReservesControleur()
+<span class="nc" id="L59">    {</span>
+<span class="nc" id="L60">        magasinDAO = new MagasinDAO();</span>
+<span class="nc" id="L61">        magasinDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L62">        vendeurDAO = new VendeurDAO();</span>
+<span class="nc" id="L63">        vendeurDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L64">    }</span>
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+<span class="nc" id="L69">        detailsLabel.setWrapText(true);</span>
+
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        if(estUnVendeur == true)</span>
+        {
+<span class="nc" id="L73">            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());</span>
+        }
+
+
+<span class="nc" id="L77">        ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();</span>
+<span class="nc" id="L78">        chefMagasinDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L79">        this.chefMagasin = chefMagasinDAO.recupererChefMagasin();</span>
+
+
+
+        //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
+<span class="nc" id="L84">        colNom.setCellValueFactory(new PropertyValueFactory(&quot;nom&quot;));</span>
+<span class="nc" id="L85">        colQuantiteReservee.setCellValueFactory(new PropertyValueFactory(&quot;quantiteReserve&quot;));</span>
+
+
+<span class="nc" id="L88">        remplirTableauDArticlesReserves(vendeur);</span>
+
+
+
+        //Nettoyer les details
+<span class="nc" id="L93">        afficherArticleDetails(null);</span>
+
+<span class="nc" id="L95">        tableauArticlesReserves.getSelectionModel().selectedItemProperty().addListener(</span>
+<span class="nc" id="L96">                (observable, oldValue, newValue) -&gt; afficherArticleDetails(newValue));</span>
+<span class="nc" id="L97">    }</span>
+
+
+    public void remplirTableauDArticlesReserves(Vendeur vendeur)
+    {
+<span class="nc" id="L102">        List&lt;Article&gt; articlesReserves = new ArrayList&lt;Article&gt;();</span>
+
+<span class="nc" id="L104">        List&lt;Rayon&gt; rayons = magasinDAO.recupererRayon();</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        for (int i = 0; i &lt; rayons.size(); ++i) {</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            for(int j = 0; j &lt; rayons.get(i).getListeReservationArticle().size(); ++j)</span>
+            {
+                //si la quantite reservee de l article est supereure stricte a 0 alors on ajoute l article a la liste articlesReserves
+<span class="nc bnc" id="L109" title="All 2 branches missed.">                if(rayons.get(i).getListeReservationArticle().get(j).getQuantiteReserve() &gt; 0)</span>
+                {
+<span class="nc" id="L111">                    articlesReserves.add(rayons.get(i).getListeReservationArticle().get(j));</span>
+                }
+            }
+        }
+
+        //cas du vendeur
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if(estUnVendeur == true)</span>
+        {
+<span class="nc" id="L119">                articlesReserves = new ArrayList&lt;Article&gt;();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                for(int j = 0; j &lt; vendeur.getRayonV().getListeArticles().size(); ++ j)</span>
+                {
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                    if(vendeur.getRayonV().getListeReservationArticle().get(j).getQuantiteReserve() &gt; 0)</span>
+                    {
+<span class="nc" id="L124">                        articlesReserves.add(vendeur.getRayonV().getListeReservationArticle().get(j));</span>
+                    }
+                }
+        }
+
+<span class="nc" id="L129">        produits.clear();</span>
+<span class="nc" id="L130">        produits.addAll(articlesReserves);</span>
+
+<span class="nc" id="L132">        tableauArticlesReserves.setItems(produits);</span>
+<span class="nc" id="L133">    }</span>
+
+    public void afficherArticleDetails(Article article)
+    {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if(article != null)</span>
+        {
+<span class="nc" id="L139">            detailsLabel.setText(article.getDetails());</span>
+<span class="nc" id="L140">            rayonLabel.setText(article.getRayonA().getNom()+&quot;&quot;);</span>
+<span class="nc" id="L141">            prixLabel.setText(article.getPrix()+&quot;&quot;);</span>
+        }
+        else
+        {
+<span class="nc" id="L145">            detailsLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L146">            rayonLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L147">            prixLabel.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L149">    }</span>
+
+
+    public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if(estUnVendeur == true)</span>
+        {
+<span class="nc" id="L155">            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());</span>
+        }
+
+<span class="nc" id="L158">        Article article = tableauArticlesReserves.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if(article != null)</span>
+        {
+            //si la quantite de l article est superieure ou egale a 1
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            if(article.getQuantite() &gt;= 1)</span>
+            {
+<span class="nc" id="L165">                article.setQuantite(article.getQuantite() - 1);</span>
+<span class="nc" id="L166">                article.setQuantiteReserve(article.getQuantiteReserve() + 1);</span>
+
+<span class="nc" id="L168">                Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L169">                alert.setTitle(&quot;Ajout&quot;);</span>
+<span class="nc" id="L170">                alert.setContentText(&quot;augmentation du stock reserve de 1&quot;);</span>
+<span class="nc" id="L171">                alert.showAndWait();</span>
+
+<span class="nc" id="L173">                remplirTableauDArticlesReserves(vendeur);</span>
+<span class="nc" id="L174">            }</span>
+            else
+            {
+<span class="nc" id="L177">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L178">                alert.setTitle(&quot;Erreur&quot;);</span>
+<span class="nc" id="L179">                alert.setContentText(&quot;l article n est plus en stock&quot;);</span>
+<span class="nc" id="L180">                alert.showAndWait();</span>
+            }
+        }
+
+<span class="nc" id="L184">    }</span>
+
+    public void cliqueSurRetirer(ActionEvent actionEvent) throws IOException {
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if(estUnVendeur == true)</span>
+        {
+<span class="nc" id="L189">            this.vendeur = vendeurDAO.trouverVendeurAvecIdentifiant(ConnexionControleur.getIdentifiant());</span>
+        }
+<span class="nc" id="L191">        Article article = tableauArticlesReserves.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc bnc" id="L193" title="All 2 branches missed.">        if(article != null)</span>
+        {
+<span class="nc" id="L195">            article.setQuantite(article.getQuantite() + 1);</span>
+<span class="nc" id="L196">            article.setQuantiteReserve(article.getQuantiteReserve() - 1);</span>
+
+<span class="nc" id="L198">            remplirTableauDArticlesReserves(vendeur);</span>
+        }
+<span class="nc" id="L200">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

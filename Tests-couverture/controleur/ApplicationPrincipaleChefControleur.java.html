@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApplicationPrincipaleChefControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">ApplicationPrincipaleChefControleur.java</span></div><h1>ApplicationPrincipaleChefControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import controleur.dao.ChefMagasinDAO;
+import controleur.dao.SetupEM;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import main.Main;
+import modele.ChefMagasin;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+<span class="nc" id="L23">public class ApplicationPrincipaleChefControleur implements Initializable {</span>
+
+    private ChefMagasin chefMagasin;
+<span class="nc" id="L26">    private Node[] nodes = new Node[1];</span>
+<span class="nc" id="L27">    private boolean estSurGestionDesRayons = false;</span>
+<span class="nc" id="L28">    private boolean estSurGestionDesVendeurs = false;</span>
+<span class="nc" id="L29">    private boolean estSurGestionDesArticlesReserves = false;</span>
+    @FXML
+    private Label nomLabel;
+    @FXML
+    private VBox pnl_scroll;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+<span class="nc" id="L37">        ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();</span>
+<span class="nc" id="L38">        chefMagasinDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L39">        chefMagasin = chefMagasinDAO.recupererChefMagasin();</span>
+
+<span class="nc" id="L41">        nomLabel.setText(chefMagasin.getPrenom()+&quot; &quot;+chefMagasin.getNom());</span>
+<span class="nc" id="L42">    }</span>
+
+    public void setEstSurGestionDesRayons(boolean estSurGestionDesRayons) {
+<span class="nc" id="L45">        this.estSurGestionDesRayons = estSurGestionDesRayons;</span>
+<span class="nc" id="L46">    }</span>
+
+    public void cliqueSurGestionDesVendeurs() {
+        try {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">            if(!estSurGestionDesVendeurs)</span>
+            {
+<span class="nc" id="L52">                chargerPage(0);</span>
+            }
+<span class="nc" id="L54">        } catch (IOException ex) {</span>
+<span class="nc" id="L55">            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L56">        }</span>
+<span class="nc" id="L57">    }</span>
+
+    public void cliqueSurParametres() throws IOException {
+
+<span class="nc" id="L61">        Object[] res = new BoiteAOutil().creerBoiteDialogue (&quot;Modifier Parametres&quot;, 0);</span>
+
+        //Recuperer le controleur lier à la vue
+<span class="nc" id="L64">        BoiteDialogueParametresControleur controleur = ((FXMLLoader)res[0]).getController();</span>
+<span class="nc" id="L65">        controleur.setChefMagasin(chefMagasin);</span>
+<span class="nc" id="L66">        controleur.remplirFormulaire();</span>
+<span class="nc" id="L67">        controleur.setDialogStage((Stage)res[1]);</span>
+<span class="nc" id="L68">        controleur.setApplicationPrincipaleChefControleur(this);</span>
+<span class="nc" id="L69">        controleur.setNomLabel(nomLabel);</span>
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+<span class="nc" id="L72">        ((Stage)res[1]).showAndWait();</span>
+<span class="nc" id="L73">    }</span>
+
+    public void cliqueSurGestionDesRayons() throws IOException {
+        try {
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (!estSurGestionDesRayons) {</span>
+<span class="nc" id="L78">                chargerPage(1);</span>
+            }
+<span class="nc" id="L80">        } catch (IOException ex) {</span>
+<span class="nc" id="L81">            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L82">        }</span>
+
+<span class="nc" id="L84">    }</span>
+
+    public void cliqueSurGestionArticlesReserves() throws IOException {
+        try {
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            if (!estSurGestionDesArticlesReserves) {</span>
+<span class="nc" id="L89">                chargerPage(2);</span>
+            }
+<span class="nc" id="L91">        } catch (IOException ex) {</span>
+<span class="nc" id="L92">            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L93">        }</span>
+<span class="nc" id="L94">    }</span>
+
+    public void cliqueSurDeconnecte() throws IOException {
+
+<span class="nc" id="L98">        Parent root = FXMLLoader.load(getClass().getResource(&quot;../ressources/connexion.fxml&quot;));</span>
+
+<span class="nc" id="L100">        Main.getPrimaryStage().setScene(new Scene(root));</span>
+<span class="nc" id="L101">    }</span>
+
+    /**
+     *
+     * @param nombre differencie les cas
+     */
+    public void chargerPage(int nombre) throws IOException {
+        //vider l'ancienne vue
+<span class="nc" id="L109">        pnl_scroll.getChildren().clear();</span>
+<span class="nc" id="L110">        FXMLLoader loader = new FXMLLoader();</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        if(nombre == 0)</span>
+        {
+<span class="nc" id="L113">            loader = new FXMLLoader(getClass().getResource(&quot;../ressources/gestionDesVendeurs.fxml&quot;));</span>
+        }
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        else if(nombre == 1)</span>
+        {
+<span class="nc" id="L117">            loader = new FXMLLoader(getClass().getResource(&quot;../ressources/gestionDesRayons.fxml&quot;));</span>
+        }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        else if(nombre == 2)</span>
+        {
+<span class="nc" id="L121">            loader = new FXMLLoader(getClass().getResource(&quot;../ressources/gestionArticlesReserves.fxml&quot;));</span>
+        }
+
+<span class="nc" id="L124">        Parent parent = loader.load();</span>
+<span class="nc" id="L125">        nodes[0] = (Node) parent;</span>
+<span class="nc" id="L126">        pnl_scroll.getChildren().add(nodes[0]);</span>
+
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if(nombre == 0)</span>
+        {
+<span class="nc" id="L130">            GestionDesVendeursControleur controleur = loader.getController();</span>
+
+<span class="nc" id="L132">            estSurGestionDesVendeurs = true;</span>
+<span class="nc" id="L133">            estSurGestionDesRayons = false;</span>
+<span class="nc" id="L134">            estSurGestionDesArticlesReserves = false;</span>
+<span class="nc" id="L135">        }</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        else if(nombre == 1)</span>
+        {
+<span class="nc" id="L138">            GestionDesRayonsControleur controleur = loader.getController();</span>
+
+<span class="nc" id="L140">            controleur.setVBox(pnl_scroll);</span>
+<span class="nc" id="L141">            controleur.setNodes(nodes);</span>
+<span class="nc" id="L142">            controleur.setEstUnVendeur(false);</span>
+<span class="nc" id="L143">            controleur.setApplicationPrincipaleChefControleur(this);</span>
+
+<span class="nc" id="L145">            estSurGestionDesRayons = true;</span>
+<span class="nc" id="L146">            estSurGestionDesVendeurs = false;</span>
+<span class="nc" id="L147">            estSurGestionDesArticlesReserves = false;</span>
+<span class="nc" id="L148">        }</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        else if(nombre == 2)</span>
+        {
+<span class="nc" id="L151">            GestionArticlesReservesControleur controleur = loader.getController();</span>
+<span class="nc" id="L152">            controleur.setEstUnVendeur(false);</span>
+
+<span class="nc" id="L154">            estSurGestionDesArticlesReserves = true;</span>
+<span class="nc" id="L155">            estSurGestionDesRayons = false;</span>
+<span class="nc" id="L156">            estSurGestionDesVendeurs = false;</span>
+        }
+
+<span class="nc" id="L159">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

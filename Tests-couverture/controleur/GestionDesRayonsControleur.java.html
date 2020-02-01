@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestionDesRayonsControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">GestionDesRayonsControleur.java</span></div><h1>GestionDesRayonsControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import controleur.dao.ChefMagasinDAO;
+import controleur.dao.MagasinDAO;
+import controleur.dao.SetupEM;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import modele.*;
+import org.controlsfx.control.textfield.CustomTextField;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class GestionDesRayonsControleur implements Initializable {
+    @FXML
+    private TableView&lt;Rayon&gt; tableauRayons;
+    @FXML
+    private TableColumn&lt;Rayon, String&gt; colRayon;
+    @FXML
+    private CustomTextField filtreTextField;
+    @FXML
+    private Button ajouterButton;
+    @FXML
+    private Button modifierButton;
+    @FXML
+    private Button supprimerButton;
+
+    private MagasinDAO magasinDAO;
+    private ChefMagasin chefMagasin;
+
+<span class="nc" id="L43">    private ObservableList&lt;Rayon&gt; produits = FXCollections.observableArrayList();</span>
+<span class="nc" id="L44">    private ObservableList&lt;Rayon&gt; filtreProduits = FXCollections.observableArrayList();</span>
+
+    private VBox pnl_scroll;
+    private Node[] nodes;
+    private boolean estUnVendeur;
+    private Vendeur vendeur;
+    private ApplicationPrincipaleControleur applicationPrincipaleControleur;
+    private ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur;
+
+    public void setApplicationPrincipaleChefControleur(ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur) {
+<span class="nc" id="L54">        this.applicationPrincipaleChefControleur = applicationPrincipaleChefControleur;</span>
+<span class="nc" id="L55">    }</span>
+
+    public void setApplicationPrincipaleControleur(ApplicationPrincipaleControleur applicationPrincipaleControleur) {
+<span class="nc" id="L58">        this.applicationPrincipaleControleur = applicationPrincipaleControleur;</span>
+<span class="nc" id="L59">    }</span>
+
+    public void setVBox(VBox vBox)
+    {
+<span class="nc" id="L63">        this.pnl_scroll = vBox;</span>
+<span class="nc" id="L64">    }</span>
+
+    public VBox getVBox()
+    {
+<span class="nc" id="L68">        return pnl_scroll;</span>
+    }
+
+    public Node[] getNodes()
+    {
+<span class="nc" id="L73">        return nodes;</span>
+    }
+
+    public void setNodes(Node[] no)
+    {
+<span class="nc" id="L78">        this.nodes = no;</span>
+<span class="nc" id="L79">    }</span>
+
+    public void setEstUnVendeur(boolean estUnVendeur)
+    {
+<span class="nc" id="L83">        this.estUnVendeur = estUnVendeur;</span>
+<span class="nc" id="L84">    }</span>
+
+    public void setVendeur(Vendeur vendeur)
+    {
+<span class="nc" id="L88">        this.vendeur = vendeur;</span>
+<span class="nc" id="L89">    }</span>
+
+    public GestionDesRayonsControleur()
+<span class="nc" id="L92">    {</span>
+<span class="nc" id="L93">        magasinDAO = new MagasinDAO();</span>
+<span class="nc" id="L94">        magasinDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L95">    }</span>
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+<span class="nc" id="L100">        ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();</span>
+<span class="nc" id="L101">        chefMagasinDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L102">        this.chefMagasin = chefMagasinDAO.recupererChefMagasin();</span>
+
+        //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
+<span class="nc" id="L105">        colRayon.setCellValueFactory(new PropertyValueFactory(&quot;nom&quot;));</span>
+
+<span class="nc" id="L107">        remplirTableauDeRayons();</span>
+<span class="nc" id="L108">    }</span>
+
+    public void remplirTableauDeRayons()
+    {
+<span class="nc" id="L112">        List&lt;Rayon&gt; rayons = magasinDAO.recupererRayon();</span>
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if(estUnVendeur == true)</span>
+        {
+<span class="nc" id="L116">            rayons.remove(vendeur.getRayonV());</span>
+        }
+<span class="nc" id="L118">        filtreProduits.clear();</span>
+<span class="nc" id="L119">        filtreProduits.addAll(rayons);</span>
+
+<span class="nc" id="L121">        produits.clear();</span>
+<span class="nc" id="L122">        produits.addAll((rayons));</span>
+
+<span class="nc" id="L124">        tableauRayons.setItems(filtreProduits);</span>
+<span class="nc" id="L125">    }</span>
+
+    private void mettreAJourFiltre() {
+<span class="nc" id="L128">        filtreProduits.clear();</span>
+
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        for (Rayon r : produits) {</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">            if (matchFiltre(r)) {</span>
+<span class="nc" id="L132">                filtreProduits.add(r);</span>
+            }
+<span class="nc" id="L134">        }</span>
+<span class="nc" id="L135">    }</span>
+
+    /**
+     * Vider ce qui a ete tape dans la barre de recherche
+     */
+    public void viderBarreRecherche()
+    {
+<span class="nc" id="L142">        filtreTextField.setText(&quot;&quot;);</span>
+<span class="nc" id="L143">    }</span>
+
+    private boolean matchFiltre(Rayon rayon) {
+<span class="nc" id="L146">        String filtrerString = filtreTextField.getText();</span>
+<span class="nc bnc" id="L147" title="All 4 branches missed.">        if (filtrerString == null || filtrerString.isEmpty()) {</span>
+            //Pas de filtre afficher tout les articles
+<span class="nc" id="L149">            return true;</span>
+        }
+<span class="nc" id="L151">        String lowerCaseFilterString = filtrerString.toLowerCase();</span>
+
+<span class="nc bnc" id="L153" title="All 2 branches missed.">        if (rayon.getNom().toLowerCase().indexOf(lowerCaseFilterString) != -1) {</span>
+<span class="nc" id="L154">            return true;</span>
+        }
+        else{
+            //Aucun match trouve
+<span class="nc" id="L158">            return false;</span>
+        }
+    }
+
+    public void editerFormulaire(String titre, boolean bool) throws IOException {
+<span class="nc" id="L163">        Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc" id="L165">        Object[] res = new BoiteAOutil().creerBoiteDialogue (titre, 4);</span>
+
+        //Recuperer le controleur lier à la vue
+<span class="nc" id="L168">        BoiteDialogueRayonControleur controleur = ((FXMLLoader)res[0]).getController();</span>
+        //Modifier le rayon
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        if(bool == true)</span>
+        {
+<span class="nc" id="L172">            controleur.remplirFormulaire(rayon);</span>
+        }
+        else
+        {
+<span class="nc" id="L176">            controleur.remplirFormulaire(null);</span>
+        }
+        //Indique au controler si c'est a modifier ou a ajouter
+<span class="nc" id="L179">        controleur.setEstAModifier(bool);</span>
+<span class="nc" id="L180">        controleur.setRayon(rayon);</span>
+<span class="nc" id="L181">        controleur.setDialogStage((Stage)res[1]);</span>
+<span class="nc" id="L182">        controleur.setGestionDesRayonsControleur(this);</span>
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+<span class="nc" id="L185">        ((Stage)res[1]).showAndWait();</span>
+<span class="nc" id="L186">    }</span>
+
+    public void cliqueSurSupprimer() {
+<span class="nc bnc" id="L189" title="All 2 branches missed.">        if(tableauRayons.getSelectionModel().getSelectedItem() == null)</span>
+        {
+<span class="nc" id="L191">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L192">            alert.setTitle(&quot;Erreur supprimer rayon&quot;);</span>
+<span class="nc" id="L193">            alert.setContentText(&quot;Veuillez selectionner un rayon dans la liste&quot;);</span>
+<span class="nc" id="L194">            alert.showAndWait();</span>
+<span class="nc" id="L195">        }</span>
+        else
+        {
+<span class="nc" id="L198">            Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();</span>
+<span class="nc" id="L199">            magasinDAO.supprimerRayon(rayon.getIdRayon());</span>
+            //Actualiser le tableauView
+<span class="nc" id="L201">            remplirTableauDeRayons();</span>
+        }
+
+<span class="nc" id="L204">    }</span>
+
+    public void cliqueSurModifier() throws IOException {
+
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        if(tableauRayons.getSelectionModel().getSelectedItem() == null)</span>
+        {
+<span class="nc" id="L210">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L211">            alert.setTitle(&quot;Erreur modifier rayon&quot;);</span>
+<span class="nc" id="L212">            alert.setContentText(&quot;Veuillez selectionner un rayon dans la liste&quot;);</span>
+<span class="nc" id="L213">            alert.showAndWait();</span>
+<span class="nc" id="L214">        }</span>
+        else
+        {
+<span class="nc" id="L217">            editerFormulaire(&quot;Modifier rayon&quot;, true);</span>
+        }
+<span class="nc" id="L219">    }</span>
+
+    public void cliqueSurAjouter() throws IOException {
+<span class="nc" id="L222">        editerFormulaire(&quot;Ajouter rayon&quot;,false);</span>
+<span class="nc" id="L223">    }</span>
+
+    public void cliqueSurVisiter() {
+        try {
+<span class="nc bnc" id="L227" title="All 2 branches missed.">            if(tableauRayons.getSelectionModel().getSelectedItem() == null)</span>
+            {
+<span class="nc" id="L229">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L230">                alert.setTitle(&quot;Erreur visiter rayon&quot;);</span>
+<span class="nc" id="L231">                alert.setContentText(&quot;Veuillez selectionner un rayon dans la liste&quot;);</span>
+<span class="nc" id="L232">                alert.showAndWait();</span>
+<span class="nc" id="L233">            }</span>
+            else
+            {
+                //Vider l'ancienne vue
+<span class="nc" id="L237">                pnl_scroll.getChildren().clear();</span>
+
+<span class="nc" id="L239">                FXMLLoader loader = new FXMLLoader(getClass().getResource(&quot;../ressources/monRayon.fxml&quot;));</span>
+<span class="nc" id="L240">                Parent parent = loader.load();</span>
+<span class="nc" id="L241">                nodes[0] = (Node) parent;</span>
+<span class="nc" id="L242">                pnl_scroll.getChildren().add(nodes[0]);</span>
+
+<span class="nc" id="L244">                MonRayonControleur controleur = loader.getController();</span>
+
+<span class="nc" id="L246">                Rayon rayon = tableauRayons.getSelectionModel().getSelectedItem();</span>
+
+                // permet de savoir quel rayon afficher
+<span class="nc" id="L249">                controleur.setRayon(rayon);</span>
+<span class="nc" id="L250">                controleur.setApplicationPrincipaleControleur(applicationPrincipaleControleur);</span>
+<span class="nc" id="L251">                controleur.setApplicationPrincipaleChefControleur(applicationPrincipaleChefControleur);</span>
+
+<span class="nc bnc" id="L253" title="All 2 branches missed.">                if(!estUnVendeur)</span>
+                {
+<span class="nc" id="L255">                    controleur.setType(0);</span>
+                }
+<span class="nc bnc" id="L257" title="All 2 branches missed.">                if(estUnVendeur)</span>
+                {
+<span class="nc" id="L259">                    controleur.setType(2);</span>
+                }
+
+<span class="nc" id="L262">                controleur.vue();</span>
+<span class="nc" id="L263">                controleur.remplirTableauDArticles();</span>
+            }
+
+
+<span class="nc" id="L267">        } catch (IOException ex) {</span>
+<span class="nc" id="L268">            Logger.getLogger(ApplicationPrincipaleControleur.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L269">        }</span>
+
+<span class="nc" id="L271">    }</span>
+
+    public void cliqueSurSearch() {
+<span class="nc" id="L274">        mettreAJourFiltre();</span>
+<span class="nc" id="L275">    }</span>
+
+    public void cliqueSurSupprimerFiltre() {
+<span class="nc" id="L278">        viderBarreRecherche();</span>
+<span class="nc" id="L279">        remplirTableauDeRayons();</span>
+<span class="nc" id="L280">    }</span>
+
+    public void vue()
+    {
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        if(estUnVendeur == true)</span>
+        {
+<span class="nc" id="L286">            ajouterButton.setVisible(false);</span>
+<span class="nc" id="L287">            modifierButton.setVisible(false);</span>
+<span class="nc" id="L288">            supprimerButton.setVisible(false);</span>
+        }
+<span class="nc" id="L290">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

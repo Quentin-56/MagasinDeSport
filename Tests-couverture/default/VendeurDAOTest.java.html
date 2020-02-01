@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VendeurDAOTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">VendeurDAOTest.java</span></div><h1>VendeurDAOTest.java</h1><pre class="source lang-java linenums">import controleur.dao.VendeurDAO;
+import modele.Rayon;
+import modele.Vendeur;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+
+<span class="fc" id="L23">public class VendeurDAOTest {</span>
+    @Mock
+    EntityManager entityManagerMock;
+
+    @Mock
+    EntityTransaction transaction;
+    @Mock
+    Query queryMock;
+
+    @BeforeEach
+    public void setup(){
+<span class="fc" id="L34">        MockitoAnnotations.initMocks(this);</span>
+<span class="fc" id="L35">    }</span>
+
+    @Test
+    public void creer_un_vendeur_test(){
+<span class="fc" id="L39">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L40">        doAnswer(new Answer&lt;Object&gt;(){</span>
+            @Override
+            public Object answer(InvocationOnMock invocation){
+<span class="fc" id="L43">                Vendeur vendeur = (Vendeur) invocation.getArguments()[0];</span>
+<span class="fc" id="L44">                vendeur.setIdPersonne(1);</span>
+<span class="fc" id="L45">                return vendeur;</span>
+            }
+<span class="fc" id="L47">        }).when(entityManagerMock).persist(any(Vendeur.class));</span>
+<span class="fc" id="L48">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L49">        dao.setEntityManager(entityManagerMock);</span>
+
+<span class="fc" id="L51">        Vendeur vendeur = dao.creerVendeur(&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,new Rayon());</span>
+<span class="fc" id="L52">        vendeur.setIdPersonne(1);</span>
+<span class="fc" id="L53">        verify(transaction).begin();</span>
+<span class="fc" id="L54">        verify(transaction).commit();</span>
+<span class="fc" id="L55">        verify(entityManagerMock).persist(vendeur);</span>
+<span class="fc" id="L56">    }</span>
+    @Test
+    public void supprimer_un_vendeur(){
+<span class="fc" id="L59">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L60">        Rayon rayon = new Rayon();</span>
+<span class="fc" id="L61">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L62">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L63">        int idVendeurASupprimer= 1;</span>
+<span class="fc" id="L64">        Vendeur vendeur = dao.creerVendeur(&quot;&quot;,&quot;&quot;,&quot;&quot;,&quot;&quot;,rayon);</span>
+<span class="fc" id="L65">        vendeur.setIdPersonne(1);</span>
+<span class="fc" id="L66">        when(entityManagerMock.find(Vendeur.class, idVendeurASupprimer)).thenReturn(vendeur);</span>
+<span class="fc" id="L67">        doNothing().when(entityManagerMock).remove(vendeur);</span>
+<span class="fc" id="L68">        dao.supprimerVendeur(idVendeurASupprimer, rayon);</span>
+<span class="fc" id="L69">        verify(entityManagerMock).remove(vendeur);</span>
+<span class="fc" id="L70">    }</span>
+    @Test
+    public void modifier_vendeur(){
+
+<span class="fc" id="L74">        Vendeur vendeur = new Vendeur();</span>
+<span class="fc" id="L75">        Vendeur vendeurModifie = vendeur;</span>
+<span class="fc" id="L76">        vendeurModifie.setNom(&quot;test&quot;);</span>
+<span class="fc" id="L77">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L78">        when(entityManagerMock.merge(vendeur)).thenReturn(vendeurModifie);</span>
+<span class="fc" id="L79">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L80">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L81">        dao.modifierVendeur(vendeur);</span>
+<span class="fc" id="L82">        verify(transaction).begin();</span>
+<span class="fc" id="L83">        verify(transaction).commit();</span>
+<span class="fc" id="L84">        verify(entityManagerMock).merge(vendeurModifie);</span>
+
+<span class="fc" id="L86">    }</span>
+    @Test
+    public void ajouter_vendeur_dans_la_liste_vendeur_test(){
+        //Before
+<span class="fc" id="L90">        Rayon rayon = new Rayon();</span>
+<span class="fc" id="L91">        Vendeur vendeur1 = new Vendeur();</span>
+<span class="fc" id="L92">        Vendeur vendeur2 = new Vendeur();</span>
+<span class="fc" id="L93">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L94">        List&lt;Vendeur&gt; listeVendeurInitial = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L95">        listeVendeurInitial.add(vendeur1);</span>
+<span class="fc" id="L96">        rayon.setListeVendeurs(listeVendeurInitial);</span>
+        //test
+<span class="fc" id="L98">        dao.ajouterVendeurDansListeVendeur(vendeur2,rayon);</span>
+<span class="fc" id="L99">        assertEquals(vendeur1,rayon.getListeVendeurs().get(0));</span>
+<span class="fc" id="L100">        assertEquals(vendeur2,rayon.getListeVendeurs().get(1));</span>
+        //after
+<span class="fc" id="L102">        rayon.setListeArticles(null);</span>
+<span class="fc" id="L103">    }</span>
+    @Test
+    public void supprimer_vendeur_dans_la_liste_vendeur(){
+        //Before
+<span class="fc" id="L107">        Rayon rayon = new Rayon();</span>
+<span class="fc" id="L108">        Vendeur vendeur1 = new Vendeur();</span>
+<span class="fc" id="L109">        Vendeur vendeur2 = new Vendeur();</span>
+<span class="fc" id="L110">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L111">        List&lt;Vendeur&gt; listeVendeurInitial = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L112">        listeVendeurInitial.add(vendeur1);</span>
+<span class="fc" id="L113">        listeVendeurInitial.add(vendeur2);</span>
+<span class="fc" id="L114">        rayon.setListeVendeurs(listeVendeurInitial);</span>
+        //test
+<span class="fc" id="L116">        dao.supprimerVendeurDansListeVendeur(vendeur2, rayon);</span>
+<span class="fc" id="L117">        assertEquals(vendeur1,rayon.getListeVendeurs().get(0));</span>
+        try{
+<span class="nc" id="L119">            rayon.getListeVendeurs().get(1);</span>
+<span class="fc" id="L120">        }catch (IndexOutOfBoundsException e){</span>
+<span class="fc" id="L121">            assertEquals(&quot;Index 1 out of bounds for length 1&quot;,e.getMessage());</span>
+<span class="nc" id="L122">        }</span>
+        //after
+<span class="fc" id="L124">        rayon.setListeArticles(null);</span>
+<span class="fc" id="L125">    }</span>
+    @Test
+    public void recuperer_vendeur(){
+<span class="fc" id="L128">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L129">        Rayon rayon = new Rayon();</span>
+<span class="fc" id="L130">        Vendeur vendeur1 = new Vendeur();</span>
+<span class="fc" id="L131">        Vendeur vendeur2 = new Vendeur();</span>
+<span class="fc" id="L132">        List&lt;Vendeur&gt; listeTest = List.of(vendeur1, vendeur2);</span>
+
+<span class="fc" id="L134">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+
+<span class="fc" id="L136">        when(entityManagerMock.createQuery(&quot;from Vendeur vendeur&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L137">        when(queryMock.setParameter(1,rayon)).thenReturn(queryMock);</span>
+<span class="fc" id="L138">        when(queryMock.getResultList()).thenReturn(listeTest);</span>
+<span class="fc" id="L139">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L140">        assertArrayEquals(listeTest.toArray(), dao.recupererVendeurs().toArray());</span>
+<span class="fc" id="L141">        verify(transaction).begin();</span>
+<span class="fc" id="L142">        verify(transaction).commit();</span>
+
+
+<span class="fc" id="L145">    }</span>
+    @Test
+    public void trouver_vendeur_avec_son_identifiant(){
+<span class="fc" id="L148">        VendeurDAO dao = new VendeurDAO();</span>
+<span class="fc" id="L149">        Vendeur vendeur = new Vendeur();</span>
+<span class="fc" id="L150">        String identifiant= &quot;ok&quot;;</span>
+<span class="fc" id="L151">        vendeur.setIdentifiant(identifiant);</span>
+<span class="fc" id="L152">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L153">        when(entityManagerMock.createQuery(&quot;from Vendeur vendeur where vendeur.identifiant = ?1&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L154">        when(queryMock.setParameter(1,identifiant)).thenReturn(queryMock);</span>
+<span class="fc" id="L155">        when(queryMock.getSingleResult()).thenReturn(vendeur);</span>
+<span class="fc" id="L156">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L157">        assertEquals(vendeur, dao.trouverVendeurAvecIdentifiant(identifiant));</span>
+<span class="fc" id="L158">        verify(transaction).begin();</span>
+<span class="fc" id="L159">        verify(transaction).commit();</span>
+<span class="fc" id="L160">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

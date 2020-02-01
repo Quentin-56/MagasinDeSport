@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MagasinDAOTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">MagasinDAOTest.java</span></div><h1>MagasinDAOTest.java</h1><pre class="source lang-java linenums">import controleur.dao.MagasinDAO;
+import modele.Magasin;
+import modele.Rayon;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+
+<span class="fc" id="L23">public class MagasinDAOTest {</span>
+    @Mock
+    EntityManager entityManagerMock;
+
+    @Mock
+    EntityTransaction transaction;
+
+    @Mock
+    Query queryMock;
+
+
+    @BeforeEach
+    public void setup(){
+<span class="fc" id="L36">        MockitoAnnotations.initMocks(this);</span>
+<span class="fc" id="L37">        Magasin magasin = new Magasin();</span>
+<span class="fc" id="L38">    }</span>
+
+    @Test
+    public void rayon_ajouter_au_magasin()
+    {
+<span class="fc" id="L43">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+
+<span class="fc" id="L45">        doAnswer(new Answer&lt;Object&gt;(){</span>
+            @Override
+            public Object answer(InvocationOnMock invocation){
+<span class="fc" id="L48">                Rayon rayon = (Rayon) invocation.getArguments()[0];</span>
+<span class="fc" id="L49">                rayon.setIdRayon(1);</span>
+<span class="fc" id="L50">                return rayon;</span>
+            }
+<span class="fc" id="L52">        }).when(entityManagerMock).persist(any(Rayon.class));</span>
+<span class="fc" id="L53">        MagasinDAO dao = new MagasinDAO();</span>
+<span class="fc" id="L54">        dao.setEntityManager(entityManagerMock);</span>
+
+<span class="fc" id="L56">        Rayon rayon =dao.creerRayon(&quot;&quot;);</span>
+<span class="fc" id="L57">        verify(transaction).begin();</span>
+<span class="fc" id="L58">        verify(transaction).commit();</span>
+<span class="fc" id="L59">        verify(entityManagerMock).persist(rayon);</span>
+<span class="fc" id="L60">    }</span>
+    @Test
+    public void rayon_supprimer_du_magasin()
+    {
+<span class="fc" id="L64">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L65">        MagasinDAO dao = new MagasinDAO();</span>
+<span class="fc" id="L66">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L67">        Rayon rayon =dao.creerRayon(&quot;&quot;);</span>
+<span class="fc" id="L68">        int idRayonASupprimer =1;</span>
+<span class="fc" id="L69">        rayon.setIdRayon(idRayonASupprimer);</span>
+<span class="fc" id="L70">        when(entityManagerMock.find(Rayon.class, idRayonASupprimer)).thenReturn(rayon);</span>
+<span class="fc" id="L71">        doNothing().when(entityManagerMock).remove(rayon);</span>
+<span class="fc" id="L72">        dao.supprimerRayon(idRayonASupprimer);</span>
+<span class="fc" id="L73">        verify(entityManagerMock).remove(rayon);</span>
+
+<span class="fc" id="L75">    }</span>
+
+    @Test
+    public void modifier_rayon_du_magasin(){
+
+<span class="fc" id="L80">        Rayon rayon = new Rayon();</span>
+<span class="fc" id="L81">        Rayon rayonModifie = rayon;</span>
+<span class="fc" id="L82">        rayonModifie.setNom(&quot;test&quot;);</span>
+<span class="fc" id="L83">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L84">        when(entityManagerMock.merge(rayon)).thenReturn(rayonModifie);</span>
+<span class="fc" id="L85">        MagasinDAO dao = new MagasinDAO();</span>
+<span class="fc" id="L86">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L87">        dao.modifierRayon(rayon);</span>
+<span class="fc" id="L88">        verify(transaction).begin();</span>
+<span class="fc" id="L89">        verify(transaction).commit();</span>
+<span class="fc" id="L90">        verify(entityManagerMock).merge(rayonModifie);</span>
+
+<span class="fc" id="L92">    }</span>
+
+
+    @Test
+    public void ajouter_rayon_dans_la_liste_rayon(){
+        //Before
+<span class="fc" id="L98">        Rayon rayon1 = new Rayon();</span>
+<span class="fc" id="L99">        Rayon rayon2 = new Rayon();</span>
+<span class="fc" id="L100">        MagasinDAO dao = new MagasinDAO();</span>
+<span class="fc" id="L101">        List&lt;Rayon&gt; listeRayonInitial = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L102">        listeRayonInitial.add(rayon1);</span>
+<span class="fc" id="L103">        Magasin.setListeRayons((ArrayList&lt;Rayon&gt;) listeRayonInitial);</span>
+        //test
+<span class="fc" id="L105">        dao.ajouterRayonDansLaListeRayon(rayon2);</span>
+<span class="fc" id="L106">        assertEquals(rayon1,Magasin.getListeRayons().get(0));</span>
+<span class="fc" id="L107">        assertEquals(rayon2,Magasin.getListeRayons().get(1));</span>
+        //after
+<span class="fc" id="L109">        Magasin.setListeRayons(null);</span>
+<span class="fc" id="L110">    }</span>
+    @Test
+    public void supprimer_rayon_dans_la_liste_rayon(){
+        //Before
+<span class="fc" id="L114">        Rayon rayon1 = new Rayon();</span>
+<span class="fc" id="L115">        Rayon rayon2 = new Rayon();</span>
+<span class="fc" id="L116">        MagasinDAO dao = new MagasinDAO();</span>
+<span class="fc" id="L117">        List&lt;Rayon&gt; listeRayonInitial = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L118">        listeRayonInitial.add(rayon1);</span>
+<span class="fc" id="L119">        listeRayonInitial.add(rayon2);</span>
+<span class="fc" id="L120">        Magasin.setListeRayons((ArrayList&lt;Rayon&gt;) listeRayonInitial);</span>
+        //test
+<span class="fc" id="L122">        dao.supprimerRayonDansLaListeRayon(rayon2);</span>
+<span class="fc" id="L123">        assertEquals(rayon1,Magasin.getListeRayons().get(0));</span>
+        try{
+<span class="nc" id="L125">            Magasin.getListeRayons().get(1);</span>
+<span class="fc" id="L126">        }catch (IndexOutOfBoundsException e){</span>
+<span class="fc" id="L127">            assertEquals(&quot;Index 1 out of bounds for length 1&quot;,e.getMessage());</span>
+<span class="nc" id="L128">        }</span>
+        //after
+<span class="fc" id="L130">        Magasin.setListeRayons(null);</span>
+<span class="fc" id="L131">    }</span>
+
+    @Test
+    public void recuperer_rayon_du_magasin(){
+<span class="fc" id="L135">        MagasinDAO dao = new MagasinDAO();</span>
+
+<span class="fc" id="L137">        Rayon rayon1 = new Rayon();</span>
+<span class="fc" id="L138">        Rayon rayon2 = new Rayon();</span>
+<span class="fc" id="L139">        List&lt;Rayon&gt; listeTest = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L140">        listeTest.add(rayon1);</span>
+<span class="fc" id="L141">        listeTest.add(rayon2);</span>
+
+<span class="fc" id="L143">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+
+<span class="fc" id="L145">        when(entityManagerMock.createQuery(&quot;from Rayon&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L146">        when(queryMock.getResultList()).thenReturn(listeTest);</span>
+<span class="fc" id="L147">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L148">        assertArrayEquals(listeTest.toArray(), dao.recupererRayon().toArray());</span>
+<span class="fc" id="L149">        verify(transaction).begin();</span>
+<span class="fc" id="L150">        verify(transaction).commit();</span>
+
+
+<span class="fc" id="L153">    }</span>
+
+    @Test
+    public void trouver_un_rayon_avec_son_nom(){
+<span class="fc" id="L157">        MagasinDAO dao =  new MagasinDAO();</span>
+<span class="fc" id="L158">        Rayon rayon = new Rayon();</span>
+<span class="fc" id="L159">        String nomRayon = &quot;Foot&quot;;</span>
+<span class="fc" id="L160">        rayon.setNom(nomRayon);</span>
+<span class="fc" id="L161">        when(entityManagerMock.getTransaction()).thenReturn(transaction);</span>
+<span class="fc" id="L162">        when(entityManagerMock.createQuery(&quot;from Rayon rayon where rayon.nom = ?1&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L163">        when(queryMock.setParameter(1,nomRayon)).thenReturn(queryMock);</span>
+<span class="fc" id="L164">        when(queryMock.getSingleResult()).thenReturn(rayon);</span>
+<span class="fc" id="L165">        dao.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L166">        assertEquals(dao.trouverRayonAvecNom(nomRayon), rayon);</span>
+<span class="fc" id="L167">        verify(transaction).begin();</span>
+<span class="fc" id="L168">        verify(transaction).commit();</span>
+
+<span class="fc" id="L170">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

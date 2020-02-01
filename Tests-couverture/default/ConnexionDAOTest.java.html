@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConnexionDAOTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">ConnexionDAOTest.java</span></div><h1>ConnexionDAOTest.java</h1><pre class="source lang-java linenums">import controleur.dao.ConnexionDAO;
+import modele.ChefMagasin;
+import modele.Personne;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+<span class="fc" id="L14">public class ConnexionDAOTest {</span>
+
+    @Mock
+    EntityManager entityManagerMock;
+    @Mock
+    private Query queryMock;
+
+    @BeforeEach
+    public void setup(){
+<span class="fc" id="L23">       MockitoAnnotations.initMocks(this);</span>
+<span class="fc" id="L24">    }</span>
+
+    @Test
+    public void devrait_etre_un_chef_qui_se_connecte(){
+<span class="fc" id="L28">        when(entityManagerMock.createQuery(&quot;from ChefMagasin chef where chef.identifiant =  ?1&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L29">        when(queryMock.setParameter(1,&quot;Id&quot;)).thenReturn(queryMock);</span>
+
+<span class="fc" id="L31">        ChefMagasin chef = new ChefMagasin();</span>
+<span class="fc" id="L32">        when(queryMock.getSingleResult()).thenReturn(chef);</span>
+
+<span class="fc" id="L34">        ConnexionDAO con = new ConnexionDAO();</span>
+<span class="fc" id="L35">        con.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L36">        assertEquals(con.leChefSeConnecte(&quot;Id&quot;),true);</span>
+<span class="fc" id="L37">    }</span>
+
+    @Test
+    public void devrait_etre_un_vendeur_qui_se_connecte(){
+<span class="fc" id="L41">        when(entityManagerMock.createQuery(&quot;from ChefMagasin chef where chef.identifiant =  ?1&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L42">        when(queryMock.setParameter(1,&quot;Id&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L43">        when(queryMock.getSingleResult()).thenReturn(null);</span>
+
+<span class="fc" id="L45">        ConnexionDAO con = new ConnexionDAO();</span>
+<span class="fc" id="L46">        con.setEntityManager(entityManagerMock);</span>
+<span class="fc" id="L47">        assertEquals(con.leChefSeConnecte(&quot;Id&quot;),false);</span>
+<span class="fc" id="L48">    }</span>
+
+    @Test
+    public void identifiant_correct(){
+<span class="fc" id="L52">        when(entityManagerMock.createQuery(&quot; from Personne personne where personne.identifiant = ?1 &quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L53">        when(queryMock.setParameter(1,&quot;id&quot;)).thenReturn(queryMock);</span>
+
+<span class="fc" id="L55">        Personne vendeur = new  Personne();</span>
+<span class="fc" id="L56">        when(queryMock.getSingleResult()).thenReturn(vendeur);</span>
+
+<span class="fc" id="L58">        ConnexionDAO con = new ConnexionDAO();</span>
+<span class="fc" id="L59">        con.setEntityManager(entityManagerMock);</span>
+
+<span class="fc" id="L61">        assertEquals(con.verifierIdentifiant(&quot;id&quot;),true);</span>
+
+<span class="fc" id="L63">    }</span>
+    @Test
+    public void identifiant_incorrect(){
+<span class="fc" id="L66">        when(entityManagerMock.createQuery(&quot; from Personne personne where personne.identifiant = ?1 &quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L67">        when(queryMock.setParameter(1,&quot;id&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L68">        when(queryMock.getSingleResult()).thenReturn(null);</span>
+
+<span class="fc" id="L70">        ConnexionDAO con = new ConnexionDAO();</span>
+<span class="fc" id="L71">        con.setEntityManager(entityManagerMock);</span>
+
+<span class="fc" id="L73">        assertEquals(con.verifierIdentifiant(&quot;id&quot;),false);</span>
+<span class="fc" id="L74">    }</span>
+
+    @Test
+    public void motDePasse_associe_a_un_identifiant_est_incorrect(){
+<span class="fc" id="L78">        when(entityManagerMock.createQuery(&quot; from Personne personne where personne.identifiant = ?1&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L79">        when(queryMock.setParameter(1,&quot;id&quot;)).thenReturn(queryMock);</span>
+
+<span class="fc" id="L81">        Personne personne = new Personne();</span>
+<span class="fc" id="L82">        personne.setMotDePasse(&quot;mdpdifferent&quot;);</span>
+<span class="fc" id="L83">        when(queryMock.getSingleResult()).thenReturn(personne);</span>
+
+<span class="fc" id="L85">        ConnexionDAO con = new ConnexionDAO();</span>
+<span class="fc" id="L86">        con.setEntityManager(entityManagerMock);</span>
+
+<span class="fc" id="L88">        assertEquals(con.verifierMotDePasse(&quot;id&quot;, &quot;mdp&quot;),false);</span>
+<span class="fc" id="L89">    }</span>
+
+    @Test
+    public void motDePasse_associe_a_un_identifiant_est_correct(){
+
+<span class="fc" id="L94">        when(entityManagerMock.createQuery(&quot; from Personne personne where personne.identifiant = ?1&quot;)).thenReturn(queryMock);</span>
+<span class="fc" id="L95">        when(queryMock.setParameter(1,&quot;id&quot;)).thenReturn(queryMock);</span>
+
+<span class="fc" id="L97">        Personne personne = new Personne();</span>
+<span class="fc" id="L98">        personne.setMotDePasse(&quot;mdp&quot;);</span>
+<span class="fc" id="L99">        when(queryMock.getSingleResult()).thenReturn(personne);</span>
+
+<span class="fc" id="L101">        ConnexionDAO con = new ConnexionDAO();</span>
+<span class="fc" id="L102">        con.setEntityManager(entityManagerMock);</span>
+
+<span class="fc" id="L104">        assertEquals(con.verifierMotDePasse(&quot;id&quot;, &quot;mdp&quot;),true);</span>
+<span class="fc" id="L105">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

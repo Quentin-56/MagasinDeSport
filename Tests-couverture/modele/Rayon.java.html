@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rayon.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">modele</a> &gt; <span class="el_source">Rayon.java</span></div><h1>Rayon.java</h1><pre class="source lang-java linenums">package modele;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class Rayon {
+	@Id
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private  int idRayon;
+
+	private String nom;
+
+	@OneToMany(
+			mappedBy = &quot;rayonA&quot;,
+			cascade = CascadeType.ALL
+	)
+	private List&lt;Article&gt;listeArticles;
+
+	@OneToMany(
+			mappedBy = &quot;rayonA&quot;,
+			cascade = CascadeType.ALL
+	)
+	private List&lt;Article&gt;listeReservationArticle;
+
+	@OneToMany(
+			mappedBy = &quot;rayonV&quot;,
+			cascade = CascadeType.ALL
+	)
+	private List&lt;Vendeur&gt; listeVendeurs;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Magasin magasin;
+
+	/**
+	 * Constructeur de confort
+	 * @param nom
+	 * @param listeArticles
+	 * @param listeReservationArticle
+	 * @param listeVendeurs
+	 */
+	public Rayon(String nom, List&lt;Article&gt; listeArticles, List&lt;Article&gt; listeReservationArticle,
+<span class="nc" id="L44">			List&lt;Vendeur&gt; listeVendeurs) {</span>
+<span class="nc" id="L45">		this.idRayon = 0;</span>
+<span class="nc" id="L46">		this.nom = nom;</span>
+<span class="nc" id="L47">		this.listeArticles = listeArticles;</span>
+<span class="nc" id="L48">		this.listeReservationArticle = listeReservationArticle;</span>
+<span class="nc" id="L49">		this.listeVendeurs = listeVendeurs;</span>
+<span class="nc" id="L50">	}</span>
+
+	/**
+	 * Constructeur par defaut
+	 */
+	public Rayon() {
+<span class="fc" id="L56">		super();</span>
+<span class="fc" id="L57">		this.idRayon = 0;</span>
+<span class="fc" id="L58">		this.nom = &quot;&quot;;</span>
+<span class="fc" id="L59">		this.listeArticles = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L60">		this.listeReservationArticle = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L61">		this.listeVendeurs = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L62">	}</span>
+
+	/**
+	 * Constructeur de recopie
+	 * @param rayon
+	 */
+<span class="nc" id="L68">	public Rayon(Rayon rayon) {</span>
+<span class="nc" id="L69">		this.idRayon = rayon.idRayon;</span>
+<span class="nc" id="L70">		this.nom = rayon.nom;</span>
+<span class="nc" id="L71">		this.listeArticles = rayon.listeArticles;</span>
+<span class="nc" id="L72">		this.listeReservationArticle = rayon.listeReservationArticle;</span>
+<span class="nc" id="L73">		this.listeVendeurs = rayon.listeVendeurs;</span>
+<span class="nc" id="L74">		this.magasin = rayon.magasin;</span>
+<span class="nc" id="L75">	}</span>
+
+
+	@Override
+	public String toString() {
+<span class="nc" id="L80">		return &quot;Rayon{&quot; +</span>
+				&quot;idRayon=&quot; + idRayon +
+				&quot;, nom='&quot; + nom + '\'' +
+				'}';
+	}
+
+	//GETTERS ET SETTERS
+	public int getIdRayon() {
+<span class="nc" id="L88">		return idRayon;</span>
+	}
+
+	public void setIdRayon(int idRayon) {
+<span class="fc" id="L92">		this.idRayon = idRayon;</span>
+<span class="fc" id="L93">	}</span>
+
+	public String getNom() {
+<span class="nc" id="L96">		return nom;</span>
+	}
+
+	public void setNom(String nom) {
+<span class="fc" id="L100">		this.nom = nom;</span>
+<span class="fc" id="L101">	}</span>
+
+	public List&lt;Article&gt; getListeArticles() {
+<span class="fc" id="L104">		return listeArticles;</span>
+	}
+
+	public void setListeArticles(List&lt;Article&gt; listeArticles) {
+<span class="fc" id="L108">		this.listeArticles = listeArticles;</span>
+<span class="fc" id="L109">	}</span>
+
+	public List&lt;Article&gt; getListeReservationArticle() {
+<span class="fc" id="L112">		return listeReservationArticle;</span>
+	}
+
+	public void setListeReservationArticle(List&lt;Article&gt; listeReservationArticle) {
+<span class="nc" id="L116">		this.listeReservationArticle = listeReservationArticle;</span>
+<span class="nc" id="L117">	}</span>
+
+	public List&lt;Vendeur&gt; getListeVendeurs() {
+<span class="fc" id="L120">		return listeVendeurs;</span>
+	}
+
+	public void setListeVendeurs(List&lt;Vendeur&gt; listeVendeurs) {
+<span class="fc" id="L124">		this.listeVendeurs = listeVendeurs;</span>
+<span class="fc" id="L125">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

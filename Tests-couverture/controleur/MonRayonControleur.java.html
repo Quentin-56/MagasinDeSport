@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MonRayonControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">MonRayonControleur.java</span></div><h1>MonRayonControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import controleur.dao.RayonDAO;
+import controleur.dao.SetupEM;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import modele.Article;
+import modele.Rayon;
+import org.controlsfx.control.textfield.CustomTextField;
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class MonRayonControleur implements Initializable {
+    @FXML
+    private TableView&lt;Article&gt; tableau;
+    @FXML
+    private TableColumn&lt;Article, String&gt; colNom;
+    @FXML
+    private TableColumn&lt;Article, String&gt; colQuantite;
+    @FXML
+    private Label nomLabel;
+    @FXML
+    private Label detailsLabel;
+    @FXML
+    private Label reservationLabel;
+    @FXML
+    private Label prixLabel;
+    @FXML
+    private CustomTextField filtreTextField;
+    @FXML
+    private Button transfererButton;
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button supprimerButton;
+    @FXML
+    private Button modifierButton;
+    @FXML
+    private Button reserverButton;
+    @FXML
+    private Button btnRetourEnArriere;
+
+<span class="nc" id="L51">    private ObservableList&lt;Article&gt; produits = FXCollections.observableArrayList();</span>
+<span class="nc" id="L52">    private ObservableList&lt;Article&gt; filtreProduits = FXCollections.observableArrayList();</span>
+
+    private int type;
+    private Rayon rayon;
+    private ApplicationPrincipaleControleur applicationPrincipaleControleur;
+    private ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur;
+    private RayonDAO rayonDAO;
+
+    public MonRayonControleur()
+<span class="nc" id="L61">    {</span>
+<span class="nc" id="L62">        rayonDAO = new RayonDAO();</span>
+<span class="nc" id="L63">        rayonDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L64">    }</span>
+
+    public void setApplicationPrincipaleControleur(ApplicationPrincipaleControleur applicationPrincipaleControleur) {
+<span class="nc" id="L67">        this.applicationPrincipaleControleur = applicationPrincipaleControleur;</span>
+<span class="nc" id="L68">    }</span>
+
+    public void setType(int type)
+    {
+<span class="nc" id="L72">        this.type = type;</span>
+<span class="nc" id="L73">    }</span>
+
+    public void setRayon(Rayon rayon)
+    {
+<span class="nc" id="L77">        this.rayon = rayon;</span>
+<span class="nc" id="L78">    }</span>
+
+    public void setApplicationPrincipaleChefControleur(ApplicationPrincipaleChefControleur applicationPrincipaleChefControleur) {
+<span class="nc" id="L81">        this.applicationPrincipaleChefControleur = applicationPrincipaleChefControleur;</span>
+<span class="nc" id="L82">    }</span>
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle)
+    {
+<span class="nc" id="L87">        detailsLabel.setWrapText(true);</span>
+        //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
+<span class="nc" id="L89">        colNom.setCellValueFactory(new PropertyValueFactory(&quot;nom&quot;));</span>
+<span class="nc" id="L90">        colQuantite.setCellValueFactory(new PropertyValueFactory(&quot;quantite&quot;));</span>
+
+<span class="nc" id="L92">        remplirTableauDArticles();</span>
+
+        //Nettoyer les details
+<span class="nc" id="L95">        afficherArticleDetails(null);</span>
+
+<span class="nc" id="L97">        tableau.getSelectionModel().selectedItemProperty().addListener(</span>
+<span class="nc" id="L98">                (observable, oldValue, newValue) -&gt; afficherArticleDetails(newValue));</span>
+
+<span class="nc" id="L100">    }</span>
+
+    public void remplirTableauDArticles()
+    {
+<span class="nc" id="L104">        List&lt;Article&gt; articles = rayonDAO.recupererArticleDuRayon(rayon);</span>
+
+<span class="nc" id="L106">        filtreProduits.clear();</span>
+<span class="nc" id="L107">        filtreProduits.addAll(articles);</span>
+
+<span class="nc" id="L109">        produits.clear();</span>
+<span class="nc" id="L110">        produits.addAll((articles));</span>
+
+<span class="nc" id="L112">        tableau.setItems(filtreProduits);</span>
+<span class="nc" id="L113">    }</span>
+
+    public void afficherArticleDetails(Article article)
+    {
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if(article != null)</span>
+        {
+<span class="nc" id="L119">            nomLabel.setText(article.getNom());</span>
+<span class="nc" id="L120">            detailsLabel.setText(article.getDetails());</span>
+<span class="nc" id="L121">            reservationLabel.setText(article.getQuantiteReserve()+&quot;&quot;);</span>
+<span class="nc" id="L122">            prixLabel.setText(article.getPrix()+&quot;&quot;);</span>
+
+        }
+        else
+        {
+<span class="nc" id="L127">            nomLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L128">            detailsLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L129">            reservationLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L130">            prixLabel.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L132">    }</span>
+
+    private void mettreAJourFiltre() {
+<span class="nc" id="L135">        filtreProduits.clear();</span>
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        for (Article a : produits) {</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (matchFiltre(a)) {</span>
+<span class="nc" id="L139">                filtreProduits.add(a);</span>
+            }
+<span class="nc" id="L141">        }</span>
+<span class="nc" id="L142">    }</span>
+
+    /**
+     * Vider ce qui a ete tape dans la barre de recherche
+     */
+    public void viderBarreRecherche()
+    {
+<span class="nc" id="L149">        filtreTextField.setText(&quot;&quot;);</span>
+<span class="nc" id="L150">    }</span>
+
+    private boolean matchFiltre(Article article) {
+<span class="nc" id="L153">        String filtrerString = filtreTextField.getText();</span>
+<span class="nc bnc" id="L154" title="All 4 branches missed.">        if (filtrerString == null || filtrerString.isEmpty()) {</span>
+            //Pas de filtre afficher tout les articles
+<span class="nc" id="L156">            return true;</span>
+        }
+<span class="nc" id="L158">        String lowerCaseFilterString = filtrerString.toLowerCase();</span>
+
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if (article.getNom().toLowerCase().contains(lowerCaseFilterString)) {</span>
+<span class="nc" id="L161">            return true;</span>
+        }
+        else{
+            //Aucun match trouve
+<span class="nc" id="L165">            return false;</span>
+        }
+    }
+
+    public void editerFormulaire(String titre, boolean bool) throws IOException {
+<span class="nc" id="L170">        Article article = tableau.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc" id="L172">        Object[] res = new BoiteAOutil().creerBoiteDialogue (titre, 1);</span>
+
+        //Recuperer le controleur lier à la vue
+<span class="nc" id="L175">        BoiteDialogueArticleControleur controleur = ((FXMLLoader)res[0]).getController();</span>
+        //Modifier l'article
+<span class="nc bnc" id="L177" title="All 2 branches missed.">        if(bool)</span>
+        {
+<span class="nc" id="L179">            controleur.remplirFormulaire(article);</span>
+        }
+        else //Ajouter l'article
+        {
+<span class="nc" id="L183">            controleur.remplirFormulaire(null);</span>
+<span class="nc" id="L184">            controleur.setRayon(rayon);</span>
+        }
+        //Indique au controler si c'est a modifier ou a ajouter
+<span class="nc" id="L187">        controleur.setEstAModifier(bool);</span>
+<span class="nc" id="L188">        controleur.setArticle(article);</span>
+<span class="nc" id="L189">        controleur.setDialogStage((Stage)res[1]);</span>
+<span class="nc" id="L190">        controleur.setMonRayonControleur(this);</span>
+
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+<span class="nc" id="L194">        ((Stage)res[1]).showAndWait();</span>
+<span class="nc" id="L195">    }</span>
+
+    public void cliqueSurSupprimer() {
+<span class="nc bnc" id="L198" title="All 2 branches missed.">        if(tableau.getSelectionModel().getSelectedItem() == null)</span>
+        {
+<span class="nc" id="L200">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L201">            alert.setTitle(&quot;Erreur supprimer article&quot;);</span>
+<span class="nc" id="L202">            alert.setContentText(&quot;Veuillez selectionner un article dans la liste&quot;);</span>
+<span class="nc" id="L203">            alert.showAndWait();</span>
+<span class="nc" id="L204">        }</span>
+        else
+        {
+<span class="nc" id="L207">            Article article = tableau.getSelectionModel().getSelectedItem();</span>
+<span class="nc" id="L208">            rayonDAO.supprimerArticle(article);</span>
+            //Actualiser le tableauView
+<span class="nc" id="L210">            remplirTableauDArticles();</span>
+        }
+
+<span class="nc" id="L213">    }</span>
+
+    public void cliqueSurModifier() throws IOException {
+
+<span class="nc bnc" id="L217" title="All 2 branches missed.">        if(tableau.getSelectionModel().getSelectedItem() == null)</span>
+        {
+<span class="nc" id="L219">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L220">            alert.setTitle(&quot;Erreur modifier article&quot;);</span>
+<span class="nc" id="L221">            alert.setContentText(&quot;Veuillez selectionner un article dans la liste&quot;);</span>
+<span class="nc" id="L222">            alert.showAndWait();</span>
+<span class="nc" id="L223">        }</span>
+        else
+        {
+<span class="nc" id="L226">            editerFormulaire(&quot;Modifier article&quot;, true);</span>
+        }
+<span class="nc" id="L228">    }</span>
+
+    public void cliqueSurAjouter() throws IOException {
+<span class="nc" id="L231">        editerFormulaire(&quot;Ajouter article&quot;,false);</span>
+
+<span class="nc" id="L233">    }</span>
+
+    public void cliqueSurReserver() throws IOException {
+<span class="nc" id="L236">        Article article = tableau.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc" id="L238">        Object[] res = new BoiteAOutil().creerBoiteDialogue (&quot;reserver &quot; + article.getNom(), 2);</span>
+
+        //Recuperer le controleur lier à la vue
+<span class="nc" id="L241">        BoiteDialogueReservationArticleControleur controleur = ((FXMLLoader)res[0]).getController();</span>
+
+<span class="nc" id="L243">        controleur.setArticle(article);</span>
+<span class="nc" id="L244">        controleur.setDialogStage((Stage)res[1]);</span>
+<span class="nc" id="L245">        controleur.setMonRayonControleur(this);</span>
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+<span class="nc" id="L248">        ((Stage)res[1]).showAndWait();</span>
+<span class="nc" id="L249">    }</span>
+
+    public void cliqueSurSearch() {
+<span class="nc" id="L252">        mettreAJourFiltre();</span>
+<span class="nc" id="L253">    }</span>
+
+    public void cliqueSurSupprimerFiltre() {
+<span class="nc" id="L256">         viderBarreRecherche();</span>
+<span class="nc" id="L257">         remplirTableauDArticles();</span>
+<span class="nc" id="L258">    }</span>
+
+    public void cliquerSurTransferer() throws IOException {
+<span class="nc" id="L261">        Article article = tableau.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc" id="L263">        Object[] res = new BoiteAOutil().creerBoiteDialogue (&quot;Transferer &quot; + article.getNom(), 3);</span>
+
+        //Recuperer le controleur lier à la vue
+<span class="nc" id="L266">        BoiteDialogueTransfererArticleControleur controleur = ((FXMLLoader)res[0]).getController();</span>
+
+<span class="nc" id="L268">        controleur.setArticle(article);</span>
+<span class="nc" id="L269">        controleur.setDialogStage((Stage)res[1]);</span>
+<span class="nc" id="L270">        controleur.setMonRayonControleur(this);</span>
+
+        // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+<span class="nc" id="L273">        ((Stage)res[1]).showAndWait();</span>
+<span class="nc" id="L274">    }</span>
+
+    public void vue()
+    {
+        //cas vendeur qui regarde son rayon
+<span class="nc bnc" id="L279" title="All 2 branches missed.">        if(type == 1)</span>
+        {
+<span class="nc" id="L281">            transfererButton.setVisible(false);</span>
+<span class="nc" id="L282">            btnRetourEnArriere.setVisible(false);</span>
+        }
+
+        //cas vendeur qui regarde un autre rayon
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        if(type == 2)</span>
+        {
+<span class="nc" id="L288">            btnAdd.setVisible(false);</span>
+<span class="nc" id="L289">            transfererButton.setVisible(false);</span>
+<span class="nc" id="L290">            modifierButton.setVisible(false);</span>
+<span class="nc" id="L291">            supprimerButton.setVisible(false);</span>
+<span class="nc" id="L292">            reserverButton.setVisible(false);</span>
+        }
+<span class="nc" id="L294">    }</span>
+
+    public void cliqueSurRetourEnArriere() throws IOException {
+
+<span class="nc bnc" id="L298" title="All 2 branches missed.">        if(applicationPrincipaleControleur !=null)</span>
+        {
+<span class="nc" id="L300">            applicationPrincipaleControleur.setEstSurAutresRayons(false);</span>
+<span class="nc" id="L301">            applicationPrincipaleControleur.cliqueSurAutresRayons();</span>
+        }
+        else{
+<span class="nc" id="L304">            applicationPrincipaleChefControleur.setEstSurGestionDesRayons(false);</span>
+<span class="nc" id="L305">            applicationPrincipaleChefControleur.cliqueSurGestionDesRayons();</span>
+        }
+
+<span class="nc" id="L308">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

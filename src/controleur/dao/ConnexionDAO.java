@@ -69,13 +69,15 @@ public class ConnexionDAO {
      */
     public boolean verifierMotDePasse(String identifiant, String motDePasse){
         String mdp = "";
-        try{
-            Personne personne;
-            Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1");
-            query.setParameter(1, identifiant);
-            personne =  (Personne) query.getSingleResult();
-            mdp = personne.getMotDePasse();
-        }catch(Exception e){}
+
+        Personne personne;
+        Query query = entityManager.createQuery(" from Personne personne where personne.identifiant = ?1");
+
+        query.setParameter(1, identifiant);
+
+        personne =  (Personne) query.getSingleResult();
+        mdp = personne.getMotDePasse();
+
         if(mdp.equals(motDePasse)){
             return true;
         }else{

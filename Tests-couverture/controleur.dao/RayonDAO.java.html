@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RayonDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur.dao</a> &gt; <span class="el_source">RayonDAO.java</span></div><h1>RayonDAO.java</h1><pre class="source lang-java linenums">package controleur.dao;
+
+import modele.Article;
+import modele.Rayon;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
+
+<span class="fc" id="L10">public class RayonDAO {</span>
+
+    private EntityManager entityManager;
+
+    //Getter et setter
+    public EntityManager getEntityManager() {
+<span class="nc" id="L16">        return entityManager;</span>
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+<span class="fc" id="L20">        this.entityManager = entityManager;</span>
+<span class="fc" id="L21">    }</span>
+
+    /**
+     *Permet d'ajouter un article dans un rayon et est ajouté dans la BDD
+     * @param nom
+     * @param quantite
+     * @param details
+     * @param rayonA
+     */
+    public Article creerArticle(String nom, int quantite, String details, Rayon rayonA, double prix)
+    {
+<span class="fc" id="L32">        Article article = new Article(nom, quantite, details, rayonA, prix);</span>
+
+<span class="fc" id="L34">        entityManager.getTransaction().begin();</span>
+
+        //Ajout de l'article dans la bdd
+<span class="fc" id="L37">        entityManager.persist(article);</span>
+
+<span class="fc" id="L39">        entityManager.getTransaction().commit();</span>
+
+<span class="fc" id="L41">        ajouterArticleDansListeArticle(rayonA, article);</span>
+
+<span class="fc" id="L43">        return article;</span>
+    }
+
+    /**
+     * Ajoute un article dans la liste d'articles du rayon
+     * @param rayon
+     * @param article
+     */
+    public void ajouterArticleDansListeArticle(Rayon rayon, Article article)
+    {
+<span class="fc" id="L53">       rayon.getListeArticles().add(article);</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Supprime l'article dans la BDD et dans la liste d'article du rayon
+     * @param articleASupprimer
+     */
+    public void supprimerArticle(Article articleASupprimer)
+    {
+<span class="fc" id="L62">        entityManager.getTransaction().begin();</span>
+
+<span class="fc" id="L64">        Article article = entityManager.find(Article.class, articleASupprimer.getIdArticle());</span>
+<span class="fc" id="L65">        entityManager.remove(article);</span>
+
+<span class="fc" id="L67">        entityManager.getTransaction().commit();</span>
+
+<span class="fc" id="L69">        supprimerArticleDansListeArticle(articleASupprimer.getRayonA(), articleASupprimer);</span>
+<span class="fc" id="L70">    }</span>
+
+    /**
+     * Supprime l'article dans la liste d'article du rayon
+     * @param rayon
+     * @param article
+     */
+    public void supprimerArticleDansListeArticle(Rayon rayon, Article article)
+    {
+
+<span class="fc" id="L80">        rayon.getListeArticles().remove(article);</span>
+
+        //Si l'article est reserve alors on le supprime des reservations
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if(rayon.getListeReservationArticle().contains(article))</span>
+        {
+<span class="nc" id="L85">            rayon.getListeReservationArticle().remove(article);</span>
+        }
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Modifier un article
+     * @param article
+     */
+    public void modifierArticle(Article article)
+    {
+        try {
+<span class="fc" id="L96">            entityManager.getTransaction().begin();</span>
+
+<span class="fc" id="L98">            entityManager.merge(article);</span>
+
+<span class="fc" id="L100">            entityManager.getTransaction().commit();</span>
+<span class="nc" id="L101">        }catch (Exception e){</span>
+<span class="nc" id="L102">            e.getStackTrace();</span>
+<span class="fc" id="L103">        }</span>
+<span class="fc" id="L104">    }</span>
+
+    /**
+     * Permet de recuper les articles d'un rayon
+     * @param rayon
+     * @return listP la liste des articles du rayon
+     */
+    public List&lt;Article&gt; recupererArticleDuRayon(Rayon rayon)
+    {
+<span class="fc" id="L113">        entityManager.getTransaction().begin();</span>
+<span class="fc" id="L114">        Query query =  entityManager.createQuery(&quot;from Article article where article.rayonA = ?1&quot;);</span>
+<span class="fc" id="L115">        List&lt;Article&gt; listP =  query.setParameter(1, rayon).getResultList();</span>
+
+<span class="fc" id="L117">        entityManager.getTransaction().commit();</span>
+
+<span class="fc" id="L119">        return listP;</span>
+    }
+
+    public void transfererUnArticle(Article article, Rayon nouveauRayon)
+    {
+<span class="fc" id="L124">        article.getRayonA().getListeArticles().remove(article);</span>
+
+        //si l'article etait un article reserve alors le retirer de la liste des articles reserves de l ancien rayon
+        // et l ajouter dans la liste des articles reserves du nouveau rayon
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        if(article.getRayonA().getListeReservationArticle().contains(article))</span>
+        {
+<span class="fc" id="L130">            article.getRayonA().getListeReservationArticle().remove(article);</span>
+<span class="fc" id="L131">            nouveauRayon.getListeReservationArticle().add(article);</span>
+        }
+
+<span class="fc" id="L134">        nouveauRayon.getListeArticles().add(article);</span>
+
+<span class="fc" id="L136">        article.setRayonA(nouveauRayon);</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * @param article l article a reserver
+     * @param quantite la quantite reservee
+     */
+    public void reserverUnArticle(Article article, int quantite)
+    {
+<span class="fc" id="L145">        article.setQuantite(article.getQuantite() - quantite);</span>
+<span class="fc" id="L146">        article.setQuantiteReserve(article.getQuantiteReserve() + quantite);</span>
+
+<span class="fc" id="L148">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

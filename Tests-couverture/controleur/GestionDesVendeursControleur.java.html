@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GestionDesVendeursControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">GestionDesVendeursControleur.java</span></div><h1>GestionDesVendeursControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import controleur.dao.ChefMagasinDAO;
+import controleur.dao.SetupEM;
+import controleur.dao.VendeurDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import modele.ChefMagasin;
+import modele.Vendeur;
+import org.controlsfx.control.textfield.CustomTextField;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+public class GestionDesVendeursControleur implements Initializable {
+
+        @FXML
+        private TableView&lt;Vendeur&gt; tableauVendeurs;
+        @FXML
+        private TableColumn&lt;Vendeur, String&gt; colPrenom;
+        @FXML
+        private TableColumn&lt;Vendeur, String&gt; colNom;
+        @FXML
+        private Label identifiantLabel;
+        @FXML
+        private Label motDePasseLabel;
+        @FXML
+        private Label rayonLabel;
+        @FXML
+        private CustomTextField filtreTextField;
+
+        private VendeurDAO vendeurDAO;
+
+<span class="nc" id="L46">        private ObservableList&lt;Vendeur&gt; produits = FXCollections.observableArrayList();</span>
+<span class="nc" id="L47">        private ObservableList&lt;Vendeur&gt; filtreProduits = FXCollections.observableArrayList();</span>
+
+        private ChefMagasin chefMagasin;
+
+        public GestionDesVendeursControleur()
+<span class="nc" id="L52">        {</span>
+<span class="nc" id="L53">            vendeurDAO = new VendeurDAO();</span>
+<span class="nc" id="L54">            vendeurDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L55">        }</span>
+
+        @Override
+        public void initialize(URL url, ResourceBundle resourceBundle)
+        {
+<span class="nc" id="L60">            ChefMagasinDAO chefMagasinDAO = new ChefMagasinDAO();</span>
+<span class="nc" id="L61">            chefMagasinDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L62">            this.chefMagasin = chefMagasinDAO.recupererChefMagasin();</span>
+
+            //Specifier quel champ de l'objet produit devra être utilisé pour la colonne
+<span class="nc" id="L65">            colPrenom.setCellValueFactory(new PropertyValueFactory(&quot;prenom&quot;));</span>
+<span class="nc" id="L66">            colNom.setCellValueFactory(new PropertyValueFactory(&quot;nom&quot;));</span>
+
+
+<span class="nc" id="L69">            remplirTableauDeVendeurs();</span>
+
+
+            //Nettoyer les details
+<span class="nc" id="L73">            afficherVendeursDetails(null);</span>
+
+<span class="nc" id="L75">            tableauVendeurs.getSelectionModel().selectedItemProperty().addListener(</span>
+<span class="nc" id="L76">                    (observable, oldValue, newValue) -&gt; afficherVendeursDetails(newValue));</span>
+
+<span class="nc" id="L78">        }</span>
+
+
+        public void remplirTableauDeVendeurs()
+        {
+<span class="nc" id="L83">            List&lt;Vendeur&gt; vendeurs = vendeurDAO.recupererVendeurs();</span>
+<span class="nc" id="L84">            filtreProduits.clear();</span>
+<span class="nc" id="L85">            filtreProduits.addAll(vendeurs);</span>
+
+<span class="nc" id="L87">            produits.clear();</span>
+<span class="nc" id="L88">            produits.addAll(vendeurs);</span>
+
+<span class="nc" id="L90">            tableauVendeurs.setItems(filtreProduits);</span>
+<span class="nc" id="L91">        }</span>
+
+
+    public void afficherVendeursDetails(Vendeur vendeur)
+        {
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            if(vendeur != null)</span>
+            {
+<span class="nc" id="L98">                identifiantLabel.setText(vendeur.getIdentifiant());</span>
+<span class="nc" id="L99">                motDePasseLabel.setText(vendeur.getMotDePasse()+&quot;&quot;);</span>
+<span class="nc" id="L100">                rayonLabel.setText(vendeur.getRayonV().getNom()+&quot;&quot;);</span>
+            }
+            else
+            {
+<span class="nc" id="L104">                identifiantLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L105">                motDePasseLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L106">                rayonLabel.setText(&quot;&quot;);</span>
+            }
+<span class="nc" id="L108">        }</span>
+
+
+        private void mettreAJourFiltre() {
+<span class="nc" id="L112">            filtreProduits.clear();</span>
+
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            for (Vendeur v : produits) {</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">                if (matchFiltre(v)) {</span>
+<span class="nc" id="L116">                    filtreProduits.add(v);</span>
+                }
+<span class="nc" id="L118">            }</span>
+<span class="nc" id="L119">        }</span>
+
+        /**
+         * Vider ce qui a ete tape dans la barre de recherche
+         */
+        public void viderBarreRecherche()
+        {
+<span class="nc" id="L126">            filtreTextField.setText(&quot;&quot;);</span>
+<span class="nc" id="L127">        }</span>
+
+
+        private boolean matchFiltre(Vendeur vendeur) {
+<span class="nc" id="L131">            String filtrerString = filtreTextField.getText();</span>
+<span class="nc bnc" id="L132" title="All 4 branches missed.">            if (filtrerString == null || filtrerString.isEmpty()) {</span>
+                //Pas de filtre afficher tout les vendeurs
+<span class="nc" id="L134">                return true;</span>
+            }
+<span class="nc" id="L136">            String lowerCaseFilterString = filtrerString.toLowerCase();</span>
+
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if ((vendeur.getPrenom() + &quot; &quot; + vendeur.getNom()).toLowerCase().contains(lowerCaseFilterString)) {</span>
+<span class="nc" id="L139">                return true;</span>
+            }
+            else{
+                //Aucun match trouve
+<span class="nc" id="L143">                return false;</span>
+            }
+        }
+
+        /**
+         *
+         * @param titre
+         * @param bool
+         * @throws IOException
+         */
+        public void editerFormulaire(String titre, boolean bool) throws IOException {
+<span class="nc" id="L154">            Vendeur vendeur = tableauVendeurs.getSelectionModel().getSelectedItem();</span>
+
+<span class="nc" id="L156">            Object[] res = new BoiteAOutil().creerBoiteDialogue (titre, 5);</span>
+
+            //Recuperer le controleur lier à la vue
+<span class="nc" id="L159">            BoiteDialogueVendeurControleur controleur = ((FXMLLoader)res[0]).getController();</span>
+            //Modifier le vendeur
+<span class="nc bnc" id="L161" title="All 2 branches missed.">            if(bool == true)</span>
+            {
+<span class="nc" id="L163">                controleur.remplirFormulaire(vendeur);</span>
+            }
+            else
+            {
+<span class="nc" id="L167">                controleur.remplirFormulaire(null);</span>
+            }
+            //Indique au controler si c'est a modifier ou a ajouter
+<span class="nc" id="L170">            controleur.setEstAModifier(bool);</span>
+<span class="nc" id="L171">            controleur.setVendeur(vendeur);</span>
+<span class="nc" id="L172">            controleur.setDialogStage((Stage)res[1]);</span>
+<span class="nc" id="L173">            controleur.setGestionDesVendeursControleur(this);</span>
+
+            // Afficher jusqu'à ce que l'utilisateur ferme la fenetre
+<span class="nc" id="L176">            ((Stage)res[1]).showAndWait();</span>
+<span class="nc" id="L177">        }</span>
+
+        public void cliqueSurSupprimer(ActionEvent actionEvent) {
+<span class="nc bnc" id="L180" title="All 2 branches missed.">            if(tableauVendeurs.getSelectionModel().getSelectedItem() == null)</span>
+            {
+<span class="nc" id="L182">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L183">                alert.setTitle(&quot;Erreur supprimer vendeur&quot;);</span>
+<span class="nc" id="L184">                alert.setContentText(&quot;Veuillez selectionner un vendeur dans la liste&quot;);</span>
+<span class="nc" id="L185">                alert.showAndWait();</span>
+<span class="nc" id="L186">            }</span>
+            else
+            {
+<span class="nc" id="L189">                VendeurDAO vendeurDAO = new VendeurDAO();</span>
+<span class="nc" id="L190">                vendeurDAO.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L191">                Vendeur vendeur =  tableauVendeurs.getSelectionModel().getSelectedItem();</span>
+                //Si un vendeur est selectionne
+<span class="nc bnc" id="L193" title="All 2 branches missed.">                if(vendeur != null) {</span>
+<span class="nc" id="L194">                    vendeurDAO.supprimerVendeur(vendeur.getIdPersonne(),vendeur.getRayonV());</span>
+                }
+<span class="nc" id="L196">                remplirTableauDeVendeurs();</span>
+            }
+
+
+<span class="nc" id="L200">        }</span>
+
+        public void cliqueSurModifier(ActionEvent actionEvent) throws IOException {
+
+<span class="nc bnc" id="L204" title="All 2 branches missed.">            if(tableauVendeurs.getSelectionModel().getSelectedItem() == null)</span>
+            {
+<span class="nc" id="L206">                Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L207">                alert.setTitle(&quot;Erreur modifier vendeur&quot;);</span>
+<span class="nc" id="L208">                alert.setContentText(&quot;Veuillez selectionner un vendeur dans la liste&quot;);</span>
+<span class="nc" id="L209">                alert.showAndWait();</span>
+<span class="nc" id="L210">            }</span>
+            else
+            {
+<span class="nc" id="L213">                editerFormulaire(&quot;Modifier vendeur&quot;, true);</span>
+            }
+
+<span class="nc" id="L216">        }</span>
+
+
+        public void cliqueSurAjouter(ActionEvent actionEvent) throws IOException {
+<span class="nc" id="L220">            editerFormulaire(&quot;Ajouter vendeur&quot;,false);</span>
+<span class="nc" id="L221">        }</span>
+
+
+        public void cliqueSurSearch(ActionEvent actionEvent) {
+<span class="nc" id="L225">            mettreAJourFiltre();</span>
+<span class="nc" id="L226">        }</span>
+
+        public void cliqueSurSupprimerFiltre(ActionEvent actionEvent) {
+<span class="nc" id="L229">            viderBarreRecherche();</span>
+<span class="nc" id="L230">            remplirTableauDeVendeurs();</span>
+<span class="nc" id="L231">        }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

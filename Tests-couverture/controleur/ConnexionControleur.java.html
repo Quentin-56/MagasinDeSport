@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ConnexionControleur.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MagasinDeSport$All_in_MagasinDeSport.exec</a> &gt; <a href="index.source.html" class="el_package">controleur</a> &gt; <span class="el_source">ConnexionControleur.java</span></div><h1>ConnexionControleur.java</h1><pre class="source lang-java linenums">package controleur;
+
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+import controleur.dao.ConnexionDAO;
+import controleur.dao.SetupEM;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import main.Main;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ConnexionControleur implements Initializable
+{
+    @FXML
+    private Button eyeBtn;
+    @FXML
+    private JFXTextField textField;
+    @FXML
+    private JFXPasswordField passwordField;
+    @FXML
+    private JFXCheckBox checkBox;
+    @FXML
+    private Label utilisateurLabel;
+    @FXML
+    private Label mdpLabel;
+
+<span class="nc" id="L37">    private Boolean mdpEstCache = true;</span>
+
+    private ConnexionDAO connexion;
+
+    private static String identifiant;
+
+<span class="nc" id="L43">    public ConnexionControleur(){</span>
+<span class="nc" id="L44">        connexion = new ConnexionDAO();</span>
+<span class="nc" id="L45">        connexion.setEntityManager(SetupEM.getEm());</span>
+<span class="nc" id="L46">    }</span>
+
+    public void clickOnLogIn(ActionEvent actionEvent) throws IOException {
+<span class="nc" id="L49">        String password = passwordField.getText();</span>
+<span class="nc" id="L50">        String identifiant = textField.getText();</span>
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(connexion.verifierIdentifiant(identifiant) == true)</span>
+        {
+<span class="nc" id="L54">            utilisateurLabel.setText(&quot;&quot;);</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if(connexion.verifierMotDePasse(identifiant, password) == true)</span>
+            {
+                //Retenir l'identifiant
+<span class="nc" id="L58">                ConnexionControleur.identifiant = identifiant;</span>
+<span class="nc" id="L59">                mdpLabel.setText(&quot;&quot;);</span>
+<span class="nc" id="L60">                Parent root = null;</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                if(connexion.leChefSeConnecte(identifiant) == true)</span>
+                {
+<span class="nc" id="L63">                    root = FXMLLoader.load(getClass().getResource(&quot;../ressources/applicationPrincipaleChef.fxml&quot;));</span>
+<span class="nc" id="L64">                    Main.getPrimaryStage().setScene(new Scene(root));</span>
+                }
+                else
+                {
+                    //Est un vendeur
+<span class="nc" id="L69">                    root = FXMLLoader.load(getClass().getResource(&quot;../ressources/applicationPrincipale.fxml&quot;));</span>
+<span class="nc" id="L70">                    Main.getPrimaryStage().setScene(new Scene(root));</span>
+                }
+<span class="nc" id="L72">            }</span>
+            else
+            {
+                //Affichage si mot de passe incorrect
+<span class="nc" id="L76">                mdpLabel.setText(&quot;Mot de passe incorrect&quot;);</span>
+                //Effacer le mot de passe incorrect
+<span class="nc" id="L78">                passwordField.setText(&quot;&quot;);</span>
+            }
+        }
+        else
+        {
+<span class="nc" id="L83">            utilisateurLabel.setText(&quot;Nom d'utilisateur incorrect&quot;);</span>
+        }
+<span class="nc" id="L85">    }</span>
+
+    //GETTERS ET SETTERS
+
+    public static String getIdentifiant() {
+<span class="nc" id="L90">        return identifiant;</span>
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+<span class="nc" id="L96">        eyeBtn.pressedProperty().addListener((observable, wasPressed, pressed) -&gt; {</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (pressed) {</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                if(!passwordField.getText().isEmpty())</span>
+                {
+<span class="nc" id="L100">                    passwordField.setPromptText(passwordField.getText());</span>
+<span class="nc" id="L101">                    passwordField.setText(&quot;&quot;);</span>
+<span class="nc" id="L102">                    mdpEstCache = false;</span>
+                }
+            } else {
+<span class="nc bnc" id="L105" title="All 2 branches missed.">                if(!mdpEstCache)</span>
+                {
+<span class="nc" id="L107">                    passwordField.setText(passwordField.getPromptText());</span>
+<span class="nc" id="L108">                    passwordField.setPromptText(&quot;Mot de passe&quot;);</span>
+<span class="nc" id="L109">                    mdpEstCache = true;</span>
+                }
+<span class="nc" id="L111">            }});</span>
+<span class="nc" id="L112">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
