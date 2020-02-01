@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="623.0" prefWidth="1183.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.ApplicationPrincipaleControleur">
+    <children>
+        <Pane layoutX="-2.0" layoutY="40.0" prefHeight="145.0" prefWidth="1186.0" styleClass="head-background" stylesheets="@style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label fx:id="labelPolysports" layoutX="224.0" layoutY="47.0" text="Poly'Sports" textFill="WHITE">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Label>
+                <Label fx:id="labelSince2019" layoutX="227.0" layoutY="100.0" text="Since 2019" textFill="WHITE">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <VBox layoutX="-1.0" layoutY="145.0" prefHeight="477.0" prefWidth="227.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="146.0">
+            <children>
+                <Label fx:id="nomLabel" prefHeight="30.0" prefWidth="252.0" text="Prenom Nom" textFill="#171717">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <padding>
+                        <Insets left="40.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets top="60.0" />
+                    </VBox.margin>
+                </Label>
+            <JFXToggleButton onAction="#cliqueSurDeconnecte" text="Connecté" toggleColor="WHITE" toggleLineColor="#ed0505" unToggleLineColor="#15d215" />
+            <Label prefHeight="30.0" prefWidth="252.0" text="Menu" textFill="#171717">
+               <font>
+                  <Font size="13.0" />
+               </font>
+               <padding>
+                  <Insets left="40.0" />
+               </padding>
+            </Label>
+                <JFXButton fx:id="monRayon" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurMonRayon" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Mon rayon" textFill="#5b5858">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView accessibleText="Project List" fitHeight="16.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/projects.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                </JFXButton>
+                <JFXButton fx:id="autresRayons" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurAutresRayons" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Autres rayons" textFill="#5b5858">
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/projections.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                </JFXButton>
+                <JFXButton fx:id="articlesReserves" alignment="BASELINE_LEFT" graphicTextGap="10.0" onAction="#cliqueSurArticlesReserves" prefHeight="43.0" prefWidth="252.0" ripplerFill="#bfadf8" text="Articles réservés" textFill="#5b5858">
+                    <font>
+                        <Font size="13.0" />
+                    </font>
+                    <graphic>
+                        <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/reliabilty.png" />
+                            </image>
+                            <viewport>
+                                <Rectangle2D />
+                            </viewport>
+                        </ImageView>
+                    </graphic>
+                    <padding>
+                        <Insets left="50.0" />
+                    </padding>
+                </JFXButton>
+            </children>
+        </VBox>
+        <Pane layoutX="71.0" layoutY="44.0" prefHeight="131.0" prefWidth="142.0" style="-fx-background-color: #fff;">
+            <children>
+                <ImageView fitHeight="120.0" fitWidth="139.0" layoutX="11.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logoPolytech.png" />
+                    </image>
+                </ImageView>
+            </children>
+            <effect>
+                <DropShadow blurType="GAUSSIAN" height="10.0" radius="4.5" width="10.0" />
+            </effect>
+        </Pane>
+        <ScrollPane layoutX="226.0" layoutY="146.0" prefHeight="477.0" prefWidth="955.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="226.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="146.0">
+            <content>
+                <VBox fx:id="pnl_scroll" prefHeight="465.0" prefWidth="1116.0" spacing="20.0" style="-fx-background-color: #fff;" />
+            </content>
+        </ScrollPane>
+        <HBox layoutX="251.0" layoutY="145.0" prefHeight="30.0" prefWidth="810.0" AnchorPane.leftAnchor="251.0" AnchorPane.rightAnchor="1.0" />
+    </children>
+</AnchorPane>

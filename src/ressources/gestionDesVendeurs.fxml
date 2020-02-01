@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import org.controlsfx.control.textfield.CustomTextField?>
+
+<AnchorPane prefHeight="457.0" prefWidth="684.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controleur.GestionDesVendeursControleur">
+   <children>
+      <TableView fx:id="tableauVendeurs" layoutX="1.0" layoutY="60.0" prefHeight="376.0" prefWidth="262.0">
+        <columns>
+          <TableColumn fx:id="colPrenom" prefWidth="123.20001792907715" text="Prenom" />
+            <TableColumn fx:id="colNom" prefWidth="105.5999755859375" text="Nom" />
+        </columns>
+      </TableView>
+      <Label layoutX="269.0" layoutY="100.0" text="Autres" AnchorPane.leftAnchor="269.0" AnchorPane.topAnchor="100.0" />
+      <GridPane layoutX="269.0" layoutY="131.0" prefHeight="92.0" prefWidth="406.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.20001220703125" minWidth="10.0" prefWidth="101.39996337890625" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="304.60003662109375" minWidth="10.0" prefWidth="304.60003662109375" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="29.60001220703125" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="31.19998779296875" minHeight="10.0" prefHeight="31.19998779296875" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="identifiant" text="Identifiant" />
+            <Label fx:id="rayonLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="motDePasseLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="rayon" text="Rayon" GridPane.rowIndex="2" />
+            <Label fx:id="identifiantLabel" text="Label" GridPane.columnIndex="1" />
+            <Label fx:id="motDePasse" text="Mot de passe" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button layoutX="531.0" layoutY="11.0" mnemonicParsing="false" onAction="#cliqueSurAjouter" text="Ajouter vendeur" />
+      <ButtonBar layoutX="263.0" layoutY="396.0" prefHeight="40.0" prefWidth="225.0">
+         <buttons>
+            <Button layoutX="135.0" layoutY="17.0" mnemonicParsing="false" onAction="#cliqueSurSupprimer" text="Supprimer" />
+          <Button mnemonicParsing="false" onAction="#cliqueSurModifier" text="Modifier" />
+         </buttons>
+      </ButtonBar>
+       <CustomTextField fx:id="filtreTextField" layoutX="5.0" layoutY="10.0" prefHeight="25.0" prefWidth="261.0">
+           <left>
+               <Button fx:id="btnSearch" onAction="#cliqueSurSearch">
+                   <graphic>
+                       <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                               <Image url="@../images/search.png" />
+                           </image>
+                       </ImageView>
+                   </graphic>
+               </Button>
+           </left>
+       </CustomTextField>
+       <Button fx:id="btnSupprimerFiltre" layoutX="269.0" layoutY="11.0" mnemonicParsing="false" onAction="#cliqueSurSupprimerFiltre">
+         <graphic>
+               <ImageView fitHeight="26.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                   <image>
+                       <Image url="@../images/cross.png" />
+                   </image>
+               </ImageView>
+         </graphic></Button>
+   </children>
+</AnchorPane>

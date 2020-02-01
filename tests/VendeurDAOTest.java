@@ -1,5 +1,4 @@
-import controlleur.VendeurDAO;
-import modele.Article;
+import controleur.dao.VendeurDAO;
 import modele.Rayon;
 import modele.Vendeur;
 import org.junit.jupiter.api.BeforeEach;

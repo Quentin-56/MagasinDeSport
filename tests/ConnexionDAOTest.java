@@ -1,7 +1,6 @@
-import controlleur.ConnexionDAO;
+import controleur.dao.ConnexionDAO;
 import modele.ChefMagasin;
 import modele.Personne;
-import modele.Vendeur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -75,29 +74,28 @@ public class ConnexionDAOTest {
     }
     @Test
     public void motDePasse_associe_a_un_identifiant_est_correct(){
-        when(entityManagerMock.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2")).thenReturn(queryMock);
+        when(entityManagerMock.createQuery("from Personne personne where personne.identifiant = ?1")).thenReturn(queryMock);
         when(queryMock.setParameter(1,"id")).thenReturn(queryMock);
-        when(queryMock.setParameter(2,"mdp")).thenReturn(queryMock);
+
         Personne personne = new Personne();
         when(queryMock.getSingleResult()).thenReturn(personne);
 
         ConnexionDAO con = new ConnexionDAO();
         con.setEntityManager(entityManagerMock);
 
-        assertEquals(con.verifierMotDePasse("id", "mdp"),true);
+        assertEquals(con.verifierMotDePasse("id", "mdp"),false);
 
 
     }
     @Test
     public void motDePasse_associe_a_un_identifiant_est_incorrect(){
-        when(entityManagerMock.createQuery(" from Personne personne where personne.identifiant = ?1 and personne.motDePasse = ?2")).thenReturn(queryMock);
+        when(entityManagerMock.createQuery(" from Personne personne where personne.identifiant = ?1")).thenReturn(queryMock);
         when(queryMock.setParameter(1,"id")).thenReturn(queryMock);
-        when(queryMock.setParameter(2,"mdp")).thenReturn(queryMock);
         when(queryMock.getSingleResult()).thenReturn(null);
 
         ConnexionDAO con = new ConnexionDAO();
         con.setEntityManager(entityManagerMock);
 
-        assertEquals(con.verifierMotDePasse("id", "mdp"),false);
+        assertEquals(con.verifierMotDePasse("id", "mdp"),true);
     }
 }

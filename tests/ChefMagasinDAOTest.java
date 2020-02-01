@@ -1,4 +1,4 @@
-import controlleur.ChefMagasinDAO;
+import controleur.dao.ChefMagasinDAO;
 import modele.ChefMagasin;
 import modele.Magasin;
 import org.junit.jupiter.api.BeforeEach;

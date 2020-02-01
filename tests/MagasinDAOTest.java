@@ -1,6 +1,4 @@
-import controlleur.MagasinDAO;
-import controlleur.RayonDAO;
-import modele.Article;
+import controleur.dao.MagasinDAO;
 import modele.Magasin;
 import modele.Rayon;
 import org.junit.jupiter.api.BeforeEach;

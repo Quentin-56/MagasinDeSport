@@ -1,4 +1,4 @@
-import controlleur.BoiteAOutil;
+import controleur.BoiteAOutil;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
