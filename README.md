@@ -1,5 +1,3 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Quentin-56_MagasinDeSport&metric=alert_status)](https://sonarcloud.io/dashboard?id=Quentin-56_MagasinDeSport)
-
 <h1>Logiciel de gestion des stocks d'un magasin de sport</h1>
 <p><em> <strong>Auteurs : </strong>Colin DEFIENAS, Florian GIGOT & Quentin LEVIEUX</em></p>
 <h2>Introduction</h2>
@@ -18,9 +16,11 @@ Le responsable de magasin posséde des droits super utilisateur lui permettant d
 Les étapes à réaliser pour que cela fonctionne, à faire la premiere fois :<br/>
 <ul>
 <li>Veuillez créer une BDD se nommant "magasin"</li>  
-<li>Insérer le fichier .sql dans la base de données </li>
+<li>Importer la base de donnée avec le fichier magasin.sql </li>
 <li>Sur IntelliJ, s'assurer d'être sous java 11</li>
-<li>S'assurer de la présence du: pilote mySQL(mysql-connector-java-8.0.18.jar), les librairies Hibernate, controlsfx-11.0.1 et jfoenix-9.0.8</li></ul>
+<li>S'assurer de la présence du: pilote mySQL(mysql-connector-java-8.0.18.jar), les librairies Hibernate, controlsfx-11.0.1, jfoenix-9.0.8, librairies JUnit et mockito </li></ul>
  <br />
  Un tutoriel complet pour utiliser l'application est disponible dans le document nommé Guide Utilisateur
+ 
+ Une video permet également de comprendre le fonctionnement de l'application au lien suivant : https://reccloud.com/fr/u/d7i5r3c
 </em></p>
