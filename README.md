@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Quentin-56_MagasinDeSport&metric=alert_status)](https://sonarcloud.io/dashboard?id=Quentin-56_MagasinDeSport)
+
 <h1>Logiciel de gestion des stocks d'un magasin de sport</h1>
 <p><em> <strong>Auteurs : </strong>Colin DEFIENAS, Florian GIGOT & Quentin LEVIEUX</em></p>
 <h2>Introduction</h2>
